@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block homeactive %}
+(current)
+{% endblock %}
+{%block title%}
+Home
+{%endblock%}
+{%block statics %}
+<!--import additional css files here-->
+<link href="{% static "homepages/home/home.css"%}" rel="stylesheet">
+{% endblock %}
+{%block body%}
+
+<!-- BANNER HERE-->
+<section>
+  <img src="{% static "homepages/home/bg.jpg"%}" id="bg">
+  <img src="{% static "homepages/home/skyline2.png"%}" id="mountain">
+  <img src="{% static "homepages/home/water.png"%}" id="road">
+  <h2 id="bnnrtxt" >MUNbase</h2>
+</section>
+<script type="text/javascript">
+  let bg = document.getElementById("bg");
+  let mountain = document.getElementById("mountain");
+  let road = document.getElementById("road");
+  let text = document.getElementById("bnnrtxt")
+
+  window.addEventListener('scroll', function (){
+    if (window.innerWidth >900){
+      var value=window.scrollY;
+      bg.style.top = value *0.5 + 'px';
+      mountain.style.top = -value *0.13 + 'px';
+      road.style.top = value *0.15 + 'px';
+      bnnrtxt.style.top = value *0.30 + 'px';
+    }
+    else if (window.innerWidth <451){
+      var value=window.scrollY;
+      bg.style.top = value *0.2 + 'px';
+      mountain.style.top = -value *0.04 + 'px';
+      road.style.top = -value *0.07 + 'px';
+      bnnrtxt.style.top = value *0.45 + 'px';
+    }
+    else{
+      var value=window.scrollY;
+      bg.style.top = value *0.3 + 'px';
+      mountain.style.top = -value *0.09 + 'px';
+      road.style.top = value *0.09 + 'px';
+      bnnrtxt.style.top = value *0.55 + 'px';
+    }
+
+  })
+</script>
+<br>
+<!--INTERACTIVE UI CARDS HERE-->
+<!--LEFT TO MAKE FOR USER WHO IS LOGGED IN-->
+<div class="container">
+  <div class="row center">
+    <div class="col-md marg ">
+      <div class="contain" >
+        <div class="card card1">
+          <div class="imgbx">
+            <img id="img1" src="{% static "homepages/home/cardimg1.png" %}" >
+          </div>
+          <div class="contentbox">
+            <h2 id="i1"> Register</h2>
+            <div class="info">
+              <p id ="p1"class="text">Join us today</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md marg">
+      <div class="contain">
+        <div class="card card2">
+          <div class="imgbx">
+            <img src="{% static "homepages/home/cardimg2.png" %}" >
+          </div>
+          <div class="contentbox">
+            <h2 id="i2"> Login</h2>
+            <div class="info">
+              <p id="p2"class="text">Login to start using Features</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md marg">
+      <div class="contain" >
+        <div class="card card3" onclick="location.href='{% url 'featured'%}'">
+          <div class="imgbx">
+            <img id= "img3"src="{% static "homepages/home/cardimg3.png" %}" width="auto" height=220>
+          </div>
+          <div class="contentbox">
+            <h2 > Featured</h2>
+            <div class="info">
+              <p class="text">See whats hot</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% if user is not None%}
+<script type="text/javascript">
+  card1=document.getElementById("i1");
+  card1.innerHTML="Search";
+  card2=document.getElementById("i2");
+  card2.innerHTML="Profile";
+  p1=document.getElementById("p1");
+  p2=document.getElementById("p2");
+  p1.innerHTML="Search for MUNs or Delegates"
+  p2.innerHTML="Update your Profile"
+  c1=document.getElementsByClassName("card1")[0];
+  c2=document.getElementsByClassName("card2")[0];
+  c1.onclick= function(){location.href='{%url 'searchdel' %}'}
+  c2.onclick= function(){location.href='{%url 'viewdel' user.username%}'}
+
+</script>
+{% else %}
+<script type="text/javascript">
+c1=document.getElementsByClassName("card1")[0];
+c2=document.getElementsByClassName("card2")[0];
+c1.onclick= function(){location.href='{%url 'register'%}'}
+c2.onclick= function(){location.href='{%url 'login'%}'}
+
+</script>
+{% endif %}
+{% endblock %}

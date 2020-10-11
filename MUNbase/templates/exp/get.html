@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Experience
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Update Experience!</h2>
+        <br><br>
+        <div class="alert">
+
+        </div>
+        <section class="text" style="font-size:20px">
+      <form class="form-action" action="{%  url 'getexp' %}" method="post">
+        {% csrf_token %}
+          MUN Name: <input type="text" name="MUN" id ="MUN" placeholder="MUN Name" value=""><br><br>
+          Year: <input type="number" id = "year" name="year" value="2020"><br><br>
+          Committee <input type="text" id ='comm'name="comm" placeholder="eg. DISEC"><br><br>
+          Position: <select id='pos' name="pos">
+          <option value= "Special Mention" >Special mention</option>
+          <option value= "High Commendation" >High Commendation</option>
+          <option value= "Best Delegate" >Best Delegate</option>
+          <option value= "Verbal Metion" >Verbal Mention</option>
+          <option value= "Executive Board" > Executive Board</option>
+          <option value= "Organizing Committee" > Organizing Committee</option>
+          <option value= "Secretariat" > Secretariat</option>
+          <option value= "International Press" > International Press</option>
+          <option value= "None" SELECTED>None</option>
+        </select>
+          <br><br>
+          <button type="Submit" id='bt'name="button" class="btn button-dark text">Submit</button>
+
+      </form>
+
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  but=document.getElementById('bt').disabled=true;
+  form=document.querySelector("form")
+  form.addEventListener('keydown', validate);
+  form.addEventListener('keyup', validate);
+
+  function validate(){
+      mun=document.getElementById("MUN").value;
+      comm = document.getElementById("comm").value;
+      alert=document.getElementsByClassName('alert')[0];
+      but=document.getElementById('bt');
+
+      if (mun=="")||(mun.length<5)
+      {
+        alert.innerHTML="Please fill a MUN name of at least 5 Characters";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+      else if(comm=="")||{com.length<2}{
+        alert.innerHTML="Fill in a valid Committee name of at least 2 characters";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+     else {
+        alert.innerHTML="";
+        alert.style.visibility='hidden';
+        but.disabled=false;
+      }
+    }
+
+</script>
+{%endblock%}

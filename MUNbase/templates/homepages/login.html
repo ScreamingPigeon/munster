@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block loginactive %}
+(current)
+{% endblock %}
+
+{%block title%}
+Login
+{%endblock%}
+{% block body %}
+<img src="{%static "homepages/tnc/tnc.png" %}" id = "bnnrimg">
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <div class="box">
+        <h2 class="text">Login</h2>
+        {% if errmsg is not None %}
+        <div  style="visibility:visible"class="alert">
+          {{errmsg}}
+        </div>
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <input type="text" autocomplete="off" autofocus class="form-control"name="username" placeholder="Username">
+          <br>
+          <input type="password" class="form-control" name="password" placeholder="Password">
+          <br>
+          <button type="submit" class="btn btn-dark" name="button">Submit</button><br>
+          <span class="text">Don't have an account? <a href="{% url 'register'%}">Register</a> to get started!</span>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md">
+      <div class="box">
+        <h2 class="text">Login to use:</h2>
+        <ul class="text">
+          <li>Search Functionality</li>
+          <li>Updating and Sharing your Profile</li>
+          <li>Updating your Experience</li>
+          <li>Setting up a MUN's edition details</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Experience
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Your Experience!</h2>
+        <br><br>
+        <section class="text" style="font-size:20px">
+          <table class="table table-dark" >
+        <thead>
+          <tr>
+            <th scope="col">MUN</th>
+            <th scope="col">Year</th>
+            <th scope="col">Committee</th>
+            <th scope="col">Prize</th>
+          </tr>
+        </thead>
+  {%if exp|length > 0 %}
+        <tbody>
+
+        {% for row in exp %}
+          <tr>
+            <td>{{row.MUN}}</td>
+            <td>{{row.year}}</td>
+            <td>{{row.committee}}</td>
+            <td>{{row.position}}</td>
+          </tr>
+          {%endfor%}
+          </tbody>
+      {% else %}
+            <tbody>
+              <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              </tbody>
+          {%endif%}
+
+
+   </table>
+   <a href="{% url 'getexp'%}"><button type="button" name="button" class="btn button-dark text">Update!</button></a>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

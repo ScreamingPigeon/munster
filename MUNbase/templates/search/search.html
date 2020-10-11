@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{%block title%}
+Search
+{%endblock%}
+
+{% block body %}
+<!--Banner image here-->
+<!--content starts here--><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <div class="box text">
+      <form class="form-action" action="{%url 'searchdel'%}" method="post">
+        {%csrf_token%}
+        Search: <input type="text" name="search" placeholder="Username">
+        <button type="submit" name="butt" class="btn button-dark text">Search</button>
+      </form>
+      <br><br>
+      <table class="table table-dark " >
+    {%if users|length > 0 %}
+      {% for row in users %}
+        <tr>
+          <td> <a href="{% url 'viewdel' row.username %}">{{row.username}}</a></td>
+        </tr>
+      {%endfor%}
+      {% else %}
+          <tr>
+            <td>-</td>
+          </tr>
+      {%endif%}
+    </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block registeractive %}
+(current)
+{% endblock %}
+
+{%block title%}
+Register
+{%endblock%}
+{% block statics %}
+{% endblock %}
+
+{% block body %}
+<!--Banner image here-->
+<section>
+  <img id="bnnrimg" src="{%static 'homepages/register/banner.jpeg'%}">
+</section>
+<!--content starts here-->
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <br><br>
+      <section class="box">
+        <h2 class="subh"> Register</h2>
+        {%if errmsg is None%}
+        <div class="alert"></div>
+        {%else%}
+        <div class="alert" style="visibility:visible">{{errmsg}}</div>
+        {%endif%}
+        <form action="{% url 'register' %}" class="form-group" method="post">
+          {% csrf_token %}
+          <input id="uname" type="text" autofocus autocomplete="off"class="form-control" name="username" placeholder="Username">
+          <br>
+          <input id="pword"name="password" type="password" class="form-control" placeholder="Password">
+          <br>
+          <input id="pword2"name="password2" type="password" class="form-control" placeholder="password once again"><br>
+          <br>
+          <button id="bt" type="submit" class="btn btn-dark" disabled="true"name="button">Register</button>
+        </form>
+        <span class='text'>Already have an account?<a href="{% url 'login'%}">Login</a> instead!</span>
+      </section>
+    </div>
+    <div class="col-md">
+            <br><br>
+      <section class="box">
+        <h1 class="text"> Why MUNbase?</h1>
+        <p class="text">Tired of Filling repititive forms for Delegate Registrations, browsing social media to look for good MUNs, and being added to spammy EB application groups? MUNbase solves all these problems for delegates by allowing them to build an online profile, through which they can apply for the MUNs they want to, based on their preferences</p>
+        <span class="text"> Join now to get started!</span>
+      </section>
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+  unames="{{usernames}}";
+  form=document.querySelector("form")
+  form.addEventListener('keydown', validate);
+  form.addEventListener('keyup', validate);
+
+  function validate(){
+      uname=document.getElementById("uname").value;
+      pword=document.getElementById('pword').value;
+      pword2 = document.getElementById("pword2").value;
+      alert=document.getElementsByClassName('alert')[0];
+      but=document.getElementById('bt');
+
+      if (uname.length <6|| uname.length >16)
+      {
+        alert.innerHTML="Username should be between 6 and 15 characters";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+      else if(pword.length>15 || pword.length<6){
+        alert.innerHTML="Password should be between 6 and 15 characters";
+        alert.style.visibility='visible';
+        but.disabled=true;
+
+      }
+      else if(pword!=pword2){
+        alert.innerHTML="Passwords do not match";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+      else if(unames.includes(uname)==true){
+        alert.innerHTML="Username already taken";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+     else {
+        alert.innerHTML="";
+        alert.style.visibility='hidden';
+        but.disabled=false;
+      }
+    }
+
+</script>
+
+{%endblock%}
