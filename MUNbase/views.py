@@ -4,6 +4,7 @@ from django.urls import reverse
 from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf.urls import (handler400, handler403, handler404, handler500)
 
 
 #------------------------------------------HOMEPAGES-------------------------------------------#
@@ -148,3 +149,6 @@ def loguserin(username,password,request):
         return True
     else:
         return False
+#-----------------------------------------ERROR HANDLERS-----------------------------------#
+def error_404_view(request,exception):
+    return render(request,'404.html')

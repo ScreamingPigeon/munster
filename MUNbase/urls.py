@@ -35,3 +35,4 @@ urlpatterns = [
     #search for a delegate
     path("search/delegate", views.searchdel, name ="searchdel")
 ]
+handler404 = 'MUNbase.views.error_404_view'
