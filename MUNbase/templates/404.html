@@ -1,7 +1,7 @@
 {%extends 'layout.html'%}
-[%load static%]
-{%block title%}404 Page not Found{%endblock%}
-{%block body%}
+{% load static %}
+{% block title %}404 Page not Found{% endblock %}
+{% block body %}
 <br>
 <div class="container">
   <div class="row">
@@ -9,10 +9,10 @@
       <h1 class="text">Uh oh! We couldn't find the page you were looking for :(</h1><br>
       <h5 class ="text">{{msg}}</h5><br><br>
       <a href="{%url 'home'%}"><button type="button" class="btn button-dark text">Go back to home</button></a>
-      <img src="{% static "homepages/404.jpg" %}" id = "bnnrimg">
+      <img src="{% static "homepages/e404.jpg" %}" id = "bnnrimg">
 
     </div>
 
   </div>
 </div>
-{%endblock%}
+{% endblock %}
