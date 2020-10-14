@@ -100,7 +100,7 @@ def viewdel(request, dele):
         dele=User.objects.filter(username=dele)[0]
         exp = Experience.objects.filter(delegate=dele)
     except IndexError:
-        return HttpResponse('error')
+        return render(request,'404.html', msg ="That account does not exist")
     if getuser(request)== dele:
         return render(request, "view/del.html", {"del":dele, "user":getuser(request), "exp": exp})
     else:

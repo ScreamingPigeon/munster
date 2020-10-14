@@ -2,5 +2,6 @@
 {%block title%}404 Page not Found{%endblock%}
 {%block body%}
 <h1 class="text">Uh oh! We couldn't find the page you were looking for :(</h1>
-<a href="{%url 'home'%}"><button type="button" name="button">Go back to home</button></a>
+{{msg}}
+}<a href="{%url 'home'%}"><button type="button" name="button">Go back to home</button></a>
 {%endblock%}
