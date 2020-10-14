@@ -56,19 +56,20 @@ Experience
       alert=document.getElementsByClassName('alert')[0];
       but=document.getElementById('bt');
 
-      if (mun=="")||(mun.length<5)
+      if (mun==""||mun.length<5)
       {
         alert.innerHTML="Please fill a MUN name of at least 5 Characters";
         alert.style.visibility='visible';
         but.disabled=true;
       }
-      else if(comm=="")||{com.length<2}{
+      else if(comm==""||com.length<2{
         alert.innerHTML="Fill in a valid Committee name of at least 2 characters";
         alert.style.visibility='visible';
         but.disabled=true;
       }
      else {
-        alert.innerHTML="";
+        alert.style.display = 'none';
+        alert.innerHTML = "";
         alert.style.visibility='hidden';
         but.disabled=false;
       }

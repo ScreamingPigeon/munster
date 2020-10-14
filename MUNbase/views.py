@@ -91,6 +91,8 @@ def getexp(request):
         year=request.POST["year"]
         committee=request.POST["comm"]
         pos=request.POST["pos"]
+        if mun is None or year is None or committee is None or pos is None:
+            return render(request, "exp/get.html", {"errmsg":"Please fill all the fields"})
         exp=Experience(delegate=user,MUN=mun,committee=committee,year=year, position=pos )
         exp.save()
         return redirect(reverse('exp'), user=user)
