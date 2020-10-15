@@ -57,8 +57,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'munbase.urls'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",]
 
 TEMPLATES = [
     {
