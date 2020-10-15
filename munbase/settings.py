@@ -22,8 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = "/opt/bitnami/projects/PROJECT/PROJECT/static"
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 # SECURITYWARNING: keep the secret key used in production secret!
 SECRET_KEY = 'kb5)j&qx0v^=3!=f4845_lskpeaq+mk4bs##*q4uqp2lb-07q9'
 
