@@ -25,7 +25,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # SECURITYWARNING: keep the secret key used in production secret!
-os.environ['SECRET_KEY']
+SECRET_KEY = 'kb5)j&qx0v^=3!=f4845_lskpeaq+mk4bs##*q4uqp2lb-07q9'
+
 # SECURITYWARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -56,8 +57,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'munbase.urls'
 
-TATICFILES_DIRS = [
-    BASE_DIR / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",]
 
 TEMPLATES = [
     {
