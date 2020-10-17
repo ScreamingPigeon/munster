@@ -35,6 +35,8 @@ urlpatterns = [
     #view Delegate
     path("view/delegate/<str:dele>", views.viewdel, name="viewdel"),
     #search for a delegate
-    path("search/delegate", views.searchdel, name ="searchdel")
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # to import static in deployment
-handler404 = 'MUNbase.views.error_404_view'
+    path("search/delegate", views.searchdel, name ="searchdel"),
+    # loading static files in deployment
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT})
+    ]
+    handler404 = 'MUNbase.views.error_404_view'
