@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static # to import static in deployment
+from django.conf import settings # to import static in deployment
 
 
 urlpatterns = [
