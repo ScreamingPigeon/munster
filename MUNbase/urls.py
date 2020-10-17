@@ -39,4 +39,4 @@ urlpatterns = [
     # loading static files in deployment
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT})
     ]
-    handler404 = 'MUNbase.views.error_404_view'
+handler404 = 'MUNbase.views.error_404_view'
