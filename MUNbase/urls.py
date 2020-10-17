@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .munbase import settings
+from ..munbase import settings
 from django.conf import settings # to import static in deployment
 from django.conf.urls.static import static # to import static in deployment
 
