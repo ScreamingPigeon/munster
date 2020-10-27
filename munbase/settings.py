@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import json
 
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +26,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ()
 # SECURITYWARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kb5)j&qx0v^=3!=f4845_lskpeaq+mk4bs##*q4uqp2lb-07q9'
+SECRET_KEY =  config['SECRET_KEY']
 
 # SECURITYWARNING: don't run with debug turned on in production!
 DEBUG = False
