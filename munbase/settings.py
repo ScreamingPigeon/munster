@@ -30,7 +30,7 @@ SECRET_KEY =  "s!)5@5s79sp=92a+!a4z!1g0d0+64ln3d$xt1f_7=749ht&-zi"
 # SECURITYWARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['13.233.23.174']
+ALLOWED_HOSTS = ['13.233.198.174','127.0.0.1']
 
 
 # Application definition
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'munbase.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR,'..' ,'db.sqlite3'),
     }
 }
 
