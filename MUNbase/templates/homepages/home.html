@@ -52,7 +52,6 @@ Home
 </script>
 <br>
 <!--INTERACTIVE UI CARDS HERE-->
-<!--LEFT TO MAKE FOR USER WHO IS LOGGED IN-->
 <div class="container">
   <div class="row center">
     <div class="col-md marg ">
@@ -100,7 +99,6 @@ Home
         </div>
       </div>
     </div>
-
   </div>
 </div>
 {% if user is not None%}
@@ -117,7 +115,6 @@ Home
   c2=document.getElementsByClassName("card2")[0];
   c1.onclick= function(){location.href='{%url 'searchdel' %}'}
   c2.onclick= function(){location.href='{%url 'viewdel' user.username%}'}
-
 </script>
 {% else %}
 <script type="text/javascript">

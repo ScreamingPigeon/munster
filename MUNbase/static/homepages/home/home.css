@@ -26,6 +26,15 @@ marg{
   border-radius: 20px;
   overflow: hidden;
 }
+@media only screen and (max-width:500px){
+  .card .imgbx img{
+    padding-left: 50px;
+    padding-right:50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    size : 50%;
+  }
+}
 .contain .card:before{
   content: '';
   position: absolute;
@@ -109,7 +118,7 @@ marg{
 }
 /*Banner code here*/
 @media only screen and (min-width:991px)
-{
+ {
     section{
       position : relative;
       width: 100%;
@@ -175,7 +184,7 @@ marg{
       padding-bottom:20px;
     }
 
-}
+ }
 @media only screen and (max-width:991px)
 {
   section{
