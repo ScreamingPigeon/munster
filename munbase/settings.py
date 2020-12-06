@@ -30,7 +30,7 @@ SECRET_KEY =  "s!)5@5s79sp=92a+!a4z!1g0d0+64ln3d$xt1f_7=749ht&-zi"
 # SECURITYWARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['13.233.198.174','127.0.0.1', 'munster.co.in', 'www.munster.co.in']
+ALLOWED_HOSTS = ['13.233.198.174','127.0.0.1','65.0.219.107' ,'munster.co.in', 'www.munster.co.in']
 
 
 # Application definition
