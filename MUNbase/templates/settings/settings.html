@@ -13,10 +13,11 @@ Settings
       <div class="box">
         <h2 class="subh">Your Account settings and details</h2>
         <br><br>
-
+        {%if alert != None%}
         <div class="alert" id="alert "style="color:#67DB8F;visibility:visible; border-color:#67DB8F">
           {{alrt}}
         </div>
+        {%endif%}
         <section class="text" style="font-size:20px">
           Username: {{user.username}}
           <form  action="{%url 'settings'%}" method="post">
