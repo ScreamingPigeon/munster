@@ -33,20 +33,4 @@ Settings
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  {
-    name = document.getElementById("name");
-    email = document.getElementById("email");
-    city = document.getElementById("city");
-    alert = document.getElementById("alert");
-    alert.style.visibility = "hidden";
-    if (name == "")||(email == "")(city==""){
-      alert.innerHTML = "Please fill all the fields";
-    }
-
-    if(alert.innerHTML != ""){
-      alert.style.visibility = "visible";
-    }
-  }
-</script>
 {%endblock%}
