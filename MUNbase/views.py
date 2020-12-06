@@ -4,13 +4,13 @@ from django.urls import reverse
 from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.conf.urls import (handler400, handler403, handler404, handler500)
+from django.conf.urls import handler400, handler403, handler404, handler500
 
 
 #------------------------------------------HOMEPAGES-------------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return redirect(reverse("settings"))
+        return redirect(reverse("settings") ,{"alrt": "Please Fill in the below details to continue"})
     return render(request, "homepages/home.html",{"user":getuser(request)})
 def login(request):
     if request.method == "GET":
