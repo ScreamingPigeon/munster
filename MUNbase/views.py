@@ -10,7 +10,7 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 #------------------------------------------HOMEPAGES-------------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return redirect(reverse("settings") ,{"alrt": "Please Fill in the below details to continue"})
+        return redirect(reverse("settings"))
     return render(request, "homepages/home.html",{"user":getuser(request)})
 def login(request):
     if request.method == "GET":

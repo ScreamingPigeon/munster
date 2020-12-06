@@ -13,18 +13,17 @@ Settings
       <div class="box">
         <h2 class="subh">Your Account settings and details</h2>
         <br><br>
-        {%if alrt is not None%}
-        <div class="alert" style="color:#67DB8F;visibility:visible; border-color:#67DB8F">
+
+        <div class="alert" id="alert "style="color:#67DB8F;visibility:visible; border-color:#67DB8F">
           {{alrt}}
         </div>
-        {%endif%}
         <section class="text" style="font-size:20px">
           Username: {{user.username}}
           <form  action="{%url 'settings'%}" method="post">
             {%csrf_token%}
-              Name:</label><input type="text" name="name" class="form-control" value="{{user.name}}"><br>
-              Email<input type="text" name="email" class="form-control" value="{{user.email}}"><br>
-              City: <input type="select" name="city" value="{{user.city}}"><br><br>
+              Name:<input type="text" id="name" name="name" class="form-control" value="{{user.name}}"><br>
+              Email<input type="text"id ="email" name="email" class="form-control" value="{{user.email}}"><br>
+              City: <input type="select" id ="city" name="city" value="{{user.city}}"><br><br>
 
             <button type="submit" class="btn btn-dark">Update</button>
           </form>
@@ -34,4 +33,20 @@ Settings
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  {
+    name = document.getElementById("name");
+    email = document.getElementById("email");
+    city = document.getElementById("city");
+    alert = document.getElementById("alert");
+    alert.style.visibility = "hidden";
+    if (name == "")||(email == "")(city==""){
+      alert.innerHTML = "Please fill all the fields";
+    }
+
+    if(alert.innerHTML != ""){
+      alert.style.visibility = "visible";
+    }
+  }
+</script>
 {%endblock%}
