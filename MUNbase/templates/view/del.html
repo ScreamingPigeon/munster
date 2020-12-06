@@ -15,8 +15,8 @@
         <h4 class="text" style="float:right">Name: {{del.name}}</h4><br><br>
         <img style="float:right;padding-bottom:10px;" width="100" height="100" src = "{% static "prof-pic.png" %}" >
         <section class="text" style="font-size:20px">
-
-          <table class="table table-dark table-responsive" >
+        <div class ="table-responsive">
+        <table class="table table-dark " >
         <thead>
           <tr style="color:#af7904;">
             <th scope="col">MUN</th>
@@ -47,9 +47,8 @@
                     </tr>
                     </tbody>
                 {%endif%}
-
-
-   </table>
+      </table>
+      </div>
    {% if user == del%}
    <a href="{% url 'getexp'%}"><button type="button" name="button" class="btn button-dark text">Update Experience!</button></a>
    <a href="{% url 'settings'%}"><button type="button" name="button" class="btn button-dark text">Update Settings!</button></a>
