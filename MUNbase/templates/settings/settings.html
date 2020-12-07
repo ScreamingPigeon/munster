@@ -24,11 +24,11 @@ Settings
             {%csrf_token%}
               Name:<input type="text" id="name" name="name" class="form-control" value="{{user.name}}"><br>
               Email<input type="text"id ="email" name="email" class="form-control" value="{{user.email}}"><br>
-              City: <input type="select" id ="city" name="city" value="{{user.city}}"><br><br>
-
+              City:<input type="select" id ="city" name="city" value="{{user.city}}"><br>
+              Age: <input type="number" name = "age" id = "age" value = "{{user.age}}"><br>
+              Institution: <input type = "text" name = "institution" id = "institution" value = "{{user.institution}}"><br><br>
             <button type="submit" class="btn btn-dark">Update</button>
           </form>
-
         </section>
       </div>
     </div>

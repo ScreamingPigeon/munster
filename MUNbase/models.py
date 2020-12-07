@@ -7,6 +7,8 @@ class User(models.Model):
     email=models.CharField(max_length=50,default=None )
     username = models.CharField(max_length=16)
     password=models.CharField(max_length=100)
+    institution=models.CharField(max_length=50, default ="")
+    age =models.IntegerField(default = 16)
     city=models.CharField(max_length=60, default="")
 
 class Experience(models.Model):

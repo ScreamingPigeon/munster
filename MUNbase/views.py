@@ -68,9 +68,11 @@ def settings(request):
         name = request.POST["name"]
         email = request.POST["email"]
         user=getuser(request)
-        user.name=name
-        user.email=email
-        user.city=request.POST["city"]
+        user.name = name
+        user.email = email
+        user.city = request.POST["city"]
+        user.age = request.POST['age']
+        user.institution = request.POST['institution']
         user.save()
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Profile updated successfully"})
 #------------------------------------VIEW EXPERIENCE----------------------------------#
@@ -137,7 +139,7 @@ def detailsfilled(request):
     if getuser(request) is None:
         return False
     user= getuser(request)
-    if user.email is "" or user.name is "" or user.city is "":
+    if user.email is "" or user.name is "" or user.city is "" or user.age is None or user.institution is "":
         return False
     return True
 def loguserin(username,password,request):
