@@ -123,7 +123,7 @@ def searchdel(request):
         users = User.objects.all()
         unames=[]
         for row in users:
-            if search in row.username:
+            if search in row.username or search in row.name:
                 unames.append(row)
         users=unames
         return render(request,"search/search.html",{'users':users, 'user':getuser(request)})
