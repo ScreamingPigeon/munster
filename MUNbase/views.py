@@ -114,17 +114,18 @@ def editexp(request,MUN, year):
     if request.method == "GET":
         return render(request, "exp/edit.html",{"user":user,"exp":expelement})
     if request.method == "POST":
-        expelement=Experience.objects.filter(MUN=MUN, year = int(year))[0]
-        expelement.delete()
+
         mun= request.POST["MUN"]
         year=request.POST["year"]
         committee=request.POST["comm"]
         pos=request.POST["pos"]
         if mun is None or year is None or committee is None or pos is None:
-            return render(request, "exp/get.html", {"errmsg":"Please fill all the fields"})
-        exp=Experience(delegate=user,MUN=mun,committee=committee,year=year, position=pos )
-        expelement.delete()
-        exp.save()
+            return render(request, "exp/edit.html", {"errmsg":"Please fill all the fields"})
+        expelement.MUN = mun
+        expelement.committee = committee
+        expelement.year = year
+        expelement.position = pos
+        expelement.save()
         return redirect(reverse('exp'), user=user)
 
 
