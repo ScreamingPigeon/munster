@@ -118,12 +118,12 @@ def editexp(request,MUN, year):
         year=request.POST["year"]
         committee=request.POST["comm"]
         pos=request.POST["pos"]
-
-        expelement.MUN = mun
-        expelement.committee = committee
-        expelement.year = year
-        expelement.position = pos
-        expelement.save()
+        expelement.delete()
+        exp.MUN = mun
+        exp.committee = committee
+        exp.year = year
+        exp.position = pos
+        exp.save()
         return redirect(reverse('exp'), user=user)
 
 
