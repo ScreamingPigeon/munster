@@ -33,7 +33,7 @@ Experience
             <td>{{row.year}}</td>
             <td>{{row.committee}}</td>
             <td>{{row.position}}</td>
-            <td><a href="{%url 'expedit' row.MUN,row.year %}"><img height="15" width="15 src="{% url "edit.png" %}"></img></a></td>
+            <td><a href="{%url 'expedit' row.MUN row.year %}"><img height="15" width="15 src="{% url "edit.png" %}"></img></a></td>
           </tr>
           {%endfor%}
           </tbody>
