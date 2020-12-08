@@ -112,7 +112,7 @@ def editexp(request,MUN, year):
         return redirect(reverse("settings", alrt="Sorry, that resource is restricted!"))
 
     if request.method == "GET":
-        return render(request, "exp/edit.html",{"user":user,"exp":exp})
+        return render(request, "exp/edit.html",{"user":user,"exp":expelement})
     if request.method == "POST":
         mun= request.POST["MUN"]
         year=request.POST["year"]
