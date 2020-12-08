@@ -32,6 +32,7 @@ urlpatterns = [
     #experience
     path("experience", views.exp, name="exp"),
     path("addexperience", views.getexp, name="getexp"),
+    path("editexperience/<str:MUN>/<str:year>",views.editexp,name="editexp"),
     #view Delegate
     path("view/delegate/<str:dele>", views.viewdel, name="viewdel"),
     #search for a delegate

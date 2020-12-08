@@ -21,6 +21,7 @@ Experience
             <th scope="col">Year</th>
             <th scope="col">Committee</th>
             <th scope="col">Prize</th>
+            <th scope="col"></th>
           </tr>
         </thead>
   {%if exp|length > 0 %}
@@ -32,6 +33,7 @@ Experience
             <td>{{row.year}}</td>
             <td>{{row.committee}}</td>
             <td>{{row.position}}</td>
+            <td><a href="{%url 'expedit' row.MUN,row.year %}"><img height="15" width="15 src="{% url "edit.png" %}"></img></a></td>
           </tr>
           {%endfor%}
           </tbody>
