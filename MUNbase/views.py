@@ -104,7 +104,7 @@ def editexp(request,MUN, year):
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
     try:
-        expelement=Experience.objects.filter(MUN=MUN, year = int(year))[0]
+        expelement=Experience.objects.filter(MUN=MUN, year = int(year), delegate = user)[0]
     except IndexError:
         return redirect(reverse("settings", alrt="Sorry, that resource does not exist!"))
 
@@ -114,13 +114,11 @@ def editexp(request,MUN, year):
     if request.method == "GET":
         return render(request, "exp/edit.html",{"user":user,"exp":expelement})
     if request.method == "POST":
-        expelement=Experience.objects.filter(MUN=MUN, year = int(year))[0]
         mun= request.POST["MUN"]
         year=request.POST["year"]
         committee=request.POST["comm"]
         pos=request.POST["pos"]
-        if mun is None or year is None or committee is None or pos is None:
-            return render(request, "exp/edit.html", {"errmsg":"Please fill all the fields"})
+
         expelement.MUN = mun
         expelement.committee = committee
         expelement.year = year
