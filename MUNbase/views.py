@@ -81,8 +81,18 @@ def exp(request):
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
     experience=Experience.objects.filter(delegate=user)
-    experience = orderbyyear(input=experience)
-    return render(request, "exp/view.html", {'exp':experience, 'user':user})
+    input = experience
+    output = []
+    for row in input:
+        min = int(row.year)
+        for rows in input:
+            if int(rows.year) < int(min):
+                int(min) = int(rows.year)
+        for rowss in input:
+            if int(min) == int(rowss.year):
+                output.append(rowss)
+                input.remove(rowss)
+    return render(request, "exp/view.html", {'exp':output, 'user':user})
 def getexp(request):
     user = getuser(request)
     if user is None:
@@ -183,18 +193,6 @@ def loguserin(username,password,request):
         return True
     else:
         return False
-def orderbyyear(input):
-    output = []
-    for row in input:
-        min = int(row.year)
-        for rows in input:
-            if int(rows.year) < int(min):
-                int(min) = int(rows.year)
-        for rowss in input:
-            if int(min) == int(rowss.year):
-                output.append(rowss)
-                input.remove(rowss)
-    return output
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
     return render(request,'404.html')
