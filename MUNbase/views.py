@@ -189,7 +189,9 @@ def sortbydate(input):
     for i in range(n-1):
         for j in range(0, n-1-i):
             if int(input[j].year)>int(input[j+1].year):
-                input[j], input[j+1] = input[j+1], input[j]
+                temp = input[j]
+                input[j] = input[j+1]
+                input[j+1] = temp
     return input
 
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
