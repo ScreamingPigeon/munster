@@ -82,7 +82,6 @@ def exp(request):
         return redirect(reverse("login", errmsg="You need to login first!"))
     experience=Experience.objects.filter(delegate=user).order_by("year")
     input = experience
-    input = sortbydate(input)
     return render(request, "exp/view.html", {'exp':input, 'user':user})
 def getexp(request):
     user = getuser(request)
