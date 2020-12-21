@@ -81,7 +81,6 @@ def exp(request):
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
     experience=Experience.objects.filter(delegate=user)
-
     return render(request, "exp/view.html", {'exp':experience, 'user':user})
 def getexp(request):
     user = getuser(request)
@@ -99,7 +98,6 @@ def getexp(request):
         exp=Experience(delegate=user,MUN=mun,committee=committee,year=year, position=pos )
         exp.save()
         return redirect(reverse('exp'), user=user)
-
 def editexp(request,MUN, year):
     user = getuser(request)
     if user is None:
@@ -124,7 +122,7 @@ def editexp(request,MUN, year):
         expelement.year=year
         expelement.committee=committee
         expelement.position=pos
-
+        expelement.save()
 
         return redirect(reverse('exp'), user=user)
 
