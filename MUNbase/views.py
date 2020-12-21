@@ -80,7 +80,7 @@ def exp(request):
     user=getuser(request)
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
-    experience=Experience.objects.filter(delegate=user)
+    experience=Experience.objects.filter(delegate=user).order_by("year")
     input = experience
     input = sortbydate(input)
     return render(request, "exp/view.html", {'exp':input, 'user':user})
@@ -184,15 +184,6 @@ def loguserin(username,password,request):
         return True
     else:
         return False
-def sortbydate(input):
-    n = len(input)
-    for i in range(n-1):
-        for j in range(0, n-1-i):
-            if int(input[j].year)>int(input[j+1].year):
-                temp = input[j]
-                input[j] = input[j+1]
-                input[j+1] = temp
-    return input
 
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
