@@ -17,7 +17,7 @@ Experience
 
         </div>
         <section class="text" style="font-size:20px">
-      <form class="form-action" action="{%  url 'editexp' %}" method="post">
+      <form class="form-action" action="{%  url 'editexp' exp.MUN exp.year %}" method="post">
         {% csrf_token %}
           MUN Name: <input type="text" name="MUN" id ="MUN" placeholder="MUN Name" value={{exp.MUN}}><br><br>
           Year: <input type="number" id = "year" name="year" value={{exp.year}}><br><br>
