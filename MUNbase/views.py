@@ -132,7 +132,7 @@ def editexp(request,MUN, year):
 def viewdel(request, dele):
     try:
         dele=User.objects.filter(username=dele)[0]
-        exp = Experience.objects.filter(delegate=dele)
+        exp = Experience.objects.filter(delegate=dele).order_by("year")
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request)})
     if getuser(request)== dele:
