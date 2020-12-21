@@ -81,7 +81,7 @@ def exp(request):
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
     experience=Experience.objects.filter(delegate=user)
-    experience = orderbyyear(request,experience)
+    experience = orderbyyear(input=experience)
     return render(request, "exp/view.html", {'exp':experience, 'user':user})
 def getexp(request):
     user = getuser(request)
@@ -183,7 +183,7 @@ def loguserin(username,password,request):
         return True
     else:
         return False
-def orderbyyear(request,input):
+def orderbyyear(input):
     output = []
     for row in input:
         min = int(row.year)
