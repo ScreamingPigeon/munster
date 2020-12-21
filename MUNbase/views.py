@@ -184,7 +184,7 @@ def loguserin(username,password,request):
         return True
     else:
         return False
-def sortbydate(input)
+def sortbydate(input):
     n = len(input)
     for i in range(n-1):
         for j in range(o, n-1-i):
