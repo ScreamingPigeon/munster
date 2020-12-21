@@ -187,7 +187,7 @@ def loguserin(username,password,request):
 def sortbydate(input):
     n = len(input)
     for i in range(n-1):
-        for j in range(o, n-1-i):
+        for j in range(0, n-1-i):
             if int(input[j].year)>int(input[j+1].year):
                 input[j], input[j+1] = input[j+1], input[j]
     return input
