@@ -81,18 +81,7 @@ def exp(request):
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
     experience=Experience.objects.filter(delegate=user)
-    input = experience
-    output = []
-    for row in input:
-        min = int(row.year)
-        for rows in input:
-            if int(rows.year) < int(min):
-                int(min) = int(rows.year)
-        for rowss in input:
-            if int(min) == int(rowss.year):
-                output.append(rowss)
-                input.remove(rowss)
-    return render(request, "exp/view.html", {'exp':output, 'user':user})
+    return render(request, "exp/view.html", {'exp':experience, 'user':user})
 def getexp(request):
     user = getuser(request)
     if user is None:
