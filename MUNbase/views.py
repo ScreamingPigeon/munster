@@ -113,7 +113,7 @@ def editexp(request,MUN, year):
     if request.method == "GET":
         return render(request, "exp/edit.html",{"user":user,"exp":expelement})
     if request.method == "POST":
-        expelement.delete()
+        Experience.objects.filter(MUN=MUN, year = int(year), delegate = user)[0].delete()
         mun= request.POST["MUN"]
         year=request.POST["year"]
         committee=request.POST["comm"]
