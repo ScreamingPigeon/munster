@@ -114,6 +114,16 @@ def editexp(request,MUN, year):
         return render(request, "exp/edit.html",{"user":user,"exp":expelement})
     if request.method == "POST":
         expelement.delete()
+        mun= request.POST["MUN"]
+        year=request.POST["year"]
+        committee=request.POST["comm"]
+        pos=request.POST["pos"]
+        expelement.MUN = mun
+        expelement.year=year
+        expelement.committee=committee
+        expelement.position=pos
+        expelement.save()
+
         return redirect(reverse('exp'), user=user)
 
 
