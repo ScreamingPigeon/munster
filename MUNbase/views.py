@@ -190,10 +190,10 @@ def orderbyyear(request,input):
         for rows in input:
             if int(rows.year) < int(min):
                 int(min) = int(rows.year)
-        for rows in input:
-            if int(min) == int(rows.year):
-                output.append(rows)
-                input.remove(rows)
+        for rowss in input:
+            if int(min) == int(rowss.year):
+                output.append(rowss)
+                input.remove(rowss)
     return output
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
