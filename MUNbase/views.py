@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import DelUser, Experience
+from .models import User, Experience
 from django.urls import reverse
 from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
@@ -131,7 +131,7 @@ def editexp(request,MUN, year):
 #----------------------------------VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
-        dele=DelUser.objects.filter(username=dele)[0]
+        dele=User.objects.filter(username=dele)[0]
         exp = Experience.objects.filter(delegate=dele).order_by("year")
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request)})
@@ -144,13 +144,13 @@ def searchdel(request):
     if request.method=="GET":
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
-        users=DelUser.objects.all()
+        users=User.objects.all()
         return render(request,"search/search.html",{'users':users, 'user':getuser(request)})
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
         search = request.POST["search"]
-        users = DelUser.objects.all()
+        users = User.objects.all()
         unames=[]
         for row in users:
             if search in row.username or search in row.name:
@@ -163,7 +163,7 @@ def getuser(request):
     user=request.session.get('id')
     if user is None:
         return None
-    user= DelUser.objects.filter(id=user)[0]
+    user= User.objects.filter(id=user)[0]
     return user
 def detailsfilled(request):
     if getuser(request) is None:
@@ -173,7 +173,7 @@ def detailsfilled(request):
         return False
     return True
 def loguserin(username,password,request):
-    user= DelUser.objects.filter(username=username)
+    user= User.objects.filter(username=username)
     try:
          user=user[0]
     except IndexError:

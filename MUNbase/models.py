@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class DelUser(models.Model):
+class User(models.Model):
     id = models.AutoField(primary_key=True)
     name=models.CharField(max_length=50,default=None)
     email=models.CharField(max_length=50,default=None )
@@ -12,7 +12,7 @@ class DelUser(models.Model):
     city=models.CharField(max_length=60, default="")
 
 class Experience(models.Model):
-    delegate=models.ForeignKey(DelUser,on_delete=models.CASCADE)
+    delegate=models.ForeignKey(User,on_delete=models.CASCADE)
     MUN=models.CharField(max_length=50, default="")
     committee=models.CharField(max_length=50, default="")
     year=models.IntegerField(default=2020)
