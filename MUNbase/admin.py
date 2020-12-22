@@ -4,7 +4,4 @@ from django.contrib import admin
 from .models import User, Experience
 admin.site.register(User)
 admin.site.register(Experience)
-
-class Experience(admin.ModelAdmin):
-    list_display = ('delegate', 'MUN', 'committee', 'year', 'position')
 admin.site.register(Experience)
