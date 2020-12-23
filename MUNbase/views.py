@@ -234,7 +234,7 @@ def getallusers():
         users.append(row.username)
     for row in munusers:
         users.append(row.username)
-    return users[]
+    return users
 def getallusernames():
     #getting a list of usernames
     users=getallusers()
