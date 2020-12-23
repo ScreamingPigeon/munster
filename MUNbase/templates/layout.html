@@ -27,31 +27,35 @@
   </head>
 
   <body>
+    <!--Navbars-->
+    <!--Not logged in-->
     {% if user is None %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{% url 'home' %}">    <img src="{%static "logo.png"%}" width="30" height="30" alt="">  MUNster</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">{%block homeactive%}{%endblock%}</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login<span class="sr-only">{%block loginactive%}{%endblock%}</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'register'%}">Register<span class="sr-only">{%block registeractive%}{%endblock%}</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'featured' %}">Featured<span class="sr-only">{%block featuredactive%}{%endblock%}</span></a>
-          </li>
-          </ul>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">    <img src="{%static "logo.png"%}" width="30" height="30" alt="">  MUNster</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">{%block homeactive%}{%endblock%}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login<span class="sr-only">{%block loginactive%}{%endblock%}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'register'%}">Register<span class="sr-only">{%block registeractive%}{%endblock%}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'featured' %}">Featured<span class="sr-only">{%block featuredactive%}{%endblock%}</span></a>
+            </li>
+            </ul>
 
-      </div>
-    </nav>
-    {% else %}
+        </div>
+      </nav>
+    {% endif %}
+    <!--Logged in as a delegate-->
+    {% if request.session.get('type') == "Delegate"%}
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="{% url 'home' %}"><img src="{%static "logo.png"%}" width="30" height="30" alt=""> MUNster</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +91,48 @@
 
       </nav>
     {%endif%}
+    <!--Logged in as A MUN-->
+    {% if request.session.get('type') =="MUN" %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="{%static "logo.png"%}" width="30" height="30" alt=""> MUNster</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'featured' %}">Featured<span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Registrations<span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Announcements<span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'searchdel'%}">Search<span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'settings'%}">Settings<span class="sr-only"></span></a>
+          </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+              </li>
+          </ul>
+      </div>
+
+    </nav>
+  {%endif%}
+    {%endif%}
+    <!--Dyna Content-->
     {%block body%}{%endblock%}
+
+    <!--Footer-->
     <div class="container" style="padding-top:45px;padding-left:0px;padding-right:0px; ">
       <div class="row">
         <div class="col" id="footer">

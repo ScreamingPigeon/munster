@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Settings
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Your Account settings and details</h2>
+        <br><br>
+        {%if alrt is not None %}
+        <div class="alert" id="alert "style="color:#67DB8F;visibility:visible; border-color:#67DB8F">
+          {{alrt}}
+        </div>
+        {%endif%}
+        <section class="text" style="font-size:20px">
+          Username: {{user.username}}
+          <form  action="{%url 'settings'%}" method="post">
+            {%csrf_token%}
+              MUN Name:<input type="text" id="name" name="name" class="form-control" value="{{user.name}}"><br>
+              Email<input type="text"id ="email" name="email" class="form-control" value="{{user.email}}"><br>
+              City:<input type="select" id ="city" name="city" value="{{user.city}}"><br><br>
+              Institution: <input type = "text" name = "institution" id = "institution" value = "{{user.institution}}"><br><br>
+              Number: <input type ="text" name ="number" id = 'number' value = "{{user.number}}"><br><br>
+              Link to Website or Social Media: <input type="text" name ="url" id ="url" value="{{user.url}}"><br><br>
+              MUN Description: <input type="text" name ="desc" id = 'desc'value="{{user.url}}"><br><br>
+            <button type="submit" class="btn btn-dark">Update</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

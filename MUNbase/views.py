@@ -25,29 +25,40 @@ def login(request):
         else:
             return render(request,"homepages/login.html",{"errmsg":"Username or Password is wrong",'user':None})
 def register(request):
-    users=User.objects.all()
-    username=[]
-    for user in users:
-        uname=user.username
-        username.append(uname)
+    #Display Page
     if request.method == "GET":
         if request.session.get('id') is not None:
             del request.session['id']
-        return render(request,"homepages/register.html",{"usernames":username, "user":None})
+        return render(request,"homepages/register.html",{"usernames":getallusernames(), "user":None})
+    #Process Form
     else:
+        #get basic details
         usrname=request.POST["username"]
-        if usrname in username:
+        type = request.POST['type']
+        if usrname in getallusernames():
             return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Username already exists"})
         password = request.POST["password"]
         password= pbkdf2_sha256.hash(password)
-
-        try:
-            user= User(username=usrname,password=password, email="", name= "", city="")
-            user.save()
-        except IntegrityError:
-            return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again"})
-        request.session["id"]=user.id
-        return redirect(reverse("home"))
+        #If account is that of a delegate
+        if type = "Delegate":
+            try:
+                user= User(username=usrname,password=password, email="", name= "", city="")
+                user.save()
+            except IntegrityError:
+                return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again"})
+            request.session["id"]=user.id
+            request.session['type']='Delegate'
+            return redirect(reverse("home"))
+        #if account is that of a MUN
+        if type ="MUN":
+            try:
+                user= MUNuser(username=usrname,password=password, email="", name= "", city="")
+                user.save()
+            except IntegrityError:
+                return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again"})
+            request.session["id"]=user.id
+            request.session['type']='MUN'
+            return redirect(reverse("home"))
 def featured(request):
     return render(request, "homepages/featured.html",{"user":getuser(request)})
 def tnc(request):
@@ -58,23 +69,48 @@ def logout(request):
     return redirect(reverse('home'))
 #-------------------------------------SETTINGS---------------------------------------#
 def settings(request):
+    #DISPLAY PAGE
     if request.method == "GET":
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
-        return render(request,"settings/settings.html",{"user":getuser(request)})
+            type = getusertpye(request)
+            if type =="Delegate":
+                return render(request,"settings/settings.html",{"user":getuser(request)})
+            if type =="MUN":
+                return render(request,"settings/munsettings.html",{"user":getuser(request)})
+    #HANDLE FORMS
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
-        name = request.POST["name"]
-        email = request.POST["email"]
-        user=getuser(request)
-        user.name = name
-        user.email = email
-        user.city = request.POST["city"]
-        user.age = request.POST['age']
-        user.institution = request.POST['institution']
-        user.save()
-        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Profile updated successfully"})
+        #for type Delegate
+        if getusertype(request) =="Delegate":
+            name = request.POST["name"]
+            email = request.POST["email"]
+            user=getuser(request)
+            user.name = name
+            user.email = email
+            user.city = request.POST["city"]
+            user.age = request.POST['age']
+            user.institution = request.POST['institution']
+            user.save()
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Profile updated successfully"})
+        if getusertpye(request) == 'MUN':
+            user = getuser(request)
+            user.name = request.POST['name']
+            user.email = request.POST['email']
+            user.number = request.POST['number']
+            user.url = request.POST['url']
+            user.city = request.POST['city']
+            user.institution = request.POST['institution']
+            user.description = request.POST['desc']
+            try:
+                user.save()
+                return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"Profile updated successfully"})
+            except IntegrityError:
+                return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"We ran into an issue... Please try Again"})
+
+
+
 #------------------------------------VIEW EXPERIENCE----------------------------------#
 def exp(request):
     user=getuser(request)
@@ -163,8 +199,15 @@ def getuser(request):
     user=request.session.get('id')
     if user is None:
         return None
-    user= User.objects.filter(id=user)[0]
+    type = getusertype(request)
+    if type =="Delegate":
+        user= User.objects.filter(id=user)[0]
+    if type =="MUN":
+        user= MUNuser.objects.filter(id=user)[0]
     return user
+def getusertpye(request):
+    type = request.session.get('type')
+    return type
 def detailsfilled(request):
     if getuser(request) is None:
         return False
@@ -183,7 +226,23 @@ def loguserin(username,password,request):
         return True
     else:
         return False
-
+def getallusers():
+    users =[]
+    delusers = User.objects.all()
+    munusers = MUNuser.objects.all()
+    for row in delusers:
+        users.append(row.username)
+    for row in munusers:
+        users.append(row.username)
+    return users[]
+def getallusernames():
+    #getting a list of usernames
+    users=getallusers()
+    usernames=[]
+    for user in users:
+        uname=user.username
+        username.append(uname)
+    return usernames
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
     return render(request,'404.html')
