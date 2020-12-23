@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience
+from .models import User, Experience, MUNuser
 from django.urls import reverse
 from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
