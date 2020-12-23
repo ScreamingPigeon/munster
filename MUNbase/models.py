@@ -21,9 +21,7 @@ class Experience(models.Model):
 class Delwatchlist(models.Model):
     delegate = models.ForeignKey(User, on_delete=models.CASCADE)
     following = models.ForeignKey(User, on_delete=models.CASCADE)
-class MUNwatchlist(models.Model):
-    delegate = models.ForeignKey(User, on_delete=models.CASCADE)
-    following = models.ForeignKey(MUNuser, on_delete=models.CASCADE)
+
 #--------------------------------------------MUN Organizer Features-------------------#
 
 #MUN organizer account
@@ -49,3 +47,7 @@ class MUNannouncements(models.Model):
 class Registrations (models.Model):
     delegate = Models.ForeignKey(User, on_delete = models.CASCADE)
     MUN = Models.ForeignKey(MUNuser, on_delete = models.CASCADE)
+#MUN watchlist for delegates
+class MUNwatchlist(models.Model):
+    delegate = models.ForeignKey(User, on_delete=models.CASCADE)
+    following = models.ForeignKey(MUNuser, on_delete=models.CASCADE)
