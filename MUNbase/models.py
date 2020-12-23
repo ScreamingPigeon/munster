@@ -19,8 +19,8 @@ class Experience(models.Model):
     position=models.CharField(max_length=20, default="")
 #delegate watchlist
 class Delwatchlist(models.Model):
-    delegate = models.ForeignKey(User, on_delete=models.CASCADE)
-    following = models.ForeignKey(User, on_delete=models.CASCADE)
+    delegate = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
 
 #--------------------------------------------MUN Organizer Features-------------------#
 
