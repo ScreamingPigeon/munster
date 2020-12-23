@@ -45,7 +45,7 @@ class MUNannouncements(models.Model):
     dateofcreation = models.DateField(auto_now=True)
 #Registrees
 class Registrations (models.Model):
-    delegate = odels.ForeignKey(User, on_delete = models.CASCADE)
+    delegate = models.ForeignKey(User, on_delete = models.CASCADE)
     MUN = models.ForeignKey(MUNuser, on_delete = models.CASCADE)
 #MUN watchlist for delegates
 class MUNwatchlist(models.Model):
