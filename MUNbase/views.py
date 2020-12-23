@@ -11,32 +11,32 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
         return redirect(reverse("settings"))
-    return render(request, "homepages/home.html",{"user":getuser(request)})
+    return render(request, "homepages/home.html",{"user":getuser(request), "type":getusertpye(request)})
 def login(request):
     if request.method == "GET":
         if request.session.get('id') is not None:
             del request.session['id']
-        return render(request,"homepages/login.html",{'user':None})
+        return render(request,"homepages/login.html",{'user':None, "type":getusertpye(request)})
     else:
         username=request.POST["username"]
         password = request.POST["password"]
         if loguserin(username,password,request):
             return redirect(reverse("home"))
         else:
-            return render(request,"homepages/login.html",{"errmsg":"Username or Password is wrong",'user':None})
+            return render(request,"homepages/login.html",{"errmsg":"Username or Password is wrong",'user':None, "type":getusertpye(request)})
 def register(request):
     #Display Page
     if request.method == "GET":
         if request.session.get('id') is not None:
             del request.session['id']
-        return render(request,"homepages/register.html",{"usernames":getallusernames(), "user":None})
+        return render(request,"homepages/register.html",{"usernames":getallusernames(), "user":None, "type":getusertpye(request)})
     #Process Form
     else:
         #get basic details
         usrname=request.POST["username"]
         type = request.POST['type']
         if usrname in getallusernames():
-            return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Username already exists"})
+            return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Username already exists", "type":getusertpye(request)})
         password = request.POST["password"]
         password= pbkdf2_sha256.hash(password)
         #If account is that of a delegate
@@ -45,7 +45,7 @@ def register(request):
                 user= User(username=usrname,password=password, email="", name= "", city="")
                 user.save()
             except IntegrityError:
-                return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again"})
+                return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again", "type":getusertpye(request)})
             request.session["id"]=user.id
             request.session['type']='Delegate'
             return redirect(reverse("home"))
@@ -55,17 +55,18 @@ def register(request):
                 user= MUNuser(username=usrname,password=password, email="", name= "", city="")
                 user.save()
             except IntegrityError:
-                return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again"})
+                return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again", "type":getusertpye(request)})
             request.session["id"]=user.id
             request.session['type']='MUN'
             return redirect(reverse("home"))
 def featured(request):
-    return render(request, "homepages/featured.html",{"user":getuser(request)})
+    return render(request, "homepages/featured.html",{"user":getuser(request), "type":getusertpye(request)})
 def tnc(request):
-    return render(request, "homepages/tnc.html",{"user":getuser(request)})
+    return render(request, "homepages/tnc.html",{"user":getuser(request), "type":getusertpye(request)})
 def logout(request):
     if request.session.get('id') is not None:
         del request.session['id']
+        del request.session['type']
     return redirect(reverse('home'))
 #-------------------------------------SETTINGS---------------------------------------#
 def settings(request):
@@ -75,9 +76,9 @@ def settings(request):
             return redirect(reverse("login", errmsg="You need to login first!"))
             type = getusertpye(request)
             if type =="Delegate":
-                return render(request,"settings/settings.html",{"user":getuser(request)})
+                return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertpye(request)})
             if type =="MUN":
-                return render(request,"settings/munsettings.html",{"user":getuser(request)})
+                return render(request,"settings/munsettings.html",{"user":getuser(request), "type":getusertpye(request)})
     #HANDLE FORMS
     else:
         if getuser(request) is None:
@@ -93,7 +94,7 @@ def settings(request):
             user.age = request.POST['age']
             user.institution = request.POST['institution']
             user.save()
-            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Profile updated successfully"})
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Profile updated successfully", "type":getusertpye(request)})
         if getusertpye(request) == 'MUN':
             user = getuser(request)
             user.name = request.POST['name']
@@ -105,11 +106,9 @@ def settings(request):
             user.description = request.POST['desc']
             try:
                 user.save()
-                return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"Profile updated successfully"})
+                return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"Profile updated successfully", "type":getusertpye(request)})
             except IntegrityError:
-                return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"We ran into an issue... Please try Again"})
-
-
+                return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"We ran into an issue... Please try Again", "type":getusertpye(request)})
 
 #------------------------------------VIEW EXPERIENCE----------------------------------#
 def exp(request):
@@ -118,20 +117,20 @@ def exp(request):
         return redirect(reverse("login", errmsg="You need to login first!"))
     experience=Experience.objects.filter(delegate=user).order_by("year")
     input = experience
-    return render(request, "exp/view.html", {'exp':input, 'user':user})
+    return render(request, "exp/view.html", {'exp':input, 'user':user, "type":getusertpye(request)})
 def getexp(request):
     user = getuser(request)
     if user is None:
         return redirect(reverse('login', errmsg="Login to use this feature"))
     if request.method == "GET":
-        return render(request, "exp/get.html",{"user":user})
+        return render(request, "exp/get.html",{"user":user, "type":getusertpye(request)})
     elif request.method == "POST":
         mun= request.POST["MUN"]
         year=request.POST["year"]
         committee=request.POST["comm"]
         pos=request.POST["pos"]
         if mun is None or year is None or committee is None or pos is None:
-            return render(request, "exp/get.html", {"errmsg":"Please fill all the fields"})
+            return render(request, "exp/get.html", {"errmsg":"Please fill all the fields", "type":getusertpye(request)})
         exp=Experience(delegate=user,MUN=mun,committee=committee,year=year, position=pos )
         exp.save()
         return redirect(reverse('exp'), user=user)
@@ -148,7 +147,7 @@ def editexp(request,MUN, year):
         return redirect(reverse("settings", alrt="Sorry, that resource is restricted!"))
 
     if request.method == "GET":
-        return render(request, "exp/edit.html",{"user":user,"exp":expelement})
+        return render(request, "exp/edit.html",{"user":user,"exp":expelement, "type":getusertpye(request)})
     if request.method == "POST":
         expelement.delete()
         mun= request.POST["MUN"]
@@ -163,25 +162,24 @@ def editexp(request,MUN, year):
 
         return redirect(reverse('exp'), user=user)
 
-
 #----------------------------------VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
         dele=User.objects.filter(username=dele)[0]
         exp = Experience.objects.filter(delegate=dele).order_by("year")
     except IndexError:
-        return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request)})
+        return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertpye(request)})
     if getuser(request)== dele:
-        return render(request, "view/del.html", {"del":dele, "user":getuser(request), "exp": exp})
+        return render(request, "view/del.html", {"del":dele, "user":getuser(request), "exp": exp, "type":getusertpye(request)})
     else:
-        return render(request, "view/del.html", {"del":dele, "exp":exp,"user":getuser(request)})
+        return render(request, "view/del.html", {"del":dele, "exp":exp,"user":getuser(request), "type":getusertpye(request)})
 #----------------------------------- SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
         users=User.objects.all()
-        return render(request,"search/search.html",{'users':users, 'user':getuser(request)})
+        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertpye(request)})
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
@@ -192,7 +190,7 @@ def searchdel(request):
             if search in row.username or search in row.name:
                 unames.append(row)
         users=unames
-        return render(request,"search/search.html",{'users':users, 'user':getuser(request)})
+        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertpye(request)})
 
 #----------------------------------------HELPERS-----------------------------------------#
 def getuser(request):
