@@ -40,7 +40,7 @@ def register(request):
         password = request.POST["password"]
         password= pbkdf2_sha256.hash(password)
         #If account is that of a delegate
-        if type = "Delegate":
+        if type == "Delegate":
             try:
                 user= User(username=usrname,password=password, email="", name= "", city="")
                 user.save()
@@ -50,7 +50,7 @@ def register(request):
             request.session['type']='Delegate'
             return redirect(reverse("home"))
         #if account is that of a MUN
-        if type ="MUN":
+        if type =="MUN":
             try:
                 user= MUNuser(username=usrname,password=password, email="", name= "", city="")
                 user.save()
