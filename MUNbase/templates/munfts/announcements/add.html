@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Make Announcement
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Make Announcement!</h2>
+        <br><br>
+        <div class="alert">
+
+        </div>
+        <section class="text" style="font-size:20px">
+      <form class="form-action" action="{%  url 'addannouncements' %}" method="post">
+        {% csrf_token %}
+          Heading: <input type="text" name="heading" id ="heading" placeholder="Heading" value=""><br><br>
+          Content: <input type="text" name="content" id ="content" placeholder="Content" value=""><br><br>
+          <button type="Submit" id='bt'name="button" class="btn button-dark text">Submit</button>
+      </form>
+
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  but=document.getElementById('bt').disabled=true;
+  form=document.querySelector("form")
+  form.addEventListener('keydown', validate);
+  form.addEventListener('keyup', validate);
+
+  function validate(){
+      mun=document.getElementById("MUN").value;
+      comm = document.getElementById("comm").value;
+      alert=document.getElementsByClassName('alert')[0];
+      but=document.getElementById('bt');
+
+      if (mun==""||mun.length<5){
+        alert.innerHTML="Please fill a MUN name of at least 5 Characters";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+      else if(comm==""||comm.length<2){
+        alert.innerHTML="Fill in a valid Committee name of at least 2 characters";
+        alert.style.visibility='visible';
+        but.disabled=true;
+      }
+     else{
+        alert.style.display = 'none';
+        alert.innerHTML = "";
+        alert.style.visibility='hidden';
+        but.disabled=false;
+      }
+    }
+
+</script>
+{%endblock%}

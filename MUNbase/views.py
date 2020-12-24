@@ -10,7 +10,7 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 #------------------------------------------COMMON-HOMEPAGES-------------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return redirect(reverse("settings", alrt ="Please fill in all the fields with a *"))
+        return redirect(reverse("settings"), alrt ="Please fill in all the fields with a *")
     return render(request, "homepages/home.html",{"user":getuser(request), "type":getusertype(request)})
 def login(request):
     if request.method == "GET":
@@ -176,7 +176,24 @@ def announcements(request):
     announcements = MUNannouncements.objects.filter(announcer=getuser(request)).order_by('dateofcreation')
     return render(request, "munfts/announcements/view.html",{'announcements':announcements,'user':getuser(request), 'type':getusertype(request)})
 def addannouncements(request):
-    pass
+    if request.method == 'GET':
+        if getuser(request) is None:
+            return redirect(reverse('login', errmsg ='You need to login first'))
+        elif getusertype(request) != 'MUN':
+            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        return render(request, 'munfts/announcements/add.html')
+    if request.method == 'POST':
+        if getuser(request) is None:
+            return redirect(reverse('login', errmsg ='You need to login first'))
+        elif getusertype(request) != 'MUN':
+            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        anc= MUNannouncements(announcer=getuser(request), heading = request.POST['heading'], content=request.POST['content'])
+        try:
+            anc.save()
+            return redirect(reverse('announcements'))
+        except IntegrityError:
+            return render(request, 'munfts/announcements/add.html',{"errmsg":"Something went wrong, Please try again"})
+
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
