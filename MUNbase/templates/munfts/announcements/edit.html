@@ -21,7 +21,7 @@ Edit Announcement
         {% csrf_token %}
           Heading: <input type="text" name="heading" id ="heading" placeholder="Heading" value="{{announcement.heading}}"><br><br>
           Content: <input type="text" name="content" id ="content" placeholder="Content" value="{{announcement.content}}"><br><br>
-          <a href = "#"><button style="border-color:" class="btn button-dark text">Delete?</button></a>  
+          <a href = "#" style='color:#F07178'><button style="border-color:#F07178;" class="btn button-dark text">Delete?</button></a>  
           <button type="Submit" id='bt'name="button" class="btn button-dark text">Submit</button>
       </form>
 
