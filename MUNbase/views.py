@@ -7,10 +7,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf.urls import handler400, handler403, handler404, handler500
 
 
-#------------------------------------------HOMEPAGES-------------------------------------------#
+#------------------------------------------COMMON-HOMEPAGES-------------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return redirect(reverse("settings"), alrt ="Please fill in all the fields with a *")
+        return redirect(reverse("settings", alrt ="Please fill in all the fields with a *"))
     return render(request, "homepages/home.html",{"user":getuser(request), "type":getusertype(request)})
 def login(request):
     if request.method == "GET":
@@ -68,7 +68,7 @@ def logout(request):
         del request.session['id']
         del request.session['type']
     return redirect(reverse('home'))
-#-------------------------------------SETTINGS---------------------------------------#
+#-------------------------------------COMMON-SETTINGS---------------------------------------#
 def settings(request):
     #DISPLAY PAGE
     if request.method == "GET":
@@ -109,12 +109,13 @@ def settings(request):
                 return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"Profile updated successfully", "type":getusertype(request)})
             except IntegrityError:
                 return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"We ran into an issue... Please try Again", "type":getusertype(request)})
-
-#------------------------------------VIEW EXPERIENCE----------------------------------#
+#------------------------------------DELEGATE-EXPERIENCE----------------------------------#
 def exp(request):
     user=getuser(request)
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
+    elif getusertype(request) != 'Delegate':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
     experience=Experience.objects.filter(delegate=user).order_by("year")
     input = experience
     return render(request, "exp/view.html", {'exp':input, 'user':user, "type":getusertype(request)})
@@ -122,6 +123,8 @@ def getexp(request):
     user = getuser(request)
     if user is None:
         return redirect(reverse('login', errmsg="Login to use this feature"))
+    elif getusertype(request) != 'Delegate':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
     if request.method == "GET":
         return render(request, "exp/get.html",{"user":user, "type":getusertype(request)})
     elif request.method == "POST":
@@ -138,6 +141,8 @@ def editexp(request,MUN, year):
     user = getuser(request)
     if user is None:
         return redirect(reverse("login", errmsg="You need to login first!"))
+    elif getusertype(request) != 'Delegate':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
     try:
         expelement=Experience.objects.filter(MUN=MUN, year = int(year), delegate = user)[0]
     except IndexError:
@@ -161,8 +166,19 @@ def editexp(request,MUN, year):
         expelement.save()
 
         return redirect(reverse('exp'), user=user)
-
-#----------------------------------VIEW PROFILE----------------------------------------#
+#------------------------------------MUN ANNOUNCEMENTS---------------------------------------#
+def announcements(request):
+    user=getuser(request)
+    if user is None:
+        return redirect(reverse("login", errmsg="You need to login first!"))
+    elif getusertype(request) != 'MUN':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+    announcements = MUNannouncements.objects.filter(announcer=getuser(request)).order_by('dateofcreation')
+    return render(request, "munfts/announcements/view.html",{'announcements':announcements,'user':getuser(request), 'type':getusertype(request)})
+def addannouncements(request):
+    pass
+#------------------------------------MUN REGISTRATIONS---------------------------------------#
+#----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
         dele=User.objects.filter(username=dele)[0]
@@ -173,7 +189,9 @@ def viewdel(request, dele):
         return render(request, "view/del.html", {"del":dele, "user":getuser(request), "exp": exp, "type":getusertype(request)})
     else:
         return render(request, "view/del.html", {"del":dele, "exp":exp,"user":getuser(request), "type":getusertype(request)})
-#----------------------------------- SEARCH--------------------------------------------#
+def viewmun(request, mun):
+    pass
+#----------------------------------- COMMON EARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
         if getuser(request) is None:
@@ -191,7 +209,6 @@ def searchdel(request):
                 unames.append(row)
         users=unames
         return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
-
 #----------------------------------------HELPERS-----------------------------------------#
 def getusertype(request):
     type = request.session.get('type')

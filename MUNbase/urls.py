@@ -20,22 +20,28 @@ from django.conf import settings # to import static in deployment
 from django.conf.urls.static import static # to import static in deployment
 
 urlpatterns = [
-    #homepages
+    #COMMON HOMEPAGES--------------------------------------------------------------
     path("", views.home, name="home"),
     path("login", views.login, name="login"),
     path("register", views.register, name="register"),
     path("featured", views.featured, name="featured"),
     path("tnc", views.tnc, name="tnc"),
     path("logout", views.logout, name="logout"),
-    #account settings
+    #COMMON SETTINGS-------------------------------------------------------------------
     path("settings", views.settings, name="settings"),
-    #experience
+    #DELEGATE EXPERIENCE----------------------------------------------------------------
     path("experience", views.exp, name="exp"),
     path("addexperience", views.getexp, name="getexp"),
     path("editexperience/<str:MUN>/<str:year>",views.editexp,name="editexp"),
-    #view Delegate
-    path("view/delegate/<str:dele>", views.viewdel, name="viewdel"),
-    #search for a delegate
+    #COMMON VIEW-------------------------------------------------------------------------
+    path("view/delegate/<str:dele>", views.viewdel, name="viewdel"),#Delegate
+    path('view/mun/<str:mun>', views.viewmun, name='viewmun'),#MUN
+    #MUN FEATURES----------------------------------------------------
+    path('announcements', views.announcements, name='announcements'),
+    path('add-announcements',views.addannouncements, name ='addannouncements'),
+    #edit announcements
+    #delete announcements
+    #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel")
     # loading static files in deployment
     ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
