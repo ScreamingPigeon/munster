@@ -173,7 +173,7 @@ def announcements(request):
         return redirect(reverse("login", errmsg="You need to login first!"))
     elif getusertype(request) != 'MUN':
         return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
-    announcements = MUNannouncements.objects.filter(announcer=getuser(request)).order_by('-dateofcreation')
+    announcements = MUNannouncements.objects.filter(announcer=getuser(request)).order_by('dateofcreation')
     return render(request, "munfts/announcements/view.html",{'announcements':announcements,'user':getuser(request), 'type':getusertype(request)})
 def addannouncements(request):
     if request.method == 'GET':
