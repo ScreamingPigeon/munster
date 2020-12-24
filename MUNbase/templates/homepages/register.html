@@ -36,10 +36,10 @@ Register
           <br>
           <input id="pword2"name="password2" type="password" class="form-control" placeholder="Confirm Password"><br>
           <br>
-          <select id ='type' name='type'>
+          <select id ='type' name='type' class="form-select" aria-label="Default select example">
             <option value="Delegate">Delegate</option>
             <option value="MUN">MUN</option>
-          </select>
+          </select><br>
           <button id="bt" type="submit" class="btn btn-dark" disabled="true"name="button">Register</button>
         </form>
         <span class='text'>Already have an account?<a href="{% url 'login'%}"> Login</a> instead!</span><br><br>

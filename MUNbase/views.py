@@ -29,7 +29,7 @@ def register(request):
     if request.method == "GET":
         if request.session.get('id') is not None:
             del request.session['id']
-        return render(request,"homepages/register.html",{"usernames":getallusernames(), "user":None, "type":getusertpye(request)})
+        return render(request,"homepages/register.html",{"usernames":getallusernames(), "user":None, "type":None})
     #Process Form
     else:
         #get basic details
@@ -198,6 +198,8 @@ def getuser(request):
     if user is None:
         return None
     type = getusertype(request)
+    if type is None:
+        return None
     if type =="Delegate":
         user= User.objects.filter(id=user)[0]
     if type =="MUN":
@@ -205,6 +207,8 @@ def getuser(request):
     return user
 def getusertpye(request):
     type = request.session.get('type')
+    if type != "Delegate" and type != "MUN":
+        return None
     return type
 def detailsfilled(request):
     if getuser(request) is None:
