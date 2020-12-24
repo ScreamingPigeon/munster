@@ -280,6 +280,7 @@ def detailsfilled(request):
 def loguserin(username,password,request):
     deluser= User.objects.filter(username=username)
     munuser = MUNuser.objects.filter(username=username)
+    user=[]
     if deluser is None:
         user = munuser
     elif munuser is None:
