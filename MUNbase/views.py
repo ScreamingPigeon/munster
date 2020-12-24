@@ -297,9 +297,9 @@ def loguserin(username,password,request):
     deluser= User.objects.filter(username=username)
     munuser = MUNuser.objects.filter(username=username)
     user=[]
-    if length(deluser) ==1:
+    if len(deluser) ==1:
         user.append(deluser[0])
-    elif lenth(munuser)==1:
+    elif len(munuser)==1:
         user.append(munuser[0])
     user = user[0]
     if(pbkdf2_sha256.verify(password, user.password)):
