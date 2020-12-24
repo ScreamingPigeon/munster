@@ -40,6 +40,7 @@ urlpatterns = [
     path('announcements', views.announcements, name='announcements'),
     path('add-announcements',views.addannouncements, name ='addannouncements'),
     path('edit-announcements/<str:heading>/<str:content>', views.editannouncements, name ='editannouncements'),
+    path('delete-announcements/<str:heading>/<str:content>', views.deleteannouncements, name ='deleteannouncements'),
     #delete announcements
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel")

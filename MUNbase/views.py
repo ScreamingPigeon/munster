@@ -231,6 +231,16 @@ def editannouncements(request, heading, content):
         announcement.content = request.POST['content']
         announcement.save()
         return redirect(reverse('announcements'))
+def deleteannouncements(request, heading, content):
+    if getuser(request) is None:
+        return redirect(reverse('login', errmsg ='You need to login first'))
+    elif getusertype(request) != 'MUN':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+    announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)[0]
+    announcement.delete()
+    return redirect(reverse('announcements'))
+
+
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
