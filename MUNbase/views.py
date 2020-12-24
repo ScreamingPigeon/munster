@@ -75,13 +75,10 @@ def settings(request):
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
             type = getusertpye(request)
-            if type =="Delegate":
-                return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertpye(request)})
-            if type =="MUN":
-                return render(request,"settings/munsettings.html",{"user":getuser(request), "type":getusertpye(request)})
-            else:
-                return redirect(reverse('register', errmsg ="Uh oh! Something went wrong"))
-    #HANDLE FORMS
+        if type =="Delegate":
+            return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertpye(request)})
+        if type =="MUN":
+            return render(request,"settings/munsettings.html",{"user":getuser(request), "type":getusertpye(request)})
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
