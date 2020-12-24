@@ -42,7 +42,7 @@ class MUNannouncements(models.Model):
     announcer = models.ForeignKey(MUNuser, on_delete = models.CASCADE)
     heading = models.CharField(max_length = 100)
     content = models.CharField(max_length = 300)
-    dateofcreation = models.DateField(auto_now=True)
+    dateofcreation = models.DateTimeField(auto_now=True)
 #Registrees
 class Registrations (models.Model):
     delegate = models.ForeignKey(User, on_delete = models.CASCADE)
