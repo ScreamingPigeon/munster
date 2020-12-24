@@ -7,7 +7,7 @@ Announcements
 {%endblock%}
 {% block body %}
 <div class="container">
-  <div class="col-md">
+  <div class="col-lg">
     <br><br>
     <div class="row">
       <div class="box">
@@ -16,8 +16,8 @@ Announcements
         <section class ='text'>
           {% if announcements is not None %}
             {% for row in announcements %}
-              <h6>{{row.heading}}</h6>
-              <p>{{row.content}}</p>
+              <h4><weight>{{row.heading}}</weight></h6>
+              <p>{{row.content}}</p><br>
             {%endfor%}
           {% else %}
           <p>No announcements made yet :(</p>
