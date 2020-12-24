@@ -13,14 +13,16 @@ Announcements
       <div class="box">
         <h2 class="subh">View Announcements</h2>
         <!--Put viewing of announcements datewise here-->
-        {% if announcements is not None %}
-          {% for row in announcements %}
-            <h6>{{row.title}}</h6>
-            <p>{{row.content}}</p>
-          {%endfor%}
-        {% else %}
-        <p>No announcements made yet :(</p>
-        {% endif %}
+        <section class ='text'>
+          {% if announcements is not None %}
+            {% for row in announcements %}
+              <h6>{{row.heading}}</h6>
+              <p>{{row.content}}</p>
+            {%endfor%}
+          {% else %}
+          <p>No announcements made yet :(</p>
+          {% endif %}
+        </section>
         <a href = "{%url 'addannouncements'%}"><button type="button" class="btn button-dark text">Make Announcement</button></a>
       </div>
     </div>
