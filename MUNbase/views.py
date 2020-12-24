@@ -243,7 +243,7 @@ def getallusernames():
     usernames=[]
     for user in users:
         uname=user.username
-        username.append(uname)
+        usernames.append(uname)
     return usernames
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
