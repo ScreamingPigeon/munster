@@ -297,15 +297,10 @@ def loguserin(username,password,request):
     deluser= User.objects.filter(username=username)
     munuser = MUNuser.objects.filter(username=username)
     user=[]
-    try:
-         deluser=deluser[0]
-         user.append(deluser)
-    except IndexError:
-        try:
-            munuser = munser[0]
-            user.append(munuser)
-        except IndexError:
-            return False
+    if length(deluser) ==1:
+        user.append(deluser[0])
+    elif lenth(munuser)==1:
+        user.append(munuser[0])
     user = user[0]
     if(pbkdf2_sha256.verify(password, user.password)):
         request.session['id']=user.id
