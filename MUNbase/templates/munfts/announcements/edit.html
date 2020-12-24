@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Edit Announcement
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Edit Announcement</h2>
+        <br><br>
+        <div class="alert">
+
+        </div>
+        <section class="text" style="font-size:20px">
+      <form class="form-action" action="{%  url 'editannouncements' %}" method="post">
+        {% csrf_token %}
+          Heading: <input type="text" name="heading" id ="heading" placeholder="Heading" value="{{announcement.heading}}"><br><br>
+          Content: <input type="text" name="content" id ="content" placeholder="Content" value="{{announcement.content}}"><br><br>
+          <button type="Submit" id='bt'name="button" class="btn button-dark text">Submit</button>
+      </form>
+
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

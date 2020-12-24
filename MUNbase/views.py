@@ -181,7 +181,7 @@ def addannouncements(request):
             return redirect(reverse('login', errmsg ='You need to login first'))
         elif getusertype(request) != 'MUN':
             return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
-        return render(request, 'munfts/announcements/add.html')
+        return render(request, 'munfts/announcements/add.html',{'user':getuser(),'type':getusertype(request)})
     if request.method == 'POST':
         if getuser(request) is None:
             return redirect(reverse('login', errmsg ='You need to login first'))
@@ -192,8 +192,29 @@ def addannouncements(request):
             anc.save()
             return redirect(reverse('announcements'))
         except IntegrityError:
-            return render(request, 'munfts/announcements/add.html',{"errmsg":"Something went wrong, Please try again"})
-
+            return render(request, 'munfts/announcements/add.html',{"errmsg":"Something went wrong, Please try again",'user':getuser(request),'type':getusertype(request)})
+def editannouncements(request, heading, content):
+    if request.method=='GET':
+        if getuser(request) is None:
+            return redirect(reverse('login', errmsg ='You need to login first'))
+        elif getusertype(request) != 'MUN':
+            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        announcement = MUNannouncements(announcer = getuser(request), heading=heading, content=content)
+        if announcement is None:
+            return render(request, 'munfts/announcements/view.html',{"errmsg":"That Announcemnt does not exist"})
+        else:
+            announcement=announcement[0]
+            return render(request, 'munfts/announcements/edit.html',{'announcement':announcement, 'user':getuser(request), 'type':getusertype(request)})
+    if request.method == 'POST':
+        if getuser(request) is None:
+            return redirect(reverse('login', errmsg ='You need to login first'))
+        elif getusertype(request) != 'MUN':
+            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        announcement = MUNannouncements(announcer = getuser(request), heading=heading, content=content)
+        announcement.heading = request.POST['heading']
+        announcement.content = request.POST['content']
+        announcement.save()
+        return redirect(reverse('announcements'))
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
