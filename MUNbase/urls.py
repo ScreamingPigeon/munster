@@ -39,7 +39,7 @@ urlpatterns = [
     #MUN FEATURES----------------------------------------------------
     path('announcements', views.announcements, name='announcements'),
     path('add-announcements',views.addannouncements, name ='addannouncements'),
-    path('edit-announcements/<str:heading>/<str:content>', views.editannouncements, name ='editannouncements')
+    path('edit-announcements/<str:heading>/<str:content>', views.editannouncements, name ='editannouncements'),
     #delete announcements
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel")
