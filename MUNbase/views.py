@@ -192,7 +192,7 @@ def searchdel(request):
         return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertpye(request)})
 
 #----------------------------------------HELPERS-----------------------------------------#
-def getusertpye(request):
+def getusertype(request):
     type = request.session.get('type')
     if type != "Delegate" and type != "MUN":
         return None

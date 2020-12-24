@@ -8,7 +8,7 @@ class User(models.Model):
     username = models.CharField(max_length=16)
     password=models.CharField(max_length=100)
     institution=models.CharField(max_length=50, default ="")
-    age =models.IntegerField(default = 16)
+    age =models.IntegerField(default = 0)
     city=models.CharField(max_length=60, default="")
 #delegate experience
 class Experience(models.Model):
