@@ -16,7 +16,7 @@ Announcements
         <section class ='text'>
           {% if announcements is not None %}
             {% for row in announcements %}
-              <h4 style='color:#A8B7B9'><weight>{{row.heading}}</weight></h6>
+              <h4 style='color:#A8B7B9'><weight>{{row.heading}}</weight><a href="#"><img height="25" width="25" src="{% static "edit.png" %}"></img></a></h6>
               <p>{{row.content}}</p><br>
             {%endfor%}
           {% else %}
