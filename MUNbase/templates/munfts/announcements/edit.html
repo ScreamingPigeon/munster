@@ -17,7 +17,7 @@ Edit Announcement
 
         </div>
         <section class="text" style="font-size:20px">
-      <form class="form-action" action="{%  url 'editannouncements' %}" method="post">
+      <form class="form-action" action="{%  url 'editannouncements' announcement.heading announcement.content %}" method="post">
         {% csrf_token %}
           Heading: <input type="text" name="heading" id ="heading" placeholder="Heading" value="{{announcement.heading}}"><br><br>
           Content: <input type="text" name="content" id ="content" placeholder="Content" value="{{announcement.content}}"><br><br>
