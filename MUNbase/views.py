@@ -10,7 +10,7 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 #------------------------------------------HOMEPAGES-------------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return redirect(reverse("settings"))
+        return redirect(reverse("settings"), alrt ="Please fill in all the fields with a *")
     return render(request, "homepages/home.html",{"user":getuser(request), "type":getusertype(request)})
 def login(request):
     if request.method == "GET":
@@ -214,8 +214,13 @@ def detailsfilled(request):
     if getuser(request) is None:
         return False
     user= getuser(request)
-    if user.email is "" or user.name is "" or user.city is "" or user.age is None or user.institution is "":
-        return False
+    type = getusertype(request)
+    if type == "delegate":
+        if user.email is "" or user.name is "" or user.city is "" or user.age is None or user.email is "":
+            return False
+    if type == "MUN":
+        if user.email == "" or user.name == "" or user.city == "" or user.email == "" or user.description == "":
+            return False
     return True
 def loguserin(username,password,request):
     user= User.objects.filter(username=username)
