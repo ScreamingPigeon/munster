@@ -193,6 +193,11 @@ def searchdel(request):
         return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertpye(request)})
 
 #----------------------------------------HELPERS-----------------------------------------#
+def getusertpye(request):
+    type = request.session.get('type')
+    if type != "Delegate" and type != "MUN":
+        return None
+    return type
 def getuser(request):
     user=request.session.get('id')
     if user is None:
@@ -205,11 +210,6 @@ def getuser(request):
     if type =="MUN":
         user= MUNuser.objects.filter(id=user)[0]
     return user
-def getusertpye(request):
-    type = request.session.get('type')
-    if type != "Delegate" and type != "MUN":
-        return None
-    return type
 def detailsfilled(request):
     if getuser(request) is None:
         return False
