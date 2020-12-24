@@ -233,9 +233,9 @@ def getallusers():
     delusers = User.objects.all()
     munusers = MUNuser.objects.all()
     for row in delusers:
-        users.append(row.username)
+        users.append(row)
     for row in munusers:
-        users.append(row.username)
+        users.append(row)
     return users
 def getallusernames():
     #getting a list of usernames
