@@ -13,7 +13,7 @@ Settings
       <div class="box">
         <h2 class="subh">Your Account settings and details</h2>
         <br><br>
-        {%if alrt not =="" %}
+        {%if if alrt == "Profile updated successfully" or alrt == "We ran into an issue... Please try Again" or alrt == "Please fill in all the fields with a *" %}
         <div class="alert" id="alert "style="color:#67DB8F;visibility:visible; border-color:#67DB8F">
           {{alrt}}
         </div>
