@@ -29,7 +29,7 @@ def login(request):
                 if username == row.username:
                     user.append(row)
                     type.append('Delegate')
-            if user is None:
+            if len(user) == 0:
                 for row in munusers:
                     if username == row.username:
                         user.append(row)
