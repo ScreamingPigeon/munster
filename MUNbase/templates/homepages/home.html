@@ -109,7 +109,7 @@ Home
   c2.onclick= function(){location.href='{%url 'login'%}'}
 </script>
 {% else %}
-  {%if type is "Delegate"%}
+  {%if type == "Delegate"%}
     <script type="text/javascript">
   card1=document.getElementById("i1");
   card1.innerHTML="Search";
@@ -125,7 +125,7 @@ Home
   c2.onclick= function(){location.href='{%url 'viewdel' user.username%}'}
 </script>
   {%endif%}
-  {%if type is "MUN"%}
+  {%if type == "MUN"%}
     <script type="text/javascript">
       card1=document.getElementById("i1");
       card1.innerHTML="Search";
