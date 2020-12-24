@@ -21,6 +21,22 @@ def login(request):
         username=request.POST["username"]
         password = request.POST["password"]
         if loguserin(username,password,request):
+            delusers = User.objects.all()
+            munusers = MUNuser.objects.all()
+            user=[]
+            type = []
+            for row in delusers:
+                if username == row.username:
+                    user.append(row)
+                    type.append('Delegate')
+            if user is None:
+                for row in munusers:
+                    if username == row.username:
+                        user.append(row)
+                        type.append('MUN')
+            user = user[0]
+            request.session["id"]=user.id
+            request.session['type']=type[0]
             return redirect(reverse("home"))
         else:
             return render(request,"homepages/login.html",{"errmsg":"Username or Password is wrong",'user':None, "type":getusertype(request)})
