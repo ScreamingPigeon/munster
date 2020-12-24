@@ -30,35 +30,4 @@ Make Announcement
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  but=document.getElementById('bt').disabled=true;
-  form=document.querySelector("form")
-  form.addEventListener('keydown', validate);
-  form.addEventListener('keyup', validate);
-
-  function validate(){
-      mun=document.getElementById("MUN").value;
-      comm = document.getElementById("comm").value;
-      alert=document.getElementsByClassName('alert')[0];
-      but=document.getElementById('bt');
-
-      if (mun==""||mun.length<5){
-        alert.innerHTML="Please fill a MUN name of at least 5 Characters";
-        alert.style.visibility='visible';
-        but.disabled=true;
-      }
-      else if(comm==""||comm.length<2){
-        alert.innerHTML="Fill in a valid Committee name of at least 2 characters";
-        alert.style.visibility='visible';
-        but.disabled=true;
-      }
-     else{
-        alert.style.display = 'none';
-        alert.innerHTML = "";
-        alert.style.visibility='hidden';
-        but.disabled=false;
-      }
-    }
-
-</script>
 {%endblock%}
