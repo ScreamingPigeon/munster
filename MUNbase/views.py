@@ -74,7 +74,7 @@ def settings(request):
     if request.method == "GET":
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
-            type = getusertpye(request)
+        type = getusertpye(request)
         if type =="Delegate":
             return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertpye(request)})
         if type =="MUN":
