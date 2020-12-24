@@ -79,6 +79,8 @@ def settings(request):
                 return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertpye(request)})
             if type =="MUN":
                 return render(request,"settings/munsettings.html",{"user":getuser(request), "type":getusertpye(request)})
+            else:
+                return redirect(reverse('register', errmsg ="Uh oh! Something went wrong"))
     #HANDLE FORMS
     else:
         if getuser(request) is None:
