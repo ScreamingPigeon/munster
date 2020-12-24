@@ -11,12 +11,12 @@ Announcements
     <br><br>
     <div class="row">
       <div class="box">
-        <h2 class="subh">View Announcements</h2>
+        <h2 class="subh">View Announcements</h2><br><br>
         <!--Put viewing of announcements datewise here-->
         <section class ='text'>
           {% if announcements is not None %}
             {% for row in announcements %}
-              <h4><weight>{{row.heading}}</weight></h6>
+              <h4 style='color:#A8B7B9'><weight>{{row.heading}}</weight></h6>
               <p>{{row.content}}</p><br>
             {%endfor%}
           {% else %}
