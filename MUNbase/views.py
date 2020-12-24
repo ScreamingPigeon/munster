@@ -47,7 +47,7 @@ def register(request):
             except IntegrityError:
                 return render(request,"homepages/register.html",{"usernames":username,"errmsg":"Something went wrong. Please try again", "type":getusertype(request)})
             request.session["id"]=user.id
-            request.session['type']='Delegate'
+            request.session["type"]='Delegate'
             return redirect(reverse("home"))
         #if account is that of a MUN
         if type =="MUN":
@@ -79,6 +79,7 @@ def settings(request):
             return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertype(request)})
         if type =="MUN":
             return render(request,"settings/munsettings.html",{"user":getuser(request), "type":getusertype(request)})
+    #MANAGING FORM SUBMISSIONS
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
