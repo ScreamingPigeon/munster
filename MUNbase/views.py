@@ -278,7 +278,14 @@ def detailsfilled(request):
             return False
     return True
 def loguserin(username,password,request):
-    user= User.objects.filter(username=username)
+    deluser= User.objects.filter(username=username)
+    munuser = MUNuser.objects.filter(username=username)
+    if deluser is None:
+        user = munuser
+    elif munuser is None:
+        user = deluser
+    else:
+        return False
     try:
          user=user[0]
     except IndexError:
