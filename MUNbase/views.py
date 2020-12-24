@@ -202,7 +202,7 @@ def getuser(request):
     user=request.session.get('id')
     if user is None:
         return None
-    type = getusertype(request)
+    type = request.session.get('type')
     if type is None:
         return None
     if type =="Delegate":
