@@ -197,7 +197,7 @@ def addannouncements(request):
             return redirect(reverse('login', errmsg ='You need to login first'))
         elif getusertype(request) != 'MUN':
             return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
-        return render(request, 'munfts/announcements/add.html',{'user':getuser(),'type':getusertype(request)})
+        return render(request, 'munfts/announcements/add.html',{'user':getuser(request),'type':getusertype(request)})
     if request.method == 'POST':
         if getuser(request) is None:
             return redirect(reverse('login', errmsg ='You need to login first'))
