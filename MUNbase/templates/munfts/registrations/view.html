@@ -24,10 +24,10 @@ MUN Registrations
   {%if registrations|length > 0 %}
         <tbody>
 
-        {% for i in registrations|length %}
+        {% for row in registrations %}
           <tr>
-            <td>{{i+1}}</td>
-            <td><a href="{%url 'viewdel' registrations[i].delegate.username %}">{{registrations[i].delegate.username}}</a></td>
+            <td>{{loop.index}}</td>
+            <td><a href="{%url 'viewdel' row.delegate.username %}">{{row.delegate.username}}</a></td>
           </tr>
           {%endfor%}
           </tbody>
