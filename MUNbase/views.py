@@ -276,9 +276,12 @@ def viewmun(request, mun):
         if getuser(request)==MUN:
             issame=True
         #checking whether the user is registered or not
-        registrations = Registrations.objects.filter(MUN = MUN, delegate=getuser(request))
-        isreg = False
-        if len(registrations)==1:
+        if getusertype(request) == "Delegate":
+            registrations = Registrations.objects.filter(MUN = MUN, delegate=getuser(request))
+            isreg = False
+            if len(registrations)==1:
+                isreg = True
+        else:
             isreg = True
         return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame,'isreg':isreg})
     except IndexError:
