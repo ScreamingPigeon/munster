@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% load static%}
+
+
+{%block title%}
+MUN Registrations
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Your Registrations!</h2>
+        <br><br>
+        <section class="text" style="font-size:20px">
+          <table class="table table-dark" >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Delegate Username</th>
+          </tr>
+        </thead>
+  {%if registrations|length > 0 %}
+        <tbody>
+
+        {% for i in registrations|length %}
+          <tr>
+            <td>{{i+1}}</td>
+            <td><a href="{%url 'viewdel' registrations[i].delegate.username %}">{{registrations[i].delegate.username}}</a></td>
+          </tr>
+          {%endfor%}
+          </tbody>
+      {% else %}
+            <tbody>
+              <tr>
+                <td>-</td>
+                <td>No Registrations Yet :(</td>
+              </tr>
+              </tbody>
+          {%endif%}
+
+
+   </table>
+   <a href="{% url 'getexp'%}"><button type="button" name="button" class="btn button-dark text">Update!</button></a>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

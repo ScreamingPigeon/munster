@@ -257,6 +257,14 @@ def register(request, mun):
         registration = Registrations(delegate=getuser(request), MUN = MUN)
         registration.save()
         return redirect('viewmun', mun = MUN.username)
+def viewregistrations(viewregistration):
+    if getuser(request) is None:
+        return redirect(reverse('login', errmsg ='You need to login first'))
+    elif getusertype(request) != 'MUN':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+    registrations = Registrations.objects.filter(MUN=getuser(request))
+    return render(request, 'munfts/registrations/view.html', {"user":getuser(request), "type":getusertype(request), "registrations": registrations})
+
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
