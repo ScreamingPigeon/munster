@@ -185,9 +185,10 @@ def editexp(request,MUN, year):
 #------------------------------------MUN ANNOUNCEMENTS---------------------------------------#
 def announcements(request):
     user=getuser(request)
-            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
-        elif getusertype(request) != 'MUN':
-            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    if user is None:
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+    elif getusertype(request) != 'MUN':
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     announcements = MUNannouncements.objects.filter(announcer=getuser(request)).order_by('-dateofcreation')
     return render(request, "munfts/announcements/view.html",{'announcements':announcements,'user':getuser(request), 'type':getusertype(request)})
 def addannouncements(request):
