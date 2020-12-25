@@ -20,7 +20,7 @@
         <p class = "text" style= "font-size:15px">Website/Socials: {% if mun.url != "" %}<a href ="{{mun.url}}" target ="blank"> Here </a>{%else%} N/A {%endif %}</p>
         <h4 style='color:#A8B7B9'><weight>Description:</weight></h4>
         <p>{{mun.description}}</p>
-        <h4 style='color:#A8B7B9'><weight>Announcements:</weight></h4>
+        <h4><weight>Announcements:</weight></h4>
         {% if announcements is not None %}
           {% for row in announcements %}
             <h4 style='color:#A8B7B9; font-size: 16px'><weight>{{row.heading}}</weight></h6>
@@ -32,7 +32,7 @@
         {%if same is True%}
         <br>
         <a href = "{%url 'addannouncements'%}"><button type="button" class="btn button-dark text">Manage Announcements</button></a><br>
-        <a class="nav-link" href="{%url 'settings'%}"> Manage Settings<span class="sr-only"></span></a>
+        <a class="nav-link" href="{%url 'settings'%}"> <button type="button" class="btn button-dark text">Manage Settings</button><span class="sr-only"></span></a>
 
         {%endif%}
       </div>
