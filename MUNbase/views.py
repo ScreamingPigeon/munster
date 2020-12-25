@@ -10,7 +10,7 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 #------------------------------------------COMMON-HOMEPAGES-------------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return redirect(reverse("settings"), alrt ="Please fill in all the fields with a *")
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Please fill in all the fields marked with a *", "type":getusertype(request)})
     return render(request, "homepages/home.html",{"user":getuser(request), "type":getusertype(request)})
 def login(request):
     if request.method == "GET":
@@ -89,7 +89,7 @@ def settings(request):
     #DISPLAY PAGE
     if request.method == "GET":
         if getuser(request) is None:
-            return redirect(reverse("login", errmsg="You need to login first!"))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         type = getusertype(request)
         if type =="Delegate":
             return render(request,"settings/settings.html",{"user":getuser(request), "type":getusertype(request)})
@@ -98,7 +98,7 @@ def settings(request):
     #MANAGING FORM SUBMISSIONS
     else:
         if getuser(request) is None:
-            return redirect(reverse("login", errmsg="You need to login first!"))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         #for type Delegate
         if getusertype(request) =="Delegate":
             name = request.POST["name"]
@@ -129,18 +129,18 @@ def settings(request):
 def exp(request):
     user=getuser(request)
     if user is None:
-        return redirect(reverse("login", errmsg="You need to login first!"))
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'Delegate':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     experience=Experience.objects.filter(delegate=user).order_by("year")
     input = experience
     return render(request, "exp/view.html", {'exp':input, 'user':user, "type":getusertype(request)})
 def getexp(request):
     user = getuser(request)
     if user is None:
-        return redirect(reverse('login', errmsg="Login to use this feature"))
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'Delegate':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     if request.method == "GET":
         return render(request, "exp/get.html",{"user":user, "type":getusertype(request)})
     elif request.method == "POST":
@@ -156,16 +156,16 @@ def getexp(request):
 def editexp(request,MUN, year):
     user = getuser(request)
     if user is None:
-        return redirect(reverse("login", errmsg="You need to login first!"))
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'Delegate':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     try:
         expelement=Experience.objects.filter(MUN=MUN, year = int(year), delegate = user)[0]
     except IndexError:
-        return redirect(reverse("settings", alrt="Sorry, that resource does not exist!"))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
 
     if user != expelement.delegate:
-        return redirect(reverse("settings", alrt="Sorry, that resource is restricted!"))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
 
     if request.method == "GET":
         return render(request, "exp/edit.html",{"user":user,"exp":expelement, "type":getusertype(request)})
@@ -185,24 +185,23 @@ def editexp(request,MUN, year):
 #------------------------------------MUN ANNOUNCEMENTS---------------------------------------#
 def announcements(request):
     user=getuser(request)
-    if user is None:
-        return redirect(reverse("login", errmsg="You need to login first!"))
-    elif getusertype(request) != 'MUN':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+        elif getusertype(request) != 'MUN':
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     announcements = MUNannouncements.objects.filter(announcer=getuser(request)).order_by('-dateofcreation')
     return render(request, "munfts/announcements/view.html",{'announcements':announcements,'user':getuser(request), 'type':getusertype(request)})
 def addannouncements(request):
     if request.method == 'GET':
         if getuser(request) is None:
-            return redirect(reverse('login', errmsg ='You need to login first'))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         elif getusertype(request) != 'MUN':
-            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
         return render(request, 'munfts/announcements/add.html',{'user':getuser(request),'type':getusertype(request)})
     if request.method == 'POST':
         if getuser(request) is None:
-            return redirect(reverse('login', errmsg ='You need to login first'))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         elif getusertype(request) != 'MUN':
-            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
         anc= MUNannouncements(announcer=getuser(request), heading = request.POST['heading'], content=request.POST['content'])
         try:
             anc.save()
@@ -212,9 +211,9 @@ def addannouncements(request):
 def editannouncements(request, heading, content):
     if request.method=='GET':
         if getuser(request) is None:
-            return redirect(reverse('login', errmsg ='You need to login first'))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         elif getusertype(request) != 'MUN':
-            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
         announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)
         if announcement is None:
             return render(request, 'munfts/announcements/view.html',{"errmsg":"That Announcemnt does not exist"})
@@ -223,9 +222,9 @@ def editannouncements(request, heading, content):
             return render(request, 'munfts/announcements/edit.html',{'announcement':announcement, 'user':getuser(request), 'type':getusertype(request)})
     if request.method == 'POST':
         if getuser(request) is None:
-            return redirect(reverse('login', errmsg ='You need to login first'))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         elif getusertype(request) != 'MUN':
-            return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
         announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)[0]
         announcement.heading = request.POST['heading']
         announcement.content = request.POST['content']
@@ -233,18 +232,18 @@ def editannouncements(request, heading, content):
         return redirect(reverse('announcements'))
 def deleteannouncements(request, heading, content):
     if getuser(request) is None:
-        return redirect(reverse('login', errmsg ='You need to login first'))
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'MUN':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)[0]
     announcement.delete()
     return redirect(reverse('announcements'))
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
 def register(request, mun):
     if getuser(request) is None:
-        return redirect(reverse('login', errmsg ='You need to login first'))
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'Delegate':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     MUN = MUNuser.objects.filter(username=mun)
     try:
         MUN = MUN[0]
@@ -259,10 +258,9 @@ def register(request, mun):
         return redirect('viewmun', mun = MUN.username)
 def viewregistrations(request):
     if getuser(request) is None:
-        return redirect(reverse('login', errmsg ='You need to login first'))
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'MUN':
-        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
-    registrations = Registrations.objects.filter(MUN=getuser(request))
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     return render(request, 'munfts/registrations/view.html', {"user":getuser(request), "type":getusertype(request), "registrations": registrations})
 
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
@@ -300,13 +298,13 @@ def viewmun(request, mun):
 def searchdel(request):
     if request.method=="GET":
         if getuser(request) is None:
-            return redirect(reverse("login", errmsg="You need to login first!"))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         users=User.objects.all()
         musers=MUNuser.objects.all()
         return render(request,"search/search.html",{'users':users,'musers':musers, 'user':getuser(request), "type":getusertype(request)})
     else:
         if getuser(request) is None:
-            return redirect(reverse("login", errmsg="You need to login first!"))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         search = request.POST["search"]
         users = User.objects.all()
         unames=[]
@@ -319,13 +317,13 @@ def searchdel(request):
 def searchmun(request):
     if request.method=="GET":
         if getuser(request) is None:
-            return redirect(reverse("login", errmsg="You need to login first!"))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         users=MUNser.objects.all()
         dusers = User.objects.all()
         return render(request,"search/search.html",{'musers':users, 'users':dusers, 'user':getuser(request), "type":getusertype(request)})
     else:
         if getuser(request) is None:
-            return redirect(reverse("login", errmsg="You need to login first!"))
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         search = request.POST["munsearch"]
         users = MUNuser.objects.all()
         unames=[]
