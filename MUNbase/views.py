@@ -239,9 +239,22 @@ def deleteannouncements(request, heading, content):
     announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)[0]
     announcement.delete()
     return redirect(reverse('announcements'))
-
-
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
+def register(request, mun):
+    if getuser(request) is None:
+        return redirect(reverse('login', errmsg ='You need to login first'))
+    elif getusertype(request) != 'Delegate':
+        return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
+    MUN = MUNuser.objects.filter(username=mun)
+    try:
+        MUN = MUN[0]
+    except IndexError:
+        return render(request,'404.html', {"msg":"You can't register to a non-existent account","user":getuser(request), "type":getusertype(request)})
+    registration = Registrations(delegate=getuser(request), MUN = MUN)
+    registration.save()
+    return redirect(reverse('viewmun',MUN.username))
+
+
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
@@ -262,7 +275,12 @@ def viewmun(request, mun):
         issame=False
         if getuser(request)==MUN:
             issame=True
-        return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame})
+        #checking whether the user is registered or not
+        registrations = Registrations.objects.filter(MUN = MUN, delegate=getuser(request))
+        isreg = False
+        if len(registrations)==1:
+            isreg = True
+        return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame,'isreg':isreg})
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
 
