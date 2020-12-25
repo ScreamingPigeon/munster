@@ -35,28 +35,29 @@ Search
     </div>
     <div class="col-md">
       <!--MUN SEARCH HERE-->
-      <form class="form-action" action="{%url 'searchmun'%}" method="post">
-        {%csrf_token%}
-        MUN Search: <input type="text" name="munsearch" placeholder="MUN Username">
-        <button type="submit" name="butt" class="btn button-dark text">Search</button>
-      </form>
-      <br><br>
-      <table class="table table-dark " >
-    {%if munusers|length > 0 %}
-      {% for row in munusers %}
-        <tr>
-          <td> <a href="{% url 'viewdel' row.username %}">{{row.username}}</a></td>
-        </tr>
-      {%endfor%}
-      {% else %}
+      <section class="box text">
+        <form class="form-action" action="{%url 'searchmun'%}" method="post">
+          {%csrf_token%}
+          MUN Search: <input type="text" name="munsearch" placeholder="MUN Username">
+          <button type="submit" name="butt" class="btn button-dark text">Search</button>
+        </form>
+        <br><br>
+        <table class="table table-dark " >
+      {%if munusers|length > 0 %}
+        {% for row in munusers %}
           <tr>
-            <td>-</td>
+            <td> <a href="{% url 'viewdel' row.username %}">{{row.username}}</a></td>
           </tr>
-      {%endif%}
-    </table>
+        {%endfor%}
+        {% else %}
+            <tr>
+              <td>-</td>
+            </tr>
+        {%endif%}
+      </table>
+      </section>
       </div>
       </div>
     </div>
-  </div>
 
 {%endblock%}
