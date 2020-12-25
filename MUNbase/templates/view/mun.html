@@ -14,7 +14,7 @@
         <span class="subh">{{mun.username}}'s Profile</span>
         <span class="subh" style="float:right">Name: {{mun.name}}</span><br><br>
         {% if type == "Delegate" %}
-          {% isreg == False %}
+          {% if isreg == False %}
             <a href = "{%url 'register' mun.username%}"><button type="button" class="btn button-dark text">Register</button></a><br>
           {% endif %}
         {% endif %}
