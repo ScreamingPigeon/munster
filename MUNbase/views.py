@@ -257,14 +257,14 @@ def viewmun(request, mun):
     MUN = MUNuser.objects.filter(username=mun)
     try:
         MUN = MUN[0]
+        announcements = MUNannouncements.objects.filter(announcer = MUN).order_by('-dateofcreation')
+        #include registrations
+        issame=False
+        if getuser(request)==MUN:
+            issame=True
+        return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame})
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
-    announcements = MUNannouncements.objects.filter(announcer = MUN).order_by('-dateofcreation')
-    #include registrations
-    issame=False
-    if getuser(request)==MUN:
-        issame=True
-    return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame})
 
 #----------------------------------- COMMON EARCH--------------------------------------------#
 def searchdel(request):
