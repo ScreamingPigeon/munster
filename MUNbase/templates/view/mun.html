@@ -13,8 +13,10 @@
       <div class="box">
         <span class="subh">{{mun.username}}'s Profile</span>
         <span class="subh" style="float:right">Name: {{mun.name}}</span><br><br>
-        {% if type =="Delegate" and isreg is False %}
-        <a href = "{%url 'register' mun.username%}"><button type="button" class="btn button-dark text">Register</button></a><br>
+        {% if type == "Delegate" %}
+          {% isreg == False %}
+            <a href = "{%url 'register' mun.username%}"><button type="button" class="btn button-dark text">Register</button></a><br>
+          {% endif %}
         {% endif %}
         <img style="float:right;padding-bottom:10px;" width="100" height="100" src = "{% static "prof-pic.png" %}" >
         <p class = "text" style= "font-size:15px">Institution: {% if mun.institution is not None%}{{mun.institution}}{%else%} N/A {%endif %}</p>
