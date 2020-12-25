@@ -236,8 +236,8 @@ def deleteannouncements(request, heading, content):
         return redirect(reverse('login', errmsg ='You need to login first'))
     elif getusertype(request) != 'MUN':
         return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
-    announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)[0]
-    announcement.delete()
+    announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)
+    announcement[0].delete()
     return redirect(reverse('announcements'))
 
 
