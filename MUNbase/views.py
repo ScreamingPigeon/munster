@@ -314,6 +314,23 @@ def searchdel(request):
                 unames.append(row)
         users=unames
         return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
+def searchmun(request):
+    if request.method=="GET":
+        if getuser(request) is None:
+            return redirect(reverse("login", errmsg="You need to login first!"))
+        users=User.objects.all()
+        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
+    else:
+        if getuser(request) is None:
+            return redirect(reverse("login", errmsg="You need to login first!"))
+        search = request.POST["munsearch"]
+        users = MUNuser.objects.all()
+        unames=[]
+        for row in users:
+            if search in row.username or search in row.name:
+                unames.append(row)
+        users=unames
+        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
 #----------------------------------------HELPERS-----------------------------------------#
 def getusertype(request):
     type = request.session.get('type')

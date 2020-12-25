@@ -46,7 +46,8 @@ urlpatterns = [
     path('delete-announcements/<str:heading>/<str:content>', views.deleteannouncements, name ='deleteannouncements'),
     #delete announcements
     #COMMON SEARCH-------------------------------------------------------------
-    path("search/delegate", views.searchdel, name ="searchdel")
+    path("search/delegate", views.searchdel, name ="searchdel"),
+    path('search/mun', views.searchmun, name = 'searchmun')
     # loading static files in deployment
     ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 handler404 = 'MUNbase.views.error_404_view'
