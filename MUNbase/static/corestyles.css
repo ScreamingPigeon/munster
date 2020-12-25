@@ -8,6 +8,9 @@ body {
   .text{
     color:white;
   }
+  p{
+    color:"white";
+  }
 .footer{
   position: fixed;
   background-color: black;
