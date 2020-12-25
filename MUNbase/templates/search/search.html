@@ -46,7 +46,7 @@ Search
       {%if musers|length > 0 %}
         {% for row in musers %}
           <tr>
-            <td> <a href="{% url 'viewdel' row.username %}">{{row.username}}</a></td>
+            <td> <a href="{% url 'viewmun' row.username %}">{{row.username}}</a></td>
           </tr>
         {%endfor%}
         {% else %}
