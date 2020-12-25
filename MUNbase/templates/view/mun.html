@@ -20,7 +20,7 @@
         <p class = "text" style= "font-size:15px">Website/Socials: {% if mun.url != "" %}<a href ="{{mun.url}}" target ="blank"> Here </a>{%else%} N/A {%endif %}</p>
         <h4 style='color:#A8B7B9'><weight>Description:</weight></h4>
         <p class = 'text'style= "font-size:15px" >{{mun.description}}</p>
-        <h4><weight>Announcements:</weight></h4>
+        <h3 class = 'subh'><weight>Announcements:</weight></h4>
         {% if announcements is not None %}
           {% for row in announcements %}
             <h4 style='color:#A8B7B9; font-size: 16px'><weight>{{row.heading}}</weight></h6>
