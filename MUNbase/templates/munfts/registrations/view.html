@@ -26,7 +26,7 @@ MUN Registrations
 
         {% for row in registrations %}
           <tr>
-            <td>{{loop.index}}</td>
+            <td>{{forloop.index}}</td>
             <td><a href="{%url 'viewdel' row.delegate.username %}">{{row.delegate.username}}</a></td>
           </tr>
           {%endfor%}
