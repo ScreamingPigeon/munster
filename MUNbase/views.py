@@ -250,7 +250,7 @@ def register(request, mun):
         MUN = MUN[0]
     except IndexError:
         return render(request,'404.html', {"msg":"You can't register to a non-existent account","user":getuser(request), "type":getusertype(request)})
-    if Registrations.objects.filter(MUN = MUN, delegate = getuser(request)) is not None:
+    if len(Registrations.objects.filter(MUN = MUN, delegate = getuser(request)))!=0:
         Registrations.objects.filter(MUN = MUN, delegate = getuser(request))[0].delete()
         return redirect('viewmun', mun = MUN.username)
     else:
