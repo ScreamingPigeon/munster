@@ -238,7 +238,7 @@ def deleteannouncements(request, heading, content):
         return redirect(reverse('settings', errmsg = "That resource cannot be utilized by your account!" ))
     announcement = MUNannouncements.objects.filter(announcer = getuser(request), heading=heading, content=content)[0]
     announcement.delete()
-    return redirect(reverse('announcements'))
+    return HttpResponse(announcement.username)
 
 
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
