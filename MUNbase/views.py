@@ -302,7 +302,8 @@ def searchdel(request):
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
         users=User.objects.all()
-        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
+        musers=MUNuser.objects.all()
+        return render(request,"search/search.html",{'users':users,'musers':musers, 'user':getuser(request), "type":getusertype(request)})
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
@@ -313,13 +314,15 @@ def searchdel(request):
             if search in row.username or search in row.name:
                 unames.append(row)
         users=unames
-        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
+        musers = MUNuser.objects.all()
+        return render(request,"search/search.html",{'users':users,'musers':muser, 'user':getuser(request), "type":getusertype(request)})
 def searchmun(request):
     if request.method=="GET":
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
-        users=User.objects.all()
-        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
+        users=MUNser.objects.all()
+        dusers = User.objects.all()
+        return render(request,"search/search.html",{'musers':users, 'users':dusers, 'user':getuser(request), "type":getusertype(request)})
     else:
         if getuser(request) is None:
             return redirect(reverse("login", errmsg="You need to login first!"))
@@ -330,7 +333,8 @@ def searchmun(request):
             if search in row.username or search in row.name:
                 unames.append(row)
         users=unames
-        return render(request,"search/search.html",{'users':users, 'user':getuser(request), "type":getusertype(request)})
+        dusers = User.objects.all()
+        return render(request,"search/search.html",{'musers':users, 'users':dusers, 'user':getuser(request), "type":getusertype(request)})
 #----------------------------------------HELPERS-----------------------------------------#
 def getusertype(request):
     type = request.session.get('type')

@@ -43,8 +43,8 @@ Search
         </form>
         <br><br>
         <table class="table table-dark " >
-      {%if munusers|length > 0 %}
-        {% for row in munusers %}
+      {%if musers|length > 0 %}
+        {% for row in musers %}
           <tr>
             <td> <a href="{% url 'viewdel' row.username %}">{{row.username}}</a></td>
           </tr>
