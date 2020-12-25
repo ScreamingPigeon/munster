@@ -252,9 +252,20 @@ def viewdel(request, dele):
     if getuser(request)== dele:
         return render(request, "view/del.html", {"del":dele, "user":getuser(request), "exp": exp, "type":getusertype(request)})
     else:
-        return render(request, "view/del.html", {"del":dele, "exp":exp,"user":getuser(request), "type":getusertype(request)})
+        return render(request, "view/del.html", {"del":dele, "exp":exp, "user":getuser(request), "type":getusertype(request)})
 def viewmun(request, mun):
-    pass
+    MUN = MUNuser.objects.filter(username=mun)
+    try:
+        MUN = MUN[0]
+    except IndexError:
+        return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
+    announcements = MUNannouncements.objects.filter(announcer = MUN).order_by('-dateofcreation')
+    #include registrations
+    issame=False
+    if getuser(request)==MUN:
+        issame=True
+    return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame})
+
 #----------------------------------- COMMON EARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
