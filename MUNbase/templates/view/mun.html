@@ -17,10 +17,10 @@
         <p class = "text" style= "font-size:15px">Institution: {% if mun.institution is not None%}{{mun.institution}}{%else%} N/A {%endif %}</p>
         <p class = "text" style= "font-size:15px">Email: {% if mun.email is not None%}{{mun.email}}{%else%} N/A {%endif %}</p>
         <p class = "text" style= "font-size:15px">Number: {% if mun.number is not None%}{{mun.number}}{%else%} N/A {%endif %}</p>
-        <p class = "text" style= "font-size:15px">Website/Socials: {% if mun.url != "" %}<a href ="{{mun.url}}" target ="blank"> Here </a>{%else%} N/A {%endif %}</p>
+        <p class = "text" style= "font-size:15px">Website/Socials: {% if mun.url != "" %}<a href ="{{mun.url}}" target ="blank"> Here </a>{%else%} N/A {%endif %}</p><br>
         <h4 style='color:#A8B7B9'><weight>Description:</weight></h4>
-        <p class = 'text'style= "font-size:15px" >{{mun.description}}</p>
-        <h3 class = 'subh'><weight>Announcements:</weight></h4>
+        <p class = 'text'style= "font-size:15px" >{{mun.description}}</p><br>
+        <h3 class = 'subh'><weight>Announcements:</weight></h4><br>
         {% if announcements is not None %}
           {% for row in announcements %}
             <h4 style='color:#A8B7B9; font-size: 16px'><weight>{{row.heading}}</weight></h6>
