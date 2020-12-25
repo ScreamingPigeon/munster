@@ -315,7 +315,7 @@ def searchdel(request):
                 unames.append(row)
         users=unames
         musers = MUNuser.objects.all()
-        return render(request,"search/search.html",{'users':users,'musers':muser, 'user':getuser(request), "type":getusertype(request)})
+        return render(request,"search/search.html",{'users':users,'musers':musers, 'user':getuser(request), "type":getusertype(request)})
 def searchmun(request):
     if request.method=="GET":
         if getuser(request) is None:
