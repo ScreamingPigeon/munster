@@ -250,9 +250,13 @@ def register(request, mun):
         MUN = MUN[0]
     except IndexError:
         return render(request,'404.html', {"msg":"You can't register to a non-existent account","user":getuser(request), "type":getusertype(request)})
-    registration = Registrations(delegate=getuser(request), MUN = MUN)
-    registration.save()
-    return redirect('viewmun', mun = MUN.username)
+    if Registrations.objects.filter(MUN = MUN, delegate = getuser(request)) is not None:
+        Registrations.objects.filter(MUN = MUN, delegate = getuser(request))[0].delete()
+        return redirect('viewmun', mun = MUN.username)
+    else:
+        registration = Registrations(delegate=getuser(request), MUN = MUN)
+        registration.save()
+        return redirect('viewmun', mun = MUN.username)
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
