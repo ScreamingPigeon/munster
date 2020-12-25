@@ -252,9 +252,7 @@ def register(request, mun):
         return render(request,'404.html', {"msg":"You can't register to a non-existent account","user":getuser(request), "type":getusertype(request)})
     registration = Registrations(delegate=getuser(request), MUN = MUN)
     registration.save()
-    return redirect(reverse('viewmun', mun = mun)
-
-
+    return redirect(reverse('viewmun'), mun = mun)
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
@@ -286,7 +284,6 @@ def viewmun(request, mun):
         return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame,'isreg':isreg})
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
-
 #----------------------------------- COMMON EARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
