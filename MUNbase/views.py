@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist
 from django.urls import reverse
 from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf.urls import handler400, handler403, handler404, handler500
 
 
-#------------------------------------------COMMON-HOMEPAGES-------------------------------------------#
+#---------------------------------------COMMON-HOMEPAGES----------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Please fill in all the fields marked with a *", "type":getusertype(request)})
