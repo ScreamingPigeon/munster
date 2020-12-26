@@ -240,7 +240,7 @@ def deleteannouncements(request, heading, content):
     announcement.delete()
     return redirect(reverse('announcements'))
 #------------------------------------MUN REGISTRATIONS---------------------------------------#
-def register(request, mun):
+def registermun(request, mun):
     if getuser(request) is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'Delegate':

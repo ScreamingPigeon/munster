@@ -37,7 +37,7 @@ urlpatterns = [
     path("view/delegate/<str:dele>", views.viewdel, name="viewdel"),#Delegate
     path('view/mun/<str:mun>', views.viewmun, name='viewmun'),#MUN
     #REGISTRATION PROCESS----------------------------------------------------------------
-    path('register/<str:mun>', views.register, name ='register'),#Delegate registers through this link
+    path('register/<str:mun>', views.registermun, name ='register'),#Delegate registers through this link
     path('viewregistrations', views.viewregistrations, name ='viewregistrations'),
     #MUN FEATURES----------------------------------------------------
     path('announcements', views.announcements, name='announcements'),
