@@ -262,6 +262,7 @@ def viewregistrations(request):
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    registrations = Registrations.objects.filter(MUN = getuser(request))
     return render(request, 'munfts/registrations/view.html', {"user":getuser(request), "type":getusertype(request), "registrations": registrations})
 
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
