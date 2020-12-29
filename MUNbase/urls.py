@@ -39,6 +39,7 @@ urlpatterns = [
     #REGISTRATION PROCESS----------------------------------------------------------------
     path('register/<str:mun>', views.registermun, name ='register'),#Delegate registers through this link
     path('viewregistrations', views.viewregistrations, name ='viewregistrations'),
+    path('downloadregistrations', views.downloadregistrations, name = "downloadregistrations"),
     #MUN FEATURES----------------------------------------------------
     path('announcements', views.announcements, name='announcements'),
     path('add-announcements',views.addannouncements, name ='addannouncements'),

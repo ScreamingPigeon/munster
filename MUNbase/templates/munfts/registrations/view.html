@@ -15,33 +15,37 @@ MUN Registrations
         <br><br>
         <section class="text" style="font-size:20px">
           <table class="table table-dark" >
-        <thead>
+            <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Delegate Username</th>
           </tr>
         </thead>
   {%if registrations|length > 0 %}
-        <tbody>
-
-        {% for row in registrations %}
-          <tr>
-            <td>{{forloop.counter}}</td>
-            <td><a href="{%url 'viewdel' row.delegate.username %}">{{row.delegate.username}}</a></td>
-          </tr>
-          {%endfor%}
-          </tbody>
-      {% else %}
             <tbody>
-              <tr>
-                <td>-</td>
-                <td>No Registrations Yet :(</td>
-              </tr>
-              </tbody>
-          {%endif%}
+              {% for row in registrations %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td><a href="{%url 'viewdel' row.delegate.username %}">{{row.delegate.username}}</a></td>
+                </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <form action ={{path}}>
+            <button type="submit" class ="btn button-dark text" name="button">Download</button>
+          </form>
+        {% else %}
+          <tbody>
+            <tr>
+              <td>-</td>
+              <td>No Registrations Yet :(</td>
+            </tr>
+            </tbody>
+          </table>
+        {%endif%}
 
 
-   </table>
+
         </section>
       </div>
     </div>

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist
 from django.urls import reverse
+import xlsxwriter
+from datetime import datetime
 from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -263,8 +265,8 @@ def viewregistrations(request):
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     registrations = Registrations.objects.filter(MUN = getuser(request))
-    return render(request, 'munfts/registrations/view.html', {"user":getuser(request), "type":getusertype(request), "registrations": registrations})
-
+    path = excelr(request)
+    return render(request, 'munfts/registrations/view.html', {"user":getuser(request), "type":getusertype(request), "registrations": registrations, 'path':path})
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
     try:
@@ -396,6 +398,36 @@ def getallusernames():
         uname=user.username
         usernames.append(uname)
     return usernames
+def expstring(exp):
+    str = ""
+    for row in exp:
+        str += f"{row.MUN}/{row.committee}/({row.year})/{row.position}|--|"
+    return str
+def excelr(request):
+    user = getuser(request)
+    registrations = Registration.objects.filter(MUN = user)
+    workbook = xlsxwriter.Workbook(f"static/registrationsdb/{user.username}-{datetime.now()}-registrations.xlsx")
+    worksheet = workbook.add_worksheet()
+    worksheet.write(0,0, 'Delegate Name')
+    worksheet.write (0,1, 'Age')
+    worksheet.write(0,2, 'Instiution')
+    worksheet.write (0,3, 'Email - ID')
+    worksheet.write(0,4, 'City')
+    worksheet.write(0,5, 'Experience')
+    experience=[]
+    for row in registrations:
+        dele = row.delegate
+        exp = Experience.objects.filter(delegate = dele)
+        experience.append(exp)
+    for i in range(1, len(registrations)):
+        worksheet.write(i,0, str(registrations[i].delegate.name))
+        worksheet.write(i,1, str(registrations[i].delegate.age))
+        worksheet.write(i,2, str(registrations[i].delegate.institution))
+        worksheet.write(i,3, str(registrations[i].delegate.email))
+        worksheet.write(i,4, str(registrations[i].delegate.city))
+        worksheet.write(i,5, str(expstring(exp[i]))
+    workbook.close()
+    return str(f"static/registrationsdb/{user.username}-{datetime.now()}-registrations.xlsx")
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
     return render(request,'404.html')
