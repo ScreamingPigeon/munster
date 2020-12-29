@@ -419,13 +419,13 @@ def excelr(request):
         dele = row.delegate
         exp = Experience.objects.filter(delegate = dele)
         experience.append(exp)
-    for i in range(1, len(registrations)):
-        worksheet.write(i,0, str(registrations[i].delegate.name))
-        worksheet.write(i,1, str(registrations[i].delegate.age))
-        worksheet.write(i,2, str(registrations[i].delegate.institution))
-        worksheet.write(i,3, str(registrations[i].delegate.email))
-        worksheet.write(i,4, str(registrations[i].delegate.city))
-        worksheet.write(i,5, str(expstring(exp[i]))
+    for i in range(0, len(registrations)):
+        worksheet.write(i+1,0, str(registrations[i].delegate.name))
+        worksheet.write(i+1,1, str(registrations[i].delegate.age))
+        worksheet.write(i+1,2, str(registrations[i].delegate.institution))
+        worksheet.write(i+1,3, str(registrations[i].delegate.email))
+        worksheet.write(i+1,4, str(registrations[i].delegate.city))
+        worksheet.write(i+1,5, str(expstring(exp[i]))
     workbook.close()
     return str(f"registrationsdb/{user.username}-{datetime.now()}-registrations.xlsx")
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
