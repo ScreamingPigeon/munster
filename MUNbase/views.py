@@ -406,7 +406,8 @@ def expstring(exp):
 def excelr(request):
     user = getuser(request)
     registrations = Registration.objects.filter(MUN = user)
-    workbook = xlsxwriter.Workbook(f"registrationsdb/{user.username}-{datetime.now()}-registrations.xlsx")
+    path = str(f"registrationsdb/{user.username}{datetime.now()}registrations.xlsx")
+    workbook = xlsxwriter.Workbook(path)
     worksheet = workbook.add_worksheet()
     worksheet.write(0,0, 'Delegate Name')
     worksheet.write (0,1, 'Age')
@@ -427,7 +428,7 @@ def excelr(request):
         worksheet.write(i+1,4, str(registrations[i].delegate.city))
         worksheet.write(i+1,5, str(expstring(exp[i]))
     workbook.save()
-    return str(f"registrationsdb/{user.username}-{datetime.now()}-registrations.xlsx")
+    return str(path)
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
     return render(request,'404.html')
