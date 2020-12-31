@@ -265,7 +265,7 @@ def viewregistrations(request):
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     registrations = Registrations.objects.filter(MUN = getuser(request))
-    path = excelr(request)
+    path = ""
     return render(request, 'munfts/registrations/view.html', {"user":getuser(request), "type":getusertype(request), "registrations": registrations, 'path':path})
 #----------------------------------COMMON VIEW PROFILE----------------------------------------#
 def viewdel(request, dele):
