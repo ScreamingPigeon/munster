@@ -427,8 +427,8 @@ def excelr(request):
         worksheet.write(i+1,3, str(registrations[i].delegate.email))
         worksheet.write(i+1,4, str(registrations[i].delegate.city))
         worksheet.write(i+1,5, str(expstring(exp[i]))
-    workbook.close()
-    return path
+    #workbook.close()
+    return ""
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
     return render(request,'404.html')
