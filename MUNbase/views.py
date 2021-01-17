@@ -12,7 +12,10 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 #---------------------------------------COMMON-HOMEPAGES----------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
-        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Please fill in all the fields marked with a *", "type":getusertype(request)})
+        if getusertype(request)=="Delegate":
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Please fill in all the fields marked with a *", "type":getusertype(request)})
+        else:
+            return render(request,"settings/munsettings.html",{"user":getuser(request),"alrt":"Please fill in all the fields marked with a *", "type":getusertype(request)})
     return render(request, "homepages/home.html",{"user":getuser(request), "type":getusertype(request)})
 def login(request):
     if request.method == "GET":
