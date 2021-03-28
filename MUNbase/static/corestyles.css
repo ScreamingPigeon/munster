@@ -48,3 +48,6 @@ font-family: 'Source Code Pro', monospace;
 color: #F07178;
 visibility: hidden;
 }
+.article{
+  text-align: justify;
+}
