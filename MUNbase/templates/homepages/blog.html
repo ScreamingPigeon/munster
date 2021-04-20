@@ -19,9 +19,6 @@ Blogs
     </div>
     <div class="row">
     {% for row in articles%}
-    {% if forloop.counter % 3 == 0 and forloop.counter != 0 %}
-    </div><div>
-    {% endif %}
     <div class="col-md">
       <a href="{% url 'dispblog' row.title %}">
         <div class="box">
