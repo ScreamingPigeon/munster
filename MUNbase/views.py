@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article
 from django.urls import reverse
 import xlsxwriter
 from datetime import datetime
@@ -7,6 +7,7 @@ from passlib.hash import pbkdf2_sha256
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf.urls import handler400, handler403, handler404, handler500
+import math
 
 
 #---------------------------------------COMMON-HOMEPAGES----------------------------------------#
@@ -84,6 +85,17 @@ def featured(request):
     return render(request, "homepages/featured.html",{"user":getuser(request), "type":getusertype(request)})
 def tnc(request):
     return render(request, "homepages/tnc.html",{"user":getuser(request), "type":getusertype(request)})
+def blog(request):
+    articles = Articles.objects.all().order_by('-date')
+    return render(request, 'homepages/blog.html',{"user":getuser(request), "type":getusertype(request), "articles":articles})
+def dispblog(request, title):
+    article = Articles.objects.filter(title)
+    if len(article) == 0:
+        return render(request,'404.html', {"msg":"That page does not exist","user":getuser(request), "type":getusertype(request)})
+    article = article[0]
+    return render(request, 'homepages/dispblog.html',{"user":getuser(request), "type":getusertype(request), "article":article})
+
+
 def logout(request):
     if request.session.get('id') is not None:
         del request.session['id']

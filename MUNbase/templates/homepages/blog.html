@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block tncactive %}
+(current)
+{% endblock %}
+
+{%block title%}
+Blogs
+{%endblock%}
+{% block body %}
+<br><br>
+<div class="container">
+  <div class="box">
+    <div class="row">
+      <div class="col-md">
+        <h2 class="text"> <strong>Our Articles</strong></h2><brr><br>
+      </div>
+    </div>
+    <div class="row">
+    {% for row in articles%}
+    {% if ((loop.index % 3 == 0) and (loop.index != 0)) %}
+    </div><div>
+    {% endif %}
+    <div class="col-md">
+      <a href="{% url 'dispblog' row.title %}">
+        <div class="box">
+          <h3 class='text'><strong>{{row.title}}</strong></h3>
+          <h6 class ='text'> By {{row.author}}</h6>
+        </div>
+      </a>
+    </div>
+    {% endfor%}
+  </div>
+
+  </div>
+</div>
+{% endblock %}

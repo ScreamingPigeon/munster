@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block tncactive %}
+(current)
+{% endblock %}
+
+{%block title%}
+{{article.title}}
+{%endblock%}
+{% block body %}
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <div class="box">
+        <h2 class="text"> <strong>{{article.title}}</strong></h2>
+        <!--Actual Events Happening to be replaced by DB files-->
+        <section class="text article">
+
+          <p>By {{article.author}}</p>
+          {{article.content}}
+          <br><br>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

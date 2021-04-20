@@ -51,3 +51,8 @@ class Registrations (models.Model):
 class MUNwatchlist(models.Model):
     delegate = models.ForeignKey(User, on_delete=models.CASCADE)
     following = models.ForeignKey(MUNuser, on_delete=models.CASCADE)
+class Article(models.Model):
+    title = models.CharField(max_length = 200)
+    date =  models.DateField(auto_now=true)
+    content = models.CharField(max_length = 20000)
+    author = models.CharField(max_length = 200)
