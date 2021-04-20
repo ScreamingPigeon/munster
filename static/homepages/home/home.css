@@ -26,15 +26,7 @@ marg{
   border-radius: 20px;
   overflow: hidden;
 }
-@media only screen and (max-width:500px){
-  .card .imgbx img{
-    padding-left: 50px;
-    padding-right:50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    size : 25%;
-  }
-}
+
 .contain .card:before{
   content: '';
   position: absolute;
