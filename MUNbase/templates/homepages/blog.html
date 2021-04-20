@@ -19,7 +19,7 @@ Blogs
     </div>
     <div class="row">
     {% for row in articles%}
-    {% if ((loop.index % 3 == 0) and (loop.index != 0)) %}
+    {% if ((forloop.counter % 3 == 0) and (forloop.counter != 0)) %}
     </div><div>
     {% endif %}
     <div class="col-md">
