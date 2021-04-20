@@ -53,6 +53,6 @@ class MUNwatchlist(models.Model):
     following = models.ForeignKey(MUNuser, on_delete=models.CASCADE)
 class Article(models.Model):
     title = models.CharField(max_length = 200)
-    date =  models.DateField(auto_now=true)
+    date =  models.DateField(auto_now=True)
     content = models.CharField(max_length = 20000)
     author = models.CharField(max_length = 200)
