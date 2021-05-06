@@ -94,8 +94,6 @@ def dispblog(request, title):
         return render(request,'404.html', {"msg":"That page does not exist","user":getuser(request), "type":getusertype(request)})
     article = article[0]
     return render(request, 'homepages/dispblog.html',{"user":getuser(request), "type":getusertype(request), "article":article})
-
-
 def logout(request):
     if request.session.get('id') is not None:
         del request.session['id']
@@ -313,7 +311,14 @@ def viewmun(request, mun):
         return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame,'isreg':isreg})
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
-#----------------------------------- COMMON EARCH--------------------------------------------#
+
+#------------------------------------E - MUN-------------------------------------------------#
+"""
+def emuncaccess(request):
+    if request.method =='GET':
+        return render(request, 'emun/com-access.html',)
+"""
+#----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
         if getuser(request) is None:
@@ -418,7 +423,7 @@ def expstring(exp):
     for row in exp:
         str += f"{row.MUN}/{row.committee}/({row.year})/{row.position}|--|"
     return str
-"""
+    """
 def excelr(request):
     user = getuser(request)
     registrations = Registration.objects.filter(MUN = user)

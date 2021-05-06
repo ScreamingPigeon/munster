@@ -46,7 +46,9 @@ urlpatterns = [
     path('add-announcements',views.addannouncements, name ='addannouncements'),
     path('edit-announcements/<str:heading>/<str:content>', views.editannouncements, name ='editannouncements'),
     path('delete-announcements/<str:heading>/<str:content>', views.deleteannouncements, name ='deleteannouncements'),
-    #delete announcements
+    #E - MUN
+    #path('emun/daimun/committee-access', views.emun-caccess, name ='emuncaccess'),
+
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
