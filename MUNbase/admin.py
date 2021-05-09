@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 
 # Register your models here.
 from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Article
@@ -11,6 +12,12 @@ admin.site.register(Registrations)
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'date')
+class ArticleEditorAdmin(forms.ModelForm):
+    content = forms.CharField( widget=forms.Textarea )
+    class Meta:
+        model = Article
+        fields = '__all__'
+    def givepara(self):
 
 
 
