@@ -28,6 +28,10 @@ Blogs
         </div>
       </a>
     </div>
+    {%if forloop.counter % 3 == 0 %}
+    </div>
+    <div class="row">
+    {%endif%}
     {% endfor%}
   </div>
 
