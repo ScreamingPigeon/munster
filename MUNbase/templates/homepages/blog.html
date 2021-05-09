@@ -23,7 +23,8 @@ Blogs
       <a href="{% url 'dispblog' row.title %}">
         <div class="box">
           <h3 class='text'><strong>{{row.title}}</strong></h3>
-          <h6 class ='text'> By {{row.author}}</h6>
+          <h5 class ='text'> By {{row.author}}</h5>
+          <h6>{{row.date}}</h6>
         </div>
       </a>
     </div>
