@@ -8,7 +8,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf.urls import handler400, handler403, handler404, handler500
 import math
-
+import markdown
 
 #---------------------------------------COMMON-HOMEPAGES----------------------------------------#
 def home(request):
@@ -93,6 +93,7 @@ def dispblog(request, title):
     if len(article) == 0:
         return render(request,'404.html', {"msg":"That page does not exist","user":getuser(request), "type":getusertype(request)})
     article = article[0]
+    article.content = markdown.markdown(article.content)
     return render(request, 'homepages/dispblog.html',{"user":getuser(request), "type":getusertype(request), "article":article})
 def logout(request):
     if request.session.get('id') is not None:

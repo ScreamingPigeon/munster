@@ -19,7 +19,8 @@
         <section class="text article">
 
           <p>By {{article.author}}</p>
-          {{article.content}}
+          <p>By {{article.date}}</p>
+          {{article.content|safe}}
           <br><br>
 
         </section>
