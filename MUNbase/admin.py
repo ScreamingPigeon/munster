@@ -9,13 +9,12 @@ admin.site.register(MUNuser)
 admin.site.register(MUNannouncements)
 admin.site.register(Registrations)
 
-
-class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'date')
-    form = ArticleEditorAdmin
 class ArticleEditorAdmin(forms.ModelForm):
     content = forms.CharField( widget=forms.Textarea )
     class Meta:
         model = Article
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('title', 'author', 'date')
+    form = ArticleEditorAdmin
 
 admin.site.register(Article, ArticleAdmin)
