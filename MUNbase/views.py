@@ -89,7 +89,7 @@ def blog(request):
     articles = Article.objects.all().order_by('-date')
     return render(request, 'homepages/blog.html',{"user":getuser(request), "type":getusertype(request), "articles":articles})
 def dispblog(request, title):
-    article = Article.objects.filter(title=title)[0]
+    article = Article.objects.filter(title=title)
     if len(article) == 0:
         return render(request,'404.html', {"msg":"That page does not exist","user":getuser(request), "type":getusertype(request)})
     article = article[0]
