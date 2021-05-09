@@ -17,4 +17,4 @@ class ArticleAdmin(admin.ModelAdmin):
 
     active.boolean = True
 
-admin.site.register(State, StateAdmin)
+admin.site.register(Article, ArticleAdmin)
