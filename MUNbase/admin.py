@@ -13,6 +13,7 @@ class ArticleEditorAdmin(forms.ModelForm):
     content = forms.CharField( widget=forms.Textarea )
     class Meta:
         model = Article
+
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'date')
     form = ArticleEditorAdmin
