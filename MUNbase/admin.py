@@ -17,8 +17,5 @@ class ArticleEditorAdmin(forms.ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
-    def givepara(self):
-
-
 
 admin.site.register(Article, ArticleAdmin)
