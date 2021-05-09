@@ -12,11 +12,10 @@ admin.site.register(Registrations)
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'date')
-    form =ArticleEditorAdmin
+    form = ArticleEditorAdmin
 class ArticleEditorAdmin(forms.ModelForm):
     content = forms.CharField( widget=forms.Textarea )
     class Meta:
         model = Article
-        fields = '__all__'
 
 admin.site.register(Article, ArticleAdmin)
