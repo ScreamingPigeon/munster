@@ -51,3 +51,6 @@ visibility: hidden;
 .article{
   text-align: justify;
 }
+.article-bx{
+  height: 150px;
+}

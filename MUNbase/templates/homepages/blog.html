@@ -21,7 +21,7 @@ Blogs
     {% for row in articles%}
     <div class="col-md">
       <a href="{% url 'dispblog' row.title %}">
-        <div class="box">
+        <div class="box article-bx">
           <h3 class='text'><strong>{{row.title}}</strong></h3>
           <h5 class ='text'> By {{row.author}}</h5>
           <h6>{{row.date}}</h6>
