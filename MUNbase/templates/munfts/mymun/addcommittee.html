@@ -44,9 +44,9 @@ Add a Committee to your E-MUN
         </div>
 
           <br><br>
-          Committee Description: <br> <textarea name="desc" rows="8" cols="60"></textarea> <br>
-
-          <select multiple name ='clist' id ='clist'>
+          Committee Description: <br> <textarea name="desc" rows="8" cols="70"></textarea> <br> <br>
+          Country List:
+          <select name ='clist' id ='clist'>
             < option value="Afganistan">Afghanistan</option>
                <option value="Albania">Albania</option>
                <option value="Algeria">Algeria</option>
@@ -294,6 +294,11 @@ Add a Committee to your E-MUN
                <option value="Zambia">Zambia</option>
                <option value="Zimbabwe">Zimbabwe</option>
           </select>
+          <script type="text/javascript">
+              $(document).ready(function () {
+                $("#clist").CreateMultiCheckBox({ width: '230px',defaultText : 'Select Below', height:'250px' });
+            });
+          </script>
           <button type="Submit" id='bt'name="button" class="btn button-dark text">Submit</button>
       </form>
 
