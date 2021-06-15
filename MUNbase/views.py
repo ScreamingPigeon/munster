@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin
 from django.urls import reverse
 import xlsxwriter
 from datetime import datetime
@@ -329,8 +329,18 @@ def addcommittee(request):
         committeedesc = request.POST['desc']
         clist = request.POST['clist']
         mun = getuser(request)
-        comm = Committee(name = committeename, mun = mun, description = committeedesc, countrylist = clist)
+        comm = Committee(name = committeename, mun = mun, description = committeedesc)
         com.save()
+        return redirect(reverse('viewcommittees'))
+
+def viewcommittee(request):
+    if getuser(request) is None:
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+    elif getusertype(request) != 'MUN':
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    comms = Committee.objects.filter(mun = getuser(request))
+    return render(request, 'munfts/mymun/viewcommittees.html',{'comms':comms})
+    return None
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

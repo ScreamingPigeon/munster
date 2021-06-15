@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static%}
+
+
+{%block title%}
+Committees
+{%endblock%}
+{% block body %}
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-md">
+      <div class="box">
+        <h2 class="subh">View Committees</h2><br>
+        <!--Put viewing of announcements datewise here-->
+        <section class ='text'>
+          {% if comms is not None %}
+            {% for row in comms %}
+            {{row}}
+            {%endfor%}
+          {% else %}
+          <p>No committees made yet :(</p>
+          {% endif %}
+        </section>
+        <a href = "{%url 'addcommittee'%}"><button type="button" class="btn button-dark text">Make Committee</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

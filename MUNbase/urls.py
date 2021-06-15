@@ -48,6 +48,7 @@ urlpatterns = [
     path('delete-announcements/<str:heading>/<str:content>', views.deleteannouncements, name ='deleteannouncements'),
     #E - MUN
     path('mymun/addcommittee', views.addcommittee, name='addcommittee'),
+    path('mymun/viewcommittees', views.viewcommittee, name='viewcommittees'),
 
     #path('emun/daimun/committee-access', views.emun-caccess, name ='emuncaccess'),
 
