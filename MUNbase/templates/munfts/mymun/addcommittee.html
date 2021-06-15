@@ -19,7 +19,7 @@ Add a Committee to your E-MUN
         <section class="text" style="font-size:20px">
       <form class="form-action" action="{%  url 'addcommittee' %}" method="post">
         {% csrf_token %}
-        Committee Name: 
+        Committee Name:
         <select style="position:relative;width:250px; height:25px;line-height:20px;margin:0;padding:0;" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
           <option value="DISEC">DISEC</option>
           <option value="UNSC">UNSC</option>
@@ -37,7 +37,7 @@ Add a Committee to your E-MUN
         </select>
         <input type="text" name="displayValue" id="displayValue"
                placeholder="add/select a value" onfocus="this.select()"
-               style="position:absolute;top:0px;left:0px;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;"  >
+               style="position:relative;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;"  >
         <input name="idValue" id="idValue" type="hidden">
 
 
