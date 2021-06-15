@@ -312,7 +312,6 @@ def viewmun(request, mun):
         return render(request, 'view/mun.html', {'mun':MUN,'announcements':announcements, 'user':getuser(request), "type": getusertype(request), 'same':issame,'isreg':isreg})
     except IndexError:
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
-
 #------------------------------------E - MUN-------------------------------------------------#
 def addcommittee(request):
     if request.method == 'GET':
@@ -321,7 +320,17 @@ def addcommittee(request):
             elif getusertype(request) != 'MUN':
                 return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
             return render(request, 'munfts/mymun/addcommittee.html',{'user':getuser(request),'type':getusertype(request)})
-
+    if request.method == 'POST':
+        if getuser(request) is None:
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+        elif getusertype(request) != 'MUN':
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+        committeename = request.POST['cname']
+        committeedesc = request.POST['desc']
+        clist = request.POST['clist']
+        mun = getuser(request)
+        comm = Committee(name = committeename, mun = mun, description = committeedesc, countrylist = clist)
+        com.save()
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
