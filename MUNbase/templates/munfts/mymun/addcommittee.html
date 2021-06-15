@@ -20,7 +20,7 @@ Add a Committee to your E-MUN
       <form class="form-action" action="{%  url 'addcommittee' %}" method="post">
         {% csrf_token %}
         <label>Committee Name
-        <input list="comms" name="cname" /></label>
+        <input list="comms" name="cname"/></label>
         <datalist id="coms">
           <option value="UNSC">
           <option value="DISEC">

@@ -314,7 +314,7 @@ def viewmun(request, mun):
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
 
 #------------------------------------E - MUN-------------------------------------------------#
-def addcommittee(request, cname):
+def addcommittee(request):
     if request.method == 'GET':
             if getuser(request) is None:
                 return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
