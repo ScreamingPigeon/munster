@@ -11,7 +11,7 @@ Class-based views
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  
+    2. Add a URL to urlpatterns:
 """
 from django.contrib import admin
 from django.urls import path, include
@@ -47,6 +47,8 @@ urlpatterns = [
     path('edit-announcements/<str:heading>/<str:content>', views.editannouncements, name ='editannouncements'),
     path('delete-announcements/<str:heading>/<str:content>', views.deleteannouncements, name ='deleteannouncements'),
     #E - MUN
+    path('mymun/addcommittee', views.addcommittee, name='addcommittee'),
+
     #path('emun/daimun/committee-access', views.emun-caccess, name ='emuncaccess'),
 
     #COMMON SEARCH-------------------------------------------------------------
