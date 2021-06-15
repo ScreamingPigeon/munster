@@ -19,24 +19,28 @@ Add a Committee to your E-MUN
         <section class="text" style="font-size:20px">
       <form class="form-action" action="{%  url 'addcommittee' %}" method="post">
         {% csrf_token %}
-        <label>Committee Name
-        <input list="comms" name="cname"></label>
-        <datalist id="coms">
-          <option value="UNSC">
-          <option value="DISEC">
-          <option value="SPECPOL">
-          <option value="ECOFIN">
-          <option value="ECOSOC">
-          <option value="UNHRC">
-          <option value="ICJ">
-          <option value="AIPPM">
-          <option value="YHC">
-          <option value="Advisory Panel (AP)">
-          <option value="UNDP">
-          <option value="UNEP">
-          <option value="GA-6: Legal">
-        </datalist>    <br><br>
+        <select style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+          <option value="DISEC">DISEC</option>
+          <option value="UNSC">UNSC</option>
+          <option value="UNHRC">UNHRC</option>
+          <option value="SPECPOL">SPECPOL</option>
+          <option value="ECOFIN">ECOFIN</option>
+          <option value="ECOSOC">ECOSOC</option>
+          <option value="YHC">YHC</option>
+          <option value="UNDP">UNDP</option>
+          <option value="UNEP">UNEP</option>
+          <option value="Advisory Panel (AP)">Advisory Panel (AP)</option>
+          <option value="GA6: Legal">GA6: Legal</option>
+          <option value="AIPPM">AIPPM</option>
+          <option value="Lok Sabha">Lok Sabha</option>
+        </select>
+        <input type="text" name="displayValue" id="displayValue"
+               placeholder="add/select a value" onfocus="this.select()"
+               style="position:absolute;top:0px;left:0px;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;"  >
+        <input name="idValue" id="idValue" type="hidden">
 
+
+          <br><br>
           Content: <input type="text" name="content" id ="content" placeholder="Content" value=""><br><br>
           <button type="Submit" id='bt'name="button" class="btn button-dark text">Submit</button>
       </form>
