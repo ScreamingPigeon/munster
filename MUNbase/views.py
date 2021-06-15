@@ -314,6 +314,13 @@ def viewmun(request, mun):
         return render(request,'404.html', {"msg":"That account does not exist","user":getuser(request), "type":getusertype(request)})
 
 #------------------------------------E - MUN-------------------------------------------------#
+def addcommittee(request, cname):
+    if request.method == 'GET':
+            if getuser(request) is None:
+                return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+            elif getusertype(request) != 'MUN':
+                return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+            return render(request, 'munfts/mymun/addcommittee.html',{'user':getuser(request),'type':getusertype(request)})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
