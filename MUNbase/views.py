@@ -329,7 +329,7 @@ def addcommittee(request):
         committeedesc = request.POST['desc']
         mun = getuser(request)
         comm = Committee(name = committeename, mun = mun, description = committeedesc)
-        com.save()
+        comm.save()
         return redirect(reverse('viewcommittees'))
 
 def viewcommittee(request):
