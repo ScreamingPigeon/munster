@@ -327,6 +327,8 @@ def addcommittee(request):
             return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
         committeename = request.POST['cname']
         committeedesc = request.POST['desc']
+        if committeedesc == "":
+            committeedesc+=" "
         mun = getuser(request)
         comm = Committee(name = committeename, mun = mun, description = committeedesc)
         comm.save()
