@@ -61,7 +61,7 @@ class Committee(models.Model):
     name = models.CharField(max_length = 50)
     mun = models.ForeignKey(MUNuser, on_delete=models.CASCADE)
     description = models.CharField(max_length = 2000)
-    countrylist = models.CharField(max_length = 2000, null = True)
+    countrylist = models.CharField(max_length = 2000, null = True, blank = True)
 class Participant(models.Model):
     firstname = models.CharField(max_length = 50)
     secondname = models.CharField(max_length = 50)
