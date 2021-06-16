@@ -346,7 +346,7 @@ def editcommittee(request, commname, mundesc):
     if request.method == 'GET':
         return render(request, 'munfts/mymun/editcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
     if request.method == 'POST':
-        comm = Committee.objects.filter(mun = getuser(request), name=name, description=description)[0]
+        comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
         comm.name = request.POST['cname']
         comm.desc = request.POST['desc']
         comm.save()
