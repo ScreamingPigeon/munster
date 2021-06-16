@@ -344,7 +344,7 @@ def editcommittee(request, commname, mundesc):
     if user != comm.mun:
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     if request.method == 'GET':
-        return render(request, 'munfts/mymun/addcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
+        return render(request, 'munfts/mymun/editcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
     if request.method == 'POST':
         return None
 def viewcommittee(request):
