@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Add a Committee to your E-MUN
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Add Committee!</h2>
+        <section class="text" style="font-size:20px">
+      <form class="form-action" action="{%  url 'editcommittee' %}" method="post">
+        {% csrf_token %}
+        Committee Name:
+          <div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
+          <select style="position:absolute;top:0px;left:0px;width:220px; height:25px;line-height:20px;margin:0;padding:0;"
+                  onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                  <option value="DISEC">DISEC</option>
+                  <option value="UNSC">UNSC</option>
+                  <option value="UNHRC">UNHRC</option>
+                  <option value="SPECPOL">SPECPOL</option>
+                  <option value="ECOFIN">ECOFIN</option>
+                  <option value="ECOSOC">ECOSOC</option>
+                  <option value="YHC">YHC</option>
+                  <option value="UNDP">UNDP</option>
+                  <option value="UNEP">UNEP</option>
+                  <option value="Advisory Panel (AP)">Advisory Panel (AP)</option>
+                  <option value="GA6: Legal">GA6: Legal</option>
+                  <option value="AIPPM">AIPPM</option>
+                  <option value="Lok Sabha">Lok Sabha</option>
+          </select>
+          <input type="text" name="cname" id="displayValue" value="{{name}}"
+                 placeholder="Custom Committee Name" onfocus="this.select()"
+                 style="position:absolute;top:0px;left:0px;width:203px;width:200px\9;#width:200px;height:23px; height:21px\9;#height:18px;border:1px solid #556;"  >
+          <input name="idValue" id="idValue" type="hidden">
+        </div>
+
+          <br><br>
+          Committee Description: <br> <textarea name="desc" rows="8" value ='{{description}}'cols="70"></textarea> <br> <br>
+
+
+
+          <script type="text/javascript">
+            var expanded = false;
+
+            function showCheckboxes() {
+              var checkboxes = document.getElementById("checkboxes");
+              if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+              } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+              }
+            }
+          </script>
+          <button type="Submit" id='bt'name="button" class="{% url 'editannouncements' row.heading row.content %}">Submit</button>
+      </form>
+
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

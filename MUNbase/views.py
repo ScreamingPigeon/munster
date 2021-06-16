@@ -331,8 +331,22 @@ def addcommittee(request):
         comm = Committee(name = committeename, mun = mun, description = committeedesc)
         comm.save()
         return redirect(reverse('viewcommittees'))
-def editcommittee(request):
-    return None
+def editcommittee(request, commname, mundesc):
+    user = getuser(request)
+    if user is None:
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+    elif getusertype(request) != 'Delegate':
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    try:
+        comm=Committee.objects.filter(name=commname, description=mundesc, mun = user)[0]
+    except IndexError:
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
+    if user != comm.mun:
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    if request.method == 'GET':
+        return render(request, 'munfts/mymun/addcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
+    if request.method == 'POST':
+        return None
 def viewcommittee(request):
     if getuser(request) is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
