@@ -49,6 +49,7 @@ urlpatterns = [
     #E - MUN
     path('mymun/addcommittee', views.addcommittee, name='addcommittee'),
     path('mymun/viewcommittees', views.viewcommittee, name='viewcommittees'),
+    path('mymun/editcommittee/<str:commname>/<str:mundesc>', views.editcommittee, name='editcommittee'),
 
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),

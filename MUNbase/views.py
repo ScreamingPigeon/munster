@@ -331,7 +331,8 @@ def addcommittee(request):
         comm = Committee(name = committeename, mun = mun, description = committeedesc)
         comm.save()
         return redirect(reverse('viewcommittees'))
-
+def editcommittee(request):
+    return None
 def viewcommittee(request):
     if getuser(request) is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
