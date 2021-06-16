@@ -335,7 +335,7 @@ def editcommittee(request, commname, mundesc):
     user = getuser(request)
     if user is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
-    elif getusertype(request) != 'Delegate':
+    elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     try:
         comm=Committee.objects.filter(name=commname, description=mundesc, mun = user)[0]
