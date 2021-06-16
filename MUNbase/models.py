@@ -58,9 +58,10 @@ class Article(models.Model):
     author = models.CharField(max_length = 200)
 #E-MUN
 class Committee(models.Model):
-    name = models.CharField(max_length = 50) 
+    name = models.CharField(max_length = 50)
     mun = models.ForeignKey(MUNuser, on_delete=models.CASCADE)
     description = models.CharField(max_length = 2000)
+    countrylist = models.CharField(max_length = 2000, Null = True)
 class Participant(models.Model):
     firstname = models.CharField(max_length = 50)
     secondname = models.CharField(max_length = 50)
