@@ -16,7 +16,7 @@ Committees
         <section class ='text'>
           {% if comms is not None %}
             {% for row in comms %}
-            <h4 style='color:#A8B7B9'><weight>{{row.name}}</weight><a href="{% url ''editcommittee' row.name row.description %}"><img height="25" width="25" src="{% static "edit.png" %}"></img></a></h6>
+            <h4 style='color:#A8B7B9'><weight>{{row.name}}</weight><a href="{% url 'editcommittee' row.name row.description %}"><img height="25" width="25" src="{% static "edit.png" %}"></img></a></h6>
             <p>{{row.description}}</p><br>
             {%endfor%}
           {% else %}
