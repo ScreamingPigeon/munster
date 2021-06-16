@@ -2,12 +2,14 @@ from django.contrib import admin
 from django import forms
 
 # Register your models here.
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Article
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin
 admin.site.register(User)
 admin.site.register(Experience)
 admin.site.register(MUNuser)
 admin.site.register(MUNannouncements)
-admin.site.register(Registrations)
+admin.site.register(Committee)
+admin.site.register(Participant)
+admin.site.register(CommitteeAdmin)
 
 class ArticleEditorAdmin(forms.ModelForm):
     content = forms.CharField( widget=forms.Textarea )
