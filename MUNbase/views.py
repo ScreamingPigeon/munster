@@ -346,7 +346,11 @@ def editcommittee(request, commname, mundesc):
     if request.method == 'GET':
         return render(request, 'munfts/mymun/editcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
     if request.method == 'POST':
-        return None
+        comm = Committee.objects.filter(mun = getuser(request), name=name, description=description)[0]
+        comm.name = request.POST['cname']
+        comm.desc = request.POST['desc']
+        comm.save()
+        return redirect(reverse('viewcommittees'))
 def viewcommittee(request):
     if getuser(request) is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
