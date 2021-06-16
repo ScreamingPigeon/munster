@@ -50,8 +50,6 @@ urlpatterns = [
     path('mymun/addcommittee', views.addcommittee, name='addcommittee'),
     path('mymun/viewcommittees', views.viewcommittee, name='viewcommittees'),
 
-    #path('emun/daimun/committee-access', views.emun-caccess, name ='emuncaccess'),
-
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
