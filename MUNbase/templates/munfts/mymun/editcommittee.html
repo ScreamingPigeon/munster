@@ -13,7 +13,7 @@ Add a Committee to your E-MUN
       <div class="box">
         <h2 class="subh">Add Committee!</h2>
         <section class="text" style="font-size:20px">
-      <form class="form-action" action="{%  url 'editcommittee' %}" method="post">
+      <form class="form-action" action="{%  url 'editcommittee' name description %}" method="post">
         {% csrf_token %}
         Committee Name:
           <div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
