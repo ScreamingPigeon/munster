@@ -363,6 +363,7 @@ def viewcommittee(request):
     comms = Committee.objects.filter(mun = getuser(request))
     return render(request, 'munfts/mymun/viewcommittees.html',{'comms':comms})
 def deletecommittee(request, commname, mundesc):
+    user = getuser(request);
     if user is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'MUN':
