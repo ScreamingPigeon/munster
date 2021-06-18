@@ -329,6 +329,8 @@ def addcommittee(request):
         committeedesc = request.POST['desc']
         if committeedesc == "":
             committeedesc+=" "
+        if committeename == "":
+            committeename+=" "
         mun = getuser(request)
         comm = Committee(name = committeename, mun = mun, description = committeedesc)
         comm.save()
