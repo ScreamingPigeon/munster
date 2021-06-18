@@ -360,7 +360,22 @@ def viewcommittee(request):
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     comms = Committee.objects.filter(mun = getuser(request))
     return render(request, 'munfts/mymun/viewcommittees.html',{'comms':comms})
-    return None
+def deletecommittee(request, commname, mundesc):
+    if user is None:
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+    elif getusertype(request) != 'MUN':
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    try:
+        comm=Committee.objects.filter(name=commname, description=mundesc, mun = user)[0]
+    except IndexError:
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
+    if user != comm.mun:
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
+    comm.delete()
+    return redirect(reverse('viewcommittees'))
+
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
