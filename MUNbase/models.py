@@ -69,6 +69,35 @@ class Participant(models.Model):
     country = models.CharField(max_length = 100)
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     password = models.CharField(max_length = 200)
+    status = models.CharField(max_length = 20)
 class CommitteeAdmin(models.Model):
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     password = models.CharField(max_length = 50)
+class Agenda(models.Model):
+    agenda = models.CharField(max_length = 400)
+    committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
+    active = models.CharField(max_length=5)
+class Talklist(models.Model):
+    name = models.CharField(max_length = 500)
+    minutes = models.CharField(max_length = 10, blank  = True, null = True)
+    agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
+class TalkListSpeaker(models.Model):
+    speaker = model.ForeignKey(Participant, on_delete = models.CASCADE)
+    list = model.ForeignKey(Talklist, on_delete = models.CASCADE)
+    agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
+class Motion(models.Model):
+    agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 400)
+    delproposer = models.ForeignKey(Participant, on_delete = models.CASCADE)
+    defproposer = models.ForeignKey(CommitteeAdmin, on_delete = models.CASCADE)
+    type = models.CharField(max_length = 100)
+class VotingEvent(models.Model):
+    agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
+    motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
+    yes = models.CharField(max_length = 10)
+    no = models.CharField(max_length = 10)
+    abstain = models.CharField(max_length = 10)
+    yes = models.CharField(max_length = 10)
+class Attendance(models.Model):
+    total = models.ForeignKey()
+    committee = models.ForeignKey(Committee, on_delete = models.CASCADE)

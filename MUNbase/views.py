@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Agenda, Talklist, TalkListSpeaker, Motion, VotingEvent, Attendance
 from django.urls import reverse
 import xlsxwriter
 from datetime import datetime
@@ -363,7 +363,7 @@ def viewcommittee(request):
     comms = Committee.objects.filter(mun = getuser(request))
     return render(request, 'munfts/mymun/viewcommittees.html',{'comms':comms})
 def deletecommittee(request, commname, mundesc):
-    user = getuser(request);
+    user = getuser(request)
     if user is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
     elif getusertype(request) != 'MUN':
@@ -377,6 +377,9 @@ def deletecommittee(request, commname, mundesc):
     comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
     comm.delete()
     return redirect(reverse('viewcommittees'))
+
+def adddelegate(request):
+
 
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
