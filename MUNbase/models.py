@@ -99,5 +99,5 @@ class VotingEvent(models.Model):
     abstain = models.CharField(max_length = 10)
     yes = models.CharField(max_length = 10)
 class Attendance(models.Model):
-    total = models.ForeignKey()
+    total = models.CharField(max_length = 10)
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
