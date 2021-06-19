@@ -319,7 +319,7 @@ def addcommittee(request):
                 return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
             elif getusertype(request) != 'MUN':
                 return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
-            return render(request, 'munfts/mymun/addcommittee.html',{'user':getuser(request),'type':getusertype(request)})
+            return render(request, 'munfts/mymun/comms/addcommittee.html',{'user':getuser(request),'type':getusertype(request)})
     if request.method == 'POST':
         if getuser(request) is None:
             return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
@@ -348,7 +348,7 @@ def editcommittee(request, commname, mundesc):
     if user != comm.mun:
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     if request.method == 'GET':
-        return render(request, 'munfts/mymun/editcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
+        return render(request, 'munfts/mymun/comms/editcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
     if request.method == 'POST':
         comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
         comm.name = request.POST['cname']
@@ -361,7 +361,7 @@ def viewcommittee(request):
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     comms = Committee.objects.filter(mun = getuser(request))
-    return render(request, 'munfts/mymun/viewcommittees.html',{'comms':comms})
+    return render(request, 'munfts/mymun/comms/viewcommittees.html',{'comms':comms})
 def deletecommittee(request, commname, mundesc):
     user = getuser(request)
     if user is None:
@@ -377,11 +377,27 @@ def deletecommittee(request, commname, mundesc):
     comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
     comm.delete()
     return redirect(reverse('viewcommittees'))
-
+    if request.method == 'GET':
+            if getuser(request) is None:
+                return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+            elif getusertype(request) != 'MUN':
+                return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+            return render(request, 'munfts/mymun/comms/addcommittee.html',{'user':getuser(request),'type':getusertype(request)})
 def adddelegate(request):
-    return None
-
-
+    if request.method == 'GET':
+        if getuser(request) is None:
+            return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+        elif getusertype(request) != 'MUN':
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+        committees = Committee.objects.filter(mun = getuser(request))
+        dels =[]
+        if len(committees) == 0:
+            return redirect(reverse('viewcommittees') )
+        for row in committees:
+            dels+=Participant.objects.filter(committee=row)
+        return render(request, 'munfts/mymun/dels/adddelegates.html',{'user':getuser(request),'type':getusertype(request), 'committees':committees, 'dels':dels})
+    if request.method == 'POST':
+        return None
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
