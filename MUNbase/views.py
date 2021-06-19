@@ -398,6 +398,12 @@ def adddelegate(request):
         return render(request, 'munfts/mymun/dels/adddelegates.html',{'user':getuser(request),'type':getusertype(request), 'committees':committees, 'dels':dels})
     if request.method == 'POST':
         return None
+def viewdelegates(request):
+    return None
+def editdelegate(request, commname, allocation):
+    return None
+def deletedelegate(request,commname, allocation):
+    return None
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
