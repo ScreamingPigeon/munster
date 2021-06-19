@@ -379,7 +379,7 @@ def deletecommittee(request, commname, mundesc):
     return redirect(reverse('viewcommittees'))
 
 def adddelegate(request):
-
+    return None
 
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
