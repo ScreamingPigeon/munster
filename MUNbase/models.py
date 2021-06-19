@@ -82,8 +82,8 @@ class Talklist(models.Model):
     minutes = models.CharField(max_length = 10, blank  = True, null = True)
     agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
 class TalkListSpeaker(models.Model):
-    speaker = model.ForeignKey(Participant, on_delete = models.CASCADE)
-    list = model.ForeignKey(Talklist, on_delete = models.CASCADE)
+    speaker = models.ForeignKey(Participant, on_delete = models.CASCADE)
+    list = models.ForeignKey(Talklist, on_delete = models.CASCADE)
     agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
 class Motion(models.Model):
     agenda = models.ForeignKey(Agenda, on_delete = models.CASCADE)
