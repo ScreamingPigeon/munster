@@ -19,9 +19,9 @@ Add a delegate to your E-MUN Committee
         <section class="text" style="font-size:20px">
       <form class="form-action" action="{%  url 'adddelegate' %}" method="post">
         {% csrf_token %}
-          First Name: <input type="text" name="fname" id ="heading" placeholder="" value=""><br><br>
-          Second Name: <input type="text" name="sname" id ="heading" placeholder="" value=""><br><br>
-          Contact Number: <input type="number" name="number" id ="content" placeholder="" value=""><br><br>
+          First Name: <input type="text" name="fname" value=""><br><br>
+          Second Name: <input type="text" name="sname"  value=""><br><br>
+          Contact Number: <input type="text" name="number" value=""><br><br>
           Committee: <select id="comm" name="committee">
             {%for row in committees %}
             <option value="{{row}}">{{row.name}}</option>

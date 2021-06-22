@@ -66,6 +66,7 @@ class Participant(models.Model):
     firstname = models.CharField(max_length = 50)
     secondname = models.CharField(max_length = 50)
     country = models.CharField(max_length = 100)
+    contactnum = models.CharField(max_length = 15)
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     password = models.CharField(max_length = 200)
     status = models.CharField(max_length = 20)
