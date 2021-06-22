@@ -406,11 +406,11 @@ def adddelegate(request):
         lname = request.POST['sname']
         number = request.POST['number']
         comm = request.POST['committee']
-        committee = Committee.objects.filter(mun = getuser(request))[0]
+        committee = Committee.objects.filter(name = comm, mun = getuser(request))[0]
         country=  request.POST['alloc']
         part = Participant( firstname = fname, secondname = lname, contactnum = number, committee = committee, country = country, password=fname[0]+lname[0]+number)
         part.save()
-        return render(redirect('viewdelegates'))
+        return redirect(reverse('viewdelegates'))
 def viewdelegates(request):
     if getuser(request) is None:
         return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
