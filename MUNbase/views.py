@@ -421,7 +421,7 @@ def viewdelegates(request):
     for row in comms:
         var = Participant.objects.filter(committee = row)
         compre.append(var)
-    return render(request, 'munfts/mymun/dels/viewcommittees.html',{'comms':comms, 'dels':compre})
+    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'comms':comms, 'dels':compre})
 
 def editdelegate(request, commname, allocation):
     return None
