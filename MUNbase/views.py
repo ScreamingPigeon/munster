@@ -407,7 +407,7 @@ def adddelegate(request):
         number = request.POST['number']
         comm = request.POST['committee']
         committee = comm
-        countrylist= request.POST['alloc']
+        country= request.POST['alloc']
         part = Participant( firstname = fname, secondname = lname, contactnum = number, committee = committee, country = country, password=fname[0]+lname[0]+number)
         part.save()
         return render(redirect('viewdelegates'))
