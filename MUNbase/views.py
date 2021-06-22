@@ -419,7 +419,7 @@ def viewdelegates(request):
     compre = []
     comms = Committee.objects.filter(mun = getuser(request))
     for row in comms:
-        dels = Participant.objects.filter(committee = row)
+        dels = Participant.objects.filter(committee = row).order_by('committee')
         for rows in dels:
             compre.append(rows)
     return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre})
