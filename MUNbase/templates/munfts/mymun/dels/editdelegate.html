@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{%block title%}
+Edit Participant
+{%endblock%}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br><br>
+      <div class="box">
+        <h2 class="subh">Edit Delegate!</h2>
+        <br><br>
+
+        <section class="text" style="font-size:20px">
+      <form class="form-action" action="{%  url 'editdelegate' del.committee.name, del.country %}" method="post">
+        {% csrf_token %}
+          First Name: <input type="text" name="fname" value="{{del.firstname}}"><br><br>
+          Second Name: <input type="text" name="sname"  value="{{del.secondname}}"><br><br>
+          Contact Number: <input type="text" name="number" value="{{del.contactnum}}"><br><br>
+          Committee: <select id="comm" name="committee" value = '{{del.committee.name}}'>
+            {%for row in committees %}
+            <option value='{{row.name}}'>{{row.name}}</option>
+            {% endfor%}
+          </select> <br> <br>
+          Allocation: <select id="alloc" name="alloc" value ='{{del.country}}'>
+            {%for row in countries %}
+            <option value='{{row}}'>{{row}}</option>
+            {% endfor%}
+          </select> <br> <br>
+          <button type="Submit" id='bt'name="button" class="btn button-dark text">Edit</button>
+      </form>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
