@@ -16,7 +16,7 @@ View Participants
         <section class ='text'>
           {% if dels is not None %}
             {% for row in dels %}
-            <p><weight>{{row.committee.name}}</weight>: {{row.firstname}} {{row.secondname}} - {{row.country}} <a href ="{%  url 'editdelegate' del.committee.name, del.country %}"><img height="25" width="25" src="{% static "edit.png" %}"></img></a></p>
+            <p><weight>{{row.committee.name}}</weight>: {{row.firstname}} {{row.secondname}} - {{row.country}} <a href ="{%  url 'editdelegate' del.committee.name del.country %}"><img height="25" width="25" src="{% static "edit.png" %}"></img></a></p>
             {%endfor%}
           {% else %}
           <p>No participants allocated yet :(</p>
