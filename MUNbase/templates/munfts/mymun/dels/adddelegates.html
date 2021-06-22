@@ -24,7 +24,7 @@ Add a delegate to your E-MUN Committee
           Contact Number: <input type="text" name="number" value=""><br><br>
           Committee: <select id="comm" name="committee">
             {%for row in committees %}
-            <option value="{{row}}">{{row.name}}</option>
+            <option value="{{row.name}}">{{row.name}}</option>
             {% endfor%}
           </select> <br> <br>
           Allocation: <select id="alloc" name="alloc">
