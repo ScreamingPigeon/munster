@@ -419,9 +419,10 @@ def viewdelegates(request):
     compre = []
     comms = Committee.objects.filter(mun = getuser(request))
     for row in comms:
-        var = Participant.objects.filter(committee = row)
-        compre.append(var)
-    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'comms':comms, 'dels':compre})
+        dels = Participant.objects.filter(committee = row)
+        for rows in dels:
+            compre.append(rows)
+    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre})
 
 def editdelegate(request, commname, allocation):
     return None
