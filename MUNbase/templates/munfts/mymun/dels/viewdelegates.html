@@ -17,7 +17,7 @@ View Participants
           {% if dels is not None %}
             {% for row in comms %}
             <h3 style='color:#A8B7B9'><weight>{{row.name}}</weight></h3>
-            {% for rs in dels[forloop.counter]%}
+            {% for rs in dels[loop.index]%}
             <p> {{rs.firstname}} {{rs.secondname}} - {{rs.country}}</p>
             {% endfor %}
             {%endfor%}
