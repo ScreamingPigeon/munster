@@ -444,13 +444,14 @@ def editdelegate(request, commname, allocation):
             return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
         elif getusertype(request) != 'MUN':
             return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
-        fname = request.POST['fname']
-        lname = request.POST['sname']
-        number = request.POST['number']
-        comm = request.POST['committee']
-        committee = Committee.objects.filter(name = comm, mun = getuser(request))[0]
-        country=  request.POST['alloc']
-        part = Participant( firstname = fname, secondname = lname, contactnum = number, committee = committee, country = country, password=fname[0]+lname[0]+number)
+        comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
+        part = Participant.objects.filter(committee = comm, country = allocation)[0]
+        part.committee = Committee.objects.filter(name = comm, mun = getuser(request))[0]
+        part.country=  request.POST['alloc']
+        part.firstname = request.POST['fname']
+        part.secondname = request.POST['sname']
+        part.contactnum = request.POST['number']
+        part =Committee.objects.filter(name = request.POST['committee'], mun = getuser(request))[0]
         part.save()
         return redirect(reverse('viewdelegates'))
 def deletedelegate(request,commname, allocation):
