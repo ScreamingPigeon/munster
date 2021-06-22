@@ -15,11 +15,8 @@ View Participants
         <!--Put viewing of announcements datewise here-->
         <section class ='text'>
           {% if dels is not None %}
-            {% for row in comms %}
-            <h3 style='color:#A8B7B9'><weight>{{row.name}}</weight></h3>
-            {% for rs in dels[loop.index]%}
-            <p> {{rs.firstname}} {{rs.secondname}} - {{rs.country}}</p>
-            {% endfor %}
+            {% for row in dels %}
+            <p><weight>{{row.committee.name}}</weight>: {{row.firstname}} {{row.secondname}} - {{row.country}}</p>
             {%endfor%}
           {% else %}
           <p>No participants allocated yet :(</p>
