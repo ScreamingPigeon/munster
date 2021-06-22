@@ -407,10 +407,21 @@ def adddelegate(request):
         number = request.POST['number']
         committee = Committee.objects.filter(name = request.POST['committee'], mun = getuser(request))[0]
         countrylist= request.POST['alloc']
-
         part = Participant( firstname = fname, secondname = lname, contactnum = number, committee = committee, country = country, password=fname[0]+lname[0]+number)
+        part.save()
+        return render(redirect('viewdelegates'))
 def viewdelegates(request):
-    return None
+    if getuser(request) is None:
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+    elif getusertype(request) != 'MUN':
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    compre = []
+    comms = Committee.objects.filter(mun = getuser(request))
+    for row in comms:
+        var = Participant.objects.filter(committee = row)
+        compre.append(var)
+    return render(request, 'munfts/mymun/dels/viewcommittees.html',{'comms':comms, 'dels':compre})
+
 def editdelegate(request, commname, allocation):
     return None
 def deletedelegate(request,commname, allocation):
