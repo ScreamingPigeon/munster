@@ -21,8 +21,6 @@ Add a delegate to your E-MUN Committee
         {% csrf_token %}
           First Name: <input type="text" name="fname" id ="heading" placeholder="" value=""><br><br>
           Second Name: <input type="text" name="sname" id ="heading" placeholder="" value=""><br><br>
-          School: <input type="text" name="School" id ="content" placeholder="" value=""><br><br>
-          Age: <input type="number" name="age" id ="heading" placeholder="" value=""><br><br>
           Contact Number: <input type="number" name="number" id ="content" placeholder="" value=""><br><br>
           Committee: <select id="comm" name="committee">
             {%for row in committees %}

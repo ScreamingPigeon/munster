@@ -65,7 +65,6 @@ class Committee(models.Model):
 class Participant(models.Model):
     firstname = models.CharField(max_length = 50)
     secondname = models.CharField(max_length = 50)
-    dobmonth = models.CharField(max_length = 20)
     country = models.CharField(max_length = 100)
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     password = models.CharField(max_length = 200)
