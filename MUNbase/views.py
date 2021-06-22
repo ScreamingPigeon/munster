@@ -405,7 +405,8 @@ def adddelegate(request):
         fname = request.POST['fname']
         lname = request.POST['sname']
         number = request.POST['number']
-        committee = Committee.objects.filter(name = request.POST['committee'], mun = getuser(request))[0]
+        comm = request.POST['committee']
+        committee = comm
         countrylist= request.POST['alloc']
         part = Participant( firstname = fname, secondname = lname, contactnum = number, committee = committee, country = country, password=fname[0]+lname[0]+number)
         part.save()
