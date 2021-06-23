@@ -361,7 +361,7 @@ def viewcommittee(request):
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     comms = Committee.objects.filter(mun = getuser(request))
-    return render(request, 'munfts/mymun/comms/viewcommittees.html',{'comms':comms})
+    return render(request, 'munfts/mymun/comms/viewcommittees.html',{'comms':comms, 'user':getuser(request),})
 def deletecommittee(request, commname, mundesc):
     user = getuser(request)
     if user is None:
@@ -377,12 +377,6 @@ def deletecommittee(request, commname, mundesc):
     comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
     comm.delete()
     return redirect(reverse('viewcommittees'))
-    if request.method == 'GET':
-            if getuser(request) is None:
-                return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
-            elif getusertype(request) != 'MUN':
-                return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
-            return render(request, 'munfts/mymun/comms/addcommittee.html',{'user':getuser(request),'type':getusertype(request)})
 def adddelegate(request):
     if request.method == 'GET':
         if getuser(request) is None:
@@ -422,7 +416,7 @@ def viewdelegates(request):
         dels = Participant.objects.filter(committee = row).order_by('committee')
         for rows in dels:
             compre.append(rows)
-    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre})
+    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre, 'user':getuser(request),})
 def editdelegate(request, commname, contactnum):
     if request.method == 'GET':
         if getuser(request) is None:
