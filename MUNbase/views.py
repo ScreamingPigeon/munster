@@ -466,10 +466,10 @@ def deletedelegate(request,commname, contactnum):
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
     if user != comm.mun:
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
-        comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
-        part = Participant.objects.filter(committee = comm, contactnum = contactnum)
-        part.delete()
-        return redirect(reverse('viewdelegates'))
+    comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
+    part = Participant.objects.filter(committee = comm, contactnum = contactnum)
+    part.delete()
+    return redirect(reverse('viewdelegates'))
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
