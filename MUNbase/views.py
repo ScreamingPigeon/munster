@@ -361,7 +361,7 @@ def viewcommittee(request):
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     comms = Committee.objects.filter(mun = getuser(request))
-    return render(request, 'munfts/mymun/comms/viewcommittees.html',{'comms':comms, 'user':getuser(request)})
+    return render(request, 'munfts/mymun/comms/viewcommittees.html',{'comms':comms, 'user':getuser(request), "type":getusertype(request)})
 def deletecommittee(request, commname, mundesc):
     user = getuser(request)
     if user is None:
@@ -416,7 +416,7 @@ def viewdelegates(request):
         dels = Participant.objects.filter(committee = row).order_by('committee')
         for rows in dels:
             compre.append(rows)
-    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre, 'user':getuser(request)})
+    return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre, 'user':getuser(request), "type":getusertype(request)})
 def editdelegate(request, commname, contactnum):
     if request.method == 'GET':
         if getuser(request) is None:
