@@ -470,6 +470,9 @@ def deletedelegate(request,commname, contactnum):
     part = Participant.objects.filter(committee = comm, contactnum = contactnum)
     part.delete()
     return redirect(reverse('viewdelegates'))
+
+def logincomm(request):
+    return render(request, 'munfts/mymun/emun/committee-access.hrml')
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

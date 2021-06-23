@@ -46,7 +46,7 @@ urlpatterns = [
     path('add-announcements',views.addannouncements, name ='addannouncements'),
     path('edit-announcements/<str:heading>/<str:content>', views.editannouncements, name ='editannouncements'),
     path('delete-announcements/<str:heading>/<str:content>', views.deleteannouncements, name ='deleteannouncements'),
-    #E - MUN
+    #E - MUN core
     path('mymun/addcommittee', views.addcommittee, name='addcommittee'),
     path('mymun/viewcommittees', views.viewcommittee, name='viewcommittees'),
     path('mymun/editcommittee/<str:commname>/<str:mundesc>', views.editcommittee, name='editcommittee'),
@@ -55,6 +55,8 @@ urlpatterns = [
     path('mymun/viewdelegates', views.viewdelegates, name='viewdelegates'),
     path('mymun/editdelegate/<str:commname>/<str:contactnum>', views.editdelegate, name='editdelegate'),
     path('mymun/deletedelegate/<str:commname>/<str:contactnum>', views.deletedelegate, name='deletedelegate'),
+    #E-MUN funct
+    path('mymun/accesscommittee', views.logincomm, name='logincomm'),
 
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
