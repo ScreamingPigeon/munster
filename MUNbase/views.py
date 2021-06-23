@@ -472,7 +472,7 @@ def deletedelegate(request,commname, contactnum):
     return redirect(reverse('viewdelegates'))
 
 def logincomm(request):
-    return render(request, 'munfts/mymun/emun/committee-access.hrml')
+    return render(request, 'munfts/mymun/emun/committee-access.html')
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
