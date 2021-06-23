@@ -437,8 +437,8 @@ def editdelegate(request, commname, allocation):
             dels+=Participant.objects.filter(committee=row)
             countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"]
         comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
-        part = Participant.objects.filter(committee = comm, country = allocation)[0]
-        country = allocation
+        part = Participant.objects.filter(committee = comm, contactnum = contactnum)[0]
+        country = part.country
         return render(request, 'munfts/mymun/dels/editdelegate.html',{'user':getuser(request),'type':getusertype(request), 'committees':committees, 'countries':countries, 'del':part, 'country':country, 'comm':commname})
     if request.method == 'POST':
         if getuser(request) is None:
@@ -446,7 +446,7 @@ def editdelegate(request, commname, allocation):
         elif getusertype(request) != 'MUN':
             return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
         comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
-        part = Participant.objects.filter(committee = comm, country = allocation)[0]
+        part = Participant.objects.filter(committee = comm, contactnum = contactnum)[0]
         part.country=  request.POST['alloc']
         part.firstname = request.POST['fname']
         part.secondname = request.POST['sname']
@@ -454,7 +454,7 @@ def editdelegate(request, commname, allocation):
         part.committee =Committee.objects.filter(name = request.POST['committee'], mun = getuser(request))[0]
         part.save()
         return redirect(reverse('viewdelegates'))
-def deletedelegate(request,commname, allocation):
+def deletedelegate(request,commname, contactnum):
     return None
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):

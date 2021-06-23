@@ -53,8 +53,8 @@ urlpatterns = [
     path('mymun/deletecommittee/<str:commname>/<str:mundesc>', views.deletecommittee, name='deletecommittee'),
     path('mymun/adddelegate', views.adddelegate, name='adddelegate'),
     path('mymun/viewdelegates', views.viewdelegates, name='viewdelegates'),
-    path('mymun/editdelegate/<str:commname>/<str:allocation>', views.editdelegate, name='editdelegate'),
-    path('mymun/deletedelegate/<str:commname>/<str:allocation>', views.deletedelegate, name='deletedelegate'),
+    path('mymun/editdelegate/<str:commname>/<str:contactnum>', views.editdelegate, name='editdelegate'),
+    path('mymun/deletedelegate/<str:commname>/<str:contactnum>', views.deletedelegate, name='deletedelegate'),
 
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
