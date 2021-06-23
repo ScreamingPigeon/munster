@@ -461,7 +461,7 @@ def deletedelegate(request,commname, contactnum):
     elif getusertype(request) != 'MUN':
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
     try:
-        comm=Committee.objects.filter(name=commname, description=mundesc, mun = user)[0]
+        comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
     except IndexError:
         return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
     if user != comm.mun:
