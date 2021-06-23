@@ -22,12 +22,12 @@ Edit Participant
           Contact Number: <input type="text" name="number" value="{{del.contactnum}}"><br><br>
           Committee: <select id="comm" name="committee" value = '{{del.committee.name}}'>
             {%for row in committees %}
-            <option value='{{row.name}}'>{{row.name}}</option>
+            <option value='{{row.name}}' {% if row.name is del.committee.name %} selected {%endif%}>{{row.name}}</option>
             {% endfor%}
           </select> <br> <br>
           Allocation: <select id="alloc" name="alloc" value ='{{del.country}}'>
             {%for row in countries %}
-            <option value='{{row}}'>{{row}}</option>
+            <option value='{{row}}' {% if row is del.country%} selected {%endif%}>{{row}}</option>
             {% endfor%}
           </select> <br> <br>
           <button type="Submit" id='bt'name="button" class="btn button-dark text">Edit</button>
