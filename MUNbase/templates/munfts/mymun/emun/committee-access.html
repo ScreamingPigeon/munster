@@ -45,21 +45,21 @@
     </ul>
   </div>
 </nav>
-<div class="container">
-  <div class="row">
-    <div class="col-md login-boxx">
-      <form action="{% url 'logincomm' mun.username %}" method="post">
-        {% csrf_token %}
-        Committee: <select class="" name="comm" >
-          {%for row in comms%}
-          <option value="{{row.name}}">{{row.name}}</option>
-          {%endfor%}
-        </select>
-        <br>
-        Special Access Key (SAK): <input type="password"name="sak">
-      </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md ">
+        <form action="{% url 'logincomm' mun.username %}" method="post">
+          {% csrf_token %}
+          Committee: <select class="" name="comm" >
+            {%for row in comms%}
+            <option value="{{row.name}}">{{row.name}}</option>
+            {%endfor%}
+          </select>
+          <br>
+          Special Access Key (SAK): <input type="password"name="sak">
+        </form>
+      </div>
     </div>
   </div>
-</div>
   </body>
 </html>
