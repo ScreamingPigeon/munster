@@ -30,7 +30,7 @@ Edit Participant
           Allocation: <select id="alloc" name="alloc" >
             {%for row in countries %}
             {% if row is country%}  <option value='{{row}}' selected>{{row}}</option> {%endif%}
-            {% if row is country%}  <option value='{{row}}'>{{row}}</option> {%endif%}
+            {% if row is not country%}  <option value='{{row}}'>{{row}}</option> {%endif%}
             {% endfor%}
           </select> <br> <br>
           <button type="Submit" id='bt'name="button" class="btn button-dark text">Edit</button>
