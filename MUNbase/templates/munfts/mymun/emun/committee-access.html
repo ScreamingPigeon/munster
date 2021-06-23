@@ -5,7 +5,6 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link href="{% static "corestyles.css" %}" rel="stylesheet">
-      <link href="{% static "extras.css" %}" rel="stylesheet">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
@@ -45,7 +44,7 @@
 </nav>
   <div class="container">
     <div class="row">
-      <div class="col-md ">
+      <div class="col-md caccessbox">
         <form action="{% url 'logincomm' mun.username %}" method="post">
           {% csrf_token %}
           Committee: <select class="" name="comm" >

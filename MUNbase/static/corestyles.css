@@ -54,3 +54,11 @@ visibility: hidden;
 .article-bx{
   height: 150px;
 }
+.caccessbox{
+  border: solid black medium;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  display: block;
+  margin: auto;
+}
