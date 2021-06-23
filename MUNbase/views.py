@@ -334,6 +334,8 @@ def addcommittee(request):
         mun = getuser(request)
         comm = Committee(name = committeename, mun = mun, description = committeedesc)
         comm.save()
+        comma = CommitteeAdmin(committee = comm, password = 'Admin'+committeename)
+        comma.save()
         return redirect(reverse('viewcommittees'), user = getuser(request))
 def editcommittee(request, commname, mundesc):
     user = getuser(request)
@@ -464,9 +466,22 @@ def deletedelegate(request,commname, contactnum):
     part = Participant.objects.filter(committee = comm, contactnum = contactnum)
     part.delete()
     return redirect(reverse('viewdelegates'))
+def logincomm(request, munname):
+    if request.method == "GET":
+        if request.session.get('emun') is not None:
+            del request.session['emun']
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            munz = mun[0]
+        except IndexError:
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
+        mun = mun[0]
+        comms = Committee.objects.filter(mun = mun)
+        if len(comms) == 0:
+            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
 
-def logincomm(request):
-    return render(request, 'munfts/mymun/emun/committee-access.html')
+        return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
+    if request.method == "POST"
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
