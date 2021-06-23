@@ -1,10 +1,8 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link href="{% static "corestyles.css" %}" rel="stylesheet">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
@@ -33,18 +31,20 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand text">MUNster x {{mun.name}}</a>
+  <a class="navbar-brand text" style="color:white">MUNster x {{mun.name}}</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Access Your Committee</a>
+        <a class="nav-link" style="color:white" href="#">Access Your Committee</a>
       </li>
     </ul>
   </div>
 </nav>
   <div class="container">
+    <br> <br>
     <div class="row">
-      <div class="col-md caccessbox">
+      <div class="col-md ">
+      <div style="margin: solid medium black; align: center; display: block; margin: auto;">
         <form action="{% url 'logincomm' mun.username %}" method="post">
           {% csrf_token %}
           Committee: <select class="" name="comm" >
@@ -55,6 +55,7 @@
           <br>
           Special Access Key (SAK): <input type="password"name="sak">
         </form>
+      </div>
       </div>
     </div>
   </div>
