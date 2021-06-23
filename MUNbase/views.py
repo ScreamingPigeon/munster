@@ -423,7 +423,7 @@ def viewdelegates(request):
         for rows in dels:
             compre.append(rows)
     return render(request, 'munfts/mymun/dels/viewdelegates.html',{'dels':compre})
-def editdelegate(request, commname, allocation):
+def editdelegate(request, commname, contactnum):
     if request.method == 'GET':
         if getuser(request) is None:
             return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
