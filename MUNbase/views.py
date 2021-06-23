@@ -455,7 +455,21 @@ def editdelegate(request, commname, contactnum):
         part.save()
         return redirect(reverse('viewdelegates'))
 def deletedelegate(request,commname, contactnum):
-    return None
+    user = getuser(request)
+    if user is None:
+        return render(request,"homepages/login.html",{"errmsg":"You need to Login first!",'user':None, "type":getusertype(request)})
+    elif getusertype(request) != 'MUN':
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+    try:
+        comm=Committee.objects.filter(name=commname, description=mundesc, mun = user)[0]
+    except IndexError:
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
+    if user != comm.mun:
+        return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"That resource cannot be utilized by your account", "type":getusertype(request)})
+        comm = Committee.objects.filter(name = commname, mun = getuser(request))[0]
+        part = Participant.objects.filter(committee = comm, contactnum = contactnum)
+        part.delete()
+        return redirect(reverse('viewdelegates'))
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

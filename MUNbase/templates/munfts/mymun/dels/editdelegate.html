@@ -36,7 +36,8 @@ Edit Participant
           </select> <br> <br>
           <button type="Submit" id='bt'name="button" class="btn button-dark text">Edit</button>
       </form>
-
+      <br>
+      <a href="{% url 'deletedelegate' del.committee.name del.contactnum  %}" style='color:#F07178'><button style="border-color:#F07178;" type="button" class="btn btn-dark">Delete</button></a>
         </section>
       </div>
     </div>
