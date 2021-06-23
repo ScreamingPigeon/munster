@@ -481,7 +481,6 @@ def logincomm(request, munname):
             return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
 
         return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
-    if request.method == "POST"
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
