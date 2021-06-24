@@ -56,7 +56,7 @@
     <div class="row">
       <div class="col-md loginboks">
         {% if errmsg is not None%}
-        <p style="display: block; margin: auto;">{{errmsg}}</p>  
+        <p style="display: block; margin: auto;">{{errmsg}}</p>
         {%endif%}
         <form action="{% url 'logincomm' mun.username %}" method="post">
           {% csrf_token %}
@@ -67,6 +67,7 @@
           </select>
           <br> <br> <br>
           Special Access Key (SAK): <input type="password"name="sak">
+          <button type="submit" class="btn btn-primary">Login</button>
         </form>
       </div>
     </div>

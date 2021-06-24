@@ -486,8 +486,7 @@ def logincomm(request, munname):
         comm = Committee.objects.filter(mun = mun, name = comm)
         password = request.POST['sak']
         parts = Participant.objects.filter(committee = comm, password = password)
-        arr = parts
-        if len(arr) == 0:
+        if len(parts) == 0:
             admin = CommitteeAdmin.objects.filter(committee = comm, password = password )
             if len(admin) == 0:
                     return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
