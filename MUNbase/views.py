@@ -492,7 +492,7 @@ def logincomm(request, munname):
             admin = CommitteeAdmin.objects.filter(committee = comm, password = password )
             try:
                 arr = admin[0]
-            except IndexError
+            except IndexError:
                 return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
             admin = admin[0]
                 return None
