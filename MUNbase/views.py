@@ -468,8 +468,8 @@ def deletedelegate(request,commname, contactnum):
     return redirect(reverse('viewdelegates'))
 def logincomm(request, munname):
     if request.method == "GET":
-        if request.session.get('emun') is not None:
-            del request.session['emun']
+        if request.session.get('emun') is not None and request.session.get('emuncomm') is not None:
+            del request.session['emun'] #REPLACEMENT
         mun = MUNuser.objects.filter(username = munname)
         try:
             munz = mun[0]
@@ -479,8 +479,23 @@ def logincomm(request, munname):
         comms = Committee.objects.filter(mun = mun)
         if len(comms) == 0:
             return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
-
         return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
+    if request.method == 'POST':
+        comm = request.POST['comm']
+        password = request.POST['sak']
+        parts = Participant.objects.filter(committee = comm, password = password)
+        arr = parts
+        if len(arr) == 0:
+            admin = CommitteeAdmin.objects.filter(committee = comm, password = password )
+            if len(admin) == 0:
+                    return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
+            else:
+                admin = admin[0]
+                return None
+        else:
+            part = parts[0]
+            return render(request,"munfts/mymun/emun/delegate.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

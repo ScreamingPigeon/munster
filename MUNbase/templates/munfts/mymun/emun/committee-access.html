@@ -55,6 +55,9 @@
     <br> <br>
     <div class="row">
       <div class="col-md loginboks">
+        {% if errmsg is not None%}
+        <p style="display: block; margin: auto;">{{errmsg}}</p>  
+        {%endif%}
         <form action="{% url 'logincomm' mun.username %}" method="post">
           {% csrf_token %}
           Committee: <select class="" name="comm" >
