@@ -57,7 +57,8 @@ urlpatterns = [
     path('mymun/deletedelegate/<str:commname>/<str:contactnum>', views.deletedelegate, name='deletedelegate'),
     #E-MUN funct
     path('emun/<str:munname>', views.logincomm, name='logincomm'),
-
+    path ('emun/<str:munname>/<str:commname>/admin', views.adminview, name ='adminview'),
+    path ('emun/<str:munname>/<str:commname>/delegate', views.partview, name ='partview'),
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')

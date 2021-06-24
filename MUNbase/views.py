@@ -473,8 +473,11 @@ def deletedelegate(request,commname, contactnum):
     return redirect(reverse('viewdelegates'))
 def logincomm(request, munname):
     if request.method == "GET":
-        if request.session.get('emun') is not None and request.session.get('emuncomm') is not None:
-            del request.session['emun'] #REPLACEMENT
+        if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
+            if request.session.get('emunalloc') == 'Admin':
+                return redirect(reverse('adminview'), munname = munname, commname = request.session.get('emuncomm'))
+            elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
+                return redirect(reverse('partview'), munname = munname, commname = request.session.get('emuncomm'))
         mun = MUNuser.objects.filter(username = munname)
         try:
             munz = mun[0]
@@ -501,10 +504,25 @@ def logincomm(request, munname):
             except IndexError:
                 return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
             admin = admin[0]
-            return None
-        part = parts[0]
-        return render(request,"munfts/mymun/emun/delegate.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
+            request.session["emun"]=mun.username
+            request.session["emunalloc"]='Admin'
+            request.session["emuncomm"]= comm.name
+            return redirect(reverse('adminview'), munname = mun.username, commname = comm.name)
 
+        part = parts[0]
+        request.session["emun"]=mun.username
+        request.session["emunalloc"]=part.country
+        request.session["emuncomm"]= comm.name
+        return redirect(reverse('partview'), munname = mun.username, commname = comm.name)
+
+def adminview(request, munname, commname):
+    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not 'Admin' or request.session.get('emuncomm') is not commname:
+        return redirect(reverse('logincomm'), munname = munname)
+    return render(request, 'munfts/mymun/emun/admin.html')
+def partview(request, munname, commname):
+    if request.session.get('emun') is not munname or request.session.get('emunalloc') is 'Admin' or request.session.get('emunalloc') is None or request.session.get('emuncomm') is not commname:
+        return redirect(reverse('logincomm'), munname = munname)
+    return render(request, 'munfts/mymun/emun/delegate.html')
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
