@@ -482,6 +482,8 @@ def logincomm(request, munname):
         return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
     if request.method == 'POST':
         comm = request.POST['comm']
+        mun = MUNuser.objects.filter(username = munname)
+        comm = Committee.objects.filter(mun = mun, name = comm)
         password = request.POST['sak']
         parts = Participant.objects.filter(committee = comm, password = password)
         arr = parts
