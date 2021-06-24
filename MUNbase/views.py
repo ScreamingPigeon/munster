@@ -486,16 +486,18 @@ def logincomm(request, munname):
         comm = Committee.objects.filter(mun = mun, name = comm)
         password = request.POST['sak']
         parts = Participant.objects.filter(committee = comm, password = password)
-        if len(parts) == 0:
+        try:
+            arr = parts[0]
+        except IndexError:
             admin = CommitteeAdmin.objects.filter(committee = comm, password = password )
-            if len(admin) == 0:
-                    return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
-            else:
-                admin = admin[0]
+            try:
+                arr = admin[0]
+            except IndexError
+                return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
+            admin = admin[0]
                 return None
-        else:
-            part = parts[0]
-            return render(request,"munfts/mymun/emun/delegate.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
+        part = parts[0]
+        return render(request,"munfts/mymun/emun/delegate.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
