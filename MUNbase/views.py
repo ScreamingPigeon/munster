@@ -484,6 +484,7 @@ def logincomm(request, munname):
         comm = request.POST['comm']
         mun = MUNuser.objects.filter(username = munname)[0]
         comm = Committee.objects.filter(mun = mun, name = comm)[0]
+        comms = Committee.objects.filter(mun = mun)
         password = request.POST['sak']
         parts = Participant.objects.filter(committee = comm, password = password)
         try:
