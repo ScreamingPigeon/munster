@@ -447,6 +447,7 @@ def editdelegate(request, commname, contactnum):
         part.firstname = request.POST['fname']
         part.secondname = request.POST['sname']
         part.contactnum = request.POST['number']
+        part.password = request.POST['fname'][0] + request.POST['sname'][0] + request.POST['number']
         part.committee =Committee.objects.filter(name = request.POST['committee'], mun = getuser(request))[0]
         part.save()
         return redirect(reverse('viewdelegates'))
