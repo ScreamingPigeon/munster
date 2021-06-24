@@ -495,7 +495,7 @@ def logincomm(request, munname):
             except IndexError:
                 return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
             admin = admin[0]
-                return None
+            return None
         part = parts[0]
         return render(request,"munfts/mymun/emun/delegate.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun, 'errmsg': "Invalid Access details. Kindly contact the Secretariat if the problem persists"})
 
