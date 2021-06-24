@@ -353,9 +353,13 @@ def editcommittee(request, commname, mundesc):
         return render(request, 'munfts/mymun/comms/editcommittee.html',{'user':getuser(request),'type':getusertype(request),'name':comm.name,'description':comm.description})
     if request.method == 'POST':
         comm = Committee.objects.filter(mun = getuser(request), name=commname, description=mundesc)[0]
+        comma = CommitteeAdmin.objects.filter(committee = comm)[0]
         comm.name = request.POST['cname']
         comm.desc = request.POST['desc']
         comm.save()
+        comma.committee = comm
+        comma.password = 'Admin'+ comm.name
+        comma.save()
         return redirect(reverse('viewcommittees'), user = getuser(request))
 def viewcommittee(request):
     if getuser(request) is None:
