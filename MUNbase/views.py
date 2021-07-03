@@ -476,9 +476,17 @@ def logincomm(request, munname):
     if request.method == "GET":
         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
             if request.session.get('emunalloc') == 'Admin':
-                return redirect(reverse('adminview'), munname = munname, commname = request.session.get('emuncomm'))
+                request.session["emun"]=mun.username
+                request.session["emunalloc"]='Admin'
+                request.session["emuncomm"]= comm.name
+                url ='http://www.munster.co.in/emun/'+str(mun.username)+"/"+str(comm.name)+"/admin"
+                return redirect(url)
             elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
-                return redirect(reverse('partview'), munname = munname, commname = request.session.get('emuncomm'))
+                request.session["emun"]=mun.username
+                request.session["emunalloc"]='Admin'
+                request.session["emuncomm"]= comm.name
+                url ='http://www.munster.co.in/emun/'+str(mun.username)+"/"+str(comm.name)+"/delegate"
+                return redirect(url)
         mun = MUNuser.objects.filter(username = munname)
         try:
             munz = mun[0]
@@ -528,6 +536,8 @@ def partview(request, munname, commname):
     cook2 = request.session["emunalloc"]
     cook3 = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/delegate.html')
+def commlogout(request):
+    navba
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

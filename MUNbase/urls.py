@@ -59,6 +59,7 @@ urlpatterns = [
     path('emun/<str:munname>', views.logincomm, name='logincomm'),
     path ('emun/<str:munname>/<str:commname>/admin', views.adminview, name ='adminview'),
     path ('emun/<str:munname>/<str:commname>/delegate', views.partview, name ='partview'),
+    path ('emun/logout', views.commlogout, name ='commlogout'),
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
