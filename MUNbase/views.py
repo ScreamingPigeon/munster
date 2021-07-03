@@ -514,7 +514,7 @@ def logincomm(request, munname):
         request.session["emun"]=mun.username
         request.session["emunalloc"]=part.country
         request.session["emuncomm"]= comm.name
-        return redirect(reverse('partview') munname = munname, commname = commz)
+        return redirect(reverse('partview'), munname = munname, commname = commz)
 def adminview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is not 'Admin' or request.session.get('emuncomm') is not commname:
         return redirect(reverse('logincomm'), munname = munname)
