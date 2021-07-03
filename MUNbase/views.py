@@ -476,16 +476,10 @@ def logincomm(request, munname):
     if request.method == "GET":
         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
             if request.session.get('emunalloc') == 'Admin':
-                request.session["emun"]=mun.username
-                request.session["emunalloc"]='Admin'
-                request.session["emuncomm"]= comm.name
-                url ='http://www.munster.co.in/emun/'+str(mun.username)+"/"+str(comm.name)+"/admin"
+                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
                 return redirect(url)
             elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
-                request.session["emun"]=mun.username
-                request.session["emunalloc"]='Admin'
-                request.session["emuncomm"]= comm.name
-                url ='http://www.munster.co.in/emun/'+str(mun.username)+"/"+str(comm.name)+"/delegate"
+                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
                 return redirect(url)
         mun = MUNuser.objects.filter(username = munname)
         try:
