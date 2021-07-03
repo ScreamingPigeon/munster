@@ -354,7 +354,7 @@ def editcommittee(request, commname, mundesc):
     if request.method == 'POST':
         comma = CommitteeAdmin.objects.filter(committee = comm)[0]
         comm.name = request.POST['cname']
-        comm.desc = request.POST['desc']
+        comm.description = request.POST['desc']
         comm.save()
         comma.committee = comm
         comma.password = 'Admin'+ comm.name
