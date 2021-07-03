@@ -508,8 +508,7 @@ def logincomm(request, munname):
             request.session["emun"]=mun.username
             request.session["emunalloc"]='Admin'
             request.session["emuncomm"]= comm.name
-            return redirect(reverse('adminview'), munname = mun.username, commname = commz)
-
+            url ='http://www.munster.co.in/emun/'+str(mun.username)+"/"+str(comm.name)+"/admin"
         part = parts[0]
         request.session["emun"]=mun.username
         request.session["emunalloc"]=part.country
