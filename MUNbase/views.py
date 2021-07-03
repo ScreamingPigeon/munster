@@ -470,6 +470,8 @@ def deletedelegate(request,commname, contactnum):
     part = Participant.objects.filter(committee = comm, contactnum = contactnum)
     part.delete()
     return redirect(reverse('viewdelegates'))
+
+
 def logincomm(request, munname):
     if request.method == "GET":
         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
@@ -488,7 +490,7 @@ def logincomm(request, munname):
             return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
         return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
     if request.method == 'POST':
-        comm = request.POST['comm']
+        commz = request.POST['comm']
         mun = MUNuser.objects.filter(username = munname)[0]
         comm = Committee.objects.filter(mun = mun, name = comm)[0]
         comms = Committee.objects.filter(mun = mun)
@@ -506,14 +508,13 @@ def logincomm(request, munname):
             request.session["emun"]=mun.username
             request.session["emunalloc"]='Admin'
             request.session["emuncomm"]= comm.name
-            return redirect(reverse('adminview'), munname = mun.username, commname = comm.name)
+            return redirect(reverse('adminview'), munname = mun.username, commname = commz)
 
         part = parts[0]
         request.session["emun"]=mun.username
         request.session["emunalloc"]=part.country
         request.session["emuncomm"]= comm.name
-        return redirect(reverse('partview'), munname = mun.username, commname = comm.name)
-
+        return redirect(reverse('partview') munname = munname, commname = commz)
 def adminview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is not 'Admin' or request.session.get('emuncomm') is not commname:
         return redirect(reverse('logincomm'), munname = munname)
