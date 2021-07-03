@@ -508,7 +508,7 @@ def logincomm(request, munname):
             request.session["emun"]=mun.username
             request.session["emunalloc"]='Admin'
             request.session["emuncomm"]= comm.name
-            return redirect('adminview', {'munname' = mun.username, 'commname' = commz})
+            return redirect(reverse('adminview'), munname = mun.username, commname = commz)
 
         part = parts[0]
         request.session["emun"]=mun.username
