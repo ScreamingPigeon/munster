@@ -514,7 +514,8 @@ def logincomm(request, munname):
         request.session["emun"]=mun.username
         request.session["emunalloc"]=part.country
         request.session["emuncomm"]= comm.name
-        return redirect(reverse('partview'), munname = munname, commname = commz)
+        url ='http://www.munster.co.in/emun/'+str(mun.username)+"/"+str(comm.name)+"/delegate"
+        return redirect(url)
 
 
 def adminview(request, munname, commname):
@@ -523,8 +524,9 @@ def adminview(request, munname, commname):
     cook3 = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/admin.html', {'cook1':cook1, 'cook2':cook2, 'cook3':cook3})
 def partview(request, munname, commname):
-    if request.session.get('emun') is not munname or request.session.get('emunalloc') is 'Admin' or request.session.get('emunalloc') is None or request.session.get('emuncomm') is not commname:
-        return redirect(reverse('logincomm'), munname = munname)
+    cook1 = request.session["emun"]
+    cook2 = request.session["emunalloc"]
+    cook3 = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/delegate.html')
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
