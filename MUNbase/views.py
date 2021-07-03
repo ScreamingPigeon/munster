@@ -531,7 +531,11 @@ def partview(request, munname, commname):
     cook3 = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/delegate.html')
 def commlogout(request):
-    navba
+    mun = request.session["emun"]
+    del request.session["emun"]
+    del request.session["emunalloc"]
+    del request.session["emuncomm"]
+    return redirect(reverse('logincomm'), munname = mun)
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
