@@ -518,9 +518,10 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    if request.session['emun'] is not munname or request.session['emunalloc'] is not 'Admin' or request.session['emuncomm'] is not commname:
-        return redirect(reverse('logincomm'), munname = munname)
-    return render(request, 'munfts/mymun/emun/admin.html')
+    cook1 = request.session["emun"]
+    cook2 = request.session["emunalloc"]
+    cook3 = request.session["emuncomm"]
+    return render(request, 'munfts/mymun/emun/admin.html', {'cook1':cook1, 'cook2':cook2, 'cook3':cook3})
 def partview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is 'Admin' or request.session.get('emunalloc') is None or request.session.get('emuncomm') is not commname:
         return redirect(reverse('logincomm'), munname = munname)
