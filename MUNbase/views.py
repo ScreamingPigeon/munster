@@ -521,16 +521,16 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    if request.session["emun"] is None or request.session["emunalloc"] is None or request.session["emuncomm"] is None:
+    if request.session.get('emun') is None or request.session.get('emunalloc') is None or request.session.get('emuncomm') is None:
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session["emun"]
     admin = request.session["emunalloc"]
     commname = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
-    
+
 def partview(request, munname, commname):
-    if request.session["emun"] is None or request.session["emunalloc"] is None or request.session["emuncomm"] is None:
+    if request.session.get('emun') is None or request.session.get('emunalloc') is None or request.session.get('emuncomm') is None:
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session["emun"]
