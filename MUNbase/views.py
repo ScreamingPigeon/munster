@@ -521,14 +521,20 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    cook1 = request.session["emun"]
-    cook2 = request.session["emunalloc"]
-    cook3 = request.session["emuncomm"]
-    return render(request, 'munfts/mymun/emun/admin.html', {'cook1':cook1, 'cook2':cook2, 'cook3':cook3})
+    munnamme = request.session["emun"]
+    admin = request.session["emunalloc"]
+    commname = request.session["emuncomm"]
+    if munnamme is None or admin is None or commname is None:
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
 def partview(request, munname, commname):
-    cook1 = request.session["emun"]
-    cook2 = request.session["emunalloc"]
-    cook3 = request.session["emuncomm"]
+    munnamme = request.session["emun"]
+    alloc = request.session["emunalloc"]
+    commname = request.session["emuncomm"]
+    if munnamme is None or alloc is None or commname is None:
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
     return render(request, 'munfts/mymun/emun/delegate.html')
 def commlogout(request):
     mun = request.session["emun"]
