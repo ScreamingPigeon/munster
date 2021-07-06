@@ -521,20 +521,21 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
+    if request.session["emun"] is None or request.session["emunalloc"] is None or request.session["emuncomm"] is None:
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
     munnamme = request.session["emun"]
     admin = request.session["emunalloc"]
     commname = request.session["emuncomm"]
-    if munnamme is None or admin is None or commname is None:
+    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
+    
+def partview(request, munname, commname):
+    if request.session["emun"] is None or request.session["emunalloc"] is None or request.session["emuncomm"] is None:
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
-def partview(request, munname, commname):
     munnamme = request.session["emun"]
     alloc = request.session["emunalloc"]
     commname = request.session["emuncomm"]
-    if munnamme is None or alloc is None or commname is None:
-        url = "http://www.munster.co.in/emun/"+munname
-        return redirect(url)
     return render(request, 'munfts/mymun/emun/delegate.html')
 def commlogout(request):
     del request.session["emun"]
