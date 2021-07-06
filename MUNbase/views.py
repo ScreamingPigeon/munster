@@ -541,7 +541,7 @@ def commlogout(request):
     del request.session["emun"]
     del request.session["emunalloc"]
     del request.session["emuncomm"]
-    return redirect(reverse('logincomm'), munname = mun)
+    return redirect(reverse('home'))
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
