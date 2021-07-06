@@ -537,6 +537,7 @@ def partview(request, munname, commname):
     alloc = request.session["emunalloc"]
     commname = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/delegate.html')
+
 def commlogout(request):
     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
         del request.session["emun"]
