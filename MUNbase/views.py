@@ -537,11 +537,10 @@ def partview(request, munname, commname):
         return redirect(url)
     return render(request, 'munfts/mymun/emun/delegate.html')
 def commlogout(request):
-    mun = request.session["emun"]
     del request.session["emun"]
     del request.session["emunalloc"]
     del request.session["emuncomm"]
-    return redirect(reverse('home'))
+    return redirect(reverse('home') )
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
