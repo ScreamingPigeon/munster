@@ -543,9 +543,9 @@ def commlogout(request):
     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
         mun = request.session["emun"]
         del request.session["emun"]
-        del request.session["emunar.co.in/emun"+mun]
+        del request.session["emunalloc"]
         del request.session["emuncomm"]
-    return redirect("http://www.munste")
+    return redirect("http://www.munster.co.in/emun"+mun)
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
