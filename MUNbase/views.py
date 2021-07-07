@@ -521,7 +521,7 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is not commname:
+    if request.session['emun'] is not munname or request.session['emunalloc'] is not "Admin" or request.session['emuncomm'] is not commname:
         #if request.session['emun'] is not munname or request.session['emunalloc'] is not "Admin" or request.session['emuncomm'] is not commname:
         #    del request.session["emun"]
         #    del request.session["emunalloc"]
