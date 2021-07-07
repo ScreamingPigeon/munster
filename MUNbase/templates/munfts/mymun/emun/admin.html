@@ -107,7 +107,7 @@
   </body>
   <script type="text/javascript">
   function attendance(){
-    var x
+    var x;
     $('#attendancediv').css("display", "block")
     fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
           headers:{
@@ -121,23 +121,7 @@
       .then(data => {
         x = data
       })
-      for (let i = 0; i<x.length; i++)
-      {
-        var id =x[i]["id"];
-        var alloc =x[i]['country'];
-        var status = x[i]['status'];
-        var markup ="";
-        if (status ==""){
-          markup = "<tr> <td>".concat(String(alloc).concat("</td><td></td>td></td></tr>"));
-        }
-        if (status =="P"){
-          markup = " <tr> <td>".concat(String(alloc).concat("</td>td>Yes</td>td></td></tr>"));
-        }
-        if (status =="PV"){
-          markup = " <tr><td>".concat(String(alloc).concat("</td><td></td><td>Yes</td></tr>"));
-        }
-        $("tabat").append(markup);
-        }
+      
   }
   </script>
 
