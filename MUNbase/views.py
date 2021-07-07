@@ -475,9 +475,12 @@ def deletedelegate(request,commname, contactnum):
 def logincomm(request, munname):
     if request.method == "GET":
         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
-            del request.session["emun"]
-            del request.session["emunalloc"]
-            del request.session["emuncomm"]
+            if request.session.get('emunalloc') is "Admin":
+                url = "http://www.munster.co.in/emun/"+request.session.get('emun')+"/"+request.session.get('emuncomm')+"/admin"
+                return redirect(url)
+            if request.session.get('emunalloc') is not "Admin":
+                url = "http://www.munster.co.in/emun/"+request.session.get('emun')+"/"+request.session.get('emuncomm')+"/"+request.session.get('emunalloc')
+                return redirect(url)
         mun = MUNuser.objects.filter(username = munname)
         try:
             munz = mun[0]
