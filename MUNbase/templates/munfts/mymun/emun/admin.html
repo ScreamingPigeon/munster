@@ -75,7 +75,7 @@
     </div>
     <div class="row" class = "sectionz" id = 'attendancediv'>
       <div id="new">
-        <table class="table">
+        <table class="table" id ='tttt'>
           <thead>
             <tr>
               <th scope="col">Country</th>
@@ -108,7 +108,9 @@
   <script type="text/javascript">
   function attendance(){
 
-    $('#attendancediv').css("display", "block")
+    $('#attendancediv').css("display", "block");
+    $('#tttt tbody').empty();
+
     fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
           headers:{
               'Accept': 'application/json',
