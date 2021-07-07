@@ -473,13 +473,12 @@ def deletedelegate(request,commname, contactnum):
 
 
 def logincomm(request, munname):
-    if request.method == "GET":
-        if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
-            if request.session.get('emunalloc') is "Admin":
-                url = "http://www.munster.co.in/emun/"+request.session.get('emun')+"/"+request.session.get('emuncomm')+"/admin"
+     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
+            if request.session.get('emunalloc') == 'Admin':
+                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
                 return redirect(url)
-            if request.session.get('emunalloc') is not "Admin" and request.session.get('emunalloc') is not None:
-                url = "http://www.munster.co.in/emun/"+request.session.get('emun')+"/"+request.session.get('emuncomm')+"/delegate"
+            elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
+                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/delegate"
                 return redirect(url)
         mun = MUNuser.objects.filter(username = munname)
         try:
@@ -528,16 +527,14 @@ def adminview(request, munname, commname):
     admin = request.session["emunalloc"]
     commname = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
-
 def partview(request, munname, commname):
-    if request.session.get('emun') is not munname or request.session.get('emunalloc') is None or request.session.get('emuncomm') is not commname:
+    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is commname:
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session["emun"]
     alloc = request.session["emunalloc"]
     commname = request.session["emuncomm"]
     return render(request, 'munfts/mymun/emun/delegate.html')
-
 def commlogout(request):
     mun = ""
     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
