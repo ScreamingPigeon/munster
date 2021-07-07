@@ -603,7 +603,7 @@ def getattendance(request, munname, commname):
             part = part[0]
         except IndexError:
             return None
-        participants = Participant.objects.filter(committee = comm)
+        participants = Participant.objects.filter(committee = comm).values()
         return JsonResponse(participants, safe=False)
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
