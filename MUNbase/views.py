@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Agenda, Talklist, TalkListSpeaker, Motion, VotingEvent, Attendance
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Agenda, Talklist, TalkListSpeaker, Motion, VotingEvent, Attendance, Attendee
 from django.urls import reverse
 import xlsxwriter
 from datetime import datetime
@@ -475,12 +475,9 @@ def deletedelegate(request,commname, contactnum):
 def logincomm(request, munname):
     if request.method == "GET":
         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
-            if request.session.get('emunalloc') == 'Admin':
-                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
-                return redirect(url)
-            elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
-                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
-                return redirect(url)
+            del request.session["emun"]
+            del request.session["emunalloc"]
+            del request.session["emuncomm"]
         mun = MUNuser.objects.filter(username = munname)
         try:
             munz = mun[0]
@@ -521,7 +518,7 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    if request.session.get('emun') is None or request.session.get('emunalloc') is None or request.session.get('emuncomm') is None:
+    if request.session.get('emun') is not munname or request.session.get('emunalloc') is None or request.session.get('emuncomm') is not commname:
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session["emun"]
@@ -530,7 +527,7 @@ def adminview(request, munname, commname):
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
 
 def partview(request, munname, commname):
-    if request.session.get('emun') is None or request.session.get('emunalloc') is None or request.session.get('emuncomm') is None:
+    if request.session.get('emun') is not munname or request.session.get('emunalloc') is None or request.session.get('emuncomm') is not commname:
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session["emun"]
@@ -546,6 +543,24 @@ def commlogout(request):
         del request.session["emunalloc"]
         del request.session["emuncomm"]
     return redirect("http://www.munster.co.in/emun/"+mun)
+#---------------------------------_FETCH FUNCTIONS-------------------------------------------#
+def getattendance(request, munname, commname):
+    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is not commname:
+        return None
+    mun = MUNuser.objects.filter(username=munname);
+    var = 0
+    try:
+        var = mun[0]
+    except IndexError:
+        return None
+
+    comm = Committee.objects.filter(name = commname, mun = var)
+    try:
+        comm = comm[0]
+    except IndexError:
+        return None
+    attendances = Attendance.objects.filter(committee = comm)
+    return attendances
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
