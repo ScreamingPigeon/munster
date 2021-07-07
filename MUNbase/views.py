@@ -521,16 +521,35 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    if request.session['emun'] is not munname or request.session['emunalloc'] is not "Admin" or request.session['emuncomm'] is not commname:
-        #if request.session['emun'] is not munname or request.session['emunalloc'] is not "Admin" or request.session['emuncomm'] is not commname:
-        #    del request.session["emun"]
-        #    del request.session["emunalloc"]
-        #    del request.session["emuncomm"]
+    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun'):
+        delemuncookies()
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session.get('emun')
     admin = request.session.get('emunalloc')
     commname = request.session.get('emuncomm')
+    mun = munusers.objects.filter(username = munname)
+    try:
+        mun =mun[0]
+    except IndexError:
+        delemuncookies()
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    comm = Committee.objects.filter(mun = mun, name = commname)
+    try:
+        comm = comm[0]
+    except IndexError:
+        delemuncookies()
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    part = CommitteeAdmin.objects.filter(committee = comm)
+    try:
+        part = part[0]
+    except IndexError:
+        delemuncookies()
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
 def partview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is commname:
@@ -699,6 +718,15 @@ def excelr(request):
     workbook.close()
     return path
     """
+
+def delemuncookies():
+    if request.session.get('emunalloc') is None:
+        del request.session["emunalloc"]
+    if request.session.get('emuncomm') is None:
+        del request.session["emuncomm"]
+    if request.session.get('emun') is None:
+        del request.session["emun"]
+    return None
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
 def error_404_view(request,exception):
     return render(request,'404.html')
