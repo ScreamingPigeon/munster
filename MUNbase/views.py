@@ -526,7 +526,7 @@ def adminview(request, munname, commname):
         delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-    munnammez = request.session.get('emun')
+    munnamez = request.session.get('emun')
     adminz = request.session.get('emunalloc')
     commnamez = request.session.get('emuncomm')
     if commnamez != commname or adminz != "Admin" or munnamez!= munname:
