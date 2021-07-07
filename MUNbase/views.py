@@ -526,9 +526,13 @@ def adminview(request, munname, commname):
         delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-    munnamme = request.session.get('emun')
-    admin = request.session.get('emunalloc')
-    commname = request.session.get('emuncomm')
+    munnammez = request.session.get('emun')
+    adminz = request.session.get('emunalloc')
+    commnamez = request.session.get('emuncomm')
+    if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+        delemuncookies(request)
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
     mun = MUNuser.objects.filter(username = munname)
     try:
         mun =mun[0]
@@ -572,30 +576,29 @@ def commlogout(request):
     return redirect("http://www.munster.co.in/emun/"+mun)
 #---------------------------------_FETCH FUNCTIONS-------------------------------------------#
 def getattendance(request, munname, commname):
-    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
-        delemuncookies(request)
-        url = "http://www.munster.co.in/emun/"+munname
-        return redirect(url)
-    munnamme = request.session.get('emun')
-    admin = request.session.get('emunalloc')
-    commname = request.session.get('emuncomm')
-    mun = MUNuser.objects.filter(username = munname)
-    try:
-        mun =mun[0]
-    except IndexError:
-        return None
-    comm = Committee.objects.filter(mun = mun, name = commname)
-    try:
-        comm = comm[0]
-    except IndexError:
-        return None
-    part = CommitteeAdmin.objects.filter(committee = comm)
-    try:
-        part = part[0]
-    except IndexError:
-        return None
-    participants = Participant.objects.filter(committee = comm)
-    return JsonResponse(participants)
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return None
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return None
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return None
+        participants = Participant.objects.filter(committee = comm)
+        return JsonResponse(participants)
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
