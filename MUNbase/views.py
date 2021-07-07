@@ -522,7 +522,7 @@ def logincomm(request, munname):
 
 def adminview(request, munname, commname):
     if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun'):
-        delemuncookies()
+        delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     munnamme = request.session.get('emun')
@@ -532,25 +532,27 @@ def adminview(request, munname, commname):
     try:
         mun =mun[0]
     except IndexError:
-        delemuncookies()
+        delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     comm = Committee.objects.filter(mun = mun, name = commname)
     try:
         comm = comm[0]
     except IndexError:
-        delemuncookies()
+        delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
     part = CommitteeAdmin.objects.filter(committee = comm)
     try:
         part = part[0]
     except IndexError:
-        delemuncookies()
+        delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-    
+
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
+
+    
 def partview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is commname:
         url = "http://www.munster.co.in/emun/"+munname
@@ -719,7 +721,7 @@ def excelr(request):
     return path
     """
 
-def delemuncookies():
+def delemuncookies(request):
     if request.session.get('emunalloc') is None:
         del request.session["emunalloc"]
     if request.session.get('emuncomm') is None:
