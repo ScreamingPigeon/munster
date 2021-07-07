@@ -528,7 +528,7 @@ def adminview(request, munname, commname):
     munnamme = request.session.get('emun')
     admin = request.session.get('emunalloc')
     commname = request.session.get('emuncomm')
-    mun = MUNuser.objects.filter(username = munname)
+    mun = MUNusemunusersr.objects.filter(username = munname)
     try:
         mun =mun[0]
     except IndexError:
@@ -571,22 +571,33 @@ def commlogout(request):
     return redirect("http://www.munster.co.in/emun/"+mun)
 #---------------------------------_FETCH FUNCTIONS-------------------------------------------#
 def getattendance(request, munname, commname):
-    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is not commname:
-        return None
-    mun = MUNuser.objects.filter(username=munname);
-    var = 0
+    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+        delemuncookies(request)
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    munnamme = request.session.get('emun')
+    admin = request.session.get('emunalloc')
+    commname = request.session.get('emuncomm')
+    mun = MUNusemunusersr.objects.filter(username = munname)
     try:
-        var = mun[0]
+        mun =mun[0]
     except IndexError:
+        delemuncookies(request)
         return None
-
-    comm = Committee.objects.filter(name = commname, mun = var)
+    comm = Committee.objects.filter(mun = mun, name = commname)
     try:
         comm = comm[0]
     except IndexError:
+        delemuncookies(request)
         return None
-    attendances = Attendance.objects.filter(committee = comm)
-    return attendances
+    part = CommitteeAdmin.objects.filter(committee = comm)
+    try:
+        part = part[0]
+    except IndexError:
+        delemuncookies(request)
+        return None
+    participants = Participant.objects.filter(committee = comm)
+    return participants
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

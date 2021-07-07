@@ -89,7 +89,21 @@
   </body>
   <script type="text/javascript">
   function attendance(){
+    var x
     $('#attendance').css("display", "block")
+    fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
+          headers:{
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+          },
+      })
+      .then(response => {
+          return response.json() //Convert response to JSON
+      })
+      .then(data => {
+        x = data;
+      })
+      console.log(x)
   }
   </script>
 

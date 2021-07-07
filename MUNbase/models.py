@@ -69,6 +69,7 @@ class Participant(models.Model):
     contactnum = models.CharField(max_length = 15)
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     password = models.CharField(max_length = 200)
+    status = models.CharField(max_length = 20)
 class CommitteeAdmin(models.Model):
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     password = models.CharField(max_length = 50)
@@ -97,10 +98,3 @@ class VotingEvent(models.Model):
     no = models.CharField(max_length = 10)
     abstain = models.CharField(max_length = 10)
     yes = models.CharField(max_length = 10)
-class Attendance(models.Model):
-    seshname = models.CharField(max_length = 50)
-    committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
-class Attendee(models.Model):
-    part = models.ForeignKey(Participant, on_delete = models.CASCADE)
-    attendance = models.ForeignKey(Attendance, on_delete = models.CASCADE)
-    status = models.CharField(max_length = 20)
