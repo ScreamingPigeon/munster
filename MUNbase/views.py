@@ -604,7 +604,7 @@ def getattendance(request, munname, commname):
         except IndexError:
             return None
         participants = Participant.objects.filter(committee = comm).values()
-        return JsonResponse({"models_to_return": list(participants)})
+        return JsonResponse({"attendance": list(participants)})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
