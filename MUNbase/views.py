@@ -521,9 +521,13 @@ def logincomm(request, munname):
 
 
 def adminview(request, munname, commname):
-    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is not commname:
-        url = "http://www.munster.co.in/emun/"+munname
-        return redirect(url)
+    if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
+        if request.session['emun'] is not munname or request.session['emunalloc'] is not "Admin" or request.session['emuncomm'] is not commname:
+            del request.session["emun"]
+            del request.session["emunalloc"]
+            del request.session["emuncomm"]
+            url = "http://www.munster.co.in/emun/"+munname
+            return redirect(url)
     munnamme = request.session["emun"]
     admin = request.session["emunalloc"]
     commname = request.session["emuncomm"]
