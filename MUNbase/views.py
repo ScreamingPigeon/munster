@@ -578,7 +578,7 @@ def getattendance(request, munname, commname):
     munnamme = request.session.get('emun')
     admin = request.session.get('emunalloc')
     commname = request.session.get('emuncomm')
-    mun = MUNusemunusersr.objects.filter(username = munname)
+    mun = MUNuser.objects.filter(username = munname)
     try:
         mun =mun[0]
     except IndexError:
