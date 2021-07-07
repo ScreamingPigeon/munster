@@ -473,23 +473,24 @@ def deletedelegate(request,commname, contactnum):
 
 
 def logincomm(request, munname):
-     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
-            if request.session.get('emunalloc') == 'Admin':
-                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
-                return redirect(url)
-            elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
-                url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/delegate"
-                return redirect(url)
-        mun = MUNuser.objects.filter(username = munname)
-        try:
-            munz = mun[0]
-        except IndexError:
-            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
-        mun = mun[0]
-        comms = Committee.objects.filter(mun = mun)
-        if len(comms) == 0:
-            return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
-        return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
+    if request.method =="GET":
+         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
+                if request.session.get('emunalloc') == 'Admin':
+                    url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
+                    return redirect(url)
+                elif request.session.get('emunalloc')!= 'Admin' and request.session.get('emunalloc') is not None:
+                    url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/delegate"
+                    return redirect(url)
+            mun = MUNuser.objects.filter(username = munname)
+            try:
+                munz = mun[0]
+            except IndexError:
+                return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
+            mun = mun[0]
+            comms = Committee.objects.filter(mun = mun)
+            if len(comms) == 0:
+                return render(request,"settings/settings.html",{"user":getuser(request),"alrt":"Sorry, that Resource does not exist!", "type":getusertype(request)})
+            return render(request,"munfts/mymun/emun/committee-access.html",{'user':None, "type":getusertype(request), 'comms':comms, 'mun':mun})
     if request.method == 'POST':
         commz = request.POST['comm']
         mun = MUNuser.objects.filter(username = munname)[0]
