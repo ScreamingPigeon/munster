@@ -543,7 +543,7 @@ def partview(request, munname, commname):
 def commlogout(request):
     mun = ""
     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
-        mun = request.session["emun"]
+        mun = request.session.get("emun")
         del request.session["emun"]
         del request.session["emunalloc"]
         del request.session["emuncomm"]
