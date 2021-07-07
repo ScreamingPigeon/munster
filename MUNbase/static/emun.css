@@ -1,0 +1,10 @@
+.sectionz{
+  display: none;
+  margin : auto;
+  display: block;
+  border: solid #2F76D4 medium;
+}
+.nav-item{
+  color:white;
+  font-weight: bold;
+}
