@@ -49,16 +49,16 @@
           </li>
 
           <li class="nav-item active">
-            <a class="nav-link" onclick="attendance();">Motions</a>
+            <a class="nav-link" onclick="#">Motions</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" onclick="attendance();">Voting</a>
+            <a class="nav-link" onclick="#">Voting</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" onclick="attendance();">Resolutions/Clauses</a>
+            <a class="nav-link" onclick="#">Resolutions/Clauses</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" onclick="attendance();">Ammendments</a>
+            <a class="nav-link" onclick="#">Ammendments</a>
           </li>
 
           <li class="nav-item active">
@@ -70,6 +70,7 @@
 </div>
 </nav>
   <div class="container">
+    <br> <br>
     <div class="row" id = 'discs'>
 
     </div>
@@ -123,32 +124,32 @@
       })
       for (let i = 0; i<x.length; i++)
       {
-        var id =x[i]["id"]
-        var alloc =x[i]['country']
-        var status = x[i]['status']
-        var markup =""
+        var id =x[i]["id"];
+        var alloc =x[i]['country'];
+        var status = x[i]['status'];
+        var markup ="";
         if (status ==""){
           markup = "<tr>
           <td>"+ alloc +"</td>
           <td></td>
           <td></td>
-          </tr>"
+          </tr>";
         }
         if (status =="P"){
           markup = "<tr>
           <td>"+ alloc +"</td>
           <td>Yes</td>
           <td></td>
-          </tr>"
+          </tr>";
         }
         if (status =="PV"){
           markup = "<tr>
           <td>"+ alloc +"</td>
           <td></td>
           <td>Yes</td>
-          </tr>"
+          </tr>";
         }
-        $("tabat").append(markup)
+        $("tabat").append(markup);
       }
   }
   </script>
