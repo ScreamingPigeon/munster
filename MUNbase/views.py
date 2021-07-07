@@ -8,6 +8,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf.urls import handler400, handler403, handler404, handler500
 import math
+from django.http import JsonResponse
 import markdown
 
 #---------------------------------------COMMON-HOMEPAGES----------------------------------------#
@@ -582,22 +583,20 @@ def getattendance(request, munname, commname):
     try:
         mun =mun[0]
     except IndexError:
-        delemuncookies(request)
         return None
     comm = Committee.objects.filter(mun = mun, name = commname)
     try:
         comm = comm[0]
     except IndexError:
-        delemuncookies(request)
         return None
     part = CommitteeAdmin.objects.filter(committee = comm)
     try:
         part = part[0]
     except IndexError:
-        delemuncookies(request)
         return None
     participants = Participant.objects.filter(committee = comm)
-    return participants
+    return JsonResponse(participants)
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
