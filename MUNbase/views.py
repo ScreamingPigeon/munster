@@ -528,9 +528,9 @@ def adminview(request, munname, commname):
             del request.session["emuncomm"]
             url = "http://www.munster.co.in/emun/"+munname
             return redirect(url)
-    munnamme = request.session["emun"]
-    admin = request.session["emunalloc"]
-    commname = request.session["emuncomm"]
+    munnamme = request.session.get('emun')
+    admin = request.session.get('emunalloc')
+    commname = request.session.get('emuncomm')
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
 def partview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is commname:
