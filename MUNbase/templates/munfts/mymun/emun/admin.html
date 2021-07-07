@@ -121,7 +121,23 @@
       .then(data => {
         x = data
       })
-      
+      for (let i = 0; i<x.length; i++)
+      {
+        var id =x[i]["id"];
+        var alloc =x[i]['country'];
+        var status = x[i]['status'];
+        var markup ="";
+        if (status ==""){
+          markup = "<tr> <td>"+alloc+"</td><td></td><td></td></tr>";
+        }
+        if (status =="P"){
+          markup = "<tr> <td>"+alloc+"</td><td>Yes</td><td></td></tr>";
+        }
+        if (status =="PV"){
+          markup = "<tr> <td>"+alloc+"</td><td></td><td>Yes</td></tr>";
+        }
+        $("tabat").append(markup);
+      }
   }
   </script>
 
