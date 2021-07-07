@@ -550,9 +550,9 @@ def adminview(request, munname, commname):
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
 
-    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})
+    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamme, 'admin':admin, 'commname':commname})country
 
-    
+
 def partview(request, munname, commname):
     if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is commname:
         url = "http://www.munster.co.in/emun/"+munname
@@ -722,11 +722,11 @@ def excelr(request):
     """
 
 def delemuncookies(request):
-    if request.session.get('emunalloc') is None:
+    if request.session.get('emunalloc') is not None:
         del request.session["emunalloc"]
-    if request.session.get('emuncomm') is None:
+    if request.session.get('emuncomm') is not None:
         del request.session["emuncomm"]
-    if request.session.get('emun') is None:
+    if request.session.get('emun') is not None:
         del request.session["emun"]
     return None
 #-----------------------------------------ERROR HANDLERS-----------------------------------#
