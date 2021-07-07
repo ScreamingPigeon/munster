@@ -555,7 +555,7 @@ def adminview(request, munname, commname):
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
 
-    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnammez, 'admin':adminz, 'commname':commnamez})
+    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamez, 'admin':adminz, 'commname':commnamez})
 
 
 def partview(request, munname, commname):
