@@ -474,7 +474,7 @@ def deletedelegate(request,commname, contactnum):
 
 def logincomm(request, munname):
     if request.method =="GET":
-         if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
+        if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
             if request.session.get('emunalloc') == 'Admin':
                 url ='http://www.munster.co.in/emun/'+str(request.session["emun"])+"/"+str(request.session["emuncomm"])+"/admin"
                 return redirect(url)
