@@ -128,25 +128,13 @@
         var status = x[i]['status'];
         var markup ="";
         if (status ==""){
-          markup = " <tr>
-          <td>".concat(String(alloc).concat("</td>
-          <td></td>
-          <td></td>
-          </tr>"));
+          markup = "<tr> <td>".concat(String(alloc).concat("</td><td></td>td></td></tr>"));
         }
         if (status =="P"){
-          markup = " <tr>
-          <td>".concat(String(alloc).concat("</td>
-          <td>Yes</td>
-          <td></td>
-          </tr>"));
+          markup = " <tr> <td>".concat(String(alloc).concat("</td>td>Yes</td>td></td></tr>"));
         }
         if (status =="PV"){
-          markup " <tr>
-          <td>".concat(String(alloc).concat("</td>
-          <td></td>
-          <td>Yes</td>
-          </tr>"));
+          markup " <tr><td>".concat(String(alloc).concat("</td><td></td><td>Yes</td></tr>"));
         }
         $("tabat").append(markup);
         }
