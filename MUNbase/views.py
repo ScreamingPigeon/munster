@@ -579,6 +579,12 @@ def getattendance(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
+
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return None
         munnamme = request.session.get('emun')
         admin = request.session.get('emunalloc')
         commname = request.session.get('emuncomm')
@@ -598,7 +604,7 @@ def getattendance(request, munname, commname):
         except IndexError:
             return None
         participants = Participant.objects.filter(committee = comm)
-        return JsonResponse(participants)
+        return JsonResponse(participants, safe=False)
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
