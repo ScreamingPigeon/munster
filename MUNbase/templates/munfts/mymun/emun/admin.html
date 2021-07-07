@@ -60,15 +60,18 @@
     <div class="row" class = "sectionz" id = 'attendance'>
       <div id="new">
         Session name<input id="sname" name="" value="">
-        <table>
+        <table class="table">
           <thead>
-            <td>Country</td>
-            <td>Present</td>
-            <td>Present and Voting</td>
-          </thead>
-          <tr>
+            <tr>
+              <th scope="col">Country</th>
+              <th scope="col">Present</th>
+              <th scope="col">Present and Voting</th>
+            </tr>
 
-          </tr>
+          </thead>
+        <tbody id ='tabat'>
+
+        </tbody>
         </table>
       </div>
     </div>
@@ -103,7 +106,35 @@
       .then(data => {
         x = data
       })
-      return x
+      for (let i = 0; i<x.length; i++)
+      {
+        var id =x[i]["id"]
+        var alloc =x[i]['country']
+        var status = x[i]['status']
+        var markup =""
+        if (status ==""){
+          markup = "<tr>
+          <td>"+ alloc +"</td>
+          <td></td>
+          <td></td>
+          </tr>"
+        }
+        if (status =="P"){
+          markup = "<tr>
+          <td>"+ alloc +"</td>
+          <td>Yes</td>
+          <td></td>
+          </tr>"
+        }
+        if (status =="PV"){
+          markup = "<tr>
+          <td>"+ alloc +"</td>
+          <td></td>
+          <td>Yes</td>
+          </tr>"
+        }
+        $("tabat").append(markup)
+      }
   }
   </script>
 
