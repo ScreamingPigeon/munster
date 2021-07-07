@@ -528,7 +528,7 @@ def adminview(request, munname, commname):
     munnamme = request.session.get('emun')
     admin = request.session.get('emunalloc')
     commname = request.session.get('emuncomm')
-    mun = munusers.objects.filter(username = munname)
+    mun = MUNuser.objects.filter(username = munname)
     try:
         mun =mun[0]
     except IndexError:
