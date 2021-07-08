@@ -117,6 +117,7 @@
             var markup ="";
             var press= 'present('+toString(alloc)+');'
             var voti= 'voting('+alloc+');'
+            console.log(voti, press)
             if (status ==""){
               markup = "<tr> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
