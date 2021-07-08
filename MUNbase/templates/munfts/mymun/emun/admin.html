@@ -138,14 +138,16 @@
           var alloc =x[i]['country'];
           var status = x[i]['status'];
           var markup ="";
+          var press= 'present('+alloc+');'
+          var voti= 'voting('+alloc+');'
           if (status ==""){
-            markup = "<tr> <td>"+alloc+"</td><td><button onclick='present("+alloc+")' type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick='voting("+alloc+")' class = 'undet'></button></td></tr>";
+            markup = "<tr> <td>"+alloc+"</td><td><button onclick="+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick="+voti+" class = 'undet'></button></td></tr>";
           }
           if (status =="P"){
-            markup = "<tr> <td>"+alloc+"</td><td> <button onclick='present("+alloc+")' type= 'button' class = 'btn pres'></button> </td><td><button type= 'button' onclick='voting("+alloc+")' class = 'undet'></button></td></tr>";
+            markup = "<tr> <td>"+alloc+"</td><td> <button onclick="+press+" type= 'button' class = 'btn pres'></button> </td><td><button type= 'button' onclick="+voti+" class = 'undet'></button></td></tr>";
           }
           if (status =="PV"){
-            markup = "<tr> <td>"+alloc+"</td><td> <button type= 'button' onclick='present("+alloc+")' class = 'btn undet'></button></td><td><button type= 'button' onclick='voting("+alloc+")' class = 'pres'></button></td></tr>";
+            markup = "<tr> <td>"+alloc+"</td><td> <button type= 'button' onclick="+press+" class = 'btn undet'></button></td><td><button type= 'button' onclick="+voti+" class = 'pres'></button></td></tr>";
           }
           $("#tabat").append(markup);
         }
