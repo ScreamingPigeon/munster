@@ -18,29 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   </head>
   <body>
-    <style>
-    .sectionz{
-      display: none;
-      margin : auto;
-      display: block;
-      border: solid #2F76D4 medium;
-    }
-    .nav-link{
-      color:white;
-      font-weight: bold;
-    }
-    .pres{
-      width: 100%;
-      background-color: #2F76D4;
-      height: 40px;
-    }
-    .undet{
-      width: 100%;
-      background-color: #DEE1E6;
-      height: 40px;
-    }
 
-    </style>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="padding: 20px; color: white;">
       <a class="navbar-brand" href="#">EMUN: {{munname}}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,21 +60,19 @@
 
     </div>
     <div class="row" class = "sectionz" id = 'attendancediv'>
-      <div id="new">
-        <table class="table table-striped" id ='tttt'>
-          <thead>
-            <tr>
-              <th scope="col" >Country</th>
-              <th scope="col" >Present</th>
-              <th scope="col" >Present and Voting</th>
-            </tr>
+      <table class="table table-striped" id ='tttt'>
+        <thead>
+          <tr>
+            <th scope="col" >Country</th>
+            <th scope="col" >Present</th>
+            <th scope="col" >Present and Voting</th>
+          </tr>
 
-          </thead>
-        <tbody id ='tabat'>
+        </thead>
+      <tbody id ='tabat'>
 
-        </tbody>
-        </table>
-      </div>
+      </tbody>
+      </table>
     </div>
     <div class="row" class = "sectionz" id = 'motions'>
 
@@ -159,5 +135,28 @@
   }
   </script>
 
+  <style>
+  .sectionz{
+    display: none;
+    margin : auto;
+    display: block;
+    border: solid #2F76D4 medium;
+    padding: 40px;
+  }
+  .nav-link{
+    color:white;
+    font-weight: bold;
+  }
+  .pres{
+    width: 100%;
+    background-color: #2F76D4;
+    height: 40px;
+  }
+  .undet{
+    width: 100%;
+    background-color: #DEE1E6;
+    height: 40px;
+  }
 
+  </style>
 </html>
