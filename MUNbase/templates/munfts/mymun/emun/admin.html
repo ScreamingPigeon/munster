@@ -25,10 +25,19 @@
       display: block;
       border: solid #2F76D4 medium;
     }
-    .nav{
+    .nav-link{
       color:white;
       font-weight: bold;
     }
+    .pres{
+      width: 100%;
+      background-color: #2F76D4;
+    }
+    .undet{
+      width: 100%;
+      background-color: #DEE1E6;
+    }
+
 
     </style>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="padding: 20px; color: white;">
@@ -67,14 +76,14 @@
 
 </div>
 </nav>
-  <div class="container">
+  <div class="container"> <button type="button" name="button"></button>
     <br> <br>
     <div class="row" id = 'discs'>
 
     </div>
     <div class="row" class = "sectionz" id = 'attendancediv'>
       <div id="new">
-        <table class="table" id ='tttt'>
+        <table class="table table-striped" id ='tttt'>
           <thead>
             <tr>
               <th scope="col">Country</th>
@@ -106,7 +115,6 @@
   </body>
   <script type="text/javascript">
   function attendance(){
-
     $('#attendancediv').css("display", "block");
     $('#tttt tbody').empty();
 
@@ -131,10 +139,10 @@
             markup = "<tr> <td>"+alloc+"</td><td></td><td></td></tr>";
           }
           if (status =="P"){
-            markup = "<tr> <td>"+alloc+"</td><td>Yes</td><td></td></tr>";
+            markup = "<tr> <td>"+alloc+"</td><td align='center'> <button type= 'button' class = 'btn pres'></button> </td><td><button type= 'button' class = 'undet'></td></tr>";
           }
           if (status =="PV"){
-            markup = "<tr> <td>"+alloc+"</td><td></td><td>Yes</td></tr>";
+            markup = "<tr> <td>"+alloc+"</td><td> <button type= 'button' class = 'btn undet'></button></td><td><button type= 'button' class = 'pres'></button></td></tr>";
           }
           $("#tabat").append(markup);
         }
