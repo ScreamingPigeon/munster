@@ -167,20 +167,20 @@
         })
         .then(data => {
           var name = '#row'+alloc.toString();
-          $('name').empty();
+          $(name).empty();
           if (data['attendance'] == 'notP'){
-            $('name').insertCell("tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>")
+            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
           }
           if (data['attendance'] == 'P'){
-            $('name').insertCell("tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'pres'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>")
+            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'pres'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
 
           }
           if (data['attendance'] == 'PV'){
-            $('name').insertCell("tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td></tr>")
+            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td>")
 
           }
           if (data['attendance'] == 'notPV'){
-            $('name').insertCell("tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>")
+            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
 
           }
 
