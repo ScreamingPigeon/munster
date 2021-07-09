@@ -152,6 +152,7 @@
       }
     function voting(country){
       var alloc = country;
+      var stat =''
       var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/PV");
       fetch(url, {
             headers:{
@@ -162,7 +163,8 @@
         .then(response => {
           return response.json() //Convert response to JSON
         })
-        .then(data => { console.log(data['attendance'][0]) });
+        .then(data => { stat = data['attendance'] });
+        console.log(stat)
         var name = '#row'+alloc.toString();
         $('name').empty();
 
