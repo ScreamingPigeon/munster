@@ -62,6 +62,7 @@ urlpatterns = [
     path ('emun/mun/logout', views.commlogout, name ='commlogout'),
     #------FETCH FUNCTIONS------#
     path('emun/<str:munname>/<str:commname>/attendance', views.getattendance, name = 'getattendance'),
+    path('emun/<str:munname>/<str:commname>/updateattendance/<str:country:>/<str:status>', views.getattendance, name = 'getattendance'),
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
