@@ -638,7 +638,7 @@ def updateattendance(request, munname,commname, country, status):
             par = par[0]
         except IndexError:
             return None
-        var retsta=''
+        retsta=''
         if status == par.status:
             par.status = ''
             retsta = 'not'+status
