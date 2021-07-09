@@ -160,6 +160,7 @@
             },
         })
         .then(response => {
+          return response.json() //Convert response to JSON
         })
         .then(data => { console.log(data.['attendance'][0]) });
         var name = '#row'+alloc.toString();
