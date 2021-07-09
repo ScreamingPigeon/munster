@@ -136,7 +136,7 @@
       var alloc = country;
       var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/P");
       console.log(url)
-      fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/", {
+      fetch(url, {
             headers:{
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
@@ -150,7 +150,7 @@
     function voting(country){
       var alloc = country;
       var url = "http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/".concat(toString(alloc)).concat("/PV");
-      fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/", {
+      fetch(url, {
             headers:{
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
