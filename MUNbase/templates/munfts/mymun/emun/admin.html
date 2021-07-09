@@ -115,9 +115,8 @@
             var alloc =x[i]['country'];
             var status = x[i]['status'];
             var markup ="";
-            console.log(alloc);
-            var press= 'present('+toString(alloc)+');'
-            var voti= 'voting('+toString(alloc)+');'
+            var press= 'present('+alloc.toString()+');'
+            var voti= 'voting('+alloc.toString()+');'
             console.log(voti, press)
             if (status ==""){
               markup = "<tr> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
@@ -135,7 +134,7 @@
     }
     function present(country){
       var alloc = country;
-      var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(toString(alloc)).concat("/P");
+      var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/P");
       console.log(url)
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/", {
             headers:{
