@@ -638,12 +638,16 @@ def updateattendance(request, munname,commname, country, status):
             par = par[0]
         except IndexError:
             return None
+        var retsta=''
         if status == par.status:
             par.status = ''
+            retsta = 'not'+status
         else:
             par.status = status
+            retsta =status
+
         par.save();
-        return None
+        return JsonResponse(status)
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
