@@ -62,12 +62,22 @@
 </nav>
 <div class="container">
     <br> <br>
-    <div class="row justify-content-center" >
+    <div class="row justify-content-center" ><!--discs-->
       <div class="col-md" class = 'sectionz' id = 'discs'>
+        <div id='newdisc'>
+          <h3>New Discussion</h3>
+          Agenda: <input type="text" id="discname"> <br>
+          Per Speaker Time(seconds): <input type="number" id="spektime" value=""> <br>
+          Number of speakers: <input type="number" id="speknum" value="">
+        </div>
+        <div id="olddisc">
+          <table>
 
+          </table>
+        </div>
       </div>
     </div>
-    <div class="row justify-content-center" >
+  <div class="row justify-content-center" ><!--Attendance-->
       <div class="col-auto sectionz" style="display:none;" id = 'attendancediv'>
         <table class="table table-responsive table-striped" id ='tttt'>
         <thead>
@@ -81,19 +91,6 @@
         <tbody id ='tabat'>
 
         </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row" class = "sectionz" id = 'discussions'>
-      <div id='newdisc'>
-        <h3>New Discussion</h3>
-        Agenda: <input type="text" id="discname"> <br>
-        Per Speaker Time(seconds): <input type="number" id="spektime" value=""> <br>
-        Number of speakers: <input type="number" id="speknum" value="">
-      </div>
-      <div id="olddisc">
-        <table>
-          
         </table>
       </div>
     </div>
@@ -113,7 +110,7 @@
   </body>
   <script type="text/javascript">
     function discussions(){
-      $('#discussions').css("display", "block");
+      $('#discs').css("display", "block");
 
     }
     function attendance(){
