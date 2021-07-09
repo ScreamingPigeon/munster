@@ -150,23 +150,7 @@
         .then(data => {
           var name = '#row'+alloc.toString();
           console.log(name)
-          $(name.toString()).empty();
-          console.log(data['attendance'])
-          if (data['attendance'] == 'notP'){
-            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
-          }
-          if (data['attendance'] == 'P'){
-            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'pres'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
-
-          }
-          if (data['attendance'] == 'PV'){
-            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td>")
-
-          }
-          if (data['attendance'] == 'notPV'){
-            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
-
-          }
+        
 
         });
 
