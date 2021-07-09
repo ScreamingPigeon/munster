@@ -16,6 +16,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
   </head>
   <body>
 
@@ -34,6 +36,9 @@
             <a class="nav-link" onclick="attendance();">Attendance</a>
           </li>
 
+          <li class="nav-item active">
+            <a class="nav-link" onclick="discussions();">Discussions</a>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" onclick="#">Motions</a>
           </li>
@@ -57,8 +62,10 @@
 </nav>
 <div class="container">
     <br> <br>
-    <div class="row" class = 'sectionz' id = 'discs'>
+    <div class="row justify-content-center" >
+      <div class="col-md" class = 'sectionz' id = 'discs'>
 
+      </div>
     </div>
     <div class="row justify-content-center" >
       <div class="col-auto sectionz" style="display:none;" id = 'attendancediv'>
@@ -71,14 +78,26 @@
           </tr>
 
         </thead>
-      <tbody id ='tabat'>
+        <tbody id ='tabat'>
 
-      </tbody>
-      </table>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row" class = "sectionz" id = 'discussions'>
+      <div id='newdisc'>
+        <h3>New Discussion</h3>
+        Agenda: <input type="text" id="discname"> <br>
+        Per Speaker Time(seconds): <input type="number" id="spektime" value=""> <br>
+        Number of speakers: <input type="number" id="speknum" value="">
+      </div>
+      <div id="olddisc">
+        <table>
+          
+        </table>
       </div>
     </div>
     <div class="row" class = "sectionz" id = 'motions'>
-
     </div>
     <div class="row" class = "sectionz" id = 'voting'>
 
@@ -93,6 +112,10 @@
 
   </body>
   <script type="text/javascript">
+    function discussions(){
+      $('#discussions').css("display", "block");
+
+    }
     function attendance(){
       $('#attendancediv').css("display", "block");
       $('#tttt tbody').empty();
