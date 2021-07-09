@@ -647,7 +647,7 @@ def updateattendance(request, munname,commname, country, status):
             retsta =status
 
         par.save();
-        return JsonResponse(status)
+        return retsta
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
