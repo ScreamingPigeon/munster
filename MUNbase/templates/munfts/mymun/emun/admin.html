@@ -134,7 +134,7 @@
     }
     function present(country){
       var alloc = 'country';
-      var url = "http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/"+String(alloc)+"/P"
+      var url = "http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/"+toString(alloc)+"/P"
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/", {
             headers:{
                 'Accept': 'application/json',
@@ -143,12 +143,12 @@
         })
         .then(response => {
         })
-        .then(data => {  })
+        .then(data => {  });
         attendance();
       }
     function voting(country){
       var alloc = 'country';
-      var url = "http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/"+String(alloc)+"/PV"
+      var url = "http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/"+toString(alloc)+"/PV"
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/", {
             headers:{
                 'Accept': 'application/json',
@@ -157,7 +157,7 @@
         })
         .then(response => {
         })
-        .then(data => {  })
+        .then(data => {  });
         attendance();
   }
   </script>
