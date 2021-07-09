@@ -168,20 +168,20 @@
         .then(data => {
           var name = '#row'+alloc.toString();
           console.log(name)
-          $(name).empty();
+          $(name.toString()).empty();
           if (data['attendance'] == 'notP'){
-            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
+            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
           }
           if (data['attendance'] == 'P'){
-            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'pres'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
+            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'pres'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
 
           }
           if (data['attendance'] == 'PV'){
-            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td>")
+            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td>")
 
           }
           if (data['attendance'] == 'notPV'){
-            $(name).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
+            $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
 
           }
 
