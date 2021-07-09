@@ -134,7 +134,8 @@
     }
     function present(country){
       var alloc = 'country';
-      var url = "http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/".concat(toString(alloc)).concat("/P");
+      var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(toString(alloc)).concat("/P");
+      console.log(url)
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/", {
             headers:{
                 'Accept': 'application/json',
