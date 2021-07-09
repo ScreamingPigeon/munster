@@ -137,6 +137,10 @@
     function present(country){
       var alloc = country;
       var update ='';
+      var alloc = country;
+      var press= 'present('+"'"+alloc.toString()+"'"+');'
+      var voti= 'voting('+"'"+alloc.toString()+"'"+');'
+      var stat =''
       var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/P");
       console.log(url)
       fetch(url, {
