@@ -634,11 +634,16 @@ def updateattendance(request, munname,commname, country, status):
         except IndexError:
             return None
         par = Participant.objects.filter(committee = comm, country = country)
+        try:
+            par = par[0]
+        except IndexError:
+            return None
         if status == par.status:
             par.status = ''
         else:
             par.status = status
         par.save();
+        return None
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
