@@ -609,7 +609,6 @@ def updateattendance(request, munname,commname, country, status):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
-
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
@@ -648,6 +647,120 @@ def updateattendance(request, munname,commname, country, status):
 
         par.save();
         return JsonResponse({"attendance": retsta})
+
+
+def newdiscussion(request, munname, commname, agenda, tps, ns, active):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return None
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return None
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return None
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return None
+        par = Participant.objects.filter(committee = comm, country = country)
+        try:
+            par = par[0]
+        except IndexError:
+            return None
+        disc = TalkList(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
+        disc.save()
+def getdiscussions(request, munnameme, commname):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return None
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return None
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return None
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return None
+        par = Participant.objects.filter(committee = comm, country = country)
+        try:
+            par = par[0]
+        except IndexError:
+            return None
+        discs = TalkList.objects.filter(committee=comm).order_by('name')
+        talkers =[]
+        talklists = []
+        for row in discs:
+            talkers += TalkListSpeaker.objects.filter(list = row)
+            talklists += row
+        ret = {'talklist': talklists,"talkers":talkers}
+        return JsonResponse({"result": ret})
+def getactivediscussion(response, munname, commname):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return None
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return None
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return None
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return None
+        par = Participant.objects.filter(committee = comm, country = country)
+        try:
+            par = par[0]
+        except IndexError:
+            return None
+        talklist = TalkList.objects.filter(committee=comm, active="Y")
+        try:
+            talklist = talklist[0]
+            return JsonResponse({'resps': talklist})
+        except IndexError:
+            return JsonResponse({'resps':"None"})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
