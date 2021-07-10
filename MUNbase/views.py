@@ -683,7 +683,7 @@ def newdiscussion(request, munname, commname, agenda, tps, ns, active):
             return None
         disc = TalkList(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
         disc.save()
-def getdiscussions(request, munnameme, commname):
+def getdiscussions(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
