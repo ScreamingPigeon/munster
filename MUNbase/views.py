@@ -682,7 +682,7 @@ def newdiscussion(request, munname, commname, agenda, tps, ns, active):
 def getdiscussions(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
-            return None
+            return 'Session Error'
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
