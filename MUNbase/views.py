@@ -687,7 +687,7 @@ def getdiscussions(request, munname, commname):
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
         if commnamez != commname or adminz != "Admin" or munnamez!= munname:
-            return None
+            return "Authentication Error"
         munnamme = request.session.get('emun')
         admin = request.session.get('emunalloc')
         commname = request.session.get('emuncomm')
@@ -695,17 +695,17 @@ def getdiscussions(request, munname, commname):
         try:
             mun =mun[0]
         except IndexError:
-            return None
+            return "MUN error"
         comm = Committee.objects.filter(mun = mun, name = commname)
         try:
             comm = comm[0]
         except IndexError:
-            return None
+            return "Committee Error"
         part = CommitteeAdmin.objects.filter(committee = comm)
         try:
             part = part[0]
         except IndexError:
-            return None
+            return "Admin Error"
 
         discs = TalkList.objects.filter(committee=comm).order_by('name')
         talkers =[]
