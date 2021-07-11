@@ -711,8 +711,8 @@ def getdiscussions(request, munname, commname):
         talkers =[]
         talklists = []
         for row in discs:
-            talkers += TalkListSpeaker.objects.filter(list = row)
-            talklists.append(row)
+            talkers += TalkListSpeaker.objects.filter(list = row).values()
+            talklists.append(row.values())
         ret = {'talklist': talklists,"talkers":talkers}
         return JsonResponse({"result": ret})
 def getactivediscussion(request, munname, commname):
