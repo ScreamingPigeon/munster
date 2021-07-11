@@ -723,7 +723,7 @@ def getdiscussions(request, munname, commname):
             talklists += row
         ret = {'talklist': talklists,"talkers":talkers}
         return JsonResponse({"result": ret})
-def getactivediscussion(response, munname, commname):
+def getactivediscussion(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
