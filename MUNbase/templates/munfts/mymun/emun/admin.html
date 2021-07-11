@@ -120,6 +120,8 @@
       $('#attendancediv').css("display", "block");
       $('#tttt tbody').empty();
       $('#tttt').css("display", "block");
+      $('#discs').css("display", "none");
+      $('#newdisc').css("display", "none");
 
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
             headers:{

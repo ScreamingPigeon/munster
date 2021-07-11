@@ -676,11 +676,6 @@ def newdiscussion(request, munname, commname, agenda, tps, ns, active):
             part = part[0]
         except IndexError:
             return None
-        par = Participant.objects.filter(committee = comm, country = country)
-        try:
-            par = par[0]
-        except IndexError:
-            return None
         disc = TalkList(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
         disc.save()
         return JsonResponse({'disc':list(disc)})
@@ -711,11 +706,7 @@ def getdiscussions(request, munname, commname):
             part = part[0]
         except IndexError:
             return None
-        par = Participant.objects.filter(committee = comm, country = country)
-        try:
-            par = par[0]
-        except IndexError:
-            return None
+
         discs = TalkList.objects.filter(committee=comm).order_by('name')
         talkers =[]
         talklists = []
@@ -749,11 +740,6 @@ def getactivediscussion(request, munname, commname):
         part = CommitteeAdmin.objects.filter(committee = comm)
         try:
             part = part[0]
-        except IndexError:
-            return None
-        par = Participant.objects.filter(committee = comm, country = country)
-        try:
-            par = par[0]
         except IndexError:
             return None
         talklist = TalkList.objects.filter(committee=comm, active="Y")
