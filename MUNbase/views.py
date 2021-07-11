@@ -710,11 +710,9 @@ def getdiscussions(request, munname, commname):
         discs = Talklist.objects.filter(committee=comm).order_by('name')
         talkers =[]
         talklists = []
-        talklists = Talklist.objects.filter(committee=comm).order_by('name').values()
         for row in discs:
             talkers += TalkListSpeaker.objects.filter(list = row).values()
-        ret = {'talklist': talklists,"talkers":talkers}
-        return JsonResponse({"result": ret})
+        return JsonResponse({"talkers":talkers, 'talklists':Talklist.objects.filter(committee=comm).order_by('name').values()})
 def getactivediscussion(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
