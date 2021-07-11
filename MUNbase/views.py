@@ -707,7 +707,7 @@ def getdiscussions(request, munname, commname):
         except IndexError:
             return "Admin Error"
 
-        discs = TalkList.objects.filter(committee=comm).order_by('name')
+        discs = Talklist.objects.filter(committee=comm).order_by('name')
         talkers =[]
         talklists = []
         for row in discs:
