@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="{% static "emun.css" %}" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -64,8 +63,8 @@
 </nav>
 <div class="container">
     <br> <br>
-    <div class="row justify-content-center sectionz" id = 'discs'><!--discs-->
-      <div class="col-md" style="display:none">
+    <div class="row justify-content-center" ><!--discs-->
+      <div class="col-md" style="display:none"class = 'sectionz' id = 'discs'>
         <div id='newdisc' style="display: none;">
           <h3>New Discussion</h3>
           Agenda: <input type="text" id="discname"> <br>
@@ -79,7 +78,7 @@
         </div>
       </div>
     </div>
-    <div class="row justify-content-center" ><!--Attendance-->
+  <div class="row justify-content-center" ><!--Attendance-->
       <div class="col-auto sectionz" style="display:none;" id = 'attendancediv'>
         <table class="table table-responsive table-striped" id ='tttt'>
         <thead>
@@ -239,4 +238,38 @@
       }
   </script>
 
+  <style>
+  .sectionz{
+    display: none;
+    margin : auto;
+    display: block;
+    border: solid #2F76D4 medium;
+    padding: 40px;
+  }
+  #disc{
+    display: none;
+    margin : auto;
+    display: block;
+    border: solid #2F76D4 medium;
+    padding: 40px;
+  }
+
+  .nav-link{
+    color:white;
+    font-weight: bold;
+  }
+  .pres{
+    width: 100%;
+    background-color: #2F76D4;
+    height: 30px;
+  }
+  .undet{
+    width: 100%;
+    background-color: #DEE1E6;
+    height: 30px;
+  }
+  #tttt{
+    width:600px;
+  }
+  </style>
 </html>
