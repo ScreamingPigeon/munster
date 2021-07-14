@@ -62,12 +62,12 @@
     </nav>
 <div class="container">
     <br> <br>
-  <div class="row" id ='activediscz' style=""><!--Active Discussions-->
-      <div class="col-6" style="display: inherit" >
+  <div class="row"><!--Active Discussions-->
+      <div class="col-6" id="activ" >
         <h2 id = 'adname'></h2>
         something else
       </div>
-      <div class="col-4" style="display: inherit" >
+      <div class="col-4" id="activtimer" >
         timer here
       </div>
   </div>
@@ -325,6 +325,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             var values = data['resps'];
+            $('#adname').empty()
             $('#adname').append(values['name'])
 
           })
@@ -339,15 +340,20 @@
       border: solid #2F76D4 medium;
       padding: 40px;
     }
-    #activediscz{
-    }
     #disc{
       display: none;
       margin : auto;
       border: solid #2F76D4 medium;
       padding: 40px;
     }
-
+    #activ{
+      border: solid #2F76D4 medium;
+      padding: 40px;
+    }
+    #activtimer{
+      border: solid #2F76D4 medium;
+      padding: 40px;
+    }
     .nav-link{
       color:white;
       font-weight: bold;
