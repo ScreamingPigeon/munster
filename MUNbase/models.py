@@ -83,7 +83,7 @@ class TalkListSpeaker(models.Model):
     speaker = models.ForeignKey(Participant, on_delete = models.CASCADE)
     list = models.ForeignKey(Talklist, on_delete = models.CASCADE)
     timespent = models.CharField(max_length = 3, default = 0)
-    status = models.CharField(max_length=10, default 'qd')
+    status = models.CharField(max_length=10, default ='qd')
 class Motion(models.Model):
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     name = models.CharField(max_length = 400)
