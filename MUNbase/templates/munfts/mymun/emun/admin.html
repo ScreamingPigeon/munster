@@ -64,8 +64,8 @@
 </nav>
 <div class="container">
     <br> <br>
-    <div class="row justify-content-center" ><!--discs-->
-      <div class="col-md" style="display:none"class = 'sectionz' id = 'discs'>
+    <div class="row justify-content-center sectionz" id = 'discs'><!--discs-->
+      <div class="col-md" style="display:none">
         <div id='newdisc' style="display: none;">
           <h3>New Discussion</h3>
           Agenda: <input type="text" id="discname"> <br>
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-  <div class="row justify-content-center" ><!--Attendance-->
+    <div class="row justify-content-center" ><!--Attendance-->
       <div class="col-auto sectionz" style="display:none;" id = 'attendancediv'>
         <table class="table table-responsive table-striped" id ='tttt'>
         <thead>
@@ -239,38 +239,4 @@
       }
   </script>
 
-  <style>
-  .sectionz{
-    display: none;
-    margin : auto;
-    display: block;
-    border: solid #2F76D4 medium;
-    padding: 40px;
-  }
-  #disc{
-    display: none;
-    margin : auto;
-    display: block;
-    border: solid #2F76D4 medium;
-    padding: 40px;
-  }
-
-  .nav-link{
-    color:white;
-    font-weight: bold;
-  }
-  .pres{
-    width: 100%;
-    background-color: #2F76D4;
-    height: 30px;
-  }
-  .undet{
-    width: 100%;
-    background-color: #DEE1E6;
-    height: 30px;
-  }
-  #tttt{
-    width:600px;
-  }
-  </style>
 </html>

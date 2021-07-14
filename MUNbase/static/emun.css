@@ -1,13 +1,33 @@
+
 .sectionz{
   display: none;
   margin : auto;
   display: block;
   border: solid #2F76D4 medium;
+  padding: 40px;
 }
-.nav{
+#disc{
+  display: none;
+  margin : auto;
+  display: block;
+  border: solid #2F76D4 medium;
+  padding: 40px;
+}
+
+.nav-link{
   color:white;
   font-weight: bold;
 }
-body{
-  background-color: red;
+.pres{
+  width: 100%;
+  background-color: #2F76D4;
+  height: 30px;
+}
+.undet{
+  width: 100%;
+  background-color: #DEE1E6;
+  height: 30px;
+}
+#tttt{
+  width:600px;
 }
