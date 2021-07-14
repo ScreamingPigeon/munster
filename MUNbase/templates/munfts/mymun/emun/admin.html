@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Active Discussions</a>
+            <a class="nav-link" onclick="activedisc()">Active Discussions</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" onclick="attendance();">Attendance</a>
@@ -58,12 +58,16 @@
           </li>
         </ul>
 
-
 </div>
 </nav>
 <div class="container">
     <br> <br>
-    <div class="row justify-content-center" ><!--discs-->
+  <div class="row justify-content-center"><!--Active Discussions-->
+      <div class="col-md sectionz" style="display: none" id ='activedisc'>
+        <h2 id = 'adname'></h2>
+      </div>
+  </div>
+  <div class="row justify-content-center" ><!--discs-->
       <div class="col-md sectionz" style="display:none" id = 'discs'>
         <div id='newdisc' style="display: none;">
           <h3>New Discussion</h3>
@@ -114,18 +118,18 @@
         </table>
       </div>
     </div>
-    <div class="row" class = "sectionz" id = 'motions'>
-    </div>
-    <div class="row" class = "sectionz" id = 'voting'>
-
-    </div>
-    <div class="row" class = "sectionz" id = 'paperwork'>
-
-    </div>
-    <div class="row" class = "sectionz" id = 'ammendment'>
-
-    </div>
+  <div class="row" class = "sectionz" id = 'motions'>
   </div>
+  <div class="row" class = "sectionz" id = 'voting'>
+
+  </div>
+  <div class="row" class = "sectionz" id = 'paperwork'>
+
+  </div>
+  <div class="row" class = "sectionz" id = 'ammendment'>
+
+  </div>
+</div>
 
   </body>
   <script type="text/javascript">
@@ -135,6 +139,15 @@
       $('#tttt').css("display", "none");
       $('#attendancediv').css("display", "none");
       updatediscs();
+    }
+    function activedisc(){
+      $('#discs').css("display", "none");
+      $('#newdisc').css("display", "none");
+      $('#tttt').css("display", "none");
+      $('#attendancediv').css("display", "none");
+      $('#avtivedisc').css("display", "block");
+      fillactivediscinfo();
+
     }
     function attendance(){
       $('#attendancediv').css("display", "block");
@@ -254,7 +267,6 @@
         });
 
       }
-
     function newdisc(){
 
       var discname = document.getElementById('discname').value;
@@ -299,6 +311,21 @@
             }
           })
     }
+    function fillactivediscinfo(){
+      url = 'http://www.munster.co.in/emun/getactivediscussion/{{munname}}/{{commname}}'
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data);
+
+          })
+    }
+
   </script>
 
   <style>
