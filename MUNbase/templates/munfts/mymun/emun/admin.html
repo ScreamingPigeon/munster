@@ -69,12 +69,15 @@
           <h3>New Discussion</h3>
           Agenda: <input type="text" id="discname"> <br>
           Per Speaker Time(seconds): <input type="number" id="spektime" value=""> <br>
-          Number of speakers: <input type="number" id="speknum" value="">
+          Number of speakers: <input type="number" id="speknum" value=""> <br>
+          Active<input type="checkbox" id="chkbx"> <br>
+          <p>Note: Marking a discussion as active will automatically mark any active discussion to inactive. You can reactivate and edit any discussion from below</p>
+          <button class="btn btn-primary" onclick="newdisc();">Submit</button>
         </div>
         <br> <br>
         <div id ='existingdisc'>
           <h3>Past Discussions</h3> <br>
-          <table class="table table-responsive table-striped">
+          <table class="table table-responsive table-striped" id ='tdisc'>
           <thead>
             <tr>
               <th scope="col" style="width: 50%">Topic</th>
@@ -82,6 +85,9 @@
               <th scope="col">Number of Speakers</th>
             </tr>
           </thead>
+          <tbody>
+
+          </tbody>
           </table>
         </div>
         <div id="olddisc">
@@ -249,40 +255,47 @@
         });
 
       }
+
+    function newdisc(){
+      discname = $('discname').value();
+      pst = $('spektime').value();
+      nums = $('speknum').value();
+      url ='http://www.munster.co.in/emun/newdiscussion/{{munname}}/{{commname}}/'+discname.toString()+"/"
+    }
   </script>
 
   <style>
-  .sectionz{
-    display: none;
-    margin : auto;
-    display: block;
-    border: solid #2F76D4 medium;
-    padding: 40px;
-  }
-  #disc{
-    display: none;
-    margin : auto;
-    display: block;
-    border: solid #2F76D4 medium;
-    padding: 40px;
-  }
+    .sectionz{
+      display: none;
+      margin : auto;
+      display: block;
+      border: solid #2F76D4 medium;
+      padding: 40px;
+    }
+    #disc{
+      display: none;
+      margin : auto;
+      display: block;
+      border: solid #2F76D4 medium;
+      padding: 40px;
+    }
 
-  .nav-link{
-    color:white;
-    font-weight: bold;
-  }
-  .pres{
-    width: 100%;
-    background-color: #2F76D4;
-    height: 30px;
-  }
-  .undet{
-    width: 100%;
-    background-color: #DEE1E6;
-    height: 30px;
-  }
-  #tttt{
-    width:600px;
-  }
+    .nav-link{
+      color:white;
+      font-weight: bold;
+    }
+    .pres{
+      width: 100%;
+      background-color: #2F76D4;
+      height: 30px;
+    }
+    .undet{
+      width: 100%;
+      background-color: #DEE1E6;
+      height: 30px;
+    }
+    #tttt{
+      width:600px;
+    }
   </style>
 </html>
