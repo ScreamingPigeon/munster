@@ -142,6 +142,8 @@
       $('#newdisc').css("display", "block");
       $('#tttt').css("display", "none");
       $('#attendancediv').css("display", "none");
+      $('#activ').css("display", "none");
+      $('#activtimer').css("display", "none");
       updatediscs();
     }
     function activatedisc(){
@@ -159,7 +161,8 @@
       $('#tttt').css("display", "block");
       $('#discs').css("display", "none");
       $('#newdisc').css("display", "none");
-
+      $('#activ').css("display", "none");
+      $('#activtimer').css("display", "none");
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
             headers:{
                 'Accept': 'application/json',
