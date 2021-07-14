@@ -676,7 +676,14 @@ def newdiscussion(request, munname, commname, agenda, tps, ns, active):
             part = part[0]
         except IndexError:
             return None
-        disc = Talklist(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
+        if active == 'N':
+            disc = Talklist(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
+        elif active == 'Y':
+            disc = Talklist(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
+            discs = Talklist(committee = comm)
+            for row in discs:
+                row.active = 'N'
+                row.save()
         disc.save()
         return JsonResponse({'disc':"success"})
 def getdiscussions(request, munname, commname):
