@@ -64,18 +64,16 @@
     <br> <br>
   <div class="row"><!--Active Discussions-->
       <div class="col-md" id="activ" >
-        <h2 id = 'adname'></h2>
+        <h2 id = 'adname'></h2> <br>
         <h5> Speaking Now</h5>
         <div id="speaknow">
 
-        </div>
+        </div><br>
         <h5> Upcoming Speakers</h5>
         <div id="upcoming">
-          <select id="country">
+          <select id="country" onchange="addcountry();" style="width: 100%; margin: 10px;"></select>
 
-          </select>
-
-        </div>
+        </div> <br>
         <h5> Past Speakers</h5>
         <div id="spoken">
 
@@ -398,6 +396,13 @@
     }
     #tttt{
       width:600px;
+    }
+    #speaknow{
+      padding: 20px;
+      margin: auto;
+      border-radius: 3px;
+      border: solid #C9CACB 3px;
+      background-color: #F8F8F9;
     }
   </style>
 </html>
