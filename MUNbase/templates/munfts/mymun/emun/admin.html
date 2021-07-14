@@ -321,7 +321,8 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data);
+            var values = data['resps'];
+            $('#adname').append(values['name'])
 
           })
     }
