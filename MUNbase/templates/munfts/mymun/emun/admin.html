@@ -257,24 +257,7 @@
       }
 
     function newdisc(){
-      var discname = document.getElementById('discname').value();
-      var pst =document.getElementById('spektime').value();
-      var nums = document.getElementById('speknum').value();
-      var status ='N';
-      if ($('#chckbx').checked){
-        status ='Y';
-      }
-      url ='http://www.munster.co.in/emun/newdiscussion/{{munname}}/{{commname}}/'+discname.toString()+"/"+pst.toString()+"/"+nums.toString()+"/"+status;
-      fetch(url, {
-            headers:{
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-            },
-        })
-        .then(response => {
-            return response.json() //Convert response to JSON
-        })
-        .then(data => { console.log(data)})
+        console.log('success')
     }
   </script>
 
