@@ -273,7 +273,7 @@
       var pst = document.getElementById('spektime').value;
       var nums = document.getElementById('speknum').value;
       var status ='N';
-      if ($('#chckbx').checked == true){
+      if (document.getElementById('chkbx').checked){
         status ='Y';
       }
       url ='http://www.munster.co.in/emun/newdiscussion/{{munname}}/{{commname}}/'.concat(discname.toString()).concat("/").concat(pst.toString()).concat("/").concat(nums.toString()).concat("/").concat(status);
