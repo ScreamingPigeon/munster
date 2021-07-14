@@ -292,7 +292,8 @@
               var topic= talklists[i]['name']
               var tps = talklists[i]['secsps']
               var ns = talklists[i]['numberofspeakers']
-              markup = '<tr>  <td>'+topic.toString()+'</td>  <td>'+tps.toString()+'</td  ><td>'+ ns.toString() +'</td>  </tr>'
+              markup = '<tr>  <td>'+topic.toString()+'</td>  <td>'+tps.toString()+'</td  ><td>'+ ns.toString() +'</td>  </tr>';
+              $('#tdisc').append(markup);
             }
           })
     }
