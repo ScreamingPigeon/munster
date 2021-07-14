@@ -63,11 +63,11 @@
 <div class="container">
     <br> <br>
   <div class="row" id ='activediscz' style="display: none;"><!--Active Discussions-->
-      <div class="col-6" >
+      <div class="col-6" style="display: inherit" >
         <h2 id = 'adname'></h2>
         something else
       </div>
-      <div class="col-4">
+      <div class="col-4" style="display: inherit" >
         timer here
       </div>
   </div>
@@ -149,7 +149,7 @@
       $('#newdisc').css("display", "none");
       $('#tttt').css("display", "none");
       $('#attendancediv').css("display", "none");
-      $('#avtivediscz').css("display", "block");
+      $('#activediscz').css("display", "block");
       fillactivediscinfo();
     }
     function attendance(){
@@ -340,11 +340,13 @@
       border: solid #2F76D4 medium;
       padding: 40px;
     }
-    #activediscz{display: none;
-    margin : auto;
-    display: block;
-    border: solid #2F76D4 medium;
-    padding: 40px;}
+    #activediscz{
+      display: none;
+      margin : auto;
+      display: block;
+      border: solid #2F76D4 medium;
+      padding: 40px;
+    }
     #disc{
       display: none;
       margin : auto;
