@@ -63,11 +63,11 @@
 <div class="container">
     <br> <br>
   <div class="row"><!--Active Discussions-->
-      <div class="col-6" id="activ" >
+      <div class="col-md" id="activ" >
         <h2 id = 'adname'></h2>
         something else
       </div>
-      <div class="col-4" id="activtimer" >
+      <div class="col-md" id="activtimer" >
         timer here
       </div>
   </div>
@@ -149,7 +149,8 @@
       $('#newdisc').css("display", "none");
       $('#tttt').css("display", "none");
       $('#attendancediv').css("display", "none");
-      $('#activediscz').css("display", "block");
+      $('#activ').css("display", "block");
+      $('#activtimer').css("display", "block");
       fillactivediscinfo();
     }
     function attendance(){
@@ -349,10 +350,12 @@
     #activ{
       border: solid #2F76D4 medium;
       padding: 40px;
+      display: none;
     }
     #activtimer{
       border: solid #2F76D4 medium;
       padding: 40px;
+      display: none;
     }
     .nav-link{
       color:white;
