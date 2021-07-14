@@ -257,10 +257,24 @@
       }
 
     function newdisc(){
-      discname = $('discname').value();
-      pst = $('spektime').value();
-      nums = $('speknum').value();
-      url ='http://www.munster.co.in/emun/newdiscussion/{{munname}}/{{commname}}/'+discname.toString()+"/"
+      discname = $('#discname').value();
+      pst = $('#spektime').value();
+      nums = $('#speknum').value();
+      status ='N';
+      if ($('#chckbx').checked){
+        status ='Y';
+      }
+      url ='http://www.munster.co.in/emun/newdiscussion/{{munname}}/{{commname}}/'+discname.toString()+"/"+pst.toString()+"/"+nums.toString()+"/"+status;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+        })
+        .then(response => {
+            return response.json() //Convert response to JSON
+        })
+        .then(data => { console.log(data)})
     }
   </script>
 
