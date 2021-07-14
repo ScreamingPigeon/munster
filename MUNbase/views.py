@@ -680,7 +680,7 @@ def newdiscussion(request, munname, commname, agenda, tps, ns, active):
             disc = Talklist(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
         elif active == 'Y':
             disc = Talklist(committee=comm, name = agenda, numberofspeakers = ns, secsps = tps, active = active)
-            discs = Talklist.object.filter(committee = comm)
+            discs = Talklist.objects.filter(committee = comm)
             for row in discs:
                 row.active = 'N'
                 row.save()
