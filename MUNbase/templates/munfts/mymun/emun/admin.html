@@ -276,6 +276,20 @@
         })
         .then(data => { console.log(data)})
     }
+    function updatediscs(){
+      var table = $("#tdisc");
+      url = 'http://www.munster.co.in/emun/getdiscussions/{{munname}}/{{commname}}/'
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data)
+          })
+    }
   </script>
 
   <style>
