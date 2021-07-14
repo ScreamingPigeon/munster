@@ -162,7 +162,6 @@
             var markup ="";
             var press= 'present('+"'"+alloc.toString()+"'"+');'
             var voti= 'voting('+"'"+alloc.toString()+"'"+');'
-            console.log(voti, press)
             if (status ==""){
               markup = "<tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
@@ -287,7 +286,14 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
+            var talkers =data['talkers'];
+            var talklists = data['talklists']
+            for(let i =0; i<talklists.length; i++){
+              var topic= talklists[i]['name']
+              var tps = talklists[i]['secsps']
+              var ns = talklists[i]['numberofspeakers']
+              markup = '<tr>  <td>'+topic.toString()+'</td>  <td>'+tps.toString()+'</td  ><td>'+ ns.toString() +'</td>  </tr>'
+            }
           })
     }
   </script>
