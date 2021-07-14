@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" onclick="activedisc()">Active Discussions</a>
+            <a class="nav-link" onclick="activatedisc()">Active Discussions</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" onclick="attendance();">Attendance</a>
@@ -62,7 +62,7 @@
     </nav>
 <div class="container">
     <br> <br>
-  <div class="row sectionz" id ='activediscz'><!--Active Discussions-->
+  <div class="row" id ='activediscz'><!--Active Discussions-->
       <div class="col-6" >
         <h2 id = 'adname'></h2>
         something else
@@ -144,7 +144,7 @@
       $('#attendancediv').css("display", "none");
       updatediscs();
     }
-    function activedisc(){
+    function activatedisc(){
       $('#discs').css("display", "none");
       $('#newdisc').css("display", "none");
       $('#tttt').css("display", "none");
