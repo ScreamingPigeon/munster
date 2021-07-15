@@ -447,12 +447,11 @@
         }, 1000);
     }
     function nextspeaker(){
-      seconds= tps; timerstate = false; $('#timertime').html(seconds +' s');$('#timerbar').css('width', '100%');      element = $('#sortable li:first').attr('id')
       var contry = '';
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      url = '/emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString());
+      url = '/emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString()).concat(seconds.toString());
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
@@ -463,6 +462,8 @@
           }).then(data => {
           })
           fillactivediscinfo();
+          seconds= tps; timerstate = false; $('#timertime').html(seconds +' s');$('#timerbar').css('width', '100%');      element = $('#sortable li:first').attr('id')
+
     }
 
 
