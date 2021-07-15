@@ -415,9 +415,10 @@
     $( "#sortable" ).on( "sortupdate", function( event, ui ) {} );
     function timerstart(){
       timerstate = !timerstate;
-      console.log(timerstate)
+      console.log(timerstate);
+      timerplay();
     }
-    function timer(){
+    function timerplay(){
       if (seconds==-129){
           seconds = tps;
           $('#timertime').html(seconds);
