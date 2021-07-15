@@ -200,7 +200,7 @@
         <label for="proposer"></label><input type="text" id="proposer" value="">
       </div>
       <div class="modal-footer">
-        <button onclicl="newmotion()" class="btn btn-primary">Create Motion</button>
+        <button onclicl="newmotion();" class="btn btn-primary">Create Motion</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
@@ -526,7 +526,9 @@
           $('#sortable2').append('<li class="ui-state-default" id = "spoken'+contry+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+contry+'</a></li>');
 
     }
-
+    $('#myModal').on('shown.bs.modal', function () {
+  $('#newvotingevent').trigger('focus')
+})
 
 
   </script>
