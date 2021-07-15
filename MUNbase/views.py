@@ -1049,15 +1049,17 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
         except IndexError:
             return 'participant error'
         speaker = TalkListSpeaker.objects.filter(list = list, speaker = parz)
+        newz = TalkListSpeaker.objects.filter(list = list).values()
+        newtalkers = []
+        for row in newz:
+            newtalkers.append(row)
         if len(speaker) == 0:
             speaker = TalkListSpeaker(list = list, speaker = parz)
             speaker.save()
-            newtalkers = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)[0]).values()
             return  JsonResponse({'resps':'added', 'talkers':newtalkers})
         else:
             speaker = speaker[0]
             speaker.delete()
-            newtalkers = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)[0]).values()
             return  JsonResponse({'resps':'removed','talkers':newtalkers})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
