@@ -380,7 +380,6 @@
       if (country == 'none'){ val = document.getElementById('countryadder').value;}
       else{
         val = country;
-        cosnole.log(val)
       }
       url = '/emun/speaker/{{munname}}/{{commname}}/'+agenda+'/'+tps+'/'+ns+'/'+val;
       console.log(url);
@@ -392,7 +391,6 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data);
             if (data['resps'] == 'removed')
             { $('#speaking'+val).remove();}
             else
