@@ -1217,7 +1217,7 @@ def getvoterdata(request, munname,commname, motionid):
         motion = Motion.objects.filter(committee =comm, id = motionid).values()[0]
 
         for i in range(len(voters)):
-            voters[i]['country']=voterz.voter.country
+            voters[i]['country']=voterz[i].voter.country
         return JsonResponse({'voterdata': list(voters), 'motion':motion})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
