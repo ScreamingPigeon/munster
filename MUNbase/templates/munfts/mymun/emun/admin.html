@@ -452,7 +452,7 @@
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      url = '/emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString()).concat(seconds.toString());
+      url = '/emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString()).concat('/').concat(seconds.toString());
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
