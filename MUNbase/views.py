@@ -803,8 +803,11 @@ def adminview(request, munname, commname):
         delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-
-    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamez, 'admin':adminz, 'commname':commnamez})
+    parz = Participant.objects.filter(committee=comm)
+    countries = []
+    for row in parz:
+        countries+= row.country
+    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamez, 'admin':adminz, 'commname':commnamez, 'countries':countries})
 
 
 def partview(request, munname, commname):
