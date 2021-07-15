@@ -71,7 +71,7 @@
         </div><br>
         <h5> Upcoming Speakers</h5>
         <div id="upcoming">
-          <select id="country" onchange="addcountry();" style="width: 100%; margin: 10px; margin-top: 0px; display: block;"></select>
+          <select id="countryadder" onchange="addcountry();" style="width: 100%; margin: 10px; margin-top: 0px; display: block;"></select>
 
           <ul id="sortable">
           </ul>
@@ -362,10 +362,18 @@
             }
             var talkers = data['talkers'];
             for (let i = 0; i<talkers.length; i++){
-              $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "'+talkers[i]['speaker']['country']+'"></span>'+talkers[i]['speaker']['country']+'</li>');
+              $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+talkers[i]['speaker']['country']+'"></span>'+talkers[i]['speaker']['country']+'</li>');
             }
           })
     }
+    function addocuntry(){
+      var val = document.getElementById('countryadder').value;
+      $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+val+'"></span>'+val+'</li>');
+
+    }
+
+
+
   </script>
   <option value=""></option>
   <style>
