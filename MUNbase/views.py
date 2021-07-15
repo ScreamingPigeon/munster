@@ -1209,7 +1209,7 @@ def getvoterdata(request, munname,commname, motionid):
         voterz = Voter.objects.filter(motion = motion)
         for i in range(len(voters)):
             voters[i]['country']=voterz.voter.country
-        return JsonResponse({'voterdata': list(voters)})
+        return JsonResponse({'voterdata': list(voters), 'motion':motion})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
