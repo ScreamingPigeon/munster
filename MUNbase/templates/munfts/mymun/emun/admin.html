@@ -390,7 +390,6 @@
           })
     }
     function addcountry(country){
-      console.log(country)
       var val =''
       if (country == 'none'){ val = document.getElementById('countryadder').value;}
       else{
@@ -409,6 +408,8 @@
             { $('#speaking'+val).remove();}
             else
             {      $('#sortable').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+' <a style="font-size:8px; color:red;" href="#" onclick = "addcountry(`'+val+'`);">'+ 'Remove' +'</a></li>');}
+            talkersdata = data[talkers]
+
           })
     }
     $( "#sortable" ).sortable({
@@ -435,6 +436,15 @@
         $('#timerbar').css('width', x);
         }, 1000);
     }
+    function nextspeaker(){
+      timerstate = false;
+      element = $('#sortable li:first')
+      console.log(element)
+      url = 'emun/speaker/{{munname}}/{{commname}}/'+'/'
+    }
+
+
+
   </script>
   <style>
     .sectionz{

@@ -1061,7 +1061,46 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             speaker = speaker[0]
             speaker.delete()
             return  JsonResponse({'resps':'removed','talkers':newtalkers})
-
+def nextspeaker(request, munname, commname, talkid, speakerid):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return 'Admin Error'
+        list = Talklist.objects.filter(id = talkid, committee=comm)
+        try:
+            list = list[0]
+        except IndexError:
+            return 'talklist error'
+        talker = TalkListSpeaker.objects.filter(id = speakerid, list = list)
+        try:
+            talker = talker[0]
+            talker.speaker = 'sn'
+            talker.save()
+            return None
+        except IndexError:
+            return 'error'
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
