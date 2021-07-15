@@ -89,7 +89,6 @@ class Motion(models.Model):
     name = models.CharField(max_length = 400)
     delproposer = models.ForeignKey(Participant, on_delete = models.CASCADE)
     defproposer = models.ForeignKey(CommitteeAdmin, on_delete = models.CASCADE)
-    type = models.CharField(max_length = 100)
     yes = models.CharField(max_length = 10)
     no = models.CharField(max_length = 10)
     abstain = models.CharField(max_length = 10)
