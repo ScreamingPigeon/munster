@@ -94,5 +94,5 @@ class Motion(models.Model):
     abstain = models.CharField(max_length = 10,default='0')
 class Voter(models.Model):
     voter = models.ForeignKey(Participant, on_delete = models.CASCADE)
-    vote = models.CharField(max_length = 10)
+    vote = models.CharField(max_length = 10, default='NV')
     motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
