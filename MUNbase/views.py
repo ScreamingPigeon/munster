@@ -1058,7 +1058,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             speaker = speaker[0]
             speaker.delete()
             newtalkers = TalkListSpeaker.objects.filter(list = list).values()
-            return  JsonResponse({'resps':'removed',talkers':list(newtalkers)})
+            return  JsonResponse({'resps':'removed','talkers':list(newtalkers)})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
