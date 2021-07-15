@@ -439,7 +439,11 @@
     function nextspeaker(){
       timerstate = false;
       element = $('#sortable li:first').attr('id')
-      console.log(element)
+      var contry = '';
+      for(int i =7; i<element.length;i++){
+        contry+=element[i];
+      }
+      console.log(contry)
       url = 'emun/speaker/{{munname}}/{{commname}}/'+'/'
     }
 
