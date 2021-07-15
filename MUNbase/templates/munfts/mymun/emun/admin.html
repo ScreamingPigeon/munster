@@ -380,10 +380,10 @@
             for (let i = 0;i< countries.length; i++){
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
-            var countries = data['countries'];
+            var countriez = data['countries'];
             talkersdata = data['talkers']
-            for (let i = 0; i<countries.length; i++){
-              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countries[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countries[i]+'`);">'+ 'Remove' +'</a></li>');
+            for (let i = 0; i<countriez.length; i++){
+              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');
             }
           })
     }
