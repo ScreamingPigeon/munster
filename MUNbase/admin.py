@@ -13,7 +13,7 @@ admin.site.register(CommitteeAdmin)
 admin.site.register(TalkListSpeaker)
 admin.site.register(Talklist)
 admin.site.register(Motion)
-admin.site.register(VotingEvent)
+admin.site.register(Voter)
 
 class ArticleEditorAdmin(forms.ModelForm):
     content = forms.CharField( widget=forms.Textarea )
