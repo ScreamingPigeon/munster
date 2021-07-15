@@ -196,8 +196,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <label for="motname"></label><input type="text" id="motname" value=""> <br>
-        <label for="proposer"></label><input type="text" id="proposer" value="">
+        <label for="motname">Motion Name</label><input type="text" id="motname" value=""> <br> <br>
+        <label for="proposer">Proposer</label> <select id="proposer" >
+          <option value="admin">EB</option>
+          {% for row in countries %}
+          <option value="{{row}}">{{row}}</option>
+          {%endfor%}
+        </select>
       </div>
       <div class="modal-footer">
         <button onclicl="newmotion();" class="btn btn-primary">Create Motion</button>
