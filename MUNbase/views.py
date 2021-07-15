@@ -806,7 +806,7 @@ def adminview(request, munname, commname):
     parz = Participant.objects.filter(committee=comm).values()
     countries = []
     for row in parz:
-        countries+= row
+        countries.append(row['country'])
     return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamez, 'admin':adminz, 'commname':commnamez, 'countries':countries})
 
 
