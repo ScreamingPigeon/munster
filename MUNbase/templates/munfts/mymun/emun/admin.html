@@ -205,7 +205,7 @@
         </select>
       </div>
       <div class="modal-footer">
-        <button onclick="newmotion();" class="btn btn-primary">Create Motion</button>
+        <button onclick="newmotion();" data-dismiss="modal"class="btn btn-primary">Create Motion</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
@@ -594,7 +594,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-
+            motions();
           })
     }
     function voterdata(id){
@@ -611,7 +611,7 @@
             $('#voterdata').empty();
             $('#mn').html(data['motion']['name'])
             var voters = data['voterdata']
-            
+
             var vyes = []
             var vno = []
             var vabs = []
