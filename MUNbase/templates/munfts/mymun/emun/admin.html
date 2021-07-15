@@ -388,7 +388,7 @@
             talkersdata = data['talkers']
             for (let i = 0; i<countriez.length; i++){
               if (talkersdata[i]['status'] == 'qd')
-              {              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}            
+              {              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}
               else
               {              $('#sortable2').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}            }
 
@@ -453,7 +453,7 @@
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      url = 'emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString());
+      url = '/emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString());
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
