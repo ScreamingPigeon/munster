@@ -1056,7 +1056,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
         checkallspoken = True;
         for row in speaker:
             if row.status=='qd':
-                checkallspoken = False;
+                checkallspoken = False
 
         if (len(speaker) == 0)or(checkallspoken == True):
             speaker = TalkListSpeaker(list = list, speaker = parz)
