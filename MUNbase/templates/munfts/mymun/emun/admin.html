@@ -317,7 +317,7 @@
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
             var id = motions[i]['id']
-            markup = '<tr> <td>'+motions[i]['name']+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ No +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(motions[i]['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(motions[i]['total'])).toString()+'</td>    </tr>'
+            markup = '<tr> <td>'+motions[i]['name']+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ No +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
           }
             })
 
