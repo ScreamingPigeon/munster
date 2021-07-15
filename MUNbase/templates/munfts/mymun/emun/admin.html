@@ -370,7 +370,7 @@
             var talkers = data['talkers'];
             console.log(talkers)
             for (let i = 0; i<talkers.length; i++){
-              $('#sortable').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry("'+talkers[i]+'");">'+ 'Remove' +'</a></li>');
+              $('#sortable').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry("'+'"'+talkers[i]+'"'+'");">'+ 'Remove' +'</a></li>');
             }
           })
     }
@@ -396,7 +396,7 @@
             if (data['resps'] == 'removed')
             { $('#speaking'+val).remove();}
             else
-            {      $('#sortable').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+' <a style="font-size:8px; color:red;" href="#" onclick = "addcountry("'+val+'");">'+ 'Remove' +'</a></li>');}
+            {      $('#sortable').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+' <a style="font-size:8px; color:red;" href="#" onclick = "addcountry("'+'"'+val+'"'+'");">'+ 'Remove' +'</a></li>');}
           })
     }
 
