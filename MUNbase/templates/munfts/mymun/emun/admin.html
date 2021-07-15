@@ -619,18 +619,19 @@
 
             for (let i =0;i<voters.length;i++){
               if (voters[i]['vote'] == 'Yes'){
-                vyes.concat(voters[i]['country'])
+                vyes.push(voters[i]['country'])
               }
               else if (voters[i]['vote'] == 'No'){
-                vno.concat(voters[i]['country'])
+                vno.push(voters[i]['country'])
               }
               else if (voters[i]['vote'] == 'Abstain'){
-                vabs.concat(voters[i]['country'])
+                vabs.push(voters[i]['country'])
               }
               else {
-                vnot.concat(voters[i]['country'])
+                vnot.push(voters[i]['country'])
               }
             }
+            console.log()
             markyes = '<tr>'
             markno = '<tr>'
             markabs = '<tr>'
