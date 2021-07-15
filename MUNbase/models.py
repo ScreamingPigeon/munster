@@ -96,4 +96,4 @@ class Motion(models.Model):
 class Voter(models.Model):
     voter = models.ForeignKey(Participant, on_delete = models.CASCADE)
     vote = models.CharField(max_length = 10)
-    motion = Models.ForeignKey(Motion, on_delete = models.CASCADE)
+    motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
