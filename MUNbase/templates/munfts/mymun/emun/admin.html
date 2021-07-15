@@ -414,13 +414,7 @@
     });
     $( "#sortable" ).on( "sortupdate", function( event, ui ) {} );
     function timerstart(){
-      if (timerstate){
-        timerstate = false;
-        timer();
-      }
-      else{
-        timerstate = true;
-      }
+      timerstate = !timerstate;
     }
     function timer(){
       if (seconds==-129){
@@ -430,10 +424,10 @@
       }
 
       var countdown = setInterval(function() {
+        if (timerstate == false) {clearInterval(countdown);}
         seconds--;
         $('#timertime').html(seconds);
-
-        if (timerstate == false) clearInterval(countdown);}, 1000);
+        }, 1000);
     }
   </script>
   <style>
