@@ -158,7 +158,15 @@
         </table>
       </div>
     </div>
-  <div class="row" class = "sectionz" id = 'motions'>
+  <div class="row" ><!--Motions-->
+    <div class="col-md" class = "sectionz" id = 'motions'>
+      <h2>Motions</h2>
+      <p>Create or view voting events</p>
+      <button class="btn btn-primary" id="newvotingevent()"></button>
+      <table id ='pastmotions'>
+
+      </table>
+    </div>
   </div>
 
   <div class="row" class = "sectionz" id = 'paperwork'>
@@ -184,6 +192,8 @@
       $('#attendancediv').css("display", "none");
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
+      timerstate = false;
+      $('#motions').css("display", "block");
       updatediscs();
     }
     function activatedisc(){
@@ -193,7 +203,10 @@
       $('#attendancediv').css("display", "none");
       $('#activ').css("display", "block");
       $('#activtimer').css("display", "block");
+      $('#motions').css("display", "block");
       fillactivediscinfo();
+      timerstate = false;
+
     }
     function attendance(){
       $('#attendancediv').css("display", "block");
@@ -203,6 +216,8 @@
       $('#newdisc').css("display", "none");
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
+      $('#motions').css("display", "none");
+
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
             headers:{
                 'Accept': 'application/json',
@@ -234,6 +249,20 @@
             $("#tabat").append(markup);
           }
         })
+      timerstate = false;
+
+    }
+    function motions(){
+      $('#attendancediv').css("display", "none");
+      $('#tttt tbody').empty();
+      $('#tttt').css("display", "none");
+      $('#discs').css("display", "none");
+      $('#newdisc').css("display", "none");
+      $('#activ').css("display", "none");
+      $('#activtimer').css("display", "none");
+      $('#motions').css("display", "block");
+
+      timerstate = false;
 
     }
     function present(country){
