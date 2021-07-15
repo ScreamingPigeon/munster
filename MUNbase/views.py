@@ -1031,7 +1031,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             part = part[0]
         except IndexError:
             return None
-        list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = nps, active = 'Y',committee = comm )
+        list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm )
         try:
             list = list[0]
         except IndexError:
