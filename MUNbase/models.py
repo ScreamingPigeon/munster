@@ -89,9 +89,9 @@ class Motion(models.Model):
     committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
     name = models.CharField(max_length = 400)
     proposer = models.CharField(max_length = 100)
-    yes = models.CharField(max_length = 10)
-    no = models.CharField(max_length = 10)
-    abstain = models.CharField(max_length = 10)
+    yes = models.CharField(max_length = 10,default='0')
+    no = models.CharField(max_length = 10, default='0')
+    abstain = models.CharField(max_length = 10,default='0')
 class Voter(models.Model):
     voter = models.ForeignKey(Participant, on_delete = models.CASCADE)
     vote = models.CharField(max_length = 10)

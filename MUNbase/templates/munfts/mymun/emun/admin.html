@@ -171,7 +171,9 @@
           <th scope="col" style="width: 100px;" >Total</th>
           <th scope="col" style="width: 100px;" >Majority %</th>
         </tr>
+        <tbody id ='motiondata'>
 
+        </tbody>
       </thead>
       <tbody id ='tabat'>
 
@@ -291,6 +293,7 @@
     function motions(){
       $('#attendancediv').css("display", "none");
       $('#tttt tbody').empty();
+      $('#motiondata').empty();
       $('#tttt').css("display", "none");
       $('#discs').css("display", "none");
       $('#newdisc').css("display", "none");
@@ -308,7 +311,14 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-          console.log(data)
+          var motions = data['motions']
+          for(let i =0; i<motions.length;i++){
+            var yes = motions[i]['yes']
+            var no = motions[i]['no']
+            var abstain = motions[i]['abstain']
+            var id = motions[i]['id']
+            markup = '<tr> <td>'+motions[i]['name']+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ No +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(motions[i]['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(motions[i]['total'])).toString()+'</td>    </tr>'
+          }
             })
 
     }
