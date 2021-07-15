@@ -611,9 +611,47 @@
             $('#voterdata').empty();
             $('#mn').html(data['motion']['name'])
             var voters = data['voterdata']
-            //for (let i =0;i<voters.length;i++)
-            markup='<tr>  <td>x</td>    <td>y</td>    <td>z</td>    <td>a</td>  </tr>'
-            $('#voterdata').append(markup);
+
+            var vyes = []
+            var vno = []
+            var vabs = []
+            var vnot = []
+
+            for (let i =0;i<voters.length;i++){
+              if (voters[i]['vote'] == 'Yes'){
+                vyes.append(voters[i]['country'])
+              }
+              else if (voters[i]['vote'] == 'No'){
+                vno.append(voters[i]['country'])
+              }
+              else if (voters[i]['vote'] == 'Abstain'){
+                vabs.append(voters[i]['country'])
+              }
+              else {
+                vnot.append(voters[i]['country'])
+              }
+            }
+            markyes = '<tr>'
+            markno = '<tr>'
+            markabs = '<tr>'
+            marknot = '<tr>'
+            for(let i = 0; i<vyes.length; i++){
+              markyes.concat('<td>'+vyes[i]+'</td>')
+            }
+            for(let i = 0; i<vno.length; i++){
+              markno.concat('<td>'+vno[i]+'</td>')
+            }
+            for(let i = 0; i<vnot.length; i++){
+              marknot.concat('<td>'+marknot[i]+'</td>')
+            }
+            for(let i = 0; i<vabs.length; i++){
+              markabs.concat('<td>'+markabs[i]+'</td>')
+            }
+            markyes.append('</td>')
+            markno.append('</td>')
+            marknot.append('</td>')
+            markabs.append('</td>')
+            $('#voterdata').append(markyes + markno + markabs + marknot);
           })
     }
 
