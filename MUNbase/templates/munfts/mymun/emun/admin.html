@@ -428,7 +428,9 @@
       var countdown = setInterval(function() {
         if (timerstate == false) {clearInterval(countdown);}
         seconds--;
+        var x = (100-((tps - seconds)*(tps/100))).toString().concat('px');
         $('#timertime').html(seconds);
+        $('#timerbar').css('width', x);
         }, 1000);
     }
   </script>
