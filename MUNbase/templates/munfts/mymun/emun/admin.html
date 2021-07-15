@@ -385,7 +385,7 @@
             var countriez = data['countries'];
             talkersdata = data['talkers']
             for (let i = 0; i<countriez.length; i++){
-              if (talkersdata['status'] == 'qd')
+              if (talkersdata[i]['status'] == 'qd')
 {              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}            }
           })
     }
