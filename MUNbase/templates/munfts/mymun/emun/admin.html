@@ -627,7 +627,17 @@
       var val = document.getElementById('countryadder').value;
       $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+val+'"></span>'+val+'</li>');
       url = 'emun/speaker/{{munname}}/{{commname}}/'+agenda+'/'+tps+'/'+ns+'/'+val;
-      console.log(val);
+      console.log(url);
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data)
+          })
     }
 
     $( "#sortable" ).sortable({
