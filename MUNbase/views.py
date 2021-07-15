@@ -751,7 +751,7 @@ def getactivediscussion(request, munname, commname):
         try:
             talklist = talklist[0]
             talkers = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(committee=comm, active="Y")[0]).values()
-            return JsonResponse({'resps': talklist, 'talkers': talkers})
+            return JsonResponse({'resps': talklist, 'talkers': list(talkers)})
         except IndexError:
             return JsonResponse({'resps':"None"})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
