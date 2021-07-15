@@ -160,8 +160,21 @@
       <h2>Motions</h2>
       <p>Create or view voting events</p>
       <button class="btn btn-primary" id="newvotingevent()">New Event</button>
-      <table id ='pastmotions'>
+      <table class="table table-responsive table-striped" id ='past motions'>
+      <thead>
+        <tr>
+          <th scope="col"  style="width: 200px;">Name</th>
+          <th scope="col" style="width: 100px;">Yes</th>
+          <th scope="col" style="width: 100px;" >No</th>
+          <th scope="col" style="width: 100px;" >Abstain</th>
+          <th scope="col" style="width: 100px;" >Total</th>
+          <th scope="col" style="width: 100px;" >Majority %</th>
+        </tr>
 
+      </thead>
+      <tbody id ='tabat'>
+
+      </tbody>
       </table>
     </div>
   </div>
@@ -190,7 +203,7 @@
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
       timerstate = false;
-      $('#motions').css("display", "block");
+      $('#motions').css("display", "none");
       updatediscs();
     }
     function activatedisc(){
@@ -200,7 +213,7 @@
       $('#attendancediv').css("display", "none");
       $('#activ').css("display", "block");
       $('#activtimer').css("display", "block");
-      $('#motions').css("display", "block");
+      $('#motions').css("display", "none");
       fillactivediscinfo();
       timerstate = false;
 
@@ -499,6 +512,12 @@
   </script>
   <style>
 
+    .sectionz{
+      display: none;
+      margin : auto;
+      border: solid #2F76D4 medium;
+      padding: 40px;
+    }
     #motions{
       display: none;
       margin : auto;
