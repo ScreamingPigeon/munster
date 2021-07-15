@@ -94,9 +94,9 @@
 
                 </div>
                 <div style="margin: auto; display: block; padding: 20px;padding-left: 20%; ">
-                  <button type="button" class="btn btn-outline-success">Reset</button>
-                  <button type="button" class="btn btn-outline-primary">Pause</button>
-                  <button type="button" class="btn btn-outline-danger">Elapse</button>
+                  <button type="timereset()" class="btn btn-outline-success">Reset</button>
+                  <button onclick="timerstart()" class="btn btn-outline-primary">Play/Pause</button>
+                  <button type="timernext()" class="btn btn-outline-danger">Elapse</button>
                 </div>
               </div>
           </div>
@@ -172,6 +172,9 @@
     var agenda = '';
     var tps;
     var ns;
+    var talkersdata;
+    var seconds;
+    var timerstat = false;
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -377,9 +380,10 @@
             for (let i = 0;i< countries.length; i++){
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
-            var talkers = data['talkers'];
-            for (let i = 0; i<talkers.length; i++){
-              $('#sortable').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+talkers[i]+'`);">'+ 'Remove' +'</a></li>');
+            var countries = data['countries'];
+            talkersdata = data['talkers']
+            for (let i = 0; i<countries.length; i++){
+              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countries[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countries[i]+'`);">'+ 'Remove' +'</a></li>');
             }
           })
     }
@@ -405,18 +409,21 @@
             {      $('#sortable').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+' <a style="font-size:8px; color:red;" href="#" onclick = "addcountry(`'+val+'`);">'+ 'Remove' +'</a></li>');}
           })
     }
-
+    functi
     $( "#sortable" ).sortable({
       update: function( event, ui ) {}
     });
     $( "#sortable" ).on( "sortupdate", function( event, ui ) {} );
-    $( "#sortable2" ).sortable({
-      update: function( event, ui ) {}
-    });
-    $( "#sortable2" ).on( "sortupdate", function( event, ui ) {} );
-
+    timerstart(){
+      if (timerstate){
+        timerstate = false;
+      }
+      if (timerstate){
+        timerstate = true;
+        seconds =
+      }
+    }
   </script>
-  <option value=""></option>
   <style>
     .sectionz{
       display: none;

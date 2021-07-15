@@ -1006,7 +1006,8 @@ def getactivediscussion(request, munname, commname):
             talkers = []
             for row in talkz:
                 talkers.append(row.speaker.country)
-            return JsonResponse({'resps': talklist, 'talkers': list(talkers)})
+            countries = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(committee=comm, active="Y")[0]).values()
+            return JsonResponse({'resps': talklist, 'countries': list(talkers), 'talkers': countries})
         except IndexError:
             return JsonResponse({'resps':"None"})
 
@@ -1051,11 +1052,13 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
         if len(speaker) == 0:
             speaker = TalkListSpeaker(list = list, speaker = parz)
             speaker.save()
-            return  JsonResponse({'resps':'added'})
+            newtalkers = TalkListSpeaker.objects.filter(list = list).values()
+            return  JsonResponse({'resps':'added', 'talkers':list(newtalkers)})
         else:
             speaker = speaker[0]
             speaker.delete()
-            return  JsonResponse({'resps':'removed'})
+            newtalkers = TalkListSpeaker.objects.filter(list = list).values()
+            return  JsonResponse({'resps':'removed',talkers':list(newtalkers)})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
