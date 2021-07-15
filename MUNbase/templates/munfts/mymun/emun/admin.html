@@ -71,7 +71,8 @@
         <h6 id = 'followup'></h6>
         <h5> Speaking Now</h5>
         <div id="speaknow">
-
+          <ul id="sortable2" style="    list-style-type: none; margin-left: -5%; width: 87%">
+          </ul>
         </div><br>
         <h5> Upcoming Speakers</h5>
         <div id="upcoming">
@@ -368,8 +369,10 @@
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
             var talkers = data['talkers'];
-            console.log(talkers)
             for (let i = 0; i<talkers.length; i++){
+              if(i=0){
+                $('#sortable').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+ '</li>');
+              }
               $('#sortable').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+talkers[i]+'`);">'+ 'Remove' +'</a></li>');
             }
           })
@@ -382,7 +385,6 @@
         val = country;
       }
       url = '/emun/speaker/{{munname}}/{{commname}}/'+agenda+'/'+tps+'/'+ns+'/'+val;
-      console.log(url);
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
