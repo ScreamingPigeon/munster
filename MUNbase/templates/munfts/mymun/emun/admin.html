@@ -186,7 +186,7 @@
 
   </div>
 </div>
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal" tabindex="-1" id='newmotionmodal'role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -526,7 +526,7 @@
           $('#sortable2').append('<li class="ui-state-default" id = "spoken'+contry+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+contry+'</a></li>');
 
     }
-    $('#myModal').on('shown.bs.modal', function () {
+    $('#newmotionmodal').on('shown.bs.modal', function () {
   $('#newvotingevent').trigger('focus')
 })
 
