@@ -358,6 +358,7 @@
             $('#adname').empty();
             $('#countryadder').empty();
             $('#sortable').empty();
+            $('#sortable2').empty();
             $('#followup').empty();
             $('#adname').append(values['name']);
             agenda = values['name'];
@@ -370,9 +371,6 @@
             }
             var talkers = data['talkers'];
             for (let i = 0; i<talkers.length; i++){
-              if(i=0){
-                $('#sortable2').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+ '</li>');
-              }
               $('#sortable').append('<li class="ui-state-default" id = "speaking'+talkers[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+talkers[i]+'`);">'+ 'Remove' +'</a></li>');
             }
           })
