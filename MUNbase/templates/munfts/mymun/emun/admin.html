@@ -464,7 +464,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
           })
-          fillactivediscinfo();
+          $('#sortable li:first').remove();
           seconds= tps; timerstate = false; $('#timertime').html(seconds +' s');$('#timerbar').css('width', '100%');
 
     }
