@@ -376,7 +376,6 @@
     }
     function addcountry(){
       var val = document.getElementById('countryadder').value;
-      $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+val+'"></span>'+val+'</li>');
       url = '/emun/speaker/{{munname}}/{{commname}}/'+agenda+'/'+tps+'/'+ns+'/'+val;
       console.log(url);
       fetch(url, {
@@ -388,8 +387,8 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             console.log(data);
-            if data['resps'] == 'removed':
-              $('#speaking'+val).remove()
+            if (data['resps'] == 'removed'){              $('#speaking'+val).remove();}
+            else{      $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+val+'"></span>'+val+'</li>');}
           })
     }
 
