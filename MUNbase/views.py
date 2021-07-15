@@ -1053,12 +1053,12 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             speaker = TalkListSpeaker(list = list, speaker = parz)
             speaker.save()
             newtalkers = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)[0]).values()
-            return  JsonResponse({'resps':'added', 'talkers':list(newtalkers)})
+            return  JsonResponse({'resps':'added', 'talkers':newtalkers})
         else:
             speaker = speaker[0]
             speaker.delete()
             newtalkers = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)[0]).values()
-            return  JsonResponse({'resps':'removed','talkers':list(newtalkers)})
+            return  JsonResponse({'resps':'removed','talkers':newtalkers})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
