@@ -1002,7 +1002,7 @@ def getactivediscussion(request, munname, commname):
         talklist = Talklist.objects.filter(committee=comm, active="Y").values()
         try:
             talklist = talklist[0]
-            talkz = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(committee=comm, active="Y")[0]).values()
+            talkz = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(committee=comm, active="Y")[0])
             talkers = []
             for row in talkz:
                 talkers.append(row.speaker.country)
