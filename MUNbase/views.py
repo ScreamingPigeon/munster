@@ -1093,15 +1093,15 @@ def nextspeaker(request, munname, commname, agenda, alloc, seconds):
             list = list[0]
         except IndexError:
             return 'talklist error'
-        part = Participant.objects.filter(committee=comm, country = alloc)
+        partz = Participant.objects.filter(committee=comm, country = alloc)
         try:
-            part = part[0]
+            partz = partz[0]
         except IndexError:
             return 'country error'
-        talker = TalkListSpeaker.objects.filter(speaker = part, list = list)
+        talker = TalkListSpeaker.objects.filter(speaker = partz, list = list)
         try:
             talker = talker[0]
-            talker.speaker = 'sn'
+            talker.status = 'sn'
             talker.timespent = seconds
             talker.save()
             return None
