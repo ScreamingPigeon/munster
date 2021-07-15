@@ -425,13 +425,14 @@
     function timer(){
       if (seconds==-129){
           seconds = tps;
-          $('#timertime').html = seconds;
+          $('#timertime').html(seconds);
 
       }
 
       var countdown = setInterval(function() {
         seconds--;
-        $('#timertime').html = seconds;
+        $('#timertime').html(seconds);
+
         if (timerstate == false) clearInterval(countdown);}, 1000);
     }
   </script>
