@@ -619,16 +619,16 @@
 
             for (let i =0;i<voters.length;i++){
               if (voters[i]['vote'] == 'Yes'){
-                vyes.append(voters[i]['country'])
+                vyes.concat(voters[i]['country'])
               }
               else if (voters[i]['vote'] == 'No'){
-                vno.append(voters[i]['country'])
+                vno.concat(voters[i]['country'])
               }
               else if (voters[i]['vote'] == 'Abstain'){
-                vabs.append(voters[i]['country'])
+                vabs.concat(voters[i]['country'])
               }
               else {
-                vnot.append(voters[i]['country'])
+                vnot.concat(voters[i]['country'])
               }
             }
             markyes = '<tr>'
