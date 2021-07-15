@@ -1053,7 +1053,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
         newtalkers = []
         for row in newz:
             newtalkers.append(row)
-        if ((len(speaker) == 0)||(len(speaker)==1 && speaker[0].status=='sn')) :
+        if ((len(speaker) == 0)or(len(speaker)==1 and speaker[0].status=='sn')) :
             speaker = TalkListSpeaker(list = list, speaker = parz)
             speaker.save()
             return  JsonResponse({'resps':'added', 'talkers':newtalkers})
