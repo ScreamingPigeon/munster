@@ -1142,9 +1142,7 @@ def newmotion(request, munname, commname, name, proposer):
             return 'Admin Error'
         motion = Motion(committee=comm, proposer = proposer,name = name)
         motion.save()
-        return JsonResponse({'resps':success
-
-        })
+        return JsonResponse({'resps':'success'})
 def showallmotions(request,munname,commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
