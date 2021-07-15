@@ -367,6 +367,7 @@
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
             var talkers = data['talkers'];
+            console.log(talkers)
             for (let i = 0; i<talkers.length; i++){
               $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+talkers[i]['speaker']['country']+'"></span>'+talkers[i]['speaker']['country']+'</li>');
             }
