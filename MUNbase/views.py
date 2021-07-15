@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Talklist, TalkListSpeaker, Motion, VotingEvent
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Talklist, TalkListSpeaker, Motion, Voter
 from django.urls import reverse
 import xlsxwriter
 from datetime import datetime

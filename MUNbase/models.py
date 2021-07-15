@@ -90,9 +90,10 @@ class Motion(models.Model):
     delproposer = models.ForeignKey(Participant, on_delete = models.CASCADE)
     defproposer = models.ForeignKey(CommitteeAdmin, on_delete = models.CASCADE)
     type = models.CharField(max_length = 100)
-class VotingEvent(models.Model):
-    motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
     yes = models.CharField(max_length = 10)
     no = models.CharField(max_length = 10)
     abstain = models.CharField(max_length = 10)
-    yes = models.CharField(max_length = 10)
+class Voter(models.Model):
+    voter = models.ForeignKey(Participant, on_delete = models.CASCADE)
+    vote = models.CharField(max_length = 10)
+    motion = Models.ForeignKey(Motion, on_delete = models.CASCADE)
