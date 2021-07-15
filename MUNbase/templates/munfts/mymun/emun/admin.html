@@ -175,9 +175,6 @@
 
         </tbody>
       </thead>
-      <tbody id ='tabat'>
-
-      </tbody>
       </table>
     </div>
   </div>
@@ -236,9 +233,6 @@
 
           </tbody>
         </thead>
-        <tbody id ='tabat'>
-
-        </tbody>
         </table>
       </div>
       <div class="modal-footer">
@@ -616,6 +610,10 @@
             console.log(data)
             $('#voterdata').empty();
             $('#mn').html(data['motion']['name'])
+            var voters = data['voterdata']
+            //for (let i =0;i<voters.length;i++)
+            markup='<tr>  <td>x</td>    <td>y</td>    <td>z</td>    <td>a</td>  </tr>'
+            $('#voterdata').append(markup);
           })
     }
 
@@ -687,5 +685,12 @@
       font-size: 18px;
       padding-top: 2px;
     }
+
+#voterdata tr {
+	display: table-cell;
+}
+#voterdata tr td {
+	display: block;
+}
   </style>
 </html>
