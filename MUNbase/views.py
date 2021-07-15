@@ -1031,16 +1031,16 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             part = part[0]
         except IndexError:
             return None
-        list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm )
+        list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)
         try:
             list = list[0]
         except IndexError:
-            return None
+            return 'talklist error'
         parz = Participant.objects.filter(country = alloc, committee = comm)
         try:
             parz = parz[0]
         except IndexError:
-            return None
+            return 'participant error'
         speaker = TalkListSpeaker.objects.filter(list = list, speaker = parz)
         if len(speaker) == 0:
             speaker = TalkListSpeaker(list = list, speaker = parz)
