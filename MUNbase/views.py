@@ -1061,7 +1061,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             speaker = speaker[0]
             speaker.delete()
             return  JsonResponse({'resps':'removed','talkers':newtalkers})
-def nextspeaker(request, munname, commname, talkid, alloc):
+def nextspeaker(request, munname, commname, agenda, alloc):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
@@ -1088,7 +1088,7 @@ def nextspeaker(request, munname, commname, talkid, alloc):
             part = part[0]
         except IndexError:
             return 'Admin Error'
-        list = Talklist.objects.filter(id = talkid, committee=comm)
+        list = Talklist.objects.filter(name = agenda, committee=comm)
         try:
             list = list[0]
         except IndexError:

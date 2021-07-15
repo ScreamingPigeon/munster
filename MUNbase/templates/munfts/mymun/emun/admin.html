@@ -78,6 +78,8 @@
        </div> <br>
        <h5> Past Speakers</h5>
        <div id="spoken">
+         <ul id="sortable2" style="    list-style-type: none; margin-left: -5%; width: 87%">
+         </ul>
        </div>
        <p id ='numleft'> </p>
 
@@ -386,9 +388,13 @@
             talkersdata = data['talkers']
             for (let i = 0; i<countriez.length; i++){
               if (talkersdata[i]['status'] == 'qd')
-{              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}            }
+              {              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}            }
+              else if(talkersdata[i]['status'] == 'sn')
+              {              $('#sortable2').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}            }
+
+
           })
-    }
+        }
     function addcountry(country){
       var val =''
       if (country == 'none'){ val = document.getElementById('countryadder').value;}
@@ -416,6 +422,10 @@
       update: function( event, ui ) {}
     });
     $( "#sortable" ).on( "sortupdate", function( event, ui ) {} );
+    $( "#sortable2" ).sortable({
+      update: function( event, ui ) {}
+    });
+    $( "#sortable2" ).on( "sortupdate", function( event, ui ) {} );
     function timerstart(){
       timerstate = !timerstate;
       console.log(timerstate);
@@ -443,8 +453,17 @@
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      console.log(contry)
-      url = 'emun/speaker/{{munname}}/{{commname}}/'+'/'
+      url = 'emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString());
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+          })
+          fillactivediscinfo();
     }
 
 
