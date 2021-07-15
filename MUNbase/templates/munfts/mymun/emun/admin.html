@@ -94,9 +94,9 @@
 
                 </div>
                 <div style="margin: auto; display: block; padding: 20px;padding-left: 20%; ">
-                  <button onclick="seconds= tps; timerstate = false;" class="btn btn-outline-success">Reset</button>
+                  <button onclick="seconds= tps; timerstate = false; $('#timertime').html(seconds +' s');" class="btn btn-outline-success">Reset</button>
                   <button onclick="timerstart()" class="btn btn-outline-primary">Play/Pause</button>
-                  <button onclick="seconds= 0; timerstate = false;" class="btn btn-outline-danger">Elapse</button>
+                  <button onclick="seconds= 0; timerstate = false; $('#timertime').html(seconds +' s');" class="btn btn-outline-danger">Elapse</button>
                 </div>
               </div>
           </div>
@@ -421,7 +421,7 @@
     function timerplay(){
       if (seconds==-129){
           seconds = tps;
-          $('#timertime').html(seconds);
+          $('#timertime').html(seconds +' s');
 
       }
 
