@@ -236,7 +236,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" onclick='updatedata=false' data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -246,6 +246,7 @@
     var countries = {{countries|safe}};
     var agenda = '';
     var tps;
+    var updatedata = false;
     var ns;
     var talkersdata;
     var seconds = -129;
@@ -344,7 +345,7 @@
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
             var id = motions[i]['id']
-            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`)">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
+            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
             $('#motiondata').append(markup);
 
           }
@@ -599,62 +600,66 @@
     }
     function voterdata(id){
       url = '/emun/getvoterdata/{{munname}}/{{commname}}/'+id
-      fetch(url, {
-            headers:{
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-            },
-      }).then(response => {
-            return response.json() //Convert response to JSON
-          }).then(data => {
-            console.log(data)
-            $('#voterdata').empty();
-            $('#mn').html(data['motion']['name'])
-            var voters = data['voterdata']
 
-            var vyes = []
-            var vno = []
-            var vabs = []
-            var vnot = []
+          var int = setInterval(function(){
+            if( updatedata = false){clearInterval(int)}
+            fetch(url, {
+                  headers:{
+                      'Accept': 'application/json',
+                      'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                  },
+            }).then(response => {
+                  return response.json() //Convert response to JSON
+                }).then(data => {
+                  console.log(data)
+                  $('#voterdata').empty();
+                  $('#mn').html(data['motion']['name'])
+                  var voters = data['voterdata']
 
-            for (let i =0;i<voters.length;i++){
-              if (voters[i]['vote'] == 'Yes'){
-                vyes.push(voters[i]['country'])
-              }
-              else if (voters[i]['vote'] == 'No'){
-                vno.push(voters[i]['country'])
-              }
-              else if (voters[i]['vote'] == 'Abstain'){
-                vabs.push(voters[i]['country'])
-              }
-              else {
-                vnot.push(voters[i]['country'])
-              }
-            }
-            console.log(vnot)
-            markyes = '<tr>'
-            markno = '<tr>'
-            markabs = '<tr>'
-            marknot = '<tr>'
-            for(let i = 0; i<vyes.length; i++){
-              markyes+='<td>'.concat(vyes[i].toString()).concat('</td>');
-            }
-            for(let i = 0; i<vno.length; i++){
-              markno+='<td>'.concat(vno[i].toString()).concat('</td>');
-            }
-            for(let i = 0; i<vnot.length; i++){
-              marknot+='<td>'.concat(vnot[i].toString()).concat('</td>');
-            }
-            for(let i = 0; i<vabs.length; i++){
-              markabs+='<td>'.concat(vabs[i].toString()).concat('</td>');
-            }
-            markyes.concat('</td>')
-            markno.concat('</td>')
-            marknot.concat('</td>')
-            markabs.concat('</td>')
-            console.log(marknot)
-            $('#voterdata').append(markyes + markno + markabs + marknot);
-          })
+                  var vyes = []
+                  var vno = []
+                  var vabs = []
+                  var vnot = []
+
+                  for (let i =0;i<voters.length;i++){
+                    if (voters[i]['vote'] == 'Yes'){
+                      vyes.push(voters[i]['country'])
+                    }
+                    else if (voters[i]['vote'] == 'No'){
+                      vno.push(voters[i]['country'])
+                    }
+                    else if (voters[i]['vote'] == 'Abstain'){
+                      vabs.push(voters[i]['country'])
+                    }
+                    else {
+                      vnot.push(voters[i]['country'])
+                    }
+                  }
+                  console.log(vnot)
+                  markyes = '<tr>'
+                  markno = '<tr>'
+                  markabs = '<tr>'
+                  marknot = '<tr>'
+                  for(let i = 0; i<vyes.length; i++){
+                    markyes+='<td>'.concat(vyes[i].toString()).concat('</td>');
+                  }
+                  for(let i = 0; i<vno.length; i++){
+                    markno+='<td>'.concat(vno[i].toString()).concat('</td>');
+                  }
+                  for(let i = 0; i<vnot.length; i++){
+                    marknot+='<td>'.concat(vnot[i].toString()).concat('</td>');
+                  }
+                  for(let i = 0; i<vabs.length; i++){
+                    markabs+='<td>'.concat(vabs[i].toString()).concat('</td>');
+                  }
+                  markyes.concat('</td>')
+                  markno.concat('</td>')
+                  marknot.concat('</td>')
+                  markabs.concat('</td>')
+                  console.log(marknot)
+                  $('#voterdata').append(markyes + markno + markabs + marknot);
+                })
+          }, 250);
     }
 
 
