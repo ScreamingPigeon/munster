@@ -447,8 +447,7 @@
         }, 1000);
     }
     function nextspeaker(){
-      timerstate = false;
-      element = $('#sortable li:first').attr('id')
+      seconds= tps; timerstate = false; $('#timertime').html(seconds +' s');$('#timerbar').css('width', '100%');      element = $('#sortable li:first').attr('id')
       var contry = '';
       for(let i =8; i<element.length;i++){
         contry+=element[i];
