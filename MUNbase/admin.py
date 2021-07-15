@@ -2,7 +2,7 @@ from django.contrib import admin
 from django import forms
 
 # Register your models here.
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Talklist,TalkListSpeaker, Motion, VotingEvent
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Talklist,TalkListSpeaker, Motion, Voter
 admin.site.register(User)
 admin.site.register(Experience)
 admin.site.register(MUNuser)
