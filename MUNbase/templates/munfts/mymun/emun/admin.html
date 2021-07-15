@@ -224,7 +224,22 @@
         </button>
       </div>
       <div class="modal-body">
-        voter data here
+        <table class="table table-responsive table-striped" >
+        <thead>
+          <tr>
+            <th scope="col"  style="width: 100px;">Yes</th>
+            <th scope="col"  style="width: 100px;">No</th>
+            <th scope="col" style="width: 100px;">Abstain</th>
+            <th scope="col" style="width: 100px;" >Not Voted</th>
+          </tr>
+          <tbody id ='voterdata'>
+
+          </tbody>
+        </thead>
+        <tbody id ='tabat'>
+
+        </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -335,7 +350,7 @@
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
             var id = motions[i]['id']
-            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" onclick = "voterdata(`'+ motions[i]['id']+'`)">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
+            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`)">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
             $('#motiondata').append(markup);
 
           }
@@ -599,6 +614,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             console.log(data)
+            $('#voterdata').empty();
           })
     }
 
