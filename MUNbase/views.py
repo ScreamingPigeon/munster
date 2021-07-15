@@ -1107,6 +1107,105 @@ def nextspeaker(request, munname, commname, agenda, alloc, seconds):
             return JsonResponse({'resps':'success'})
         except IndexError:
             return 'error'
+
+def newmotion(request, munname, commname, name, proposer):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return 'Admin Error'
+        motion = Motion(committee=comm, proposer = proposer,name = name)
+        motion.save()
+        return JsonResponse({'resps':success
+
+        })
+def showallmotions(request,munname,commname):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return 'Admin Error'
+        motions = Motion.objects.filter(committee=comm).values()
+        return JsonResponse({'motions':list(motions)})
+def getvoterdata(request, munname,commname, motionid):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return 'Admin Error'
+        motion = Motion.objects.filter(committee =comm, id = motionid)
+        try:
+            motion = motion[0]
+        except IndexError:
+            return 'Motion Error'
+        voters = Motion.objects.filter(motion = motion).values()
+        voterz = Motion.objects.filter(motion = motion)
+        for i in range(len(voters)):
+            voters[i]['country']=voterz.voter.country
+        return JsonResponse({'voterdata': list(voters)})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

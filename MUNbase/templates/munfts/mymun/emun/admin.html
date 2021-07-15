@@ -159,11 +159,12 @@
     <div class="col-md" id = 'motions'>
       <h2>Motions</h2>
       <p>Create or view voting events</p>
-      <button class="btn btn-primary" id="newvotingevent()" data-toggle="modal" data-target="#newmotionmodal">New Event</button>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#newmotionmodal">New Event</button>
       <table class="table table-responsive table-striped" id ='past motions'>
       <thead>
         <tr>
-          <th scope="col"  style="width: 200px;">Name</th>
+          <th scope="col"  style="width: 150px;">Name</th>
+          <th scope="col"  style="width: 150px;">Proposer</th>
           <th scope="col" style="width: 100px;">Yes</th>
           <th scope="col" style="width: 100px;" >No</th>
           <th scope="col" style="width: 100px;" >Abstain</th>
@@ -196,8 +197,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <label for="motname">Motion Name</label><input type="text" id="motname" value=""> <br> <br>
-        <label for="proposer">Proposer</label> <select id="proposer" >
+        <label for="motname">Motion Name: </label><input type="text" id="motname" value=""> <br> <br>
+        <label for="proposer">Proposer: </label> <select id="proposer" >
           <option value="admin">EB</option>
           {% for row in countries %}
           <option value="{{row}}">{{row}}</option>
@@ -205,7 +206,7 @@
         </select>
       </div>
       <div class="modal-footer">
-        <button onclicl="newmotion();" class="btn btn-primary">Create Motion</button>
+        <button onclick="newmotion();" class="btn btn-primary">Create Motion</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
@@ -516,7 +517,7 @@
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      url = '/emun/speaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString()).concat('/').concat(seconds.toString());
+      url = '/emun/nextspeaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString()).concat('/').concat(seconds.toString());
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
@@ -531,8 +532,21 @@
           $('#sortable2').append('<li class="ui-state-default" id = "spoken'+contry+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+contry+'</a></li>');
 
     }
+    function newmotion(){
+      var name = document.getElementById('motname').value;
+      var proposer = document.getElementById('proposer').value;
+      url = '/emun/newmotion/{{munname}}/{{commname}}/'+name.toString()+"/"+proposer.toString();
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
 
-
+          })
+    }
   </script>
   <style>
 

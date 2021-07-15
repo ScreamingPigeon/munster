@@ -68,7 +68,11 @@ urlpatterns = [
     path('emun/getdiscussions/<str:munname>/<str:commname>', views.getdiscussions, name ='getdiscussions'),
     path('emun/getactivediscussion/<str:munname>/<str:commname>', views.getactivediscussion, name ='getactivediscussion'),
     path('emun/speaker/<str:munname>/<str:commname>/<str:agenda>/<str:tps>/<str:ns>/<str:alloc>', views.addcountry, name ='addcountry'),
-    path('emun/speaker/<str:munname>/<str:commname>/<str:agenda>/<str:alloc>/<str:seconds>', views.nextspeaker, name ='nextspeaker'),
+    path('emun/nextspeaker/<str:munname>/<str:commname>/<str:agenda>/<str:alloc>/<str:seconds>', views.nextspeaker, name ='nextspeaker'),
+    path('emun/newmotion/<str:munname>/<str:commname>/<str:name>/<str:proposer>', views.newmotion, name ='newmotion'),
+    path('emun/showallmotions/<str:munname>/<str:commname>', views.showallmotions, name ='showallmotions'),
+    path('emun/getvoterdata/<str:munname>/<str:commname>/<str:motionid>', views.getvoterdata, name ='getvoterdata'),
+
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
