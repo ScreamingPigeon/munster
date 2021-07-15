@@ -1003,6 +1003,54 @@ def getactivediscussion(request, munname, commname):
             return JsonResponse({'resps': talklist, 'talkers': list(talkers)})
         except IndexError:
             return JsonResponse({'resps':"None"})
+
+def addcountry(request, munname, commname, agenda, tps, ns, alloc):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+            return None
+        munnamme = request.session.get('emun')
+        admin = request.session.get('emunalloc')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return None
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return None
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return None
+        list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = nps, active = 'Y',committee = comm )
+        try:
+            list = list[0]
+        except IndexError:
+            return None
+        parz = Participant.objects.filter(country = alloc, committee = comm)
+        try:
+            parz = parz[0]
+        except IndexError:
+            return None
+        speaker = TalkListSpeaker.objects.filter(list = list, speaker = parz)
+        if len(speaker) == 0:
+            speaker = TalkListSpeaker(list = list, speaker = parz)
+            speaker.save()
+            return  JsonResponse({'resps':'added'})
+        else:
+            speaker = speaker[0]
+            speaker.delete()
+            return  JsonResponse({'resps':'removed'})
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

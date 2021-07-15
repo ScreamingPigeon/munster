@@ -68,6 +68,7 @@
   <div class="row"><!--Active Discussions-->
       <div class="col-md" id="activ" >
         <h2 id = 'adname'></h2> <br>
+        <h6 id = 'followup'></h6>
         <h5> Speaking Now</h5>
         <div id="speaknow">
 
@@ -409,6 +410,9 @@
       	"Zimbabwe",
       	"Åland Islands"
       ];
+    var agenda = '';
+    var tps;
+    var ns;
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -601,9 +605,15 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             var values = data['resps'];
-            $('#adname').empty()
-            $('#country').empty()
-            $('#adname').append(values['name'])
+            $('#adname').empty();
+            $('#countryadder').empty();
+            $('#followup').empty();
+            $('#adname').append(values['name']);
+            agenda = values['name'];
+            tps = values['secsps'];
+            ns = values['numberofspeakers'];
+            $('#followup').append(ns.toString() +' speakers and '+tps.toString()+' seconds per speaker');
+
             for (let i = 0;i< countries.length; i++){
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
@@ -616,9 +626,9 @@
     function addcountry(){
       var val = document.getElementById('countryadder').value;
       $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+val+'"></span>'+val+'</li>');
-
+      url = 'emun/speaker/{{munname}}/{{commname}}/'+agenda+'/'+tps+'/'+ns+'/'+val;
+      console.log(val);
     }
-
 
     $( "#sortable" ).sortable({
       update: function( event, ui ) {}
