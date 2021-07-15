@@ -414,13 +414,12 @@
       update: function( event, ui ) {}
     });
     $( "#sortable" ).on( "sortupdate", function( event, ui ) {} );
-    timerstart(){
+    function timerstart(){
       if (timerstate){
         timerstate = false;
       }
-      if (timerstate){
+      else{
         timerstate = true;
-        seconds = 0;
       }
     }
   </script>
