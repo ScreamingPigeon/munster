@@ -388,7 +388,8 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             console.log(data);
-            fillactivediscinfo();
+            if data['resps'] == 'removed':
+              $('#speaking'+val).remove()
           })
     }
 
