@@ -1104,7 +1104,7 @@ def nextspeaker(request, munname, commname, agenda, alloc, seconds):
             talker.status = 'sn'
             talker.timespent = seconds
             talker.save()
-            return None
+            return JsonResponse({'resps':'success'})
         except IndexError:
             return 'error'
 #----------------------------------- COMMON SEARCH--------------------------------------------#
