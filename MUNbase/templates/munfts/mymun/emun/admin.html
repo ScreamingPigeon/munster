@@ -214,6 +214,24 @@
     </div>
   </div>
 </div>
+<div class="modal" tabindex="-1" id='voterdatamodal'role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Motion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        voter data here
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   </body>
   <script type="text/javascript">
     var countries = {{countries|safe}};
@@ -317,7 +335,7 @@
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
             var id = motions[i]['id']
-            var markup = '<tr> <td>'+motions[i]['name']+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
+            var markup = '<tr> <td>'+'<a onclick = "voterdata(`'+ motions[i]['id']+'`)">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
             $('#motiondata').append(markup);
 
           }
@@ -570,6 +588,21 @@
 
           })
     }
+    function voterdata(id){
+      url = '/emun/getvoterdata/{{munname}}/{{commname}}/'+id
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data)
+          })
+    }
+
+
   </script>
   <style>
 
