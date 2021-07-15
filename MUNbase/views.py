@@ -1058,7 +1058,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             if row.status=='qd':
                 checkallspoken = False;
 
-        if ((len(speaker) == 0)or(checkallspoken == True):
+        if (len(speaker) == 0)or(checkallspoken == True):
             speaker = TalkListSpeaker(list = list, speaker = parz)
             speaker.save()
             return  JsonResponse({'resps':'added', 'talkers':newtalkers})
