@@ -68,7 +68,7 @@ urlpatterns = [
     path('emun/getdiscussions/<str:munname>/<str:commname>', views.getdiscussions, name ='getdiscussions'),
     path('emun/getactivediscussion/<str:munname>/<str:commname>', views.getactivediscussion, name ='getactivediscussion'),
     path('emun/speaker/<str:munname>/<str:commname>/<str:agenda>/<str:tps>/<str:ns>/<str:alloc>', views.addcountry, name ='addcountry'),
-    path('emun/speaker/<str:munname>/<str:commname>/<str:talkid>/<str:speakerid>', views.nextspeaker, name ='nextspeaker'),
+    path('emun/speaker/<str:munname>/<str:commname>/<str:talkid>/<str:alloc>', views.nextspeaker, name ='nextspeaker'),
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
