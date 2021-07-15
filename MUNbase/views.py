@@ -1205,8 +1205,8 @@ def getvoterdata(request, munname,commname, motionid):
             motion = motion[0]
         except IndexError:
             return 'Motion Error'
-        voters = Motion.objects.filter(motion = motion).values()
-        voterz = Motion.objects.filter(motion = motion)
+        voters = Voter.objects.filter(motion = motion).values()
+        voterz = Voter.objects.filter(motion = motion)
         for i in range(len(voters)):
             voters[i]['country']=voterz.voter.country
         return JsonResponse({'voterdata': list(voters)})
