@@ -1093,7 +1093,12 @@ def nextspeaker(request, munname, commname, agenda, alloc, seconds):
             list = list[0]
         except IndexError:
             return 'talklist error'
-        talker = TalkListSpeaker.objects.filter(country = alloc, list = list)
+        part = Participant.objects.filter(committee=comm, country = alloc)
+        try:
+            part = part[0]
+        except IndexError:
+            return 'country error'
+        talker = TalkListSpeaker.objects.filter(speaker = part, list = list)
         try:
             talker = talker[0]
             talker.speaker = 'sn'
