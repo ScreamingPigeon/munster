@@ -438,7 +438,7 @@
     }
     function nextspeaker(){
       timerstate = false;
-      element = $('#sortable li:first')
+      element = $('#sortable li:first').attr('id')
       console.log(element)
       url = 'emun/speaker/{{munname}}/{{commname}}/'+'/'
     }
