@@ -1061,7 +1061,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             speaker = speaker[0]
             speaker.delete()
             return  JsonResponse({'resps':'removed','talkers':newtalkers})
-def nextspeaker(request, munname, commname, agenda, alloc):
+def nextspeaker(request, munname, commname, agenda, alloc, seconds):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
@@ -1097,6 +1097,7 @@ def nextspeaker(request, munname, commname, agenda, alloc):
         try:
             talker = talker[0]
             talker.speaker = 'sn'
+            talker.timespent = seconds
             talker.save()
             return None
         except IndexError:
