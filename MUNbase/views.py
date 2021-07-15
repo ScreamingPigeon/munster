@@ -1012,7 +1012,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
         if commnamez != commname or adminz != "Admin" or munnamez!= munname:
-            return None
+            return 'Authentication Error'
         munnamme = request.session.get('emun')
         admin = request.session.get('emunalloc')
         commname = request.session.get('emuncomm')
@@ -1020,17 +1020,17 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
         try:
             mun =mun[0]
         except IndexError:
-            return None
+            return 'MUN Error'
         comm = Committee.objects.filter(mun = mun, name = commname)
         try:
             comm = comm[0]
         except IndexError:
-            return None
+            return 'Comm Error'
         part = CommitteeAdmin.objects.filter(committee = comm)
         try:
             part = part[0]
         except IndexError:
-            return None
+            return 'Admin Error'
         list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)
         try:
             list = list[0]
