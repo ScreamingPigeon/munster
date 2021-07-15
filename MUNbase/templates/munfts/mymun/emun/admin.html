@@ -637,16 +637,16 @@
             markabs = '<tr>'
             marknot = '<tr>'
             for(let i = 0; i<vyes.length; i++){
-              markyes.concat('<td>'+vyes[i]+'</td>')
+              markyes.concat('<td>'.concat(vyes[i].toString()).concat('</td>'))
             }
             for(let i = 0; i<vno.length; i++){
-              markno.concat('<td>'+vno[i]+'</td>')
+              markno.concat('<td>'.concat(vno[i].toString()).concat('</td>'))
             }
             for(let i = 0; i<vnot.length; i++){
-              marknot.concat('<td>'+marknot[i]+'</td>')
+              marknot.concat('<td>'.concat(vnot[i].toString()).concat('</td>'))
             }
             for(let i = 0; i<vabs.length; i++){
-              markabs.concat('<td>'+markabs[i]+'</td>')
+              markabs.concat('<td>'.concat(vabs[i].toString()).concat('</td>'))
             }
             markyes.concat('</td>')
             markno.concat('</td>')
