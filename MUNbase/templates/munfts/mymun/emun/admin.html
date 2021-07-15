@@ -94,9 +94,9 @@
 
                 </div>
                 <div style="margin: auto; display: block; padding: 20px;padding-left: 20%; ">
-                  <button type="timereset()" class="btn btn-outline-success">Reset</button>
+                  <button onclick="seconds= tps; timerstate = false;" class="btn btn-outline-success">Reset</button>
                   <button onclick="timerstart()" class="btn btn-outline-primary">Play/Pause</button>
-                  <button type="timernext()" class="btn btn-outline-danger">Elapse</button>
+                  <button type="seconds= 0; timerstate = false;" class="btn btn-outline-danger">Elapse</button>
                 </div>
               </div>
           </div>
@@ -429,7 +429,7 @@
         if (timerstate == false) {clearInterval(countdown);}
         seconds--;
         var x = (100-((tps - seconds)*(tps/100))).toString().concat('%');
-        $('#timertime').html(seconds);
+        $('#timertime').html(seconds + " s");
         $('#timerbar').css('width', x);
         }, 1000);
     }
