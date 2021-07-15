@@ -370,7 +370,7 @@
             var talkers = data['talkers'];
             console.log(talkers)
             for (let i = 0; i<talkers.length; i++){
-              $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+talkers[i]+'"></span>'+talkers[i]+'</li>');
+              $('#sortable').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+talkers[i]+'</li>');
             }
           })
     }
@@ -387,8 +387,10 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             console.log(data);
-            if (data['resps'] == 'removed'){              $('#speaking'+val).remove();}
-            else{      $('#sortable').append('<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" id = "speaking'+val+'"></span>'+val+'</li>');}
+            if (data['resps'] == 'removed')
+            { $('#speaking'+val).remove();}
+            else
+            {      $('#sortable').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+'</li>');}
           })
     }
 
