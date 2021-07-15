@@ -173,8 +173,8 @@
     var tps;
     var ns;
     var talkersdata;
-    var seconds;
-    var timerstat = false;
+    var seconds = -129;
+    var timerstate = false;
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -416,10 +416,23 @@
     function timerstart(){
       if (timerstate){
         timerstate = false;
+        timer();
       }
       else{
         timerstate = true;
       }
+    }
+    function timer(){
+      if (seconds==-129){
+          seconds = tps;
+          $('#timertime').html = seconds;
+
+      }
+
+      var countdown = setInterval(function() {
+        seconds--;
+        $('#timertime').html = seconds;
+        if (timerstate == false) clearInterval(countdown);}, 1000);
     }
   </script>
   <style>
