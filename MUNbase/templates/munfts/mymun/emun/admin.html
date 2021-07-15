@@ -385,7 +385,8 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
+            console.log(data);
+            fillactivediscinfo();
           })
     }
 
