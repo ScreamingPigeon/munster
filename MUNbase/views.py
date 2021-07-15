@@ -1007,7 +1007,7 @@ def getactivediscussion(request, munname, commname):
             for row in talkz:
                 talkers.append(row.speaker.country)
             countries = TalkListSpeaker.objects.filter(list = Talklist.objects.filter(committee=comm, active="Y")[0]).values()
-            return JsonResponse({'resps': talklist, 'countries': list(talkers), 'talkers': countries})
+            return JsonResponse({'resps': talklist, 'countries': list(talkers), 'talkers': list(countries)})
         except IndexError:
             return JsonResponse({'resps':"None"})
 
