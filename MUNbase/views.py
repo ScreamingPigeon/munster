@@ -1174,7 +1174,10 @@ def showallmotions(request,munname,commname):
             part = part[0]
         except IndexError:
             return 'Admin Error'
-        motions = Motion.objects.filter(committee=comm).values()
+        motionz = Motion.objects.filter(committee=comm).values()
+        motions =[]
+        for i in range(len(motionz)):
+            motions.append(motionz[len(motionz)-i-1])
         length = len(Participant.objects.filter(committee=comm))
         return JsonResponse({'motions':list(motions), 'total':length})
 def getvoterdata(request, munname,commname, motionid):
