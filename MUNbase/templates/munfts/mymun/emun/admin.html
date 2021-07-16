@@ -260,7 +260,7 @@
           <form  action="{% url 'updatepwork' munname commname %}" id='upform'method="post"onsubmit="return false" >
             {%csrf_token%}
             <textarea id="papeditor" name ='body'rows="80" cols="30"></textarea><br><br>
-            <button type="button" class="btn btn-primary" onclick ='document.getElementById("upform").submit();'>Update</button>
+            <button type="submit" class="btn btn-primary" onclick ='document.getElementById("upform").submit();'>Update</button>
             <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
           </form>
         </div>
@@ -340,6 +340,9 @@
 </div>
   </body>
   <script type="text/javascript">
+  $("#upform").submit(function(e) {
+    e.preventDefault();
+});
     var countries = {{countries|safe}};
     var agenda = '';
     var tps;
