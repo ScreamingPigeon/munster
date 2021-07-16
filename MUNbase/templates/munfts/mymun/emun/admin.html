@@ -176,10 +176,69 @@
     </div>
   </div>
 
-  <div class="row" class = "sectionz" id = 'paperwork'><!--paperwork-->
+  <div class="row justify-content-center" ><!--paperwork-->
+    <div class="col-md sectionz" id = 'paperwork'>
+        <h2>Open to Ammendments</h2>
+        <table class="table table-responsive table-striped" >
+        <thead>
+          <tr>
+            <th scope="col"  style="width: 400px;">Name</th>
+            <th scope="col"  style="width: 100px;">Proposer</th>
+
+          </tr>
+          <tbody id ='tammend'>
+
+          </tbody>
+        </thead>
+        </table>
+        <br>
+        <h2>Visible to Committee</h2>
+        <table class="table table-responsive table-striped" >
+        <thead>
+          <tr>
+            <th scope="col"  style="width: 400px;">Name</th>
+            <th scope="col"  style="width: 100px;">Proposer</th>
+
+          </tr>
+          <tbody id ='tvisible'>
+
+          </tbody>
+        </thead>
+        </table>
+        <br>
+        <h2>Queued</h2>
+        <table class="table table-responsive table-striped" >
+        <thead>
+          <tr>
+            <th scope="col"  style="width: 400px;">Name</th>
+            <th scope="col"  style="width: 100px;">Proposer</th>
+
+          </tr>
+          <tbody id ='tqueue'>
+
+          </tbody>
+        </thead>
+        </table>
+        <br>
+        <h2>Completed</h2>
+        <table class="table table-responsive table-striped" >
+        <thead>
+          <tr>
+            <th scope="col"  style="width: 400px;">Name</th>
+            <th scope="col"  style="width: 100px;">Proposer</th>
+
+          </tr>
+          <tbody id ='tcomp'>
+
+          </tbody>
+        </thead>
+        </table>
+        <br>
+    </div>
+  </div>
+  <div class="row justify-content-center" id ='viewpap'>
 
   </div>
-
 
 </div>
 <div class="modal" tabindex="-1" id='newmotionmodal'role="dialog">
@@ -725,6 +784,12 @@
       height: 40px;
       font-size: 18px;
       padding-top: 2px;
+    }
+    #paperwork{
+      display: none;
+      margin : auto;
+      border: solid #2F76D4 medium;
+      padding: 40px;
     }
 
 #voterdata tr {
