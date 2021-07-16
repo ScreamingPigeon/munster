@@ -1181,10 +1181,9 @@ def showallmotions(request,munname,commname):
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
-        if commnamez != commname or (adminz != "Admin" or adminz != None) or munnamez!= munname:
+        if commnamez != commname or munnamez!= munname:
             return 'Authentication Error'
         munnamme = request.session.get('emun')
-        alloc = request.session.get('emunalloc')
         commname = request.session.get('emuncomm')
         mun = MUNuser.objects.filter(username = munname)
         try:
