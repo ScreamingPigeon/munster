@@ -1448,7 +1448,7 @@ def updatepwork(request, munname, commname):
         return 'error'
     pwork.body = body;
     pwork.save()
-    return redirect('http://www.munster.co.in/emun'+munname+'/'+commname+'/admin')
+    return None
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
