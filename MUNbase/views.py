@@ -1421,7 +1421,7 @@ def paperworkdata(request, munname, commname, pworkid):
 def updatepwork(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
-            return None
+            return 'cookie error'
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
