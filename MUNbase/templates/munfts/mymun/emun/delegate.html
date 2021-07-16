@@ -212,8 +212,8 @@
                       + currentdate.getMinutes() + ":"
                       + currentdate.getSeconds();
       var expirydate =new Date();
-      expirydate.setDate(currentDate.getDate()+7)
-      console.log(expirydate)
+      expirydate.setDate(currentdate.getDate()+7)
+      console.log(expirydate, datetime)
       document.cookie ='pwork=' + tinyMCE.activeEditor.getContent().toString() + ';';
       document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+';';
       let x = document.cookie;
