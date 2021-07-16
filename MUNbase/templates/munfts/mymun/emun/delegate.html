@@ -73,7 +73,7 @@
           <div class="col-md" id ='paperwork'>
             <h2>Paperwork</h2>
             <br>
-            <form  action="{%url 'submitpwork' %}" method="post">
+            <form  action="{%url 'submitpwork' munname commname %}" method="post">
               {%csrf_token%}
               <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname'  name='title'type ='text'></input> <br> <br>
               <textarea id="cookiedpaperwork" name ='body'rows="8" cols="80"></textarea><br><br>
