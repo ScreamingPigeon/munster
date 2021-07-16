@@ -65,13 +65,23 @@
   <script type="text/javascript">
     function voting(){
       $('#voting').css('display','block');
+      $('#paperwork').css('display','none');
+
     }
     function paperwork(){
       $('#paperwork').css('display','block');
+      $('#voting').css('display','none');
+
     }
   </script>
   <style>
   #voting{
+      display: none;
+      margin : auto;
+      border: solid #2F76D4 thick;
+      padding: 40px;
+  }
+  #paperwork{
       display: none;
       margin : auto;
       border: solid #2F76D4 thick;
