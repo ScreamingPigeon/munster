@@ -242,7 +242,7 @@
   </div>
   <div id ='viewpap'>
     <div class="row justify-content-center">
-      <div class="col" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9;">
+      <div class="col" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 30px;">
         <h3>Paperwork Settings</h3>
         <h6 id ='mst'></h6>
         <h6 id ='currentstat'></h6>
@@ -254,6 +254,7 @@
         </select>
       </div>
     </div>
+    <br> <br>
       <div class="row">
         <div class="col-9">
           <textarea id="papeditor" name ='body'rows="40" cols="30"></textarea><br><br>
@@ -870,12 +871,12 @@
             pwork = data['pwork'];
             $('#resonance').empty()
             $('#mst').empty()
-            $('#mst').html(pwork['country'])
+            $('#mst').append(pwork['country'])
             $('#pworkstatus').empty()
-            if (pwork['status'] == 'QUE'){$('#pworkstatus').html("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
-            if (pwork['status'] == 'OTA'){$('#pworkstatus').html("Currently this paperwork is Open to Ammendments");}
-            if (pwork['status'] == 'VTC'){$('#pworkstatus').html("Currently this paperwork is Visible to the Committee but not Open to Ammendments")}
-            if (pwork['status'] == 'COM'){$('#pworkstatus').html("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
+            if (pwork['status'] == 'QUE'){$('#pworkstatus').append("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
+            if (pwork['status'] == 'OTA'){$('#pworkstatus').append("Currently this paperwork is Open to Ammendments");}
+            if (pwork['status'] == 'VTC'){$('#pworkstatus').append("Currently this paperwork is Visible to the Committee but not Open to Ammendments")}
+            if (pwork['status'] == 'COM'){$('#pworkstatus').append("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
 
             $('#resonance').html(pwork['title'])
             tinymce.get('papeditor').setContent(pwork['body']);
