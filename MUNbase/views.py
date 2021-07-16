@@ -1476,7 +1476,7 @@ def getammendments(request, munname, commname, id):
         except IndexError:
             return 'Error'
         ammendments = Ammendment.objects.filter(paperwork=paperwork).order_by('time').values()
-        return JsonResponse('resps':ammendments)
+        return JsonResponse({'resps':ammendments})
 
 
 
