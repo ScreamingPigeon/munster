@@ -155,7 +155,8 @@
           }).then(data => {
             console.log(data)
                 $('#motname').html(data['motionname']);
-                $('#submitvote').attr('onclick', 'submitvote("'data['id'].toString()'");');
+
+                $('#submitvote').attr('onclick', 'submitvote("'+data['id'].toString()+'");');
               if (data['vote'] != 'NA'){
                 $('#votecont').empty()
                 $('#submitvote').css('display', 'none');
