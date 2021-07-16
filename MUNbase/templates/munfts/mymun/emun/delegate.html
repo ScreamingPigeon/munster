@@ -204,7 +204,7 @@
             })
     }
     function updateinfo(){
-      document.cookie ='pwork=' + document.getElementById('cookiedpaperwork').innerHTML.toString() + ';';
+      document.cookie ='pwork=' + tinyMCE.activeEditor.getContent().toString() + ';';
       document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+';';
       let x = document.cookie;
       console.log(x)
