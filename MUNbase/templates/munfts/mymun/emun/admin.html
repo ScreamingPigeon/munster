@@ -743,7 +743,6 @@
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "block");
       pworkstate = true;
-      var int = setInterval(function(){if (pworkstate == false){clearInterval( int );}
       $('#tcomp').empty()
       $('#tvisible').empty()
       $('#tqueue').empty()
@@ -754,7 +753,7 @@
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
             },
-      }).then(response => {
+          }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
             var OTA = data['OTA']
@@ -777,6 +776,40 @@
               markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
               $('#tammend').append(markup)
             }
+      var int = setInterval(function(){if (pworkstate == false){clearInterval( int );}
+        $('#tcomp').empty()
+        $('#tvisible').empty()
+        $('#tqueue').empty()
+        $('#tammend').empty()
+        url = '/emun/getpaperwork/{{munname}}/{{commname}}'
+        fetch(url, {
+              headers:{
+                  'Accept': 'application/json',
+                  'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+              },
+        }).then(response => {
+              return response.json() //Convert response to JSON
+            }).then(data => {
+              var OTA = data['OTA']
+              var VTC = data['VTC']
+              var QUE = data['QUE']
+              var COM = data['COM']
+              for (let i =0; i< OTA.length; i++){
+                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+OTA[i]['id']+'`)" >'+OTA[i]['title']+'</a></td>  <td>'+OTA[i]['mainsubmitter']+'</td>  </tr>';
+                $('#tammend').append(markup)
+              }
+              for (let i =0; i< VTC.length; i++){
+                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+VTC[i]['id']+'`)" >'+VTC[i]['title']+'</a></td>  <td>'+VTC[i]['mainsubmitter']+'</td>   </tr>';
+                $('#tvisible').append(markup)
+              }
+              for (let i =0; i< QUE.length; i++){
+                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+QUE[i]['id']+'`)" >'+QUE[i]['title']+'</a></td>  <td>'+QUE[i]['mainsubmitter']+'</td>  </tr>';
+                $('#tqueue').append(markup)
+              }
+              for (let i =0; i< COM.length; i++){
+                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
+                $('#tammend').append(markup)
+              }
           })},5000)
 
     }
