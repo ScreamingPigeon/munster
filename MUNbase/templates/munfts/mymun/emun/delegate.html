@@ -124,9 +124,9 @@
       $('#paperwork').css('display','block');
       $('#voting').css('display','none');
       $('#ammendment').css('display','none');
-      var content = readCookie('pwork');
+      var content = readCookie('pwork').slice(0, -29);
       tinymce.get('cookiedpaperwork').setContent(content);
-      var title = readCookie('pworktitle');
+      var title = readCookie('pworktitle').slice(0,-29);
       document.getElementById('resoname').value = title;
 
     }
