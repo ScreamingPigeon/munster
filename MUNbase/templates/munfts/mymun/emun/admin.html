@@ -257,11 +257,24 @@
     <br> <br>
       <div class="row" style="border-radius: 3px;border: solid #C9CACB 1px; padding: 20px;">
         <div class="col-9">
-          <textarea id="papeditor" name ='body'rows="80" cols="30"></textarea><br><br>
+          <form  action="{% url 'updatepwork' munname commname %}" method="post">
+            {%csrf_token%}
+            <textarea id="papeditor" name ='body'rows="80" cols="30"></textarea><br><br>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
+          </form>
         </div>
         <div class="col-3" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 10px;margin-bottom: 45px;">
-          <h5>Ammendments</h5>
-          <div id='contam'>
+          <div id='contamq'>
+            <h5>Queued Ammendments</h5>
+
+          </div>
+          <div id='passedam'>
+            <h5>Passed Ammendments</h5>
+
+          </div>
+          <div id='rejectam'>
+            <h5>Rejected Ammendments</h5>
 
           </div>
         </div>
@@ -874,6 +887,7 @@
             pwork = data['pwork'];
             $('#resonance').empty()
             $('#mst').empty()
+            document.getElementById('idpw').value = pwork['id'];
             $('#mst').text(pwork['country'])
             $('#currentstat').empty()
             if (pwork['status'] == 'QUE'){$('#currentstat').text("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}

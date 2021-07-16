@@ -1418,6 +1418,42 @@ def paperworkdata(request, munname, commname, pworkid):
         except IndexError:
             return 'Pwork Error'
         return JsonResponse({'pwork':pwork})
+def updatepwork(request, munname, commname):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        part = CommitteeAdmin.objects.filter(committee = comm)
+        try:
+            part = part[0]
+        except IndexError:
+            return 'Admin Error'
+        id = request.POST['id']
+        body = request.POST['body']
+        pwork = Paperwork.objects.filter(committee=comm, id = id)
+        try:
+            pwork = pwork[0]
+        except IndexError:
+            return 'error'
+        pwork.body = body;
+        pwork.save()
+        return redirect('http://www.munster.co.in/emun'+munname+'/'+commname+'/admin')
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
