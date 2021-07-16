@@ -843,7 +843,7 @@ def partview(request, munname, commname):
         delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamez, 'country':country, 'commname':commnamez})
+    return render(request, 'munfts/mymun/emun/delegate.html', {'munname':munnamez, 'country':country, 'commname':commnamez})
 
 def commlogout(request):
     mun = ""
