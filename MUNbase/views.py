@@ -1419,7 +1419,7 @@ def paperworkdata(request, munname, commname, pworkid):
             return 'Pwork Error'
         return JsonResponse({'pwork':pwork})
 def updatepwork(request, munname, commname):
-    if request.is_ajax and request.method == "GET":
+    if request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return 'cookie error'
         munnamez = request.session.get('emun')
@@ -1441,7 +1441,6 @@ def updatepwork(request, munname, commname):
             return 'Comm Error'
         id = request.POST['id']
         body = request.POST['body']
-        return redirect('http://www.munster.co.in/emun'+munname+'/'+commname+'/admin')
 
         pwork = Paperwork.objects.filter(committee=comm, id = id)
         try:
