@@ -166,22 +166,14 @@
                 $('#submitvote').css('display', 'block');
 
                 if(data['status']=='PV'){
-                  markup = '              <label for="voteopt">Vote: </label> <select id="voteopt" >
-                                  <option value="Yes">YES</option>
-                                  <option value="No">NO</option>
-                                  </select>';
+                  markup = '<label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><select>';
                   $('#votecont').append(markup);
                 }
                 if(data['status']=='P'){
-                  markup = '              <label for="voteopt">Vote: </label> <select id="voteopt" >
-                                  <option value="Yes">YES</option>
-                                  <option value="No">NO</option>
-                                  <option value="Abstain">ABSTAIN</option>
-                                  </select>';
+                  markup = '<label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><option value="Abstain">ABSTAIN</option><select>';
                   $('#votecont').append(markup);
                 }
               }
-
 
             })
     }
