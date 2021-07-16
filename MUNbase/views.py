@@ -1325,9 +1325,10 @@ def sendvote(request, munname, commname, motionid, country, vote):
         return JsonResponse({'resps':'success'})
 
 def submitpwork(request, munname, commname):
-    title = json.load(request)['title'][0] #Get data from POST request
-    body = json.load(request)['body'][0] #Get data from POST request
-    country = json.load(request)['country'][0] #Get data from POST request
+    data = json.loads(request.body.decode("utf-8"))
+    title = data['title'][0] #Get data from POST request
+    body = data['body'][0] #Get data from POST request
+    country = data['country'][0] #Get data from POST request
     if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
         return None
     munnamez = request.session.get('emun')
