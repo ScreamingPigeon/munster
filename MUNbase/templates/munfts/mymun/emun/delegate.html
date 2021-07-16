@@ -75,7 +75,7 @@
             <br>
             <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname' type ='text'></input> <br> <br>
             <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea><br><br>
-            <button class="btn btn-primary" onclick="submitpaperwork()">Submit Paperwork</button>
+            <button class="btn btn-primary" onclick="submitpwork()">Submit Paperwork</button>
           </div>
         </div>
         <div class="row justify-content-center" ><!--ammendments-->
@@ -232,7 +232,7 @@
           'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
           'X-CSRFToken': '{% csrf_token %}',
         },
-            body: JSON.stringify({'title':[title],'body':[body], 'country':[alloc]}) //JavaScript object of data to POST
+            body: JSON.stringify({'title':'`'+title.toString()+'`','body':'`'+body.toString()+'`', 'country':'`'+alloc.toString()+'`'}) //JavaScript object of data to POST
         })
         .then(response => {
               return response.json() //Convert response to JSON
