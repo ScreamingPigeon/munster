@@ -260,7 +260,7 @@
           <form  action="{% url 'updatepwork' munname commname %}" id='upform'method="post"onsubmit="return false" >
             {%csrf_token%}
             <textarea id="papeditor" name ='body'rows="80" cols="30"></textarea><br><br>
-            <button type="button" class="btn btn-primary" onclick ='openpwork("'+document.getElementById('idpw').value.toString()+'");document.getElementById("upform").submit();'>Update</button>
+            <button type="button" class="btn btn-primary" onclick ='document.getElementById("upform").submit();'>Update</button>
             <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
           </form>
         </div>
