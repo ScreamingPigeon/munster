@@ -257,12 +257,9 @@
     <br> <br>
       <div class="row" style="border-radius: 3px;border: solid #C9CACB 1px; padding: 20px;">
         <div class="col-9">
-          <form  action="{% url 'updatepwork' munname commname %}" id='upform'method="post"onsubmit="return false" >
-            {%csrf_token%}
             <textarea id="papeditor" name ='body'rows="80" cols="30"></textarea><br><br>
-            <button type="submit" class="btn btn-primary" onclick ='document.getElementById("upform").submit();'>Update</button>
+            <button type="button" class="btn btn-primary" onclick ='updatepwork();'>Update</button>
             <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
-          </form>
         </div>
         <div class="col-3" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 10px;margin-bottom: 45px;">
           <div id='contamq'>
@@ -340,9 +337,6 @@
 </div>
   </body>
   <script type="text/javascript">
-  $("#upform").submit(function(e) {
-    e.preventDefault();
-});
     var countries = {{countries|safe}};
     var agenda = '';
     var tps;
@@ -900,6 +894,43 @@
             tinymce.get('papeditor').setContent(pwork['body']);
           });
       }
+    function updatepwork(){
+      var url ='/emun/updatepwork/{{munname}/{{commname}}}'
+      var csrftoken =getCookie('csrftoken');
+      var body = tinyMCE.activeEditor.getContent().toString();
+      var id = document.getElementById('idpw').value.toString();
+      fetch(URL, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers:{
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+          'X-CSRFToken': csrftoken,
+          },
+              body: JSON.stringify({'body':body, 'id':id}) //JavaScript object of data to POST
+          })
+          .then(response => {
+                return response.json() //Convert response to JSON
+          })
+          .then(data => {
+            console.log(data)
+          })
+            }
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
   </script>
   <style>
 
