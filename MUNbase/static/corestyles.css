@@ -33,7 +33,7 @@ body {
   font-weight: bold;
   color:#A8B7B9;
 }
-.btn{
+button{
   border-style: solid;
   border-color: #009688;
   border-width: thin;
@@ -41,6 +41,28 @@ body {
 .alert{
 border-style: solid;
 border-width: thin;
+    color:white;
+  }
+.footer{
+  position: fixed;
+  background-color: black;
+  padding-bottom: 0px;
+  position: sticky;
+  bottom: 0;
+}
+#bnnrimg{
+  width:100%;
+  height: auto;
+}
+.box{
+  padding:25px;
+  border: 5px;
+  border-style: solid;
+  border-width: medium;
+  border-color: #009688;
+  background-color: #28343A;
+}
+.subh{
 border-color:#F07178;
 font-family: 'Source Code Pro', monospace;
 color: #F07178;
