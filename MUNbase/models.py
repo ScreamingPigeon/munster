@@ -96,3 +96,18 @@ class Voter(models.Model):
     voter = models.ForeignKey(Participant, on_delete = models.CASCADE)
     vote = models.CharField(max_length = 10, default='NV')
     motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
+class Paperwork(models.Model):
+    title = models.CharField(max_length = 1000, default ='')
+    body = models.TextField(default='')
+    proposers = models.CharField(max_length=1000)
+    agenda = models.CharField(max_length=1000)
+
+class Ammendment(models.Model):
+    paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
+    type = models.CharField(max_length=100, default ='Addition')
+    content = models.TextField(default='')
+
+class Ammendmentscnd(models.Model):
+    ammendment = models.ForeignKey(Ammendment, on_delete = models.CASCADE)
+    type = models.CharField(max_length=100, default ='Addition')
+    content = models.TextField(default='')

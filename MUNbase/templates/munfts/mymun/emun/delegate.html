@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script src="https://cdn.tiny.cloud/1/123046wnx9rmn1uyq9ljnjy75xb7qq2nay9c8xc9lisaoxrq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector:'#cookiedpaperwork' });</script>
 </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="padding: 20px; color: white;">
@@ -46,7 +47,7 @@
           </ul>
 
         </div>
-      </nav>
+    </nav>
 
       <div class="container">
         <br><br>
@@ -71,6 +72,7 @@
         <div class="row justify-content-center" ><!--paperwork-->
           <div class="col-md" id ='paperwork'>
             <h2>Paperwork</h2>
+            <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea>
           </div>
         </div>
         <div class="row justify-content-center" ><!--ammendments-->
@@ -78,7 +80,7 @@
             <h2>Ammendments</h2>
           </div>
         </div>
-    </div>
+      </div>
     <div class="modal" tabindex="-1" id='sendvotemodal'role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
