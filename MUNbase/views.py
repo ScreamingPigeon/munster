@@ -1425,7 +1425,7 @@ def updatepwork(request, munname, commname):
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
-        if commnamez != commname or munnamez!= munname:
+        if commnamez != commname or adminz!='Admin' munnamez!= munname:
             return 'Authentication Error'
         munnamme = request.session.get('emun')
         commname = request.session.get('emuncomm')
@@ -1441,6 +1441,8 @@ def updatepwork(request, munname, commname):
             return 'Comm Error'
         id = request.POST['id']
         body = request.POST['body']
+        return redirect('http://www.munster.co.in/emun'+munname+'/'+commname+'/admin')
+
         pwork = Paperwork.objects.filter(committee=comm, id = id)
         try:
             pwork = pwork[0]
