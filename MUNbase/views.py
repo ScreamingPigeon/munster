@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Talklist, TalkListSpeaker, Motion, Voter
+from .models import User, Experience, MUNuser, MUNannouncements, Registrations, Delwatchlist, MUNwatchlist, Article, Committee, Participant, CommitteeAdmin, Talklist, TalkListSpeaker, Motion, Voter, Paperwork, Ammendment
 from django.urls import reverse
 import xlsxwriter
 from datetime import datetime
@@ -1323,6 +1323,37 @@ def sendvote(request, munname, commname, motionid, country, vote):
         motion.save()
         return JsonResponse({'resps':'success'})
 
+def submitpwork(request):
+    title = json.load(request)['title'] #Get data from POST request
+    body = json.load(request)['body'] #Get data from POST request
+    country = json.load(request)['country'] #Get data from POST request
+    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+        return None
+    munnamez = request.session.get('emun')
+    adminz = request.session.get('emunalloc')
+    commnamez = request.session.get('emuncomm')
+    if commnamez != commname or munnamez!= munname:
+        return 'Authentication Error'
+    munnamme = request.session.get('emun')
+    commname = request.session.get('emuncomm')
+    mun = MUNuser.objects.filter(username = munname)
+    try:
+        mun =mun[0]
+    except IndexError:
+        return 'MUN Error'
+    comm = Committee.objects.filter(mun = mun, name = commname)
+    try:
+        comm = comm[0]
+    except IndexError:
+        return 'Comm Error'
+    participant = Participant.objects.filter(committee=comm, country=country)
+    try:
+        participant=participant[0]
+    except IndexError:
+        return 'country error'
+    paperwork = Paperwork(title =title,body = body, mainsubmitter = country)
+    paperwork.save()
+    return JsonResponse({'resps':success})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):

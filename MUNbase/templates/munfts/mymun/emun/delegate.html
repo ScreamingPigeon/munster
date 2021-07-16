@@ -73,13 +73,9 @@
           <div class="col-md" id ='paperwork'>
             <h2>Paperwork</h2>
             <br>
-            <label for="resoname">Name of the Paperwork  </label><input onchange='updateinfo()'id ='resoname' type ='text'></input> <br> <br>
-            <label for="resoname">Number of Aditional Submitters  </label><input id ='resoname' onchange='updateinfo()' type='number' value='0' ></input> <br> <br> <br>
-
-            <div id='adsub'>
-
-            </div>
-            <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea>
+            <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname' type ='text'></input> <br> <br>
+            <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea><br><br>
+            <button class="btn btn-primary" onclick="submitpwork()">Submit Paperwork</button>
           </div>
         </div>
         <div class="row justify-content-center" ><!--ammendments-->
@@ -222,10 +218,28 @@
       document.cookie ='pwork=' + tinyMCE.activeEditor.getContent().toString() +expirydate.toUTCString() + ';';
       document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+expirydate.toUTCString()+';';
       let x = document.cookie;
-      console.log(x)
     }
-    function submitreso(){
-      return 'x';
+    function submitpaperwork(){
+      var body = tinyMCE.activeEditor.getContent().toString();
+      var title = document.getElementById('resoname').value.toString();
+      var alloc = '{{country}}';
+      var url = '/emun/submitpwork/{{munname}}/{{commname}}'
+      fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers:{
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+          'X-CSRFToken': '{% csrf_token %}',
+        },
+            body: JSON.stringify({'title':title,'body':body, 'country':alloc}) //JavaScript object of data to POST
+        })
+        .then(response => {
+              return response.json() //Convert response to JSON
+        })
+        .then(data => {
+        //Perform actions with the response data from the view
+        })
     }
 
   </script>

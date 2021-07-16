@@ -99,15 +99,11 @@ class Voter(models.Model):
 class Paperwork(models.Model):
     title = models.CharField(max_length = 1000, default ='')
     body = models.TextField(default='')
-    proposers = models.CharField(max_length=1000)
-    agenda = models.CharField(max_length=1000)
-
+    mainsubmitter = models.CharField(max_length=1000)
+    visible = models.CharField(max_length=10, default ='No')
+    opentoam = models.CharField(max_length=10, default='No')
 class Ammendment(models.Model):
     paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
     type = models.CharField(max_length=100, default ='Addition')
     content = models.TextField(default='')
-
-class Ammendmentscnd(models.Model):
-    ammendment = models.ForeignKey(Ammendment, on_delete = models.CASCADE)
-    type = models.CharField(max_length=100, default ='Addition')
-    content = models.TextField(default='')
+    visible = models.CharField(max_length=10)
