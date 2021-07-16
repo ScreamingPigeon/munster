@@ -223,7 +223,7 @@
       var body = tinyMCE.activeEditor.getContent().toString();
       var title = document.getElementById('resoname').value.toString();
       var alloc = '{{country}}';
-      var resps = {'title':'`'+title.toString()+'`','body':'`'+body.toString()+'`', 'country':'`'+alloc.toString()+'`'};
+      var resps = {'title':title.toString(),'body':body.toString(), 'country':alloc.toString()};
       console.log(resps)
       var url = '/emun/submitpwork/{{munname}}/{{commname}}'
       fetch(url, {
