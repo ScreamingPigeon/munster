@@ -1323,7 +1323,7 @@ def sendvote(request, munname, commname, motionid, country, vote):
         motion.save()
         return JsonResponse({'resps':'success'})
 
-def submitpwork(request):
+def submitpwork(request, munname, commname):
     title = json.load(request)['title'] #Get data from POST request
     body = json.load(request)['body'] #Get data from POST request
     country = json.load(request)['country'] #Get data from POST request
