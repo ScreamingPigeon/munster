@@ -1354,7 +1354,7 @@ def submitpwork(request, munname, commname):
         return 'country error'
     paperwork = Paperwork(title =title,body = body, mainsubmitter = country)
     paperwork.save()
-    return JsonResponse({'resps':success})
+    return JsonResponse({'resps':'success'})
 
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):

@@ -14,6 +14,8 @@ admin.site.register(TalkListSpeaker)
 admin.site.register(Talklist)
 admin.site.register(Motion)
 admin.site.register(Voter)
+admin.site.register(Paperwork)
+admin.site.register(Admin)
 
 class ArticleEditorAdmin(forms.ModelForm):
     content = forms.CharField( widget=forms.Textarea )
