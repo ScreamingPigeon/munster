@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+  <script>tinymce.init({selector: "#papeditor",menubar: false,plugins: "link image code lists export",  setup:function(ed) {ed.on('change', function(e) {updateinfo();});},content_style:"body { font-size: 14pt; font-family: serif; }",toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist | export'});    </script>
   </head>
   <body>
 
@@ -241,9 +241,8 @@
   </div>
   <div class="row justify-content-center" id ='viewpap'>
       <h2 id ='resonance'></h2>
-      <div id="papcont">
+      <textarea id="papeditor" name ='body'rows="60" cols="80"></textarea><br><br>
 
-      </div>
   </div>
 
 </div>
