@@ -313,6 +313,8 @@
       $('#attendancediv').css("display", "none");
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
+      $('#paperwork').css("display", "none");
+
       timerstate = false;
       $('#motions').css("display", "none");
       updatediscs();
@@ -325,7 +327,7 @@
       $('#activ').css("display", "block");
       $('#activtimer').css("display", "block");
       $('#motions').css("display", "none");
-      $('#paperwork').css("display", "block");
+      $('#paperwork').css("display", "none");
 
       fillactivediscinfo();
       timerstate = false;
@@ -340,7 +342,7 @@
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "none");
-      $('#paperwork').css("display", "block");
+      $('#paperwork').css("display", "none");
 
 
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
@@ -387,7 +389,7 @@
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "block");
-      $('#paperwork').css("display", "block");
+      $('#paperwork').css("display", "none");
 
 
       timerstate = false;
