@@ -899,7 +899,7 @@
       var csrftoken =getCookie('csrftoken');
       var body = tinyMCE.activeEditor.getContent().toString();
       var id = document.getElementById('idpw').value.toString();
-      fetch(URL, {
+      fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
       headers:{
