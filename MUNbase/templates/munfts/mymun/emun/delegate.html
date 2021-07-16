@@ -178,7 +178,7 @@
 
             })
     }
-    function sendvote(id){
+    function submitvote(id){
       url = '/emun/sendvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}'+'/'+$('#voteopt').value;
       fetch(url, {
             headers:{
