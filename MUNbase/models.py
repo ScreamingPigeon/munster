@@ -101,7 +101,7 @@ class Paperwork(models.Model):
     committee=models.ForeignKey(Committee, on_delete = models.CASCADE)
     body = models.TextField(default='')
     mainsubmitter = models.CharField(max_length=1000)
-    time = models.DateField(auto_now=True)
+    time = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, default='QUE')
 class Ammendment(models.Model):
     paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
