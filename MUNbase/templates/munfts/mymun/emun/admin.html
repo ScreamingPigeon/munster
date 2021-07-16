@@ -309,6 +309,7 @@
     var talkersdata;
     var seconds = -129;
     var timerstate = false;
+    var pworkstate = false;
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -319,6 +320,7 @@
       $('#paperwork').css("display", "none");
 
       timerstate = false;
+      pworkstate = false;
       $('#motions').css("display", "none");
       updatediscs();
     }
@@ -334,6 +336,7 @@
 
       fillactivediscinfo();
       timerstate = false;
+      pworkstate = false;
 
     }
     function attendance(){
@@ -346,6 +349,7 @@
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "none");
+      pworkstate = false;
 
 
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
@@ -394,6 +398,7 @@
       $('#motions').css("display", "block");
       $('#paperwork').css("display", "none");
 
+      pworkstate = false;
 
       timerstate = false;
       url='/emun/showallmotions/{{munname}}/{{commname}}'
@@ -737,10 +742,10 @@
       timerstate = false;
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "block");
+      pworkstate = true;
       fillpaperworkdata();
-
-    }
-    function fillpaperworkdata(){
+      var int = setInterval(function()=>{if (pworkstate == false){clearInterval( int );
+      }
       $('#tcomp').empty()
       $('#tvisible').empty()
       $('#tqueue').empty()
@@ -774,8 +779,10 @@
               markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
               $('#tammend').append(markup)
             }
-          })
+          })},500)
+
     }
+
     function openpwork(id){
       return id
     }
