@@ -33,9 +33,9 @@ body {
   font-weight: bold;
   color:#A8B7B9;
 }
-button{
+.btn{
   border-style: solid;
-  border-color: #009688;
+  border-color: #009688!important;
   border-width: thin;
 }
 .alert{
