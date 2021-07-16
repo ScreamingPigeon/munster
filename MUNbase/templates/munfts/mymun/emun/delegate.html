@@ -155,7 +155,7 @@
           }).then(data => {
             console.log(data)
                 $('#motname').html(data['motionname']);
-                $('#submitvote').attr('onclick', 'submitvote()');
+                $('#submitvote').attr('onclick', 'submitvote("'data['id']'")');
               if (data['vote'] != 'NA'){
                 $('#votecont').empty()
                 $('#submitvote').css('display', 'none');
@@ -178,7 +178,18 @@
             })
     }
     function sendvote(id){
+      url = '/emun/sendvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}'+'/'+$('#voteopt').value;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data);
 
+            })
     }
   </script>
   <style>
