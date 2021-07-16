@@ -153,6 +153,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
+            console.log(data)
                 $('motname').append(data['motionname'])
               if (data['vote'] != 'NA'){
                 $('#votecont').empty()
