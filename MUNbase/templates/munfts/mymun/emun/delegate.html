@@ -204,18 +204,10 @@
             })
     }
     function updateinfo(){
-      var currentdate = new Date();
-      var datetime = "Last Sync: " + currentdate.getDate() + "/"
-                      + (currentdate.getMonth()+1)  + "/"
-                      + currentdate.getFullYear() + " @ "
-                      + currentdate.getHours() + ":"
-                      + currentdate.getMinutes() + ":"
-                      + currentdate.getSeconds();
       var expirydate =new Date();
       expirydate.setDate(currentdate.getDate()+7)
-      console.log(expirydate, datetime)
-      document.cookie ='pwork=' + tinyMCE.activeEditor.getContent().toString() + ';';
-      document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+';';
+      document.cookie ='pwork=' + tinyMCE.activeEditor.getContent().toString() +expirydate.toUTCString() + ';';
+      document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+expirydate.toUTCString()+';';
       let x = document.cookie;
       console.log(x)
     }
