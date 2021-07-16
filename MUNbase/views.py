@@ -1439,7 +1439,6 @@ def updatepwork(request, munname, commname):
     except IndexError:
         return 'Comm Error'
     response = json.load(request)
-    id = response.slice(-2, -3)
     #id = json.load(request)['id'] #Get data from POST request
     #pwork = Paperwork.objects.filter(committee=comm, id = id)
     #try:
@@ -1448,7 +1447,7 @@ def updatepwork(request, munname, commname):
     #    return 'error'
     #pwork.body = body;
     #pwork.save()
-    return JsonResponse({'resps': id})
+    return JsonResponse({'resps': response})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
