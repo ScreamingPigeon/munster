@@ -240,7 +240,7 @@
     </div>
   </div>
   <div class="row justify-content-center" id ='viewpap'>
-
+      <h2>View Paperwork</h2>
   </div>
 
 </div>
@@ -318,6 +318,8 @@
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
       $('#paperwork').css("display", "none");
+      $('#viewpap').css("display", "none");
+
 
       timerstate = false;
       pworkstate = false;
@@ -333,6 +335,8 @@
       $('#activtimer').css("display", "block");
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "none");
+      $('#viewpap').css("display", "none");
+
 
       fillactivediscinfo();
       timerstate = false;
@@ -349,6 +353,8 @@
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "none");
+      $('#viewpap').css("display", "none");
+
       pworkstate = false;
 
 
@@ -397,6 +403,8 @@
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "block");
       $('#paperwork').css("display", "none");
+      $('#viewpap').css("display", "none");
+
 
       pworkstate = false;
 
@@ -682,7 +690,6 @@
             }).then(response => {
                   return response.json() //Convert response to JSON
                 }).then(data => {
-                  console.log(data)
                   $('#voterdata').empty();
                   $('#mn').html(data['motion']['name'])
                   var voters = data['voterdata']
@@ -742,6 +749,8 @@
       timerstate = false;
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "block");
+      $('#viewpap').css("display", "none");
+
       pworkstate = true;
       $('#tcomp').empty()
       $('#tvisible').empty()
@@ -816,8 +825,18 @@
     }
 
     function openpwork(id){
-      return id
-    }
+      $('#discs').css("display", "block");
+      $('#newdisc').css("display", "block");
+      $('#tttt').css("display", "none");
+      $('#attendancediv').css("display", "none");
+      $('#activ').css("display", "none");
+      $('#activtimer').css("display", "none");
+      $('#paperwork').css("display", "none");
+      $('#viewpap').css("display", "block");
+
+      timerstate = false;
+      pworkstate = false;
+      }
   </script>
   <style>
 
@@ -891,12 +910,18 @@
       border: solid #2F76D4 medium;
       padding: 40px;
     }
+    #viewpap{
+      display: none;
+      margin : auto;
+      padding: 40px;
 
-#voterdata tr {
-	display: table-cell;
-}
-#voterdata tr td {
-	display: block;
-}
+    }
+
+    #voterdata tr {
+    	display: table-cell;
+    }
+    #voterdata tr td {
+    	display: block;
+    }
   </style>
 </html>
