@@ -20,7 +20,7 @@
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.tiny.cloud/1/123046wnx9rmn1uyq9ljnjy75xb7qq2nay9c8xc9lisaoxrq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({selector: "textarea",menubar: false,plugins: "link image code lists export",content_style:
+    <script>tinymce.init({selector: "textarea",menubar: false,plugins: "link image code lists export",  onchange_callback : "updateinfo",content_style:
     "body { font-size: 14pt; font-family: serif; }",toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist | export'});    </script>
 </head>
   <body>
@@ -36,7 +36,7 @@
               <a class="nav-link" onclick="voting();">Voting</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" onclick="paperwork();">Resolutions/Clauses</a>
+              <a class="nav-link" onclick="paperwork();">Submit Paperwork</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" onclick="ammendments();">Ammendments</a>
@@ -80,7 +80,7 @@
             <div id='adsub'>
 
             </div>
-            <textarea id="cookiedpaperwork" onchange ='updateinfo()'rows="8" cols="80"></textarea>
+            <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea>
           </div>
         </div>
         <div class="row justify-content-center" ><!--ammendments-->
@@ -136,15 +136,15 @@
       $('#ammendment').css('display','block');
     }
     function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
     }
-    return null;
-}
     function getmotions(){
       $('#motiondata').empty();
 
@@ -225,7 +225,9 @@
       let x = document.cookie;
       console.log(x)
     }
-
+    function submitreso(){
+      return 'x';
+    }
 
   </script>
   <style>
