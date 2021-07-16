@@ -1439,11 +1439,6 @@ def updatepwork(request, munname, commname):
             comm = comm[0]
         except IndexError:
             return 'Comm Error'
-        part = CommitteeAdmin.objects.filter(committee = comm)
-        try:
-            part = part[0]
-        except IndexError:
-            return 'Admin Error'
         id = request.POST['id']
         body = request.POST['body']
         pwork = Paperwork.objects.filter(committee=comm, id = id)
