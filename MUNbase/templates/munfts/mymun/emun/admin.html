@@ -184,6 +184,8 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
+            <th scope="col"  style="width: 100px;">Time</th>
+
 
           </tr>
           <tbody id ='tammend'>
@@ -198,6 +200,8 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
+            <th scope="col"  style="width: 100px;">Time</th>
+
 
           </tr>
           <tbody id ='tvisible'>
@@ -212,6 +216,8 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
+            <th scope="col"  style="width: 100px;">Time</th>
+
 
           </tr>
           <tbody id ='tqueue'>
@@ -226,6 +232,7 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
+            <th scope="col"  style="width: 100px;">Time</th>
 
           </tr>
           <tbody id ='tcomp'>
@@ -734,8 +741,26 @@
       timerstate = false;
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "block");
-    }
+      fillpaperworkdata();
 
+    }
+    function fillpaperworkdata(){
+      $('#tcomp').empty()
+      $('#tvisible').empty()
+      $('#tqueue').empty()
+      $('#tammend').empty()
+      url = '/emun/getpaperwork/{{munname}}/{{commname}}'
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data)
+          })
+    }
   </script>
   <style>
 

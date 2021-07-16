@@ -76,6 +76,8 @@ urlpatterns = [
     path('emun/sendvote/<str:munname>/<str:commname>/<str:motionid>/<str:country>/<str:vote>', views.sendvote, name ='sendvote'),
     path('emun/submitpwork/<str:munname>/<str:commname>', views.submitpwork, name ='submitpwork'),
 
+    path('emun/getpaperwork/<str:munname>/<str:commname>', views.getpaperwork, name ='getpaperwork'),
+
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')

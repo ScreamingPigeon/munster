@@ -1355,7 +1355,42 @@ def submitpwork(request, munname, commname):
     paperwork = Paperwork(title =title,body = body, mainsubmitter = country)
     paperwork.save()
     return JsonResponse({'resps':'success'})
-
+def getpaperwork(request, munname, commname):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        paperworks = Paperwork.objects.filter(committee=comm).values()
+        amm = []
+        vis = []
+        que = []
+        com = []
+        for row in paperworks:
+            if row['status'] =='QUE':
+                que.append(row)
+            if row['status'] =='OTA':
+                amm.append(row)
+            if row['status'] =='VTC':
+                vis.append(row)
+            if row['status'] =='COM':
+                com.append(row)
+        return JsonResponse({'OTA':amm,'VTC':vis, 'QUE': que, 'COM':com})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

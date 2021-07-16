@@ -100,10 +100,8 @@ class Paperwork(models.Model):
     title = models.CharField(max_length = 1000, default ='')
     body = models.TextField(default='')
     mainsubmitter = models.CharField(max_length=1000)
-    visible = models.CharField(max_length=10, default ='No')
-    opentoam = models.CharField(max_length=10, default='No')
     time = models.DateField(auto_now=True)
-    completed = models.CharField(max_length=10, default='No')
+    status = models.CharField(max_length=10, default='QUE')
 class Ammendment(models.Model):
     paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
     type = models.CharField(max_length=100, default ='Addition')
