@@ -154,7 +154,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             console.log(data)
-                $('motname').text(data['motionname'])
+                $('#motname').html(data['motionname'])
               if (data['vote'] != 'NA'){
                 $('#votecont').empty()
                 $('#submitvote').css('display', 'none');
