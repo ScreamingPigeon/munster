@@ -743,9 +743,7 @@
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "block");
       pworkstate = true;
-      fillpaperworkdata();
-      var int = setInterval(function(){if (pworkstate == false){clearInterval( int );
-      }
+      var int = setInterval(function(){if (pworkstate == false){clearInterval( int );}
       $('#tcomp').empty()
       $('#tvisible').empty()
       $('#tqueue').empty()
