@@ -896,7 +896,8 @@
       }
     function updatepwork(){
       var url ='/emun/updatepwork/{{munname}}/{{commname}}';
-      var csrftoken =getCookie('csrftoken');
+      var csrftoken = getCookie('csrftoken');
+      console.log(csrftoken);
       var body = tinyMCE.activeEditor.getContent().toString();
       var id = document.getElementById('idpw').value.toString();
       fetch(url, {
