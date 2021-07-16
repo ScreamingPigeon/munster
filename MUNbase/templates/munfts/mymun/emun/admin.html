@@ -241,6 +241,9 @@
   </div>
   <div class="row justify-content-center" id ='viewpap'>
       <h2>View Paperwork</h2>
+      <div id="papcont">
+
+      </div>
   </div>
 
 </div>
@@ -836,6 +839,17 @@
 
       timerstate = false;
       pworkstate = false;
+      url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+          }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data)
+          });
       }
   </script>
   <style>
@@ -914,9 +928,16 @@
       display: none;
       margin : auto;
       padding: 40px;
+      border: solid #2F76D4 medium;
 
     }
-
+    #papcont{
+      padding: 20px;
+      margin: auto;
+      border-radius: 3px;
+      border: solid #C9CACB 1px;
+      background-color: #F8F8F9;
+    }
     #voterdata tr {
     	display: table-cell;
     }
