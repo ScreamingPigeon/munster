@@ -34,10 +34,10 @@
               <a class="nav-link" onclick="voting();">Voting</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" onclick="#">Resolutions/Clauses</a>
+              <a class="nav-link" onclick="paperwork();">Resolutions/Clauses</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" onclick="#">Ammendments</a>
+              <a class="nav-link" onclick="ammendments();">Ammendments</a>
             </li>
 
             <li class="nav-item active">
@@ -60,18 +60,31 @@
             <h2>Paperwork</h2>
           </div>
         </div>
+        <div class="row justify-content-center" ><!--ammendments-->
+          <div class="col-md" id ='ammendment'>
+            <h2>Ammendments</h2>
+          </div>
+        </div>
       </div>
   </body>
   <script type="text/javascript">
     function voting(){
       $('#voting').css('display','block');
       $('#paperwork').css('display','none');
+      $('#ammendment').css('display','none');
+
 
     }
     function paperwork(){
       $('#paperwork').css('display','block');
       $('#voting').css('display','none');
+      $('#ammendment').css('display','none');
 
+    }
+    function ammendments(){
+      $('#paperwork').css('display','none');
+      $('#voting').css('display','none');
+      $('#ammendment').css('display','block');
     }
   </script>
   <style>
