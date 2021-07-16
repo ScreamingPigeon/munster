@@ -763,19 +763,19 @@
             var QUE = data['QUE']
             var COM = data['COM']
             for (let i =0; i< OTA.length; i++){
-              markup ='<tr>  <td onclick="openpwork(`'+OTA[i]['id']+'`)"></td>  <td>'+OTA[i]['mainsubmitter']+'</td>  <td>'+OTA[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td onclick="openpwork(`'+OTA[i]['id']+'`)">'+OTA[i]['title']+'</td>  <td>'+OTA[i]['mainsubmitter']+'</td>  <td>'+OTA[i]['time'].toString()+'</td> </tr>';
               $('#tammend').append(markup)
             }
             for (let i =0; i< VTC.length; i++){
-              markup ='<tr>  <td onclick="openpwork(`'+VTC[i]['id']+'`)"></td>  <td>'+VTC[i]['mainsubmitter']+'</td>  <td>'+VTC[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td onclick="openpwork(`'+VTC[i]['id']+'`)">'+VTC[i]['title']+'</td>  <td>'+VTC[i]['mainsubmitter']+'</td>  <td>'+VTC[i]['time'].toString()+'</td> </tr>';
               $('#tvisible').append(markup)
             }
             for (let i =0; i< QUE.length; i++){
-              markup ='<tr>  <td onclick="openpwork(`'+QUE[i]['id']+'`)"></td>  <td>'+QUE[i]['mainsubmitter']+'</td>  <td>'+QUE[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td onclick="openpwork(`'+QUE[i]['id']+'`)">'+QUE[i]['title']+'</td>  <td>'+QUE[i]['mainsubmitter']+'</td>  <td>'+QUE[i]['time'].toString()+'</td> </tr>';
               $('#tqueue').append(markup)
             }
             for (let i =0; i< COM.length; i++){
-              markup ='<tr>  <td onclick="openpwork(`'+COM[i]['id']+'`)"></td>  <td>'+COM[i]['mainsubmitter']+'</td>  <td>'+COM[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td onclick="openpwork(`'+COM[i]['id']+'`)">'+COM[i]['title']+'</td>  <td>'+COM[i]['mainsubmitter']+'</td>  <td>'+COM[i]['time'].toString()+'</td> </tr>';
               $('#tammend').append(markup)
             }
           })
