@@ -811,13 +811,40 @@ def adminview(request, munname, commname):
 
 
 def partview(request, munname, commname):
-    if request.session.get('emun') is not munname or request.session.get('emunalloc') is not "Admin" or request.session.get('emuncomm') is commname:
+    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+        delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
-    munnamme = request.session["emun"]
-    alloc = request.session["emunalloc"]
-    commname = request.session["emuncomm"]
-    return render(request, 'munfts/mymun/emun/delegate.html')
+    munnamez = request.session.get('emun')
+    country = request.session.get('emunalloc')
+    commnamez = request.session.get('emuncomm')
+    if commnamez != commname or adminz == "Admin" or munnamez!= munname:
+        delemuncookies(request)
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    mun = MUNuser.objects.filter(username = munname)
+    try:
+        mun =mun[0]
+    except IndexError:
+        delemuncookies(request)
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    comm = Committee.objects.filter(mun = mun, name = commname)
+    try:
+        comm = comm[0]
+    except IndexError:
+        delemuncookies(request)
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    part = Participant.objects.filter(committee = comm, country = country)
+    try:
+        part = part[0]
+    except IndexError:
+        delemuncookies(request)
+        url = "http://www.munster.co.in/emun/"+munname
+        return redirect(url)
+    return render(request, 'munfts/mymun/emun/admin.html', {'munname':munnamez, 'country':country, 'commname':commnamez})
+
 def commlogout(request):
     mun = ""
     if request.session.get('emun') is not None or request.session.get('emunalloc') is not None or request.session.get('emuncomm') is not None:
