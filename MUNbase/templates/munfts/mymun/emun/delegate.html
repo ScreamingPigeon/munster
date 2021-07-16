@@ -204,8 +204,8 @@
             })
     }
     function updateinfo(){
-      document.cookie ='pwork=testcookie; ';
-      document.cookie ='pworktitle=testcookie;';
+      document.cookie ='pwork=' + $('#cookiedpaperwork').value.toString() + ';';
+      document.cookie ='pworktitle='+$('#resoname').value.toString()+';';
       let x = document.cookie;
       console.log(x)
     }
