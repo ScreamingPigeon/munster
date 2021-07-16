@@ -139,7 +139,7 @@
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
             var id = motions[i]['id']
-            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#sendvotemodal"onclick = "summonvote(`'+ motion[i]['id'] +'`)">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td></tr>'
+            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#sendvotemodal"onclick = "summonvote(`'+ motions[i]['id'] +'`)">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td></tr>'
             $('#motiondata').append(markup);
 
           }
