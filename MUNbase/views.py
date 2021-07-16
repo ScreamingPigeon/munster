@@ -1314,6 +1314,13 @@ def sendvote(request, munname, commname, motionid, country, vote):
         voter = Voter.objects.filter(voter = participant, motion = motion)[0]
         voter.vote = vote;
         voter.save()
+        if vote =='Yes':
+            motion.yes = str(int(motion.yes)+=1)
+        if vote =='No':
+            motion.no = str(int(motion.no)+=1)
+        if vote =='Abstain':
+            motion.abstain = str(int(motion.abstain)+=1)
+        motion.save()
         return JsonResponse({'resps':'success'})
 
 
