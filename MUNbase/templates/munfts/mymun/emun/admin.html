@@ -184,7 +184,6 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
-            <th scope="col"  style="width: 100px;">Time</th>
 
 
           </tr>
@@ -200,7 +199,6 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
-            <th scope="col"  style="width: 100px;">Time</th>
 
 
           </tr>
@@ -216,7 +214,6 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
-            <th scope="col"  style="width: 100px;">Time</th>
 
 
           </tr>
@@ -232,7 +229,6 @@
           <tr>
             <th scope="col"  style="width: 400px;">Name</th>
             <th scope="col"  style="width: 100px;">Proposer</th>
-            <th scope="col"  style="width: 100px;">Time</th>
 
           </tr>
           <tbody id ='tcomp'>
@@ -763,19 +759,19 @@
             var QUE = data['QUE']
             var COM = data['COM']
             for (let i =0; i< OTA.length; i++){
-              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+OTA[i]['id']+'`)" >'+OTA[i]['title']+'</a></td>  <td>'+OTA[i]['mainsubmitter']+'</td>  <td>'+OTA[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+OTA[i]['id']+'`)" >'+OTA[i]['title']+'</a></td>  <td>'+OTA[i]['mainsubmitter']+'</td>  </tr>';
               $('#tammend').append(markup)
             }
             for (let i =0; i< VTC.length; i++){
-              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+VTC[i]['id']+'`)" >'+VTC[i]['title']+'</a></td>  <td>'+VTC[i]['mainsubmitter']+'</td>  <td>'+VTC[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+VTC[i]['id']+'`)" >'+VTC[i]['title']+'</a></td>  <td>'+VTC[i]['mainsubmitter']+'</td>   </tr>';
               $('#tvisible').append(markup)
             }
             for (let i =0; i< QUE.length; i++){
-              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+QUE[i]['id']+'`)" >'+QUE[i]['title']+'</a></td>  <td>'+QUE[i]['mainsubmitter']+'</td>  <td>'+QUE[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+QUE[i]['id']+'`)" >'+QUE[i]['title']+'</a></td>  <td>'+QUE[i]['mainsubmitter']+'</td>  </tr>';
               $('#tqueue').append(markup)
             }
             for (let i =0; i< COM.length; i++){
-              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td>  <td>'+COM[i]['time'].toString()+'</td> </tr>';
+              markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
               $('#tammend').append(markup)
             }
           })
