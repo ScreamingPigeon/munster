@@ -1438,7 +1438,7 @@ def updatepwork(request, munname, commname):
         comm = comm[0]
     except IndexError:
         return 'Comm Error'
-    response = json.load(request)
+    response = json.loads(request)
     #id = json.load(request)['id'] #Get data from POST request
     #pwork = Paperwork.objects.filter(committee=comm, id = id)
     #try:
