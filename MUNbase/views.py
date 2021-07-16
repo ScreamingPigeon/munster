@@ -11,7 +11,7 @@ import math
 import json
 from django.http import JsonResponse
 import markdown
-import requests
+import ast
 #---------------------------------------COMMON-HOMEPAGES----------------------------------------#
 def home(request):
     if detailsfilled(request) is False and getuser(request) is not None:
@@ -1438,7 +1438,7 @@ def updatepwork(request, munname, commname):
         comm = comm[0]
     except IndexError:
         return 'Comm Error'
-    response = json.loads(request.body)
+    response = json.load(request)
     #id = json.load(request)['id'] #Get data from POST request
     #pwork = Paperwork.objects.filter(committee=comm, id = id)
     #try:
@@ -1447,7 +1447,7 @@ def updatepwork(request, munname, commname):
     #    return 'error'
     #pwork.body = body;
     #pwork.save()
-    return JsonResponse({'resps':type(response)})
+    return JsonResponse({'resps': response})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
