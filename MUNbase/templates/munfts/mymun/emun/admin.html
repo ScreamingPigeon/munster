@@ -241,9 +241,21 @@
     </div>
   </div>
   <div class="row justify-content-center" id ='viewpap'>
-      <h2 id ='resonance'></h2>
-      <textarea id="papeditor" name ='body'rows="60" cols="80"></textarea><br><br>
-
+      <div class="col-7">
+        <h2 id ='resonance'></h2>
+        <textarea id="papeditor" name ='body'rows="60" cols="80"></textarea><br><br>
+      </div>
+      <div class="col-5">
+        <h3>Paperwork Settings</h3>
+        <h6 id ='mst'></h6>
+        <h6 id ='currentstat'></h6>
+        Update Status to: <select id="pworkstatus" >
+          <option value="QUE"> Queued</option>
+          <option value="VTC"> Visible to Committee</option>
+          <option value="OTA"> Open to Ammendments</option>
+          <option value="COM"> Completed & closed</option>
+        </select>
+      </div>
   </div>
 
 </div>
@@ -850,6 +862,14 @@
           }).then(data => {
             pwork = data['pwork'];
             $('#resonance').empty()
+            $('#mst').empty()
+            $('#mst').html(pwork['country'])
+            $('#pworkstatus').empty()
+            if (pwork['status'] == 'QUE'){$('#pworkstatus').html("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
+            if (pwork['status'] == 'OTA'){$('#pworkstatus').html("Currently this paperwork is Open to Ammendments");}
+            if (pwork['status'] == 'VTC'){$('#pworkstatus').html("Currently this paperwork is Visible to the Committee but not Open to Ammendments")}
+            if (pwork['status'] == 'COM'){$('#pworkstatus').html("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
+
             $('#resonance').html(pwork['title'])
             tinymce.get('papeditor').setContent(pwork['body']);
 
