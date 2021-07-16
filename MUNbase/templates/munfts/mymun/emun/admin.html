@@ -257,10 +257,10 @@
     <br> <br>
       <div class="row" style="border-radius: 3px;border: solid #C9CACB 1px; padding: 20px;">
         <div class="col-9">
-          <form  action="{% url 'updatepwork' munname commname %}" method="post"onsubmit="return false" >
+          <form  action="{% url 'updatepwork' munname commname %}" id='upform'method="post"onsubmit="return false" >
             {%csrf_token%}
             <textarea id="papeditor" name ='body'rows="80" cols="30"></textarea><br><br>
-            <button type="submit" class="btn btn-primary" onclick ='openpwork("'+document.getElementById('idpw').value.toString()+'");'>Update</button>
+            <button type="button" class="btn btn-primary" onclick ='openpwork("'+document.getElementById('idpw').value.toString()+'");document.getElementById("upform").submit();'>Update</button>
             <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
           </form>
         </div>
