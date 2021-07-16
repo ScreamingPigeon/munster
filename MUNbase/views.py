@@ -1448,7 +1448,7 @@ def updatepwork(request, munname, commname):
     #    return 'error'
     #pwork.body = body;
     #pwork.save()
-    return JsonResponse({'resps': response["body"]})
+    return JsonResponse({'resps': response})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
