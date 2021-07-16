@@ -74,7 +74,7 @@ urlpatterns = [
     path('emun/getvoterdata/<str:munname>/<str:commname>/<str:motionid>', views.getvoterdata, name ='getvoterdata'),
     path('emun/summonvote/<str:munname>/<str:commname>/<str:motionid>/<str:country>', views.summonvote, name ='summonvote'),
     path('emun/sendvote/<str:munname>/<str:commname>/<str:motionid>/<str:country>/<str:vote>', views.sendvote, name ='sendvote'),
-    path('emun/submitpwork/<str:munname>/<str:commname>', views.submitpwork, name ='submitpwork')
+    path('emun/submitpwork/<str:munname>/<str:commname>', views.submitpwork, name ='submitpwork'),
 
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
