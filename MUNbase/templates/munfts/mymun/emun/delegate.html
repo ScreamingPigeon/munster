@@ -146,7 +146,7 @@
             })
     }
     function summonvote(id){
-      url = 'emun/summonvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}';
+      url = '/emun/summonvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}';
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
