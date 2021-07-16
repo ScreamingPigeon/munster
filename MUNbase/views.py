@@ -1352,7 +1352,7 @@ def submitpwork(request, munname, commname):
         participant=participant[0]
     except IndexError:
         return 'country error'
-    paperwork = Paperwork(title =title,body = body, mainsubmitter = country)
+    paperwork = Paperwork(title =title,body = body, mainsubmitter = country, committee=comm)
     paperwork.save()
     return JsonResponse({'resps':'success'})
 def getpaperwork(request, munname, commname):
