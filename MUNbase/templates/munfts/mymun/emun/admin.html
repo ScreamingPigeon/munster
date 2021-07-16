@@ -240,7 +240,7 @@
     </div>
   </div>
   <div class="row justify-content-center" id ='viewpap'>
-      <h2>View Paperwork</h2>
+      <h2 id ='resonance'></h2>
       <div id="papcont">
 
       </div>
@@ -848,7 +848,13 @@
           }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
+            pwork = data['pwork'];
+            $('#resonance').empty()
+            $('#papcont').empty()
+            $('#resonance').html(pwork['title'])
+            $('#papcont').append(pwork['body'])
+
+
           });
       }
   </script>
