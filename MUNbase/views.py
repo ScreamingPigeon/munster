@@ -1376,7 +1376,7 @@ def getpaperwork(request, munname, commname):
             comm = comm[0]
         except IndexError:
             return 'Comm Error'
-        paperworks = Paperwork.objects.filter(committee=comm).order_by('time')values()
+        paperworks = Paperwork.objects.filter(committee=comm).order_by('time').values()
         amm = []
         vis = []
         que = []
