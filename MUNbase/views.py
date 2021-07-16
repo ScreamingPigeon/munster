@@ -1315,11 +1315,11 @@ def sendvote(request, munname, commname, motionid, country, vote):
         voter.vote = vote;
         voter.save()
         if vote =='Yes':
-            motion.yes = str(int(motion.yes)+=1)
+            motion.yes = str(int(motion.yes)+1)
         if vote =='No':
-            motion.no = str(int(motion.no)+=1)
+            motion.no = str(int(motion.no)+1)
         if vote =='Abstain':
-            motion.abstain = str(int(motion.abstain)+=1)
+            motion.abstain = str(int(motion.abstain)+1)
         motion.save()
         return JsonResponse({'resps':'success'})
 
