@@ -98,6 +98,7 @@ class Voter(models.Model):
     motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
 class Paperwork(models.Model):
     title = models.CharField(max_length = 1000, default ='')
+    committee=models.ForeignKey(Committee, on_delete = models.CASCADE)
     body = models.TextField(default='')
     mainsubmitter = models.CharField(max_length=1000)
     time = models.DateField(auto_now=True)
