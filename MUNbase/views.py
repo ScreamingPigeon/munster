@@ -1181,10 +1181,10 @@ def showallmotions(request,munname,commname):
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
-        if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+        if commnamez != commname or (adminz != "Admin" or adminz != None) or munnamez!= munname:
             return 'Authentication Error'
         munnamme = request.session.get('emun')
-        admin = request.session.get('emunalloc')
+        alloc = request.session.get('emunalloc')
         commname = request.session.get('emuncomm')
         mun = MUNuser.objects.filter(username = munname)
         try:
@@ -1196,11 +1196,6 @@ def showallmotions(request,munname,commname):
             comm = comm[0]
         except IndexError:
             return 'Comm Error'
-        part = CommitteeAdmin.objects.filter(committee = comm)
-        try:
-            part = part[0]
-        except IndexError:
-            return 'Admin Error'
         motionz = Motion.objects.filter(committee=comm).values()
         motions =[]
         for i in range(len(motionz)):

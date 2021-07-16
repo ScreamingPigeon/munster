@@ -52,7 +52,19 @@
         <br><br>
         <div class="row justify-content-center" ><!--voting-->
           <div class="col-md" id ='voting'>
-            Latest Vote should show up Here
+            <table>
+              <table class="table table-responsive table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"  style="width: 200px;">Name</th>
+                  <th scope="col"  style="width: 100px;">Proposer</th>
+                </tr>
+                <tbody id ='motiondata'>
+
+                </tbody>
+              </thead>
+              </table>
+            </table>
           </div>
         </div>
         <div class="row justify-content-center" ><!--paperwork-->
@@ -72,7 +84,7 @@
       $('#voting').css('display','block');
       $('#paperwork').css('display','none');
       $('#ammendment').css('display','none');
-
+      getmotions();
 
     }
     function paperwork(){
@@ -86,6 +98,26 @@
       $('#voting').css('display','none');
       $('#ammendment').css('display','block');
     }
+
+    function getmotions(){
+      url='/emun/showallmotions/{{munname}}/{{commname}}'
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+          var motions = data['motions']
+          for(let i =0; i<motions.length;i++){
+            var id = motions[i]['id']
+            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#sendvotemodal"onclick = "">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td></tr>'
+            $('#motiondata').append(markup);
+
+          }
+            })
+    }
   </script>
   <style>
   #voting{
@@ -95,6 +127,12 @@
       padding: 40px;
   }
   #paperwork{
+      display: none;
+      margin : auto;
+      border: solid #2F76D4 thick;
+      padding: 40px;
+  }
+  #ammendment{
       display: none;
       margin : auto;
       border: solid #2F76D4 thick;
