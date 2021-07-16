@@ -102,8 +102,10 @@ class Paperwork(models.Model):
     mainsubmitter = models.CharField(max_length=1000)
     visible = models.CharField(max_length=10, default ='No')
     opentoam = models.CharField(max_length=10, default='No')
+    time = models.DateField(auto_now=True)
 class Ammendment(models.Model):
     paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
     type = models.CharField(max_length=100, default ='Addition')
     content = models.TextField(default='')
     visible = models.CharField(max_length=10)
+    time = models.DateField(auto_now=True)
