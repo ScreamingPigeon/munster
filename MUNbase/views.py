@@ -1240,6 +1240,49 @@ def getvoterdata(request, munname,commname, motionid):
         for i in range(len(voters)):
             voters[i]['country']=voterz[i].voter.country
         return JsonResponse({'voterdata': list(voters), 'motion':motion})
+
+def summonvote(request, munname, commname, motionid, country):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        motion = Motion.objects.filter(id = motionid, committee=comm)
+        try:
+            motion = motion[0]
+        except IndexError:
+            return 'Motion Error'
+        participant = Participant.objects.filter(committee=comm, country = country)
+        try:
+            participant = participant[0]
+        except IndexError:
+            return 'Part error'
+        voter = Voter.objects.filter(voter = participant, motion = motion)[0]
+        if voter.vote !='NV':
+            return JsonResponse({'vote':voter.vote, 'status':'voted'})
+        else:
+            if participant.status == 'PV':
+                return JsonResponse({'vote':'NA', 'status':'PV'})
+            elif participant.status == 'P':
+                return JsonResponse({'vote':'NA', 'status':'P'})
+
+
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

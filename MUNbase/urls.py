@@ -72,6 +72,7 @@ urlpatterns = [
     path('emun/newmotion/<str:munname>/<str:commname>/<str:name>/<str:proposer>', views.newmotion, name ='newmotion'),
     path('emun/showallmotions/<str:munname>/<str:commname>', views.showallmotions, name ='showallmotions'),
     path('emun/getvoterdata/<str:munname>/<str:commname>/<str:motionid>', views.getvoterdata, name ='getvoterdata'),
+    path('emun/summonvote/<str:munname>/<str:commname>/<str:motionid>/<str:country>', views.summonvote, name ='summonvote'),
 
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
