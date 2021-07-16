@@ -758,8 +758,30 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
+            var OTA = data['OTA']
+            var VTC = data['VTC']
+            var QUE = data['QUE']
+            var COM = data['COM']
+            for (let i =0; i< OTA.length; i++){
+              markup ='<tr>  <td onclick="openpwork(`'+OTA[i]['id']+'`)"></td>  <td>'+OTA[i]['mainsubmitter']+'</td>  <td>'+OTA[i]['time'].toString()+'</td> </tr>';
+              $('#tammend').append(markup)
+            }
+            for (let i =0; i< VTC.length; i++){
+              markup ='<tr>  <td onclick="openpwork(`'+VTC[i]['id']+'`)"></td>  <td>'+VTC[i]['mainsubmitter']+'</td>  <td>'+VTC[i]['time'].toString()+'</td> </tr>';
+              $('#tvisible').append(markup)
+            }
+            for (let i =0; i< QUE.length; i++){
+              markup ='<tr>  <td onclick="openpwork(`'+QUE[i]['id']+'`)"></td>  <td>'+QUE[i]['mainsubmitter']+'</td>  <td>'+QUE[i]['time'].toString()+'</td> </tr>';
+              $('#tqueue').append(markup)
+            }
+            for (let i =0; i< COM.length; i++){
+              markup ='<tr>  <td onclick="openpwork(`'+COM[i]['id']+'`)"></td>  <td>'+COM[i]['mainsubmitter']+'</td>  <td>'+COM[i]['time'].toString()+'</td> </tr>';
+              $('#tammend').append(markup)
+            }
           })
+    }
+    function openpwork(id){
+      return id
     }
   </script>
   <style>
