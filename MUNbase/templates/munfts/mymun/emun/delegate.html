@@ -90,14 +90,14 @@
           </div>
           <div class="modal-body">
             <label for="motname">Motion Name: </label><input type="text" id="motname"> <br> <br>
-            <label for="proposer">Vote: </label> <select id="proposer" >
-              <option value="Yes">YES</option>
-              <option value="No">NO</option>
-              <option value="Abstain" id ='abs'>ABSTAIN</option>
-            </select>
+            <div id="votecont">
+              <select class="" name="">
+
+              </select>
+            </div>
           </div>
           <div class="modal-footer">
-            <button onclick="sendvote();" data-dismiss="modal"class="btn btn-primary">Submit</button>
+            <button onclick="sendvote();" data-dismiss="modal" id ='submitvote' class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -156,7 +156,32 @@
             return response.json() //Convert response to JSON
           }).then(data => {
 
-                  console.log(data);
+              if (data['vote'] != 'NA'){
+                $('#votecont').empty()
+                $('#submitvote').css('display', 'none');
+                $('#votecont').append('You have already voted for this Motion. Your vote was:  ' + data['vote'])
+              }
+              else if (data['vote'] == 'NA'){
+                $('#votecont').empty();
+                $('#submitvote').css('display', 'block');
+
+                if(data['status']=='PV'){
+                  markup = '              <label for="voteopt">Vote: </label> <select id="voteopt" >
+                                  <option value="Yes">YES</option>
+                                  <option value="No">NO</option>
+                                  </select>';
+                  $('#votecont').append(markup);
+                }
+                if(data['status']=='P'){
+                  markup = '              <label for="voteopt">Vote: </label> <select id="voteopt" >
+                                  <option value="Yes">YES</option>
+                                  <option value="No">NO</option>
+                                  <option value="Abstain">ABSTAIN</option>
+                                  </select>';
+                  $('#votecont').append(markup);
+                }
+              }
+
 
             })
     }
