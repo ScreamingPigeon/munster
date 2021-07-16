@@ -108,5 +108,5 @@ class Ammendment(models.Model):
     clause = models.CharField(max_length=5, default ='1')
     type = models.CharField(max_length=100, default ='Addition')
     content = models.TextField(default='')
-    status = models.CharField(max_length=10)
+    status = models.CharField(max_length=10, default = 'QUE')
     time = models.DateTimeField(auto_now=True)
