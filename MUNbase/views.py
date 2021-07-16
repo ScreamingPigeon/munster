@@ -1425,7 +1425,7 @@ def updatepwork(request, munname, commname):
         munnamez = request.session.get('emun')
         adminz = request.session.get('emunalloc')
         commnamez = request.session.get('emuncomm')
-        if commnamez != commname or adminz!='Admin' munnamez!= munname:
+        if commnamez != commname or adminz!='Admin' or munnamez!= munname:
             return 'Authentication Error'
         munnamme = request.session.get('emun')
         commname = request.session.get('emuncomm')
