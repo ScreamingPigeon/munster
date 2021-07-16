@@ -1449,7 +1449,7 @@ def updatepwork(request, munname, commname):
     pwork.save()
     return JsonResponse({'resps': 'success'})
 
-def getammendments(request, munname, commname, id):
+def getammendments(request, munname, commname, pworkid):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
@@ -1470,7 +1470,7 @@ def getammendments(request, munname, commname, id):
             comm = comm[0]
         except IndexError:
             return 'Comm Error'
-        paperwork = Paperwork.objects.filter(committee=comm, id = id)
+        paperwork = Paperwork.objects.filter(committee=comm, id = pworkid)
         try:
             paperwork = paperwork[0]
         except IndexError:
