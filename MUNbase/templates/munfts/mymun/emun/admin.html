@@ -259,8 +259,8 @@
         <div class="col-9">
           <textarea id="papeditor" name ='body'rows="40" cols="30"></textarea><br><br>
         </div>
-        <div class="col-3">
-          Ammendments will show up here
+        <div class="col-3" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 10px;">
+          <h5>Ammendments</h5>
         </div>
       </div>
 
@@ -877,11 +877,7 @@
             if (pwork['status'] == 'OTA'){$('#currenstat').text("Currently this paperwork is Open to Ammendments");}
             if (pwork['status'] == 'VTC'){$('#currentstat').text("Currently this paperwork is Visible to the Committee but not Open to Ammendments")}
             if (pwork['status'] == 'COM'){$('#currentstat').text("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
-
-            $('#resonance').html(pwork['title'])
             tinymce.get('papeditor').setContent(pwork['body']);
-
-
           });
       }
   </script>
