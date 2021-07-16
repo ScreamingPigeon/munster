@@ -179,7 +179,8 @@
             })
     }
     function submitvote(id){
-      url = '/emun/sendvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}'+'/'+$('#voteopt').value;
+      url = '/emun/sendvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}'+'/'+document.getElementById('voteopt').value.toString();
+
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
