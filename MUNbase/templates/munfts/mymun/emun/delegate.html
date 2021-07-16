@@ -167,11 +167,11 @@
                 $('#submitvote').css('display', 'block');
 
                 if(data['status']=='PV'){
-                  markup = '<label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><select>';
+                  markup = '<p>Important: You can vote only once, so please be completely sure of your vote as you will be unable to change it later</p> <br> <br><label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><select>';
                   $('#votecont').append(markup);
                 }
                 if(data['status']=='P'){
-                  markup = '<label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><option value="Abstain">ABSTAIN</option><select>';
+                  markup = '<p>Important: You can vote only once, so please be completely sure of your vote as you will be unable to change it later</p><label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><option value="Abstain">ABSTAIN</option><select>';
                   $('#votecont').append(markup);
                 }
               }
