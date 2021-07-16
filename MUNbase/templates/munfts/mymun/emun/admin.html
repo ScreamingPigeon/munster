@@ -897,9 +897,10 @@
     function updatepwork(){
       var url ='/emun/updatepwork/{{munname}}/{{commname}}';
       var csrftoken = getCookie('csrftoken');
-      console.log(csrftoken);
       var body = tinyMCE.activeEditor.getContent().toString();
       var id = document.getElementById('idpw').value.toString();
+      var resps = JSON.stringify({'body':body, 'id':id});
+      console.log(resps)
       fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
@@ -908,7 +909,7 @@
           'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
           'X-CSRFToken': csrftoken,
           },
-              body: JSON.stringify({'body':body, 'id':id}) //JavaScript object of data to POST
+              body:resps  //JavaScript object of data to POST
           })
           .then(response => {
                 return response.json() //Convert response to JSON
