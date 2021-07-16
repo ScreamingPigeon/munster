@@ -818,7 +818,7 @@ def partview(request, munname, commname):
     munnamez = request.session.get('emun')
     country = request.session.get('emunalloc')
     commnamez = request.session.get('emuncomm')
-    if commnamez != commname or adminz == "Admin" or munnamez!= munname:
+    if commnamez != commname or country == "Admin" or munnamez!= munname:
         delemuncookies(request)
         url = "http://www.munster.co.in/emun/"+munname
         return redirect(url)
