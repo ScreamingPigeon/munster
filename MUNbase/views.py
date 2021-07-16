@@ -1354,7 +1354,7 @@ def submitpwork(request, munname, commname):
         return 'country error'
     paperwork = Paperwork(title =title,body = body, mainsubmitter = country, committee=comm)
     paperwork.save()
-    return JsonResponse({'resps':'success'})
+    return redirect('http://www.munster.co.in/emun/'+munname+"/"+str(commname)+"/delegate")
 def getpaperwork(request, munname, commname):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
@@ -1448,6 +1448,38 @@ def updatepwork(request, munname, commname):
     pwork.body = response['body'];
     pwork.save()
     return JsonResponse({'resps': 'success'})
+
+def getammendments(request, munname, commname, id):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        paperwork = Paperwork.objects.filter(committee=comm, id = id)
+        try:
+            paperwork = paperwork[0]
+        except IndexError:
+            return 'Error'
+        ammendments = Ammendment.objects.filter(paperwork=paperwork).order_by('time').values()
+        return JsonResponse('resps':ammendments)
+
+
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":

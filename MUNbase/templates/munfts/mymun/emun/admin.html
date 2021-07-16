@@ -22,7 +22,7 @@
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdn.tiny.cloud/1/123046wnx9rmn1uyq9ljnjy75xb7qq2nay9c8xc9lisaoxrq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>tinymce.init({selector: "#papeditor",menubar: false,plugins: "link image code lists export",  toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist | export'});    </script>
+  <script>tinymce.init({selector: "#papeditor",menubar: false,plugins: "link image code lists export",content_style:"body { font-size: 14pt; font-family: serif; }",  toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist | export'});    </script>
   </head>
   <body>
 
@@ -266,10 +266,12 @@
             <h5>Queued Ammendments</h5>
 
           </div>
+          <br>
           <div id='passedam'>
             <h5>Passed Ammendments</h5>
 
           </div>
+          <br>
           <div id='rejectam'>
             <h5>Rejected Ammendments</h5>
 
@@ -346,6 +348,8 @@
     var seconds = -129;
     var timerstate = false;
     var pworkstate = false;
+    var ammstate = false;
+    var ammint = setInterval(function(){ getammendments(); }, 500)
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -359,6 +363,7 @@
 
       timerstate = false;
       pworkstate = false;
+      ammstate = false;
       $('#motions').css("display", "none");
       updatediscs();
     }
@@ -377,6 +382,7 @@
       fillactivediscinfo();
       timerstate = false;
       pworkstate = false;
+      ammstate = false;
 
     }
     function attendance(){
@@ -392,6 +398,7 @@
       $('#viewpap').css("display", "none");
 
       pworkstate = false;
+      ammstate = false;
 
 
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
@@ -443,6 +450,7 @@
 
 
       pworkstate = false;
+      ammstate = false;
 
       timerstate = false;
       url='/emun/showallmotions/{{munname}}/{{commname}}'
@@ -786,6 +794,7 @@
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "block");
       $('#viewpap').css("display", "none");
+      ammstate = false;
 
       pworkstate = true;
       $('#tcomp').empty()
@@ -870,6 +879,7 @@
       $('#paperwork').css("display", "none");
       $('#viewpap').css("display", "block");
 
+      ammstate = true;
       timerstate = false;
       pworkstate = false;
       url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
@@ -931,6 +941,20 @@
           }
       }
       return cookieValue;
+    }
+    function getammendments(){
+      if (ammstate == false){clearInterval(ammint);}
+      var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+          }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+          console.log(data)
+          });
     }
   </script>
   <style>

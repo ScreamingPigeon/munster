@@ -105,8 +105,8 @@ class Paperwork(models.Model):
     status = models.CharField(max_length=10, default='QUE')
 class Ammendment(models.Model):
     paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
+    clause = models.CharField(max_length=5, default ='1')
     type = models.CharField(max_length=100, default ='Addition')
     content = models.TextField(default='')
-    visible = models.CharField(max_length=10)
-    time = models.DateField(auto_now=True)
-    completed = models.CharField(max_length=10, default='No')
+    status = models.CharField(max_length=10)
+    time = models.DateTimeField(auto_now=True)
