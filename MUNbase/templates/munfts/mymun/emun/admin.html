@@ -47,7 +47,7 @@
             <a class="nav-link" onclick="motions();">Motions</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" onclick="#">Paperwork</a>
+            <a class="nav-link" onclick="paperwork();">Paperwork</a>
           </li>
 
           <li class="nav-item active">
@@ -325,6 +325,8 @@
       $('#activ').css("display", "block");
       $('#activtimer').css("display", "block");
       $('#motions').css("display", "none");
+      $('#paperwork').css("display", "block");
+
       fillactivediscinfo();
       timerstate = false;
 
@@ -338,6 +340,8 @@
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "none");
+      $('#paperwork').css("display", "block");
+
 
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
             headers:{
@@ -383,6 +387,8 @@
       $('#activ').css("display", "none");
       $('#activtimer').css("display", "none");
       $('#motions').css("display", "block");
+      $('#paperwork').css("display", "block");
+
 
       timerstate = false;
       url='/emun/showallmotions/{{munname}}/{{commname}}'
@@ -716,7 +722,17 @@
                 })
           }, 250);
     }
-
+    function paperwork(){
+      $('#discs').css("display", "block");
+      $('#newdisc').css("display", "block");
+      $('#tttt').css("display", "none");
+      $('#attendancediv').css("display", "none");
+      $('#activ').css("display", "none");
+      $('#activtimer').css("display", "none");
+      timerstate = false;
+      $('#motions').css("display", "none");
+      $('#paperwork').css("display", "block");
+    }
 
   </script>
   <style>
