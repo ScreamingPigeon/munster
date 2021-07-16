@@ -224,7 +224,8 @@
       var title = document.getElementById('resoname').value.toString();
       var alloc = '{{country}}';
       var resps = {'title':title.toString(),'body':body.toString(), 'country':alloc.toString()};
-      console.log('    {%csrf_token%}')
+      var csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+      console.log(csrf)
       var url = '/emun/submitpwork/{{munname}}/{{commname}}'
       fetch(url, {
       method: 'POST',
