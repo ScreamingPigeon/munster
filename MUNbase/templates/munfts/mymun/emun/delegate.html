@@ -73,9 +73,11 @@
           <div class="col-md" id ='paperwork'>
             <h2>Paperwork</h2>
             <br>
-            <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname' type ='text'></input> <br> <br>
-            <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea><br><br>
-            <button class="btn btn-primary" onclick="submitpaperwork()">Submit Paperwork</button>
+            <form  action="{%url '' %}" method="post">
+              <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname' type ='text'></input> <br> <br>
+              <textarea id="cookiedpaperwork" rows="8" cols="80"></textarea><br><br>
+              <button class="btn btn-primary" type="submit">Submit Paperwork</button>
+            </form>
           </div>
         </div>
         <div class="row justify-content-center" ><!--ammendments-->
@@ -220,64 +222,27 @@
       document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+expirydate.toUTCString()+';';
       let x = document.cookie;
     }
-    function submitpaperwork(){
-      var body = tinyMCE.activeEditor.getContent().toString();
-      var title = document.getElementById('resoname').value.toString();
-      var alloc = '{{country}}';
-      var resps = {'title':title.toString(),'body':body.toString(), 'country':alloc.toString()};
-      var csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
-      var url = '/emun/submitpwork/{{munname}}/{{commname}}'
-      fetch(url, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers:{
-          'Accept': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-          'X-CSRFToken': '{% csrf_token %}',
-        },
-            body: JSON.stringify(resps) //JavaScript object of data to POST
-        })
-        .then(response => {
-              return response.json() //Convert response to JSON
-        })
-        .then(data => {
-        //Perform actions with the response data from the view
-        })
-    }
-    function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          const cookies = document.cookie.split(';');
-          for (let i = 0; i < cookies.length; i++) {
-              const cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
-      }
-      return cookieValue;}
+
   </script>
   <style>
-  #voting{
-      display: none;
-      margin : auto;
-      border: solid #2F76D4 thick;
-      padding: 40px;
-  }
-  #paperwork{
-      display: none;
-      margin : auto;
-      border: solid #2F76D4 thick;
-      padding: 40px;
-  }
-  #ammendment{
-      display: none;
-      margin : auto;
-      border: solid #2F76D4 thick;
-      padding: 40px;
-  }
+    #voting{
+        display: none;
+        margin : auto;
+        border: solid #2F76D4 thick;
+        padding: 40px;
+    }
+    #paperwork{
+        display: none;
+        margin : auto;
+        border: solid #2F76D4 thick;
+        padding: 40px;
+    }
+    #ammendment{
+        display: none;
+        margin : auto;
+        border: solid #2F76D4 thick;
+        padding: 40px;
+    }
   </style>
 
 </html>
