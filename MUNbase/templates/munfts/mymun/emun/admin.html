@@ -349,7 +349,7 @@
     var timerstate = false;
     var pworkstate = false;
     var ammstate = false;
-    var ammint = setInterval(function(){ getammendments(); }, 500)
+    var ammint = setInterval(function(){ getammendments(); }, 500);
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -882,6 +882,7 @@
       ammstate = true;
       timerstate = false;
       pworkstate = false;
+      ammint = setInterval(function(){ getammendments(); }, 500)
       url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
       fetch(url, {
             headers:{
