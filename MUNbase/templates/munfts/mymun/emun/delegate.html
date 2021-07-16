@@ -106,7 +106,6 @@
         </div>
       </div>
     </div>
-    {%csrf_token%}
   </body>
   <script type="text/javascript">
     function voting(){
@@ -225,8 +224,7 @@
       var title = document.getElementById('resoname').value.toString();
       var alloc = '{{country}}';
       var resps = {'title':title.toString(),'body':body.toString(), 'country':alloc.toString()};
-      const csrftoken = getCookie('csrftoken');
-      console.log(csrf_token)
+      console.log('    {%csrf_token%}')
       var url = '/emun/submitpwork/{{munname}}/{{commname}}'
       fetch(url, {
       method: 'POST',
