@@ -232,7 +232,7 @@
           'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
           'X-CSRFToken': '{% csrf_token %}',
         },
-            body: JSON.stringify({'title':title,'body':body, 'country':alloc}) //JavaScript object of data to POST
+            body: JSON.stringify({'title':[title],'body':[body], 'country':[alloc]}) //JavaScript object of data to POST
         })
         .then(response => {
               return response.json() //Convert response to JSON
