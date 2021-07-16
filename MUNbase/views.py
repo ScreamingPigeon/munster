@@ -1274,12 +1274,12 @@ def summonvote(request, munname, commname, motionid, country):
             return 'Part error'
         voter = Voter.objects.filter(voter = participant, motion = motion)[0]
         if voter.vote !='NV':
-            return JsonResponse({'vote':voter.vote, 'status':'voted'})
+            return JsonResponse({'vote':voter.vote, 'status':'voted', 'motionname':motion.name})
         else:
             if participant.status == 'PV':
-                return JsonResponse({'vote':'NA', 'status':'PV'})
+                return JsonResponse({'vote':'NA', 'status':'PV', 'motionname':motion.name})
             elif participant.status == 'P':
-                return JsonResponse({'vote':'NA', 'status':'P'})
+                return JsonResponse({'vote':'NA', 'status':'P', 'motionname':motion.name})
 
 
 

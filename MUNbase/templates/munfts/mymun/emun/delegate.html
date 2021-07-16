@@ -83,17 +83,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">New Motion</h5>
+            <h5 class="modal-title">Motion Vote</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <label for="motname">Motion Name: </label><input type="text" id="motname"> <br> <br>
+            <h4 id ='motname'></h4>
             <div id="votecont">
-              <select class="" name="">
 
-              </select>
             </div>
           </div>
           <div class="modal-footer">
@@ -155,7 +153,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-
+                $('motname').append(data['motionname'])
               if (data['vote'] != 'NA'){
                 $('#votecont').empty()
                 $('#submitvote').css('display', 'none');
