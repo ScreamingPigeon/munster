@@ -967,7 +967,7 @@
           }).then(data => {
             resps = data['resps']
             console.log(resps)
-            for(let i =; i<resps.length; i++){
+            for(let i =0; i<resps.length; i++){
               if(resps[i]['status']=='QUE'){
                 $('#contamq').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
               }
