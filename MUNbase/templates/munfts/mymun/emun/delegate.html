@@ -315,7 +315,7 @@
       var type = document.getElementById('amtype').value;
       var cloz = document.getElementById('cloz').value;
       var content = document.getElementById('content').value;
-      if (cloz ==''){cloz='none'} else{cloz = ' 0'+cloz}
+      if (cloz ==''){cloz='none'} else{cloz = '0'+cloz}
       if (content ==''){content='none'}
       url ='/emun/submitam/{{munname}}/{{commname}}/'+id+'/'+type+'/'+cloz+'/'+content;
       fetch(url, {
