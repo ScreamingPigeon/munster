@@ -1618,13 +1618,11 @@ def submitam(request, munname, commname, pid, type, cloz, content):
         except IndexError:
             return 'pp error'
         cont = ''
-        if content is 'none':
-            cont=' '
-        else:
+        if content is not 'none':
             cont = content
         amm = Ammendment(paperwork=pp, clause=cloz, proposer =request.session.get('emunalloc'),type=type,content=cont )
         amm.save()
-        return JsonResponse({'resps':success})
+        return JsonResponse({'resps':'success'})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
