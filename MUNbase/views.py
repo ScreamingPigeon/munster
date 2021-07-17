@@ -1524,7 +1524,7 @@ def openammendment(request, munname, commname, pid, aid):
             comm = comm[0]
         except IndexError:
             return 'Comm Error'
-        paperwork = Paperwork.objects.filter(committee=comm, id = pworkid)
+        paperwork = Paperwork.objects.filter(committee=comm, id = pid)
         try:
             paperwork = paperwork[0]
         except IndexError:
