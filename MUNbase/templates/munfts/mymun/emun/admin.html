@@ -357,7 +357,7 @@
     var timerstate = false;
     var pworkstate = false;
     var ammstate = false;
-    var ammint = setInterval(function(){ getammendments(); }, 500);
+    var ammint = setInterval(function(){ getammendments(); }, 2500);
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -969,13 +969,13 @@
             console.log(resps)
             for(let i =0; i<resps.length; i++){
               if(resps[i]['status']=='QUE'){
-                $('#contamq').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+                $('#contamq').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
               }
               if(resps[i]['status']=='PAS'){
-                $('#passedam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+                $('#passedam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
               }
               if(resps[i]['status']=='REJ'){
-                $('#rejectam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+                $('#rejectam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
               }
 
             }
@@ -983,6 +983,21 @@
     }
     function openam(id){
       console.log('work')
+    }
+    function updatepworkstatus(id){
+      var id = document.getElementById('idpw').value.toString();
+      var status = document.getElementById('pworkstatus').value;
+      url = '/emun/updatepworkstatus/{{munname}}/{{commname}}/'+id+'/'+status;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+          }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data)
+          });
     }
   </script>
   <style>

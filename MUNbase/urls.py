@@ -79,6 +79,7 @@ urlpatterns = [
     path('emun/getpaperwork/<str:munname>/<str:commname>', views.getpaperwork, name ='getpaperwork'),
     path('emun/paperworkdata/<str:munname>/<str:commname>/<str:pworkid>', views.paperworkdata, name ='paperworkdata'),
     path('emun/updatepwork/<str:munname>/<str:commname>', views.updatepwork, name ='updatepwork'),
+    path('emun/updatepworkstatus/<str:munname>/<str:commname>/<str:id>/<str:status>', views.updatepworkstatus, name ='updatepworkstatus'),
     path('emun/getammendments/<str:munname>/<str:commname>/<str:pworkid>', views.getammendments, name ='getammendments'),
 
     #COMMON SEARCH-------------------------------------------------------------

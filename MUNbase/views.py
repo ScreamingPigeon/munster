@@ -1448,7 +1448,36 @@ def updatepwork(request, munname, commname):
     pwork.body = response['body'];
     pwork.save()
     return JsonResponse({'resps': 'success'})
+def updatepworkstatus(request, munname, commname, id, status):
+    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+        return 'cookie error'
+    munnamez = request.session.get('emun')
+    adminz = request.session.get('emunalloc')
+    commnamez = request.session.get('emuncomm')
+    if commnamez != commname or adminz!='Admin' or munnamez!= munname:
+        return 'Authentication Error'
+    munnamme = request.session.get('emun')
+    commname = request.session.get('emuncomm')
+    mun = MUNuser.objects.filter(username = munname)
+    try:
+        mun =mun[0]
+    except IndexError:
+        return 'MUN Error'
+    comm = Committee.objects.filter(mun = mun, name = commname)
+    try:
+        comm = comm[0]
+    except IndexError:
+        return 'Comm Error'
+    response = json.load(request)
 
+    pwork = Paperwork.objects.filter(committee=comm, id = id)
+    try:
+        pwork = pwork[0]
+    except IndexError:
+        return 'error'
+    pwork.status = status
+    pwork.save()
+    return JsonResponse({'resps':'success'})
 def getammendments(request, munname, commname, pworkid):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
