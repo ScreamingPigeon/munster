@@ -345,6 +345,30 @@
     </div>
   </div>
 </div>
+<div class="modal" tabindex="-1" id='ammmodal'role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id='mn'></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 id ='amsub'></h3>
+        <h3 id ='amtype'></h3>
+        <h3 id ='amstat'></h3>
+        <h3>Content:</h3>
+        <section id='ambody'>
+
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick='updatedata=false' data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   </body>
   <script type="text/javascript">
     var countries = {{countries|safe}};
@@ -969,20 +993,50 @@
             console.log(resps)
             for(let i =0; i<resps.length; i++){
               if(resps[i]['status']=='QUE'){
-                $('#contamq').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+                $('#contamq').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
               }
               if(resps[i]['status']=='PAS'){
-                $('#passedam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+                $('#passedam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
               }
               if(resps[i]['status']=='REJ'){
-                $('#rejectam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+                $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
               }
 
             }
           });
     }
     function openam(id){
-      console.log('work')
+      url = '/emun/openammendment/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();+'/'+id;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+          }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            resps = data['resps']
+            $('#amsub').empty()
+            $('#amtype').empty()
+            $('#amstat').empty()
+            $('#ambody').empty()
+            $('#amsub').append('Submitter: '+resps['proposer'])
+            $('#amtype').append('Type: '+resps['type'])
+            if (resps['status']=='QUE'){
+              $('#amstat').append('Currently Queued for approval or rejection')
+
+            }
+            if (resps['status']=='PAS'){
+              $('#amstat').append('Passed in Committee')
+
+            }
+            if (resps['status']=='REJ'){
+              $('#amstat').append('Rejected in Committee')
+
+            }
+            $('#ambody').append(resps['content'])
+          });
+
     }
     function updatepworkstatus(id){
       var id = document.getElementById('idpw').value.toString();
@@ -996,7 +1050,7 @@
           }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
+            openpwork(id);
           });
     }
   </script>
