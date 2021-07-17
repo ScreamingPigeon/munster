@@ -381,7 +381,6 @@
     var timerstate = false;
     var pworkstate = false;
     var ammstate = false;
-    var ammint = setInterval(function(){ getammendments(); }, 5000);
     function discussions(){
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
@@ -914,7 +913,34 @@
       ammstate = true;
       timerstate = false;
       pworkstate = false;
-      ammint = setInterval(function(){ getammendments(); }, 500)
+      var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);}
+        $('#contamq').empty();
+        $('#passedam').empty();
+        $('#rejectam').empty();
+        var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
+        fetch(url, {
+              headers:{
+                  'Accept': 'application/json',
+                  'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+              },
+            }).then(response => {
+              return response.json() //Convert response to JSON
+            }).then(data => {
+              resps = data['resps']
+              console.log(resps)
+              for(let i =0; i<resps.length; i++){
+                if(resps[i]['status']=='QUE'){
+                  $('#contamq').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+                }
+                if(resps[i]['status']=='PAS'){
+                  $('#passedam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+                }
+                if(resps[i]['status']=='REJ'){
+                  $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+                }
+
+              }
+            }); }, 2500)
       url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
       fetch(url, {
             headers:{
@@ -974,36 +1000,6 @@
           }
       }
       return cookieValue;
-    }
-    function getammendments(){
-      if (ammstate == false){clearInterval(ammint);return 'oof'}
-      $('#contamq').empty();
-      $('#passedam').empty();
-      $('#rejectam').empty();
-      var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
-      fetch(url, {
-            headers:{
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-            },
-          }).then(response => {
-            return response.json() //Convert response to JSON
-          }).then(data => {
-            resps = data['resps']
-            console.log(resps)
-            for(let i =0; i<resps.length; i++){
-              if(resps[i]['status']=='QUE'){
-                $('#contamq').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
-              }
-              if(resps[i]['status']=='PAS'){
-                $('#passedam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
-              }
-              if(resps[i]['status']=='REJ'){
-                $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
-              }
-
-            }
-          });
     }
     function openam(id){
       url = '/emun/openammendment/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();+'/'+id;
