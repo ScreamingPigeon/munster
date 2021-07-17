@@ -1535,7 +1535,7 @@ def openammendment(request, munname, commname, pid, aid):
         except IndexError:
             return 'amm error'
         return JsonResponse({'resps':amm})
-def updateam(request, munname, commname, id, status)
+def updateam(request, munname, commname, id, status):
     if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
         return 'cookie error'
     munnamez = request.session.get('emun')
