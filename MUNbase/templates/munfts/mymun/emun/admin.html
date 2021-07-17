@@ -969,13 +969,13 @@
             console.log(resps)
             for(let i =0; i<resps.length; i++){
               if(resps[i]['status']=='QUE'){
-                $('#contamq').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+                $('#contamq').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
               }
               if(resps[i]['status']=='PAS'){
-                $('#passedam').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+                $('#passedam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
               }
               if(resps[i]['status']=='REJ'){
-                $('#rejectam').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+                $('#rejectam').append('<li><a style="color:blue" onclick="openam(`'+resps[i]['id']+'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
               }
 
             }
