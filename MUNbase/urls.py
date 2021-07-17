@@ -84,7 +84,7 @@ urlpatterns = [
     path('emun/openammendment/<str:munname>/<str:commname>/<str:pid>/<str:aid>', views.openammendment, name ='openammendment'),
     path('emun/updateam/<str:munname>/<str:commname>/<str:id>/<str:status>', views.updateam, name ='updateam'),
     path('emun/summonpaperwork/<str:munname>/<str:commname>', views.summonpwork, name ='summonpwork'),
-    path ('emun/submitam/<str:munname>/<str:commname>/<str:pid>/<str:type>/<str:cloz><str:content>', views.submitam, name ='submitam'),
+    path ('emun/submitam/<str:munname>/<str:commname>/<str:pid>/<str:type>/<str:cloz>/<str:content>', views.submitam, name ='submitam'),
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),
     path('search/mun', views.searchmun, name = 'searchmun')
