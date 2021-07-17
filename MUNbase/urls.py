@@ -83,6 +83,7 @@ urlpatterns = [
     path('emun/getammendments/<str:munname>/<str:commname>/<str:pworkid>', views.getammendments, name ='getammendments'),
     path('emun/openammendment/<str:munname>/<str:commname>/<str:pid>/<str:aid>', views.openammendment, name ='openammendment'),
     path('emun/updateam/<str:munname>/<str:commname>/<str:id>/<str:status>', views.updateam, name ='updateam'),
+    path('emun/summonpaperwork/<str:munname>/<str:commname>', views.summonpwork, name ='summonpwork'),
 
     #COMMON SEARCH-------------------------------------------------------------
     path("search/delegate", views.searchdel, name ="searchdel"),

@@ -49,45 +49,57 @@
         </div>
     </nav>
 
-      <div class="container">
-        <br><br>
-        <div class="row justify-content-center" ><!--voting-->
-          <div class="col-md" id ='voting'>
-            <table>
-              <h2>Vote for Motions</h2>
-              <table class="table table-responsive table-striped">
-              <thead>
-                <tr>
-                  <th scope="col"  style="width: 200px;">Name</th>
-                  <th scope="col"  style="width: 100px;">Proposer</th>
-                </tr>
-                <tbody id ='motiondata'>
+<div class="container">
+  <br><br>
+  <div class="row justify-content-center" ><!--voting-->
+    <div class="col-md" id ='voting'>
+      <table>
+        <h2>Vote for Motions</h2>
+        <table class="table table-responsive table-striped">
+        <thead>
+          <tr>
+            <th scope="col"  style="width: 200px;">Name</th>
+            <th scope="col"  style="width: 100px;">Proposer</th>
+          </tr>
+          <tbody id ='motiondata'>
 
-                </tbody>
-              </thead>
-              </table>
-            </table>
-          </div>
-        </div>
-        <div class="row justify-content-center" ><!--paperwork-->
-          <div class="col-md" id ='paperwork'>
-            <h2>Paperwork</h2>
-            <br>
-            <form  action="{%url 'submitpwork' munname commname %}" method="post">
-              {%csrf_token%}
-              <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname'  name='title'type ='text'></input> <br> <br>
-              <textarea id="cookiedpaperwork" name ='body'rows="8" cols="80"></textarea><br><br>
-              <button class="btn btn-primary" type="submit">Submit Paperwork</button>
-            </form>
-          </div>
-        </div>
-        <div class="row justify-content-center" ><!--ammendments-->
-          <div class="col-md" id ='ammendment'>
-            <h2>Ammendments</h2>
-          </div>
-        </div>
-      </div>
-    <div class="modal" tabindex="-1" id='sendvotemodal'role="dialog">
+          </tbody>
+        </thead>
+        </table>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center" ><!--paperwork-->
+    <div class="col-md" id ='paperwork'>
+      <h2>Paperwork</h2>
+      <br>
+      <form  action="{%url 'submitpwork' munname commname %}" method="post">
+        {%csrf_token%}
+        <label for="resoname">Name of the Paperwork:  </label><input onchange='updateinfo()'id ='resoname'  name='title'type ='text'></input> <br> <br>
+        <textarea id="cookiedpaperwork" name ='body'rows="8" cols="80"></textarea><br><br>
+        <button class="btn btn-primary" type="submit">Submit Paperwork</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center" ><!--ammendments-->
+    <div class="col-md" id ='ammendment'>
+      <h2>Select a Resolution to View</h2>
+      <table class="table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th scope="col"  style="width: 400px;">Name</th>
+          <th scope="col"  style="width: 100px;">Status</th>
+        </tr>
+        <tbody id ='pworkrows'>
+
+        </tbody>
+      </thead>
+      </table>
+    </table>
+    </div>
+  </div>
+</div>
+  <div class="modal" tabindex="-1" id='sendvotemodal'role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -133,6 +145,28 @@
       $('#paperwork').css('display','none');
       $('#voting').css('display','none');
       $('#ammendment').css('display','block');
+      url ='/emun/summonpaperwork/{{munname}}/{{commname}}'
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+        resps = data['resps']
+        for(let i =0;i<resps.length;i++){
+          var status ='';
+          $('#pworkrows').empty()
+          if (resps[i]['status']=='OTA'){
+            status = 'Open for Ammendments'
+          }
+          if (resps[i]['status']=='VTC'){
+            status = 'Visible'
+          }
+          $('#pworkrows').append('<tr><td><a style="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+resps[i]['id']+'`)">'+resps[i]['title']+'</a></td><td>'+status+'</td></tr>')
+          }
+            })
     }
     function readCookie(name) {
       var nameEQ = name + "=";
@@ -223,7 +257,7 @@
       document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+expirydate.toUTCString()+';';
       let x = document.cookie;
     }
-
+    function openpwork(id){}
   </script>
   <style>
     #voting{

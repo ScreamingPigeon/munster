@@ -1563,6 +1563,33 @@ def updateam(request, munname, commname, id, status):
     amm.status = status
     amm.save()
     return JsonResponse({'resps':'success'})
+def summonpwork(request, munname, commname):
+    if request.is_ajax and request.method == "GET":
+        if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+            return None
+        munnamez = request.session.get('emun')
+        adminz = request.session.get('emunalloc')
+        commnamez = request.session.get('emuncomm')
+        if commnamez != commname or munnamez!= munname:
+            return 'Authentication Error'
+        munnamme = request.session.get('emun')
+        commname = request.session.get('emuncomm')
+        mun = MUNuser.objects.filter(username = munname)
+        try:
+            mun =mun[0]
+        except IndexError:
+            return 'MUN Error'
+        comm = Committee.objects.filter(mun = mun, name = commname)
+        try:
+            comm = comm[0]
+        except IndexError:
+            return 'Comm Error'
+        paperworks = Paperwork.objects.filter(committee=comm).order_by('time').values()
+        resps = []
+        for row in paperworks:
+            if row['status']== 'OTA' or row['status']== 'VTC':
+                resps.append(row)
+        return JsonResponse({'resps':resps})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
