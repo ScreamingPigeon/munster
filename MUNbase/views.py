@@ -1557,7 +1557,7 @@ def updateam(request, munname, commname, id, status):
         return 'Comm Error'
     amm = Ammendment.objects.filter(id = id)
     try:
-        amm = pwork[0]
+        amm = amm[0]
     except IndexError:
         return 'error'
     amm.status = status
