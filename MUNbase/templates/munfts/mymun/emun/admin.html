@@ -1002,7 +1002,7 @@
       return cookieValue;
     }
     function openam(id){
-      url = '/emun/openammendment/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();+'/'+id;
+      url = '/emun/openammendment/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();+'/'+document.getElementById('idpw').value.toString();
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
