@@ -98,6 +98,14 @@
     </table>
     </div>
   </div>
+  <div class="row justify-content-center" id ='opendoc'>
+    <div class="col-8" id='docbody'style="font-family:serif;">
+
+    </div>
+    <div class="col-4" id ='ammform'>
+      <h4>Ammendments</h4>
+    </div>
+  </div>
 </div>
   <div class="modal" tabindex="-1" id='sendvotemodal'role="dialog">
       <div class="modal-dialog" role="document">
@@ -128,6 +136,8 @@
       $('#voting').css('display','block');
       $('#paperwork').css('display','none');
       $('#ammendment').css('display','none');
+      $('#docbody').css('display', 'none')
+
       getmotions();
 
     }
@@ -135,6 +145,8 @@
       $('#paperwork').css('display','block');
       $('#voting').css('display','none');
       $('#ammendment').css('display','none');
+      $('#docbody').css('display', 'none')
+
       var content = readCookie('pwork').slice(0, -29);
       tinymce.get('cookiedpaperwork').setContent(content);
       var title = readCookie('pworktitle').slice(0,-29);
@@ -143,6 +155,8 @@
     }
     function ammendments(){
       $('#paperwork').css('display','none');
+      $('#docbody').css('display', 'none')
+
       $('#voting').css('display','none');
       $('#ammendment').css('display','block');
       url ='/emun/summonpaperwork/{{munname}}/{{commname}}'
@@ -257,7 +271,30 @@
       document.cookie ='pworktitle='+document.getElementById('resoname').value.toString()+expirydate.toUTCString()+';';
       let x = document.cookie;
     }
-    function openpwork(id){}
+    function openpwork(id){
+      $('#docbody').css('display', 'block')
+      $('#paperwork').css('display','none');
+      $('#voting').css('display','none');
+      $('#ammendment').css('display','none');
+      url ='emun/paperworkdata/{{munname}}/{{commname}}/'+id;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            $('#docbody').empty()
+              $('#docbody').append(data['pwork']['body'])
+              if (data['pwork']['status']!='OTA'){
+                $('#ammform').css('display', 'none')
+              }
+              else{
+                $('#ammform').css('display', 'block')
+              }
+            })
+    }
   </script>
   <style>
     #voting{
@@ -277,6 +314,9 @@
         margin : auto;
         border: solid #2F76D4 thick;
         padding: 40px;
+    }
+    #docbody{
+      display: none
     }
   </style>
 
