@@ -99,11 +99,19 @@
     </div>
   </div>
   <div class="row justify-content-center" id ='opendoc'>
-    <div class="col-10" id='docbody'style="font-family:serif;display:none; font-size:18px;border:solid black 3px;" >
+    <div class="col-10" id='docbody'style="font-family:serif;display:none; font-size:22px;border:solid black 3px;" >
 
     </div>
-    <div class="col-2" id ='ammform' style="display:none">
-      <h4>Ammendments</h4>
+    <div class="col-2" id ='ammform' style="display:none; margin:20px; border: solid black 3px;">
+      <h5>Ammendment</h5>
+      Type: <select id="amtype">
+      <option value="Deletion">Deletion</option>
+      <option value="Modification">Modification</option>
+      <option value="Addition">Addition</option>
+
+      </select>
+      Clause number: <input type="text" id="cloz" value="">
+      Ammmendment Content: <textarea id="content" rows="8" cols="30"></textarea>
     </div>
   </div>
 </div>
