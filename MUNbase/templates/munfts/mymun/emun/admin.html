@@ -138,6 +138,8 @@
     </div>
   <div class="row justify-content-center" ><!--Attendance-->
       <div class="col-auto sectionz" style="display:none;" id = 'attendancediv'>
+        <h2>Attendance & Voting Status</h2>
+        <br>
         <table class="table table-responsive table-striped" id ='tttt'>
         <thead>
           <tr>
@@ -262,19 +264,25 @@
             <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
         </div>
         <div class="col-3" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 10px;margin-bottom: 45px;">
-          <div id='contamq'>
+          <div >
             <h5>Queued Ammendments</h5>
+            <ul id='contamq'>
 
+            </ul>
           </div>
           <br>
-          <div id='passedam'>
+          <div >
             <h5>Passed Ammendments</h5>
+            <ul id='passedam'>
 
+            </ul>
           </div>
           <br>
-          <div id='rejectam'>
+          <div >
             <h5>Rejected Ammendments</h5>
+            <ul id='rejectam'>
 
+            </ul>
           </div>
         </div>
       </div>
@@ -945,6 +953,9 @@
     }
     function getammendments(){
       if (ammstate == false){clearInterval(ammint);}
+      $('#contamq').empty();
+      $('#passedam').empty();
+      $('#rejectam').empty();
       var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
       fetch(url, {
             headers:{
@@ -957,7 +968,16 @@
             resps = data['resps']
             console.log(resps)
             for(let i =; i<resps.length; i++){
-              if(resps[i]['status'])
+              if(resps[i]['status']=='QUE'){
+                $('#contamq').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+              }
+              if(resps[i]['status']=='PAS'){
+                $('#passedam').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+              }
+              if(resps[i]['status']=='REJ'){
+                $('#rejectam').append('<li><a style="color:blue" onclick="openam(`'resps[i]['id']'`)" href="#">'+resps[i]['type']+' for clause 'resps[i]['clause']+'by ' +resps[i]['proposer']+'</a></li>')
+              }
+
             }
           });
     }
