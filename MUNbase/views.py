@@ -1468,8 +1468,6 @@ def updatepworkstatus(request, munname, commname, id, status):
         comm = comm[0]
     except IndexError:
         return 'Comm Error'
-    response = json.load(request)
-
     pwork = Paperwork.objects.filter(committee=comm, id = id)
     try:
         pwork = pwork[0]
