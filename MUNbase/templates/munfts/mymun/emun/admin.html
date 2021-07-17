@@ -963,7 +963,7 @@
             $('#mst').text(pwork['country'])
             $('#currentstat').empty()
             if (pwork['status'] == 'QUE'){$('#currentstat').text("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
-            if (pwork['status'] == 'OTA'){$('#currenstat').text("Currently this paperwork is Open to Ammendments");}
+            if (pwork['status'] == 'OTA'){$('#currentstat').text("Currently this paperwork is Open to Ammendments");}
             if (pwork['status'] == 'VTC'){$('#currentstat').text("Currently this paperwork is Visible to the Committee but not Open to Ammendments")}
             if (pwork['status'] == 'COM'){$('#currentstat').text("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
             tinymce.get('papeditor').setContent(pwork['body']);
