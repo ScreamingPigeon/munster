@@ -111,8 +111,10 @@
       <option value="Addition">Addition</option>
 
     </select> <br> <br>
+    <input id="poid" style="visibility:hidden;position:absolute;" value="">
       Clause number: <input type="text" id="cloz" value=""> <br> <br>
-      Ammmendment Content: <textarea id="content" rows="8" cols="40"></textarea>
+      Ammmendment Content: <textarea id="content" rows="8" cols="40"></textarea> <br> <br>
+      <button onclick="submitam()" class="btn btn-primary">submit</button>
     </div>
   </div>
 </div>
@@ -295,6 +297,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             $('#docbody').empty()
+            document.getElementById('poid').value=data['pwork']['id'];
             $('#ammform').css('display', 'block')
             $('#docbody').css('display', 'block')
 
@@ -305,6 +308,26 @@
               else{
                 $('#ammform').css('display', 'block')
               }
+            })
+    }
+    function submitam(){
+      var id = document.getElementById('poid').value;
+      var type = document.getElementById('amtype').value;
+      var cloz = document.getElementById('cloz').value;
+      var content = document.getElementById('content').value;
+      if (cloz ==''){cloz='none'}
+      if (content ==''){content='none'}
+      url ='/emun/submitam/{{munname}}/{{commname}}/'+id+'/'+type+'/'+cloz+'/'+content;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            console.log(data);
+
             })
     }
   </script>
