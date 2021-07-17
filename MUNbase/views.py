@@ -1535,8 +1535,34 @@ def openammendment(request, munname, commname, pid, aid):
         except IndexError:
             return 'amm error'
         return JsonResponse({'resps':amm})
-
-
+def updateam(request, munname, commname, id, status)
+    if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+        return 'cookie error'
+    munnamez = request.session.get('emun')
+    adminz = request.session.get('emunalloc')
+    commnamez = request.session.get('emuncomm')
+    if commnamez != commname or adminz!='Admin' or munnamez!= munname:
+        return 'Authentication Error'
+    munnamme = request.session.get('emun')
+    commname = request.session.get('emuncomm')
+    mun = MUNuser.objects.filter(username = munname)
+    try:
+        mun =mun[0]
+    except IndexError:
+        return 'MUN Error'
+    comm = Committee.objects.filter(mun = mun, name = commname)
+    try:
+        comm = comm[0]
+    except IndexError:
+        return 'Comm Error'
+    amm = Ammendment.objects.filter(id = id)
+    try:
+        amm = pwork[0]
+    except IndexError:
+        return 'error'
+    amm.status = status
+    amm.save()
+    return JsonResponse({'resps':'success'})
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
