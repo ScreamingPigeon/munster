@@ -358,7 +358,7 @@
         <h6 id ='amsub'></h6>
         <h6 id ='amtype'></h6>
         <h6 id ='amstat'></h6>
-        <label>Update Status to</label> <select onchange='updateamm()' id="amstat">
+        <label>Update Status to</label> <select onchange='updateamm()' id="amstatt">
           <option value="QUE">Queued</option>
           <option value="PAS">Passed</option>
           <option value="REJ">Rejected</option>
@@ -1058,7 +1058,7 @@
     }
     function updateamm(){
       id = document.getElementById('amid').value;
-      status= document.getElementById('amstat').value;
+      status= document.getElementById('amstatt').value;
       url ='/emun/updateam/{{munname}}/{{commname}}/'+id+'/'+status;
       fetch(url, {
             headers:{
