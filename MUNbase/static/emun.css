@@ -32,5 +32,6 @@ body{
   overflow: hidden;
 }
 dailogo{
-  width: 30%;
+  width: 200px;
+  height: auto;
 }
