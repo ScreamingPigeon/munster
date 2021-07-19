@@ -39,5 +39,5 @@ body{
 .col-12{
   background-color: white;
   border: solid #F39848 10px;
-  min-height: 600px;
+  padding: 40px;
 }
