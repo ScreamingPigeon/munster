@@ -8,15 +8,11 @@ body{
   background-color: white;
   border: solid #F39848 10px;
 }
+.col{
+  background-color: white;
+  border: solid #F39848 10px;
+}
 .col-auto{
-  background-color: white;
-  border: solid #F39848 10px;
-}
-.col-9{
-  background-color: white;
-  border: solid #F39848 10px;
-}
-.col-3{
   background-color: white;
   border: solid #F39848 10px;
 }
