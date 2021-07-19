@@ -36,3 +36,8 @@ body{
   padding: 20px; float:left;
   vertical-align: middle;
 }
+.col-12{
+  background-color: white;
+  border: solid #F39848 10px;
+  min-height: 600px;
+}
