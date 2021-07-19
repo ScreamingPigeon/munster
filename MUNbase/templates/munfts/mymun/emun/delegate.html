@@ -156,12 +156,13 @@
     {% endif %}
   </body>
   <script type="text/javascript">
+      var ammstate = false
     function voting(){
       $('#voting').css('display','block');
       $('#paperwork').css('display','none');
       $('#ammendment').css('display','none');
       $('#docbody').css('display', 'none')
-
+      ammstate = false;
       getmotions();
 
     }
@@ -170,7 +171,7 @@
       $('#voting').css('display','none');
       $('#ammendment').css('display','none');
       $('#docbody').css('display', 'none')
-
+      ammstate = false;
       var content = readCookie('pwork').slice(0, -29);
       tinymce.get('cookiedpaperwork').setContent(content);
       var title = readCookie('pworktitle').slice(0,-29);
@@ -183,28 +184,53 @@
 
       $('#voting').css('display','none');
       $('#ammendment').css('display','block');
+      ammstate = true
       url ='/emun/summonpaperwork/{{munname}}/{{commname}}'
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
             },
-      }).then(response => {
+            }).then(response => {
             return response.json() //Convert response to JSON
-          }).then(data => {
-        resps = data['resps']
-        for(let i =0;i<resps.length;i++){
-          var status ='';
-          $('#pworkrows').empty()
-          if (resps[i]['status']=='OTA'){
-            status = 'Open for Ammendments'
-          }
-          if (resps[i]['status']=='VTC'){
-            status = 'Visible'
-          }
-          $('#pworkrows').append('<tr><td><a style="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+resps[i]['id']+'`)">'+resps[i]['title']+'</a></td><td>'+status+'</td></tr>')
-          }
-            })
+            }).then(data => {
+            resps = data['resps']
+            for(let i =0;i<resps.length;i++){
+            var status ='';
+            $('#pworkrows').empty()
+            if (resps[i]['status']=='OTA'){
+              status = 'Open for Ammendments'
+            }
+            if (resps[i]['status']=='VTC'){
+              status = 'Visible'
+            }
+            $('#pworkrows').append('<tr><td><a style="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+resps[i]['id']+'`)">'+resps[i]['title']+'</a></td><td>'+status+'</td></tr>')
+            }
+              })
+        var x = setInterval(function (){if (ammstate == false){clearInterval(x)}
+        url ='/emun/summonpaperwork/{{munname}}/{{commname}}'
+        fetch(url, {
+              headers:{
+                  'Accept': 'application/json',
+                  'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+              },
+              }).then(response => {
+              return response.json() //Convert response to JSON
+              }).then(data => {
+              resps = data['resps']
+              for(let i =0;i<resps.length;i++){
+              var status ='';
+              $('#pworkrows').empty()
+              if (resps[i]['status']=='OTA'){
+                status = 'Open for Ammendments'
+              }
+              if (resps[i]['status']=='VTC'){
+                status = 'Visible'
+              }
+              $('#pworkrows').append('<tr><td><a style="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+resps[i]['id']+'`)">'+resps[i]['title']+'</a></td><td>'+status+'</td></tr>')
+              }
+                })
+      },500)
     }
     function readCookie(name) {
       var nameEQ = name + "=";
@@ -218,7 +244,7 @@
     }
     function getmotions(){
       $('#motiondata').empty();
-
+      ammstate = false;
       url='/emun/showallmotions/{{munname}}/{{commname}}'
       fetch(url, {
             headers:{
