@@ -12,7 +12,6 @@ body{
 .col{
   background-color: white;
   border: solid #F39848 10px;
-  min-height: 600px;
 
 }
 .col-auto{
@@ -26,7 +25,7 @@ body{
   height: 185px;
   background-color: #F39848;
   margin-top:20px;
-  border-top: solid #294687 10px;
+  border-top: solid white 10px;
   left: 0;
   bottom: 0;
   overflow: hidden;
@@ -35,4 +34,5 @@ body{
   width: 600px;
   height: auto;
   padding: 20px; float:left;
+  vertical-align: middle;
 }
