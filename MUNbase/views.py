@@ -1700,7 +1700,10 @@ def loguserin(username,password,request):
         user.append(deluser[0])
     elif len(munuser)==1:
         user.append(munuser[0])
-    user = user[0]
+    try:
+        user = user[0]
+    except IndexError:
+        return False
     if(pbkdf2_sha256.verify(password, user.password)):
         request.session['id']=user.id
         return True
