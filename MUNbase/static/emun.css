@@ -22,4 +22,8 @@ body{
   background-color: #F39848;
   margin-top:20px;
   border-top: solid #294687 10px;
+  left: 0;
+    bottom: 0;
+
+    overflow: hidden;
 }
