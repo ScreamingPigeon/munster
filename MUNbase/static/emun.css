@@ -16,3 +16,10 @@ body{
   background-color: white;
   border: solid #F39848 10px;
 }
+.footer{
+  width: 100%;
+  height: 200px;
+  background-color: #F39848;
+  margin-top:20px;
+  border-top: solid #294687 10px;
+}
