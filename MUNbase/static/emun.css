@@ -4,3 +4,19 @@ body{
 .navbar{
   padding: 20px; background-color: #294687!important;border-bottom: 10px solid #F39848!important; color:white!important;
 }
+.col-md{
+  background-color: white;
+  border: solid #F39848 10px;
+}
+.col-auto{
+  background-color: white;
+  border: solid #F39848 10px;
+}
+.col-9{
+  background-color: white;
+  border: solid #F39848 10px;
+}
+.col-3{
+  background-color: white;
+  border: solid #F39848 10px;
+}
