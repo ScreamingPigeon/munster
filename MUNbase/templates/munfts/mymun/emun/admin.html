@@ -394,6 +394,7 @@
     var timerstate = false;
     var pworkstate = false;
     var ammstate = false;
+    var motionstate = false;
     attendance();
     function discussions(){
       $('#discs').css("display", "block");
@@ -409,6 +410,7 @@
       timerstate = false;
       pworkstate = false;
       ammstate = false;
+      motionstate = false;
       $('#motions').css("display", "none");
       updatediscs();
     }
@@ -444,6 +446,7 @@
 
       pworkstate = false;
       ammstate = false;
+      motionstate = false;
 
 
       fetch("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/attendance", {
@@ -496,6 +499,7 @@
 
       pworkstate = false;
       ammstate = false;
+      motionstate = true;
 
       timerstate = false;
       url='/emun/showallmotions/{{munname}}/{{commname}}'
@@ -509,6 +513,7 @@
           }).then(data => {
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
+            $('#motiondata').empty();
             var yes = motions[i]['yes']
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
@@ -518,10 +523,34 @@
 
           }
             })
+          var x = setInterval(function(){
+            if (motionstate == false){clearInterval(x)}
+            url='/emun/showallmotions/{{munname}}/{{commname}}'
+            fetch(url, {
+                  headers:{
+                      'Accept': 'application/json',
+                      'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                  },
+            }).then(response => {
+                  return response.json() //Convert response to JSON
+                }).then(data => {
+                var motions = data['motions']
+                for(let i =0; i<motions.length;i++){
+                  $('#motiondata').empty();
+                  var yes = motions[i]['yes']
+                  var no = motions[i]['no']
+                  var abstain = motions[i]['abstain']
+                  var id = motions[i]['id']
+                  var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
+                  $('#motiondata').append(markup);
 
+                }
+                  })
+          }, 500)
     }
     function present(country){
       var alloc = country;
+      motionstate = false;
       var press= 'present('+"'"+alloc.toString()+"'"+');'
       var voti= 'voting('+"'"+alloc.toString()+"'"+');'
       var stat =''
@@ -599,7 +628,7 @@
 
       }
     function newdisc(){
-
+      motionstate = false;
       var discname = document.getElementById('discname').value;
       var pst = document.getElementById('spektime').value;
       var nums = document.getElementById('speknum').value;
@@ -620,6 +649,7 @@
         .then(data => { updatediscs();})
     }
     function updatediscs(){
+      motionstate = false;
       $('#tdisc tbody').empty();
       var table = $("#tdisc");
       url = 'http://www.munster.co.in/emun/getdiscussions/{{munname}}/{{commname}}'
@@ -753,6 +783,7 @@
     }
     function newmotion(){
       var name = document.getElementById('motname').value;
+      motionstate = false;
       var proposer = document.getElementById('proposer').value;
       url = '/emun/newmotion/{{munname}}/{{commname}}/'+name.toString()+"/"+proposer.toString();
       fetch(url, {
@@ -768,7 +799,7 @@
     }
     function voterdata(id){
       url = '/emun/getvoterdata/{{munname}}/{{commname}}/'+id
-
+      motionstate = false;
           var int = setInterval(function(){
             if( updatedata = false){clearInterval(int)}
             fetch(url, {
@@ -840,7 +871,7 @@
       $('#paperwork').css("display", "block");
       $('#viewpap').css("display", "none");
       ammstate = false;
-
+      motionstate = false;
       pworkstate = true;
       $('#tcomp').empty()
       $('#tvisible').empty()
@@ -923,7 +954,7 @@
       $('#activtimer').css("display", "none");
       $('#paperwork').css("display", "none");
       $('#viewpap').css("display", "block");
-
+      motionstate = false;
       ammstate = true;
       timerstate = false;
       pworkstate = false;
@@ -982,6 +1013,7 @@
       var csrftoken = getCookie('csrftoken');
       var body = tinyMCE.activeEditor.getContent().toString();
       var id = document.getElementById('idpw').value.toString();
+      motionstate = false;
       var resps = JSON.stringify({'body':body.toString(), 'id':id.toString()});
       fetch(url, {
       method: 'POST',
@@ -1016,6 +1048,8 @@
       return cookieValue;
     }
     function openam(id){
+      motionstate = false;
+
       url = '/emun/openammendment/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString()+'/'+id;
       fetch(url, {
             headers:{
@@ -1050,6 +1084,7 @@
 
     }
     function updatepworkstatus(id){
+      motionstate = false;
       var id = document.getElementById('idpw').value.toString();
       var status = document.getElementById('pworkstatus').value;
       url = '/emun/updatepworkstatus/{{munname}}/{{commname}}/'+id+'/'+status;
