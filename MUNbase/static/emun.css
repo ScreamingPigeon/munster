@@ -7,18 +7,18 @@ body{
 .col-md{
   background-color: white;
   border: solid #F39848 10px;
-  min-height: 800px;
+  min-height: 600px;
 }
 .col{
   background-color: white;
   border: solid #F39848 10px;
-  min-height: 800px;
+  min-height: 600px;
 
 }
 .col-auto{
   background-color: white;
   border: solid #F39848 10px;
-  min-height: 800px;
+  min-height: 600px;
 
 }
 .footer{
