@@ -38,14 +38,15 @@ body {
   border-color: #009688;
   border-width: thin;
   font-family: monospace;
-  style: hidden;
 }
 .alert{
-border-style: solid;
-border-width: thin;
-  color:#FF5871;
-  border: solid #FF5871 medium;
-border-radius: 5px; }
+    border-style: solid;
+    border-width: thin;
+    color:#FF5871;
+    border: solid #FF5871 3px;
+    border-radius: 5px;
+    visibility: hidden;
+  }
 .footer{
   position: fixed;
   background-color: black;
