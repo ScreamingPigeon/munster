@@ -35,13 +35,13 @@ body {
 }
 .btn{
   border-style: solid;
-  border-color: #009688!important;
+  border-color: #009688;
   border-width: thin;
-}
+}!
 .alert{
 border-style: solid;
 border-width: thin;
-    color:white;
+  color:#FF5871;
   }
 .footer{
   position: fixed;
