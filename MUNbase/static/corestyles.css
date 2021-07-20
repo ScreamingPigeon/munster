@@ -37,7 +37,6 @@ body {
   border-style: solid;
   border-color: #009688;
   border-width: thin;
-  font-family: monospace;
 }
 .alert{
     border-style: solid;
@@ -46,6 +45,8 @@ body {
     border: solid #FF5871 3px;
     border-radius: 5px;
     visibility: hidden;
+    font-family: monospace;
+
   }
 .footer{
   position: fixed;
