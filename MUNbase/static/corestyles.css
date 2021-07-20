@@ -42,7 +42,8 @@ body {
 border-style: solid;
 border-width: thin;
   color:#FF5871;
-  }
+  border: solid #FF5871 medium;
+border-radius: 5px; }
 .footer{
   position: fixed;
   background-color: black;
