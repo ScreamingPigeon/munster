@@ -37,6 +37,8 @@ body {
   border-style: solid;
   border-color: #009688;
   border-width: thin;
+  font-family: monospace;
+  style: hidden;
 }
 .alert{
 border-style: solid;
