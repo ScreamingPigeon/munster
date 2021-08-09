@@ -693,6 +693,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             var values = data['resps'];
+            console.log(values)
             $('#adname').empty();
             $('#countryadder').empty();
             $('#sortable').empty();
