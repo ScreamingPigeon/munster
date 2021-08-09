@@ -467,7 +467,7 @@
             var status = x[i]['status'];
             var markup ="";
             allo = alloc.replaceAll(' ', '_')
-            allo = allo.replaceAll(/'/g, "@");
+            allo = allo.replaceAll("'", "@");
             console.log(allo)
             var press= 'present('+"'"+allo.toString()+"'"+');'
             var voti= 'voting('+"'"+allo.toString()+"'"+');'
@@ -553,10 +553,10 @@
     }
     function present(country){
       var alloc = country.replaceAll('_', ' ');
-      alloc = alloc.replaceAll("@",/'/g);
+      alloc = alloc.replaceAll("@","'");
       motionstate = false;
       allo = alloc.replace(' ', '_')
-      allo = allo.replace(/'/g, "@");
+      allo = allo.replace("'", "@");
       var press= 'present('+"'"+allo.toString()+"'"+');'
       var voti= 'voting('+"'"+allo.toString()+"'"+');'
       var stat =''
@@ -596,10 +596,10 @@
       }
     function voting(country){
       var alloc = country.replaceAll('_', ' ');
-      alloc = alloc.replaceAll("@",/'/g);
+      alloc = alloc.replaceAll("@","'");
       motionstate = false;
       allo = alloc.replace(' ', '_')
-      allo = allo.replace(/'/g, "@");
+      allo = allo.replace("'", "@");
       var press= 'present('+"`"+allo.toString()+"`"+');'
       var voti= 'voting('+"'"+allo.toString()+"'"+');'
       var stat =''
