@@ -464,10 +464,11 @@
           {
             var id =x[i]["id"];
             var alloc =x[i]['country'];
+            alloc = alloc.replace(/ /g,'\xa0')
             var status = x[i]['status'];
             var markup ="";
-            var press= 'present('+"'"+encodeURIComponent(alloc)+"'"+');'
-            var voti= 'voting('+"'"+encodeURIComponent(alloc)+"'"+');'
+            var press= 'present('+"'"+alloc.toString()+"'"+');'
+            var voti= 'voting('+"'"+alloc.toString()+"'"+');'
             if (status ==""){
               markup = "<tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
