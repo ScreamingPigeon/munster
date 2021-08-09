@@ -38,16 +38,7 @@ body {
   border-color: #009688;
   border-width: thin;
 }
-.alert{
-    border-style: solid;
-    border-width: thin;
-    color:#FF5871;
-    border: solid #FF5871 3px;
-    border-radius: 5px;
-    visibility: hidden;
-    font-family: monospace;
 
-  }
 .footer{
   position: fixed;
   background-color: black;
@@ -67,7 +58,7 @@ body {
   border-color: #009688;
   background-color: #28343A;
 }
-.subh{
+.alert{
 border-color:#F07178;
 font-family: 'Source Code Pro', monospace;
 color: #F07178;
