@@ -570,7 +570,7 @@
           return response.json() //Convert response to JSON
         })
         .then(data => {
-          var name = '#row'+allo.toString();
+          var name = '#row'+country.toString();
           console.log(name)
           $(name.toString()).empty();
           console.log(data['attendance'])
@@ -612,7 +612,7 @@
           return response.json() //Convert response to JSON
         })
         .then(data => {
-          var name = '#row'+allo.toString();
+          var name = '#row'+country.toString();
           $(name.toString()).empty();
           if (data['attendance'] == 'notP'){
             $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
