@@ -464,7 +464,7 @@
           {
             var id =x[i]["id"];
             var alloc =x[i]['country'];
-            alloc = alloc.replace(/ /g,'\xa0')
+            alloc = encodeURI(alloc);
             var status = x[i]['status'];
             var markup ="";
             var press= 'present('+"'"+alloc.toString()+"'"+');'
@@ -551,7 +551,7 @@
     }
     function present(country){
       var alloc = country;
-      alloc = alloc.replace(/ /g,'\xa0')
+      alloc = encodeURI(alloc);
       motionstate = false;
       var press= 'present('+"'"+alloc.toString()+"'"+');'
       var voti= 'voting('+"'"+alloc.toString()+"'"+');'
@@ -592,7 +592,7 @@
       }
     function voting(country){
       var alloc = country;
-      alloc = alloc.replace(/ /g,'\xa0')
+      alloc = encodeURI(alloc);
       var press= 'present('+"`"+alloc.toString()+"`"+');'
       var voti= 'voting('+"'"+alloc.toString()+"'"+');'
       var stat =''
