@@ -554,7 +554,7 @@
     function present(country){
       var alloc = country.replaceAll('_', ' ');
       motionstate = false;
-      allo = alloc.replace(' ', '_')
+      allo = alloc.replaceAll(' ', '_')
       alloc = alloc.replaceAll("@","'");
       var press= 'present('+"'"+allo.toString()+"'"+');'
       var voti= 'voting('+"'"+allo.toString()+"'"+');'
@@ -597,7 +597,7 @@
       var alloc = country.replaceAll('_', ' ');
       alloc = alloc.replaceAll("@","'");
       motionstate = false;
-      allo = alloc.replace(' ', '_')
+      allo = alloc.replaceAll(' ', '_')
       var press= 'present('+"`"+allo.toString()+"`"+');'
       var voti= 'voting('+"'"+allo.toString()+"'"+');'
       var stat =''
