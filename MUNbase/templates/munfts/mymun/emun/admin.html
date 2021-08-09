@@ -472,13 +472,13 @@
             var press= 'present('+"'"+allo.toString()+"'"+');'
             var voti= 'voting('+"'"+allo.toString()+"'"+');'
             if (status ==""){
-              markup = "<tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
+              markup = "<tr id='row"+allo.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
             if (status =="P"){
-              markup = "<tr id='row"+alloc.toString() +"'>  <td>"+alloc+"</td><td> <button onclick = "+press+"  type= 'button' class = 'btn pres'></button> </td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
+              markup = "<tr id='row"+allo.toString() +"'>  <td>"+alloc+"</td><td> <button onclick = "+press+"  type= 'button' class = 'btn pres'></button> </td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
             if (status =="PV"){
-              markup = "<tr id='row"+alloc.toString() +"'>  <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button'  class = 'btn undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td></tr>";
+              markup = "<tr id='row"+allo.toString() +"'>  <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button'  class = 'btn undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td></tr>";
             }
             $("#tabat").append(markup);
           }
