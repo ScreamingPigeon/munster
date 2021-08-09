@@ -464,11 +464,11 @@
           {
             var id =x[i]["id"];
             var alloc =x[i]['country'];
-            console.log(alloc)
             var status = x[i]['status'];
             var markup ="";
             var press= 'present('+"'"+alloc.toString()+"'"+');'
             var voti= 'voting('+"'"+alloc.toString()+"'"+');'
+            console.log(press)
             if (status ==""){
               markup = "<tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
@@ -593,7 +593,6 @@
       var alloc = country;
       var press= 'present('+"`"+alloc.toString()+"`"+');'
       var voti= 'voting('+"'"+alloc.toString()+"'"+');'
-      console.log(press)
       var stat =''
       var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/PV");
       fetch(url, {
