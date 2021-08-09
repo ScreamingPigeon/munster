@@ -24,6 +24,7 @@ Register
       <section class="box">
         <h2 class="subh"> Register</h2>
         {%if errmsg is None%}
+        <div class="alert"></div>
         {%else%}
         <div class="alert" style="visibility:visible">{{errmsg}}</div>
         {%endif%}
