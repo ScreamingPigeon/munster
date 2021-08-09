@@ -467,7 +467,7 @@
             var status = x[i]['status'];
             var markup ="";
             allo = alloc.replaceAll(' ', '_')
-            allo = allo.replaceAll("'", "@");
+            allo = allo.replaceAll(/'/g, "@");
             console.log(allo)
             var press= 'present('+"'"+allo.toString()+"'"+');'
             var voti= 'voting('+"'"+allo.toString()+"'"+');'
