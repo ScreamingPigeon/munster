@@ -466,9 +466,10 @@
             var alloc =x[i]['country'];
             var status = x[i]['status'];
             var markup ="";
-            var press= 'present('+"'"+alloc.toString()+"'"+');'
-            var voti= 'voting('+"'"+alloc.toString()+"'"+');'
-            console.log(press)
+            allo = alloc.replace(' ', '_')
+            allo = allo.replace(/'/g, "\\'");
+            var press= 'present('+"'"+allo.toString()+"'"+');'
+            var voti= 'voting('+"'"+allo.toString()+"'"+');'
             if (status ==""){
               markup = "<tr id='row"+alloc.toString() +"'> <td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td></tr>";
             }
@@ -550,10 +551,13 @@
           }, 500)
     }
     function present(country){
-      var alloc = country;
+      var alloc = country.replace('_', ' ');
+      alloc = alloc.replace("\\'",/'/g);
       motionstate = false;
-      var press= 'present('+"'"+alloc.toString()+"'"+');'
-      var voti= 'voting('+"'"+alloc.toString()+"'"+');'
+      allo = alloc.replace(' ', '_')
+      allo = allo.replace(/'/g, "\\'");
+      var press= 'present('+"'"+allo.toString()+"'"+');'
+      var voti= 'voting('+"'"+allo.toString()+"'"+');'
       var stat =''
       var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/P");
       fetch(url, {
@@ -590,9 +594,13 @@
 
       }
     function voting(country){
-      var alloc = country;
-      var press= 'present('+"`"+alloc.toString()+"`"+');'
-      var voti= 'voting('+"'"+alloc.toString()+"'"+');'
+      var alloc = country.replace('_', ' ');
+      alloc = alloc.replace("\\'",/'/g);
+      motionstate = false;
+      allo = alloc.replace(' ', '_')
+      allo = allo.replace(/'/g, "\\'");
+      var press= 'present('+"`"+allo.toString()+"`"+');'
+      var voti= 'voting('+"'"+allo.toString()+"'"+');'
       var stat =''
       var url = ("http://www.munster.co.in/emun/"+"{{munname}}/{{commname}}/updateattendance/").concat(alloc.toString()).concat("/PV");
       fetch(url, {
