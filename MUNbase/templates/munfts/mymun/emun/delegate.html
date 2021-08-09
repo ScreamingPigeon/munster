@@ -163,6 +163,7 @@
       $('#paperwork').css('display','none');
       $('#ammendment').css('display','none');
       $('#docbody').css('display', 'none')
+      $('#ammform').css('display', 'none')
       ammstate = false;
       getmotions();
 
@@ -172,6 +173,8 @@
       $('#voting').css('display','none');
       $('#ammendment').css('display','none');
       $('#docbody').css('display', 'none')
+      $('#ammform').css('display', 'none')
+
       ammstate = false;
       var content = readCookie('pwork').slice(0, -29);
       tinymce.get('cookiedpaperwork').setContent(content);
@@ -182,7 +185,7 @@
     function ammendments(){
       $('#paperwork').css('display','none');
       $('#docbody').css('display', 'none')
-
+      $('#ammform').css('display', 'none')
       $('#voting').css('display','none');
       $('#ammendment').css('display','block');
       ammstate = true
@@ -327,6 +330,7 @@
       $('#paperwork').css('display','none');
       $('#voting').css('display','none');
       $('#ammendment').css('display','none');
+      $('#ammform').css('display','block');
       url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id;
       fetch(url, {
             headers:{
