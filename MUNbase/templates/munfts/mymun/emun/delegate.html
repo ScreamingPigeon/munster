@@ -157,6 +157,7 @@
   </body>
   <script type="text/javascript">
       var ammstate = false
+    voting();
     function voting(){
       $('#voting').css('display','block');
       $('#paperwork').css('display','none');
@@ -366,7 +367,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             console.log(data);
-
+            openpwork(id)
             })
     }
   </script>
