@@ -29,9 +29,9 @@ body {
   background-color: #28343A;
 }
 .subh{
-  font-size: 24px;
-  font-weight: bold;
-  color:#A8B7B9;
+  font-size: 24px!important;
+  font-weight: bold!important;
+  color:#A8B7B9!important;
 }
 .btn{
   border-style: solid;
