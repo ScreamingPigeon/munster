@@ -86,7 +86,7 @@ class TalkListSpeaker(models.Model):
     status = models.CharField(max_length=10, default ='qd')
     time = models.DateField(auto_now = True)
 class Motion(models.Model):
-    committee = models.ForeignKey(Committee, on_delete = models.CASCADE)
+    committee = models.ForeignKey(ComCommitteemittee, on_delete = models.CASCADE, null = True)
     name = models.CharField(max_length = 400)
     proposer = models.CharField(max_length = 100)
     yes = models.CharField(max_length = 10,default='0')
