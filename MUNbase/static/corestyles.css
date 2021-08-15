@@ -66,6 +66,8 @@ visibility: hidden;
 }
 .article{
   text-align: justify;
+  min-height: 400px;
+  overflow: scroll;
 }
 .article-bx{
   height: 150px;
