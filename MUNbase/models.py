@@ -2,7 +2,7 @@ from django.db import models
 
 #delegate account
 class User(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, default = 0)
     name=models.CharField(max_length=50,default=None)
     email=models.CharField(max_length=50,default=None )
     username = models.CharField(max_length=16)
@@ -26,7 +26,8 @@ class Delwatchlist(models.Model):
 
 #MUN organizer account
 class MUNuser(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, default =0):
+        pass)
     name=models.CharField(max_length=50,default=None)
     email=models.CharField(max_length=50,default=None )
     username = models.CharField(max_length=16)
