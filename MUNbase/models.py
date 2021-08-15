@@ -93,18 +93,18 @@ class Motion(models.Model):
     no = models.CharField(max_length = 10, default='0')
     abstain = models.CharField(max_length = 10,default='0')
 class Voter(models.Model):
-    voter = models.ForeignKey(Participant, on_delete = models.CASCADE)
+    voter = models.ForeignKey(Participant, on_delete = models.CASCADE, null = True)
     vote = models.CharField(max_length = 10, default='NV')
     motion = models.ForeignKey(Motion, on_delete = models.CASCADE)
 class Paperwork(models.Model):
     title = models.CharField(max_length = 1000, default ='')
-    committee=models.ForeignKey(Committee, on_delete = models.CASCADE)
+    committee=models.ForeignKey(Committee, on_delete = models.CASCADE, null = True)
     body = models.TextField(default='')
     mainsubmitter = models.CharField(max_length=1000)
     time = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, default='QUE')
 class Ammendment(models.Model):
-    paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE)
+    paperwork = models.ForeignKey(Paperwork, on_delete = models.CASCADE, null = True)
     clause = models.CharField(max_length=5, default ='')
     proposer = models.CharField(max_length=100, default='')
     type = models.CharField(max_length=100, default ='Addition')
