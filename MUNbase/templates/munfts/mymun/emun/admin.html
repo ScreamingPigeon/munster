@@ -970,9 +970,6 @@
       timerstate = false;
       pworkstate = false;
       var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);}
-        $('#contamq').empty();
-        $('#passedam').empty();
-        $('#rejectam').empty();
         var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
         fetch(url, {
               headers:{
@@ -983,7 +980,9 @@
               return response.json() //Convert response to JSON
             }).then(data => {
               resps = data['resps']
-              console.log(resps)
+              $('#contamq').empty();
+              $('#passedam').empty();
+              $('#rejectam').empty();
               for(let i =0; i<resps.length; i++){
                 if(resps[i]['status']=='QUE'){
                   $('#contamq').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
@@ -994,7 +993,6 @@
                 if(resps[i]['status']=='REJ'){
                   $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
                 }
-
               }
             }); }, 2500)
       url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
