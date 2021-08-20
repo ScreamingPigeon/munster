@@ -1834,7 +1834,9 @@ def summonpwork(request, munname, commname):
         paperworks = Paperwork.objects.filter(committee=comm).order_by('time').values()
         resps = []
         for row in paperworks:
-            if row['status']== 'OTA' or row['status']== 'VTC':
+            if row['status']== 'OTA':
+                resps.append(row)
+            if row['status']== 'VTC':
                 resps.append(row)
         return JsonResponse({'resps':resps})
 
