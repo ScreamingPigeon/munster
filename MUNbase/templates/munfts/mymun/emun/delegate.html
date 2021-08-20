@@ -200,9 +200,9 @@
             }).then(data => {
             resps = data['resps']
             console.log(data)
+            $('#pworkrows').empty()
             for(let i =0;i<resps.length;i++){
             var status ='';
-            $('#pworkrows').empty()
             if (resps[i]['status']=='OTA'){
               status = 'Open for Ammendments'
             }
