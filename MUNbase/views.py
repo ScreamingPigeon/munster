@@ -1832,11 +1832,11 @@ def summonpwork(request, munname, commname):
         except IndexError:
             return 'Comm Error'
         paperworks = Paperwork.objects.filter(committee=comm).order_by('time').values()
-        resps = []
+        resp = []
         for row in paperworks:
             if row['status']!= 'QUE' and row['status']!='COM':
-                resps+=row
-        return JsonResponse({'resps':resps})
+                resp.append(row)
+        return JsonResponse({'resps':resp})
 
 def submitam(request, munname, commname, pid, type, cloz, content):
     if request.is_ajax and request.method == "GET":
