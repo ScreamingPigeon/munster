@@ -1834,7 +1834,8 @@ def summonpwork(request, munname, commname):
         paperworks = Paperwork.objects.filter(committee=comm).order_by('time').values()
         resps = []
         for row in paperworks:
-            resps.append(row)
+            if row['status']!= 'QUE' and row['status']!='COM':
+                resps+=row
         return JsonResponse({'resps':resps})
 
 def submitam(request, munname, commname, pid, type, cloz, content):
