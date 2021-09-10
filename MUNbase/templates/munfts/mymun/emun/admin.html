@@ -671,6 +671,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
+            console.log(data)
             var talkers =data['talkers'];
             var talklists = data['talklists']
             for(let i =0; i<talklists.length; i++){
