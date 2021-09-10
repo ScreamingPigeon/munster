@@ -69,7 +69,7 @@
        <h5> Upcoming Speakers</h5>
        <div id="upcoming">
          <select id="countryadder" style="width: 80%; margin: 10px; margin-top: 0px; display: inline;"></select> <button style="height: auto; width: 10%; font-size: 12px; display: inline;" onclick="addcountry('none');" type="button" class="btn btn-primary">Add</button>
-         <ul id="sortable" style="    list-style-type: none; margin-left: -5%; min-width: 87%">
+         <ul id="sortable1" style="    list-style-type: none; margin-left: -5%; min-width: 87%">
          </ul>
        </div> <br>
        <h5> Past Speakers</h5>
@@ -697,7 +697,7 @@
             console.log(values)
             $('#adname').empty();
             $('#countryadder').empty();
-            $('#sortable').empty();
+            $('#sortable1').empty();
             $('#sortable2').empty();
             $('#followup').empty();
             $('#adname').append(values['name']);
@@ -713,7 +713,7 @@
             talkersdata = data['talkers']
             for (let i = 0; i<countriez.length; i++){
               if (talkersdata[i]['status'] == 'qd')
-              {              $('#sortable').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}
+              {              $('#sortable1').append('<li class="ui-state-default" id = "speaking'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'<a style="font-size:8px; color:red;"href="#" onclick = "addcountry(`'+countriez[i]+'`);">'+ 'Remove' +'</a></li>');}
               else
               {              $('#sortable2').append('<li class="ui-state-default" id = "spoken'+countriez[i]+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+countries[i]+'</a></li>');}
                 }
@@ -744,10 +744,10 @@
 
           })
     }
-    $( "#sortable" ).sortable({
+    $( "#sortable1" ).sortable({
       update: function( event, ui ) {}
     });
-    $( "#sortable" ).on( "sortupdate", function( event, ui ) {} );
+    $( "#sortable1" ).on( "sortupdate", function( event, ui ) {} );
     $( "#sortable2" ).sortable({
       update: function( event, ui ) {}
     });
@@ -775,7 +775,7 @@
     }
     function nextspeaker(){
       var contry = '';
-      element = $('#sortable li:first').attr('id')
+      element = $('#sortable1 li:first').attr('id')
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
@@ -789,7 +789,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
           })
-          $('#sortable li:first').remove();
+          $('#sortable1 li:first').remove();
           seconds= tps; timerstate = false; $('#timertime').html(seconds +' s');$('#timerbar').css('width', '100%');
           $('#sortable2').append('<li class="ui-state-default" id = "spoken'+contry+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'+contry+'</a></li>');
 
