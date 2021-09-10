@@ -182,7 +182,7 @@
 
   <div class="row justify-content-center" ><!--paperwork-->
     <div class="col-md sectionz" id = 'paperwork'>
-        <h2>Open to Ammendments</h2>
+        <h2>Open to Amendments</h2>
         <table class="table table-responsive table-striped" >
         <thead>
           <tr>
@@ -252,7 +252,7 @@
         Update Status to: <select id="pworkstatus" onchange="updatepworkstatus()">
           <option value="QUE"> Queued</option>
           <option value="VTC"> Visible to Committee</option>
-          <option value="OTA"> Open to Ammendments</option>
+          <option value="OTA"> Open to Amendments</option>
           <option value="COM"> Completed & closed</option>
         </select>
       </div>
@@ -266,21 +266,21 @@
         </div>
         <div class="col-3" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 10px;margin-bottom: 45px;">
           <div >
-            <h5>Queued Ammendments</h5>
+            <h5>Queued Amendments</h5>
             <ul id='contamq'>
 
             </ul>
           </div>
           <br>
           <div >
-            <h5>Passed Ammendments</h5>
+            <h5>Passed Amendments</h5>
             <ul id='passedam'>
 
             </ul>
           </div>
           <br>
           <div >
-            <h5>Rejected Ammendments</h5>
+            <h5>Rejected Amendments</h5>
             <ul id='rejectam'>
 
             </ul>
@@ -1013,8 +1013,8 @@
             $('#mst').text(pwork['country'])
             $('#currentstat').empty()
             if (pwork['status'] == 'QUE'){$('#currentstat').text("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
-            if (pwork['status'] == 'OTA'){$('#currentstat').text("Currently this paperwork is Open to Ammendments");}
-            if (pwork['status'] == 'VTC'){$('#currentstat').text("Currently this paperwork is Visible to the Committee but not Open to Ammendments")}
+            if (pwork['status'] == 'OTA'){$('#currentstat').text("Currently this paperwork is Open to Amendments");}
+            if (pwork['status'] == 'VTC'){$('#currentstat').text("Currently this paperwork is Visible to the Committee but not Open to Amendments")}
             if (pwork['status'] == 'COM'){$('#currentstat').text("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
             tinymce.get('papeditor').setContent(pwork['body']);
           });
