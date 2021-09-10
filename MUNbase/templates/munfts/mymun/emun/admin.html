@@ -513,9 +513,8 @@
             },
       }).then(response => {
             return response.json() //Convert response to JSON
-            $('#motiondata').empty();
           }).then(data => {
-            console.log(data)
+            $('#motiondata').empty();
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
             var yes = motions[i]['yes']
@@ -528,6 +527,7 @@
           }
             })
           var x = setInterval(function(){
+            $('#motiondata').empty();
             if (motionstate == false){clearInterval(x)}
             url='/emun/showallmotions/{{munname}}/{{commname}}'
             fetch(url, {
@@ -537,7 +537,6 @@
                   },
             }).then(response => {
                   return response.json() //Convert response to JSON
-                  $('#motiondata').empty();
                 }).then(data => {
                 var motions = data['motions']
                 for(let i =0; i<motions.length;i++){

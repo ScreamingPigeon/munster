@@ -1448,7 +1448,7 @@ def showallmotions(request,munname,commname):
         for i in range(len(motionz)):
             motions.append(motionz[len(motionz)-i-1])
         length = len(Participant.objects.filter(committee=comm))
-        return JsonResponse({'motions':list(motions), 'total':length})
+        return JsonResponse({'motions':list(motionz), 'total':length})
 def getvoterdata(request, munname,commname, motionid):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
