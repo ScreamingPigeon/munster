@@ -767,7 +767,7 @@
       var countdown = setInterval(function() {
         if (timerstate == false) {clearInterval(countdown);}
         seconds--;
-        var x = (((tps - seconds)*(100/tps))).toString().concat('%');
+        var x = (((seconds)*(100/tps))).toString().concat('%');
         $('#timertime').html(seconds + " s");
         $('#timerbar').css('width', x);
         }, 1000);
