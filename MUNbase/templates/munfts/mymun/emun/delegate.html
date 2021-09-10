@@ -345,7 +345,7 @@
             document.getElementById('poid').value=data['pwork']['id'];
             $('#ammform').css('display', 'block')
             $('#docbody').css('display', 'block')
-            tinymce.get('papeditor').setContent(pwork['body']);
+            tinymce.get('papeditor').setContent(data['pwork']['body']);
               if (data['pwork']['status']!='OTA'){
                 $('#ammform').css('display', 'none')
               }
