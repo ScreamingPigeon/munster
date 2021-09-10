@@ -514,6 +514,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
+            console.log(data)
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
             $('#motiondata').empty();
