@@ -1447,7 +1447,7 @@ def showallmotions(request,munname,commname):
         motions =[]
         for i in range(len(motionz)):
             motions.append(motionz[len(motionz)-i-1])
-        length = len(Participant.objects.filter(committee=comm,~Q(status ='')))
+        length = len(Participant.objects.filter(committee=comm).exclude(status =''))
         return JsonResponse({'motions':list(motionz), 'total':length})
 def getvoterdata(request, munname,commname, motionid):
     if request.is_ajax and request.method == "GET":
