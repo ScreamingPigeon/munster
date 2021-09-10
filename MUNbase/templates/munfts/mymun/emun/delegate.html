@@ -22,7 +22,8 @@
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="{%  static "emun.css"%}">
     <script src="https://cdn.tiny.cloud/1/123046wnx9rmn1uyq9ljnjy75xb7qq2nay9c8xc9lisaoxrq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({selector: "#cookiedpaperwork",menubar: false,plugins: "link image code lists export",  setup:function(ed) {ed.on('change', function(e) {updateinfo();});},content_style:"body { font-size: 14pt; font-family: serif; }",toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist | export'});    </script>
+    <script>tinymce.init({selector: "#cookiedpaperwork",menubar: false,plugins: "link image code lists",  setup:function(ed) {ed.on('change', function(e) {updateinfo();});},content_style:"body { font-size: 14pt; font-family: serif; }",toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist'});    </script>
+    <script>tinymce.init({selector: "#papeditor",readonly : 1, menubar: false,plugins: "link image code lists",  setup:function(ed) {ed.on('change', function(e) {updateinfo();});},content_style:"body { font-size: 14pt; font-family: serif; }",toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist'});    </script>
 </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="padding: 20px; color: white!important;font-weight:bold;">
@@ -102,7 +103,7 @@
   </div>
   <div class="row justify-content-center" id ='opendoc'>
     <div class="col-12" id='docbody'style="font-family:serif;display:none; font-size:22px;background-color: white!important;    border: solid #F39848 10px!important;    min-height: 600px!important;padding:40px;" >
-
+      <textarea id="papeditor" name ='body'rows="80" cols="60"></textarea><br><br>
     </div>
     <br> <br>
     <div class="col-12" id ='ammform' style="  background-color: white!important;
@@ -341,12 +342,10 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            $('#docbody').empty()
             document.getElementById('poid').value=data['pwork']['id'];
             $('#ammform').css('display', 'block')
             $('#docbody').css('display', 'block')
-
-              $('#docbody').append(data['pwork']['body'])
+            tinymce.get('papeditor').setContent(pwork['body']);
               if (data['pwork']['status']!='OTA'){
                 $('#ammform').css('display', 'none')
               }
