@@ -755,14 +755,12 @@
     function timerstart(){
       timerstate = !timerstate;
       console.log(timerstate);
-      timerplay();
     }
     function timerplay(){
       if (seconds==-129){
           seconds = tps;
-          $('#timertime').html(seconds +' s');
-
-      }
+        }
+      $('#timertime').html(seconds +' s');
 
       var countdown = setInterval(function() {
         if (timerstate == false) {clearInterval(countdown);}
