@@ -513,11 +513,11 @@
             },
       }).then(response => {
             return response.json() //Convert response to JSON
+            $('#motiondata').empty();
           }).then(data => {
             console.log(data)
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
-            $('#motiondata').empty();
             var yes = motions[i]['yes']
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
@@ -537,10 +537,10 @@
                   },
             }).then(response => {
                   return response.json() //Convert response to JSON
+                  $('#motiondata').empty();
                 }).then(data => {
                 var motions = data['motions']
                 for(let i =0; i<motions.length;i++){
-                  $('#motiondata').empty();
                   var yes = motions[i]['yes']
                   var no = motions[i]['no']
                   var abstain = motions[i]['abstain']
