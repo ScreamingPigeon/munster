@@ -69,12 +69,12 @@
        <h5> Upcoming Speakers</h5>
        <div id="upcoming">
          <select id="countryadder" style="width: 80%; margin: 10px; margin-top: 0px; display: inline;"></select> <button style="height: auto; width: 10%; font-size: 12px; display: inline;" onclick="addcountry('none');" type="button" class="btn btn-primary">Add</button>
-         <ul id="sortable" style="    list-style-type: none; margin-left: -5%; width: 87%">
+         <ul id="sortable" style="    list-style-type: none; margin-left: -5%; min-width: 87%">
          </ul>
        </div> <br>
        <h5> Past Speakers</h5>
        <div id="spoken">
-         <ul id="sortable2" style="    list-style-type: none; margin-left: -5%; width: 87%">
+         <ul id="sortable2" style="    list-style-type: none; margin-left: -5%; min-width: 87%">
          </ul>
        </div>
        <p id ='numleft'> </p>
@@ -759,16 +759,18 @@
     function timerplay(){
       if (seconds==-129){
           seconds = tps;
+          $('#timertime').html(seconds +' s');
         }
-      $('#timertime').html(seconds +' s');
 
       var countdown = setInterval(function() {
         if (timerstate == false) {clearInterval(countdown);}
-        seconds--;
-        var x = (((seconds)*(100/tps))).toString().concat('%');
-        $('#timertime').html(seconds + " s");
-        $('#timerbar').css('width', x);
-        }, 1000);
+        else{
+          seconds--;
+        }
+          var x = (((seconds)*(100/tps))).toString().concat('%');
+          $('#timertime').html(seconds + " s");
+          $('#timerbar').css('width', x);
+          }, 1000);
     }
     function nextspeaker(){
       var contry = '';
