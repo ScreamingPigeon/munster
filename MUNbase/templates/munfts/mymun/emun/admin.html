@@ -514,7 +514,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            $('#motiondata').empty();
+            console.log(data)
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
             var yes = motions[i]['yes']
@@ -527,7 +527,6 @@
           }
             })
           var x = setInterval(function(){
-            $('#motiondata').empty();
             if (motionstate == false){clearInterval(x)}
             url='/emun/showallmotions/{{munname}}/{{commname}}'
             fetch(url, {
@@ -539,6 +538,7 @@
                   return response.json() //Convert response to JSON
                 }).then(data => {
                 var motions = data['motions']
+                $('#motiondata').empty();
                 for(let i =0; i<motions.length;i++){
                   var yes = motions[i]['yes']
                   var no = motions[i]['no']
