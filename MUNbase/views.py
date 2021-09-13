@@ -1874,6 +1874,30 @@ def submitam(request, munname, commname, pid, type, cloz, content):
         amm = Ammendment(paperwork=pp, clause=cloz, proposer =request.session.get('emunalloc'),type=type,content=cont )
         amm.save()
         return JsonResponse({'resps':'success'})
+def pdfpwork(request, munname, commname, pid):
+        if request.is_ajax and request.method == "GET":
+            if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+                return None
+            munnamez = request.session.get('emun')
+            adminz = request.session.get('emunalloc')
+            commnamez = request.session.get('emuncomm')
+            if commnamez != commname or munnamez!= munname:
+                return 'Authentication Error'
+            munnamme = request.session.get('emun')
+            commname = request.session.get('emuncomm')
+            mun = MUNuser.objects.filter(username = munname)
+            try:
+                mun =mun[0]
+            except IndexError:
+                return 'MUN Error'
+            comm = Committee.objects.filter(mun = mun, name = commname)
+            try:
+                comm = comm[0]
+            except IndexError:
+                return 'Comm Error'
+            pp = Paperwork.objects.filter(committee=comm, id =pid)[0]
+            return render(request, 'munfts/mymun/emun/ppdf.html', {'pwork':pp.body})
+
 #----------------------------------- COMMON SEARCH--------------------------------------------#
 def searchdel(request):
     if request.method=="GET":
