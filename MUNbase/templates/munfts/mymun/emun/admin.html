@@ -843,7 +843,9 @@
                     else if (voters[i]['vote'] == 'Abstain'){
                       vabs.push(voters[i]['country'])
                     }
-                    else{}
+                    else {
+                      vnot.push(voters[i]['country'])
+                    }
                   }
                   console.log(vnot)
                   markyes = '<tr>'
