@@ -157,7 +157,8 @@
     {% endif %}
   </body>
   <script type="text/javascript">
-      var ammstate = false
+      var ammstate = false;
+      var motstate = true;
     voting();
     function voting(){
       $('#voting').css('display','block');
@@ -166,6 +167,7 @@
       $('#docbody').css('display', 'none')
       $('#ammform').css('display', 'none')
       ammstate = false;
+      motstate = true;
       getmotions();
 
     }
@@ -175,7 +177,7 @@
       $('#ammendment').css('display','none');
       $('#docbody').css('display', 'none')
       $('#ammform').css('display', 'none')
-
+      motstate = false;
       ammstate = false;
       var content = readCookie('pwork').slice(0, -29);
       tinymce.get('cookiedpaperwork').setContent(content);
@@ -189,7 +191,8 @@
       $('#ammform').css('display', 'none')
       $('#voting').css('display','none');
       $('#ammendment').css('display','block');
-      ammstate = true
+      ammstate = true;
+      motstate = false;
       url ='/emun/summonpaperwork/{{munname}}/{{commname}}'
       fetch(url, {
             headers:{
