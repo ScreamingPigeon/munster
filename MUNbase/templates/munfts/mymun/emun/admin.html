@@ -387,6 +387,7 @@
     var countries = {{countries|safe}};
     var agenda = '';
     var tps;
+    var vart;
     var updatedata = false;
     var ns;
     var talkersdata;
@@ -899,6 +900,7 @@
           }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
+            if (vart !=data){
             var OTA = data['OTA']
             var VTC = data['VTC']
             var QUE = data['QUE']
@@ -919,6 +921,8 @@
               markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
               $('#tammend').append(markup)
             }
+          }
+          vart = data;
           });
       var int = setInterval(function(){if (pworkstate == false){clearInterval( int );}
         $('#tcomp').empty()
