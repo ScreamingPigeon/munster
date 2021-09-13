@@ -272,7 +272,6 @@
           }
             })
       var y = setInterval(function (){
-        console.log('working')
         if (motstate == false){clearInterval(y);}
         fetch(url, {
               headers:{
@@ -327,6 +326,7 @@
               }
 
             })
+    getmotions();
     }
     function submitvote(id){
       url = '/emun/sendvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}'+'/'+document.getElementById('voteopt').value.toString();
