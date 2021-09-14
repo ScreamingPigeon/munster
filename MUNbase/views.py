@@ -1419,7 +1419,7 @@ def newmotion(request, munname, commname, name, proposer):
             return 'Admin Error'
         motion = Motion(committee=comm, proposer = proposer,name = name)
         motion.save()
-        parts = Participant.objects.filter(committee=comm).exclude(status = '')
+        parts = Participant.objects.filter(committee=comm)
         for row in parts:
             voter = Voter(voter = row, motion=motion, vote ='NV')
             voter.save()
