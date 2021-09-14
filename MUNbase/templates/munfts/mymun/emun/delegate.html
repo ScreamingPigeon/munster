@@ -270,7 +270,7 @@
             $('#motiondata').append(markup);
 
           }
-            })
+
       var y = setInterval(function (){
         if (motstate == false){clearInterval(y);}
         fetch(url, {
@@ -291,6 +291,7 @@
             }
               })
       }, 1000)
+      })
     }
     function summonvote(id){
       url = '/emun/summonvote/{{munname}}/{{commname}}/'+id.toString()+'/'+'{{country}}';
