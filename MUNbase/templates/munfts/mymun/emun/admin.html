@@ -832,21 +832,6 @@
                   var vabs = []
                   var vnot = []
 
-                  for (let i =0;i<voters.length;i++){
-                    if (voters[i]['vote'] == 'Yes'){
-                      vyes.push(voters[i]['country'])
-                    }
-                    else if (voters[i]['vote'] == 'No'){
-                      vno.push(voters[i]['country'])
-                    }
-                    else if (voters[i]['vote'] == 'Abstain'){
-                      vabs.push(voters[i]['country'])
-                    }
-                    else {
-                      vnot.push(voters[i]['country'])
-                    }
-                  }
-                  console.log(vnot)
                   markyes = '<tr>'
                   markno = '<tr>'
                   markabs = '<tr>'
