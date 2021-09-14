@@ -825,6 +825,7 @@
                   return response.json() //Convert response to JSON
                 }).then(data => {
                   $('#voterdata').empty();
+                  console.log(data)
                   $('#mn').html(data['motion']['name'])
                   var voters = data['voterdata']
 
