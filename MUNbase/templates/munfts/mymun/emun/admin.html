@@ -826,7 +826,7 @@
                 }).then(data => {
                   $('#voterdata').empty();
                   console.log(data)
-                  $('#mn').html(data['motion']['name'])
+                  $('#mn').html(data['motion'][0]['name'])
                   var voters = data['voterdata']
 
                   var vyes = []

@@ -1487,7 +1487,7 @@ def getvoterdata(request, munname,commname, motionid):
         voterz = Voter.objects.filter(motion = motion)
         for i in range(len(voters)):
             voters[i]['country']=voterz[i].voter.country
-        return JsonResponse({'voterdata': list(voters), 'motion':motion})
+        return JsonResponse({'voterdata': list(voters), 'motion':list(motion)})
 
 def summonvote(request, munname, commname, motionid, country):
     if request.is_ajax and request.method == "GET":
