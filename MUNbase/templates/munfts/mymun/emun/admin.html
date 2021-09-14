@@ -832,6 +832,20 @@
                   var vabs = []
                   var vnot = []
 
+                  for (let i =0;i<voters.length;i++){
+                    if (voters[i]['vote'] == 'Yes'){
+                      vyes.push(voters[i]['country'])
+                    }
+                    else if (voters[i]['vote'] == 'No'){
+                      vno.push(voters[i]['country'])
+                    }
+                    else if (voters[i]['vote'] == 'Abstain'){
+                      vabs.push(voters[i]['country'])
+                    }
+                    else {
+                      vnot.push(voters[i]['country'])
+                    }
+                  }
                   markyes = '<tr>'
                   markno = '<tr>'
                   markabs = '<tr>'
@@ -884,7 +898,7 @@
           }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            if (vart !=data){
+
             var OTA = data['OTA']
             var VTC = data['VTC']
             var QUE = data['QUE']
@@ -905,8 +919,6 @@
               markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
               $('#tammend').append(markup)
             }
-          }
-          vart = data;
           });
       var int = setInterval(function(){if (pworkstate == false){clearInterval( int );}
         $('#tcomp').empty()
