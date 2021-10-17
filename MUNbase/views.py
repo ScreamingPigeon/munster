@@ -642,7 +642,7 @@ def adddelegate(request):
                 "United Kingdom of Great Britain and Northern Ireland",
                 "United Nations Interagency Panel on Juevenile Justice",
                 "United Nations International Children's Emergency Fund",
-                "United Nations Office on Drugs and Crime"
+                "United Nations Office on Drugs and Crime",
                 "United Network of Organ Sharing",
                 "United States Minor Outlying Islands",
                 "United States of America",
@@ -948,7 +948,7 @@ def editdelegate(request, commname, contactnum):
                             "United Kingdom of Great Britain and Northern Ireland",
                             "United Nations Interagency Panel on Juevenile Justice",
                             "United Nations International Children's Emergency Fund",
-                            "United Nations Office on Drugs and Crime"
+                            "United Nations Office on Drugs and Crime",
                             "United Network of Organ Sharing",
                             "United States Minor Outlying Islands",
                             "United States of America",
