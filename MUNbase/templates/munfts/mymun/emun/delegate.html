@@ -24,7 +24,7 @@
     <script src="https://cdn.tiny.cloud/1/123046wnx9rmn1uyq9ljnjy75xb7qq2nay9c8xc9lisaoxrq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({selector: "#cookiedpaperwork",menubar: false,plugins: "link image code lists",  setup:function(ed) {ed.on('change', function(e) {updateinfo();});},content_style:"body { font-size: 14pt; font-family: serif; }",toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | numlist | bullist'});    </script>
     <script>tinymce.init({selector: "#papeditor",readonly : 1, menubar: false,plugins: "link image code lists",content_style:"body { font-size: 14pt; font-family: serif; }"});    </script>
-</head>
+  </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="padding: 20px; color: white!important;font-weight:bold;">
         <a class="navbar-brand" href="#" style="color:white!important;">EMUN: {{country}}</a>
@@ -51,8 +51,7 @@
 
         </div>
     </nav>
-
-<div class="container">
+  <div class="container">
   <br><br>
   <div class="row justify-content-center" ><!--voting-->
     <div class="col-md" id ='voting'>
@@ -295,11 +294,11 @@
                 $('#submitvote').css('display', 'block');
 
                 if(data['status']=='PV'){
-                  markup = '<p>Important: You can vote only once, so please be completely sure of your vote as you will be unable to change it later</p> <br> <br><label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><select>';
+                  markup = '<p>Important: You can vote only once, so please be completely sure of your vote as you will be unable to change it later</p> <br> <br><label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">For</option><option value="No">Against</option><select>';
                   $('#votecont').append(markup);
                 }
                 if(data['status']=='P'){
-                  markup = '<p>Important: You can vote only once, so please be completely sure of your vote as you will be unable to change it later</p><label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">YES</option><option value="No">NO</option><option value="Abstain">ABSTAIN</option><select>';
+                  markup = '<p>Important: You can vote only once, so please be completely sure of your vote as you will be unable to change it later</p><label for="voteopt">Vote: </label> <select id="voteopt" ><option value="Yes">For</option><option value="No">Against</option><option value="Abstain">ABSTAIN</option><select>';
                   $('#votecont').append(markup);
                 }
               }
@@ -359,25 +358,29 @@
     }
     function submitam(){
       var id = document.getElementById('poid').value;
-      var type = document.getElementById('amtype').value;
-      var cloz = document.getElementById('cloz').value;
-      var content = document.getElementById('content').value;
-      if (cloz ==''){cloz='none'} else{cloz = '0'+cloz}
-      if (content ==''){content='none'}
-      url ='/emun/submitam/{{munname}}/{{commname}}/'+id+'/'+type+'/'+cloz+'/'+content;
-      fetch(url, {
-            headers:{
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-            },
-      }).then(response => {
-            return response.json() //Convert response to JSON
-          }).then(data => {
-            console.log(data);
-            alert('Ammendment Submitted successfully')
-            openpwork(id)
-            })
-    }
+       var type = document.getElementById('amtype').value;
+       var cloz = document.getElementById('cloz').value;
+       var content = document.getElementById('content').value;
+       if (cloz ==''){cloz='none'} else{cloz = '0'+cloz}
+       if (content ==''){content='none'}
+       url ='/emun/submitam/{{munname}}/{{commname}}/'+id+'/'+type+'/'+cloz+'/'+content;
+       fetch(url, {
+             headers:{
+                 'Accept': 'application/json',
+                 'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+             },
+       }).then(response => {
+             return response.json() //Convert response to JSON
+           }).then(data => {
+             console.log(data);
+             alert('Ammendment Submitted successfully')
+             openpwork(id)
+             id = "";
+             type = "";
+             cloz = "";
+             content = "";
+             })
+
   </script>
   <style>
     #voting{
@@ -399,5 +402,4 @@
       display: none
     }
   </style>
-
 </html>
