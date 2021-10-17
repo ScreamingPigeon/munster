@@ -702,7 +702,7 @@ def editdelegate(request, commname, contactnum):
             return redirect(reverse('viewcommittees'), user = getuser(request) )
         for row in committees:
             dels+=Participant.objects.filter(committee=row)
-                        countries = ["Afghanistan",
+            countries = ["Afghanistan",
                             "Albania",
                             "Algeria",
                             "American Samoa",
