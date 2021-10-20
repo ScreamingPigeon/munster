@@ -1030,6 +1030,7 @@
           })
           .then(data => {
             openpwork(id);
+            console.log('Paperwork updated succesfully');
           })
             }
     function getCookie(name) {
@@ -1097,6 +1098,7 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             openpwork(id);
+            console.log('Status updated succesfully')
           });
     }
     function updateamm(){
@@ -1111,7 +1113,7 @@
           }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-
+            window.alert('Amendment updated succesfully')
           });
     }
 
