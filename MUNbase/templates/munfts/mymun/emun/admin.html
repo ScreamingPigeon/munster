@@ -649,7 +649,7 @@
         .then(response => {
             return response.json() //Convert response to JSON
         })
-        .then(data => { updatediscs();})
+        .then(data => { updatediscs();window.alert('New Discussion Generated Succesfully!')})
     }
     function updatediscs(){
       motionstate = false;
