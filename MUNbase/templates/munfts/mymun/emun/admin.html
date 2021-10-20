@@ -522,7 +522,7 @@
             var id = motions[i]['id']
             var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+((parseInt(yes)/(parseInt(yes)+parseInt(no)))*100).tbodyFixed(2).toString()+'</td>    </tr>'
             $('#motiondata').append(markup);
-
+            console.log(yes,no);
           }
             })
           var x = setInterval(function(){
