@@ -469,7 +469,6 @@
             var markup ="";
             allo = alloc.replaceAll(' ', '_')
             allo = allo.replaceAll(/'/g, "-");
-            console.log(allo)
             var press= 'present('+"'"+allo.toString()+"'"+');'
             var voti= 'voting('+"'"+allo.toString()+"'"+');'
             if (status ==""){
@@ -515,7 +514,6 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
           var motions = data['motions']
           for(let i =0; i<motions.length;i++){
             var yes = motions[i]['yes']
@@ -572,9 +570,7 @@
         })
         .then(data => {
           var name = '#row'+allo.toString();
-          console.log(name)
           $(name.toString()).empty();
-          console.log(data['attendance'])
           if (data['attendance'] == 'notP'){
             $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
           }
@@ -617,21 +613,17 @@
           $(name.toString()).empty();
           if (data['attendance'] == 'notP'){
             $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
-            console.log('working')
           }
           if (data['attendance'] == 'P'){
             $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'pres'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
-            console.log('working')
 
           }
           if (data['attendance'] == 'PV'){
             $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'pres'></button></td>")
-            console.log('working')
 
           }
           if (data['attendance'] == 'notPV'){
             $(name.toString()).append("<td>"+alloc+"</td><td> <button onclick = "+press+" type= 'button' class = 'undet'></button></td><td><button type= 'button' onclick = "+voti+"  class = 'undet'></button></td>")
-            console.log('working')
 
           }
 
@@ -672,7 +664,6 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            console.log(data)
             var talkers =data['talkers'];
             var talklists = data['talklists']
             for(let i =0; i<talklists.length; i++){
@@ -695,7 +686,6 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             var values = data['resps'];
-            console.log(values)
             $('#adname').empty();
             $('#countryadder').empty();
             $('#sortable1').empty();
@@ -755,7 +745,6 @@
     $( "#sortable2" ).on( "sortupdate", function( event, ui ) {} );
     function timerstart(){
       timerstate = !timerstate;
-      console.log(timerstate);
       timerplay();
     }
     function timerplay(){
@@ -827,7 +816,6 @@
                   console.log(data);
                   $('#voterdata').empty();
                   var voters = data['voterdata']
-                  console.log(data)
                   var vyes = []
                   var vno = []
                   var vabs = []
@@ -867,7 +855,6 @@
                   markno.concat('</td>')
                   marknot.concat('</td>')
                   markabs.concat('</td>')
-                  console.log(marknot)
                   $('#voterdata').append(markyes + markno + markabs + marknot);
                 })
           }, 250);
