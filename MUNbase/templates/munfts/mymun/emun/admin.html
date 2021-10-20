@@ -520,7 +520,7 @@
             var no = motions[i]['no']
             var abstain = motions[i]['abstain']
             var id = motions[i]['id']
-            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])).toString()+'</td>    </tr>'
+            var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+((parseInt(yes)/parseInt(yes+no))*100).tbodyFixed(2).toString()+'</td>    </tr>'
             $('#motiondata').append(markup);
 
           }
@@ -543,7 +543,7 @@
                   var no = motions[i]['no']
                   var abstain = motions[i]['abstain']
                   var id = motions[i]['id']
-                  var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(data['total'])*100).toFixed(2).toString()+'</td>    </tr>'
+                  var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+(parseInt(yes)/parseInt(yes+no)*100).toFixed(2).toString()+'</td>    </tr>'
                   $('#motiondata').append(markup);
 
                 }
@@ -946,7 +946,6 @@
           })},5000)
 
     }
-
     function openpwork(id){
       $('#discs').css("display", "none");
       $('#newdisc').css("display", "none");
