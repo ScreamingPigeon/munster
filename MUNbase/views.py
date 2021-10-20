@@ -1516,12 +1516,12 @@ def getvoterdata(request, munname,commname, motionid):
             motion = motion[0]
         except IndexError:
             return 'Motion Error'
-        voters = Voter.objects.filter(motion = Motion.objects.filter(committee =comm, id = motionid)[0]).values()
-        voterz = Voter.objects.filter(motion = Motion.objects.filter(committee =comm, id = motionid)[0])
+        voters = Voter.objects.filter(motion = motion).values()
+        voterz = Voter.objects.filter(motion = motion)
 
         for i in range(len(voters)):
             voters[i]['country']=voterz[i].voter.country
-        return JsonResponse({'voterdata': list(voters), 'motion':list(motion)})
+        return JsonResponse({'voterdata': list(voters), 'motion':motion.values()})
 
 def summonvote(request, munname, commname, motionid, country):
     if request.is_ajax and request.method == "GET":
