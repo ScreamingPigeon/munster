@@ -824,6 +824,7 @@
             }).then(response => {
                   return response.json() //Convert response to JSON
                 }).then(data => {
+                  console.log(data);
                   $('#voterdata').empty();
                   var voters = data['voterdata']
                   console.log(data)
