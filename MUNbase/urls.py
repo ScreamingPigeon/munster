@@ -68,6 +68,7 @@ urlpatterns = [
     path('emun/getdiscussions/<str:munname>/<str:commname>', views.getdiscussions, name ='getdiscussions'),
     path('emun/getactivediscussion/<str:munname>/<str:commname>', views.getactivediscussion, name ='getactivediscussion'),
     path('emun/speaker/<str:munname>/<str:commname>/<str:tid>/<str:alloc>', views.addcountry, name ='addcountry'),
+    path('emun/removespeaker/<str:munname>/<str:commname>/<str:tid>/<str:sid>', views.removecountry, name ='removecountry'),
     path('emun/nextspeaker/<str:munname>/<str:commname>/<str:agenda>/<str:alloc>/<str:seconds>', views.nextspeaker, name ='nextspeaker'),
     path('emun/newmotion/<str:munname>/<str:commname>/<str:name>/<str:proposer>', views.newmotion, name ='newmotion'),
     path('emun/showallmotions/<str:munname>/<str:commname>', views.showallmotions, name ='showallmotions'),
