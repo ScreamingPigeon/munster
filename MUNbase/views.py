@@ -1343,7 +1343,7 @@ def addcountry(request, munname, commname, tid, alloc):
             part = part[0]
         except IndexError:
             return 'Admin Error'
-        list = Talklist.objects.filter(id = aid, active = 'Y',committee = comm)
+        list = Talklist.objects.filter(id = tid, active = 'Y',committee = comm)
         try:
             list = list[0]
         except IndexError:
