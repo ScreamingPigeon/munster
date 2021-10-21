@@ -782,7 +782,8 @@
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      url = '/emun/nextspeaker/{{munname}}/{{commname}}/'.concat(agenda.toString()).concat('/').concat(contry.toString()).concat('/').concat(seconds.toString());
+      console.log(contry)
+      url = '/emun/nextspeaker/{{munname}}/{{commname}}/'.concat(id.toString()).concat(seconds.toString());
       fetch(url, {
             headers:{
                 'Accept': 'application/json',

@@ -1395,7 +1395,7 @@ def removespeaker(request, munname, commname, tid, sid):
                 return 'Speaker errror'
             speaker.delete()
             return JsonResponse({'resps':'deleted'})
-def nextspeaker(request, munname, commname, agenda, alloc, seconds):
+def nextspeaker(request, munname, commname, tid, sid, seconds):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
