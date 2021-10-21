@@ -1422,17 +1422,14 @@ def nextspeaker(request, munname, commname, tid, sid, seconds):
             part = part[0]
         except IndexError:
             return 'Admin Error'
-        list = Talklist.objects.filter(name = agenda, committee=comm)
+        list = Talklist.objects.filter(id = tid, committee=comm)
         try:
             list = list[0]
         except IndexError:
             return 'talklist error'
-        partz = Participant.objects.filter(committee=comm, country = alloc)
-        try:
-            partz = partz[0]
         except IndexError:
             return 'country error'
-        talker = TalkListSpeaker.objects.filter(speaker = partz, list = list)
+        talker = TalkListSpeaker.objects.filter(id = sid, list = list)
         try:
             talker = talker[0]
             talker.status = 'sn'
