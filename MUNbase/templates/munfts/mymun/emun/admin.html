@@ -783,7 +783,7 @@
         contry+=element[i];
       }
       console.log(contry)
-      url = '/emun/nextspeaker/{{munname}}/{{commname}}/'.concat(id.toString()).concat(seconds.toString());
+      url = '/emun/nextspeaker/{{munname}}/{{commname}}/'+id.toString()+'/'+contry.toString()+'/'+seconds.toString()
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
