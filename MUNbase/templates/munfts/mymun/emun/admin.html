@@ -743,8 +743,7 @@
       }).then(response => {
             return response.json() //Convert response to JSON
           }).then(data => {
-            if (data['resps'] == 'removed')
-            { $('#speaking'+sid).remove();}
+            $('#speaking'+sid).remove();
 
     });
   }
