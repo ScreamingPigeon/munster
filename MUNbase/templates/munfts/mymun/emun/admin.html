@@ -549,7 +549,7 @@
 
                 }
                   })
-          }, 1000)
+          }, 2000)
     }
     function present(country){
       var alloc = country.replaceAll('_', ' ');
@@ -774,7 +774,7 @@
           var x = (((seconds)*(100/tps))).toString().concat('%');
           $('#timertime').html(seconds + " s");
           $('#timerbar').css('width', x);
-          }, 1000);
+        }, 2000);
     }
     function nextspeaker(){
       var contry = '';
@@ -872,7 +872,7 @@
                   markabs.concat('</td>')
                   $('#voterdata').append(markyes + markno + markabs + marknot);
                 })
-          }, 1000);
+          }, 2000);
     }
     function paperwork(){
       $('#discs').css("display", "none");
