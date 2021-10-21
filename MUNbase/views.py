@@ -1362,12 +1362,48 @@ def addcountry(request, munname, commname, tid, alloc):
         for row in speaker:
             if row.status=='qd':
                 checkallspoken = False
-
-
         speaker = TalkListSpeaker(list = list, speaker = parz)
         speaker.save()
         return  JsonResponse({'resps':'added', 'talkers':newtalkers})
-
+def removespeaker(request, munname, commname, tid, sid):
+        if request.is_ajax and request.method == "GET":
+            if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
+                return None
+            munnamez = request.session.get('emun')
+            adminz = request.session.get('emunalloc')
+            commnamez = request.session.get('emuncomm')
+            if commnamez != commname or adminz != "Admin" or munnamez!= munname:
+                return 'Authentication Error'
+            munnamme = request.session.get('emun')
+            admin = request.session.get('emunalloc')
+            commname = request.session.get('emuncomm')
+            mun = MUNuser.objects.filter(username = munname)
+            try:
+                mun =mun[0]
+            except IndexError:
+                return 'MUN Error'
+            comm = Committee.objects.filter(mun = mun, name = commname)
+            try:
+                comm = comm[0]
+            except IndexError:
+                return 'Comm Error'
+            part = CommitteeAdmin.objects.filter(committee = comm)
+            try:
+                part = part[0]
+            except IndexError:
+                return 'Admin Error'
+            list = Talklist.objects.filter(id = tid, active = 'Y',committee = comm)
+            try:
+                list = list[0]
+            except IndexError:
+                return 'talklist error'
+            speaker = TalkListSpeaker.objects.filter(committee = comm, id = sid)
+            try:
+                speaker=speaker[0]
+            except IndexError:
+                return 'Speaker errror'
+            speaker.delete()
+            return JsonResponse({'resps':'deleted'})
 def nextspeaker(request, munname, commname, agenda, alloc, seconds):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:

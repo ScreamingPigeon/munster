@@ -698,7 +698,7 @@
             ns = values['numberofspeakers'];
             id = values['id']
             $('#followup').append(ns.toString() +' speakers and '+tps.toString()+' seconds per speaker');
-
+            console.log(data);
             for (let i = 0;i< countries.length; i++){
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
@@ -730,12 +730,26 @@
             return response.json() //Convert response to JSON
           }).then(data => {
             if (data['resps'] == 'removed')
-            { $('#speaking'+val).remove();}
+            { $('#speaking'+id).remove();}
             else
-            {      $('#sortable1').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+' <a style="font-size:8px; color:red;" href="#" onclick = "addcountry(`'+val+'`);">'+ 'Remove' +'</a></li>');}
+            {      $('#sortable1').append('<li class="ui-state-default" id = "speaking'+val+'"><span class="ui-icon ui-icon-arrowthick-2-n-s" ></span>'+val+' <a style="font-size:8px; color:red;" href="#" onclick = "removecountry(`'+cid+'`);">'+ 'Remove' +'</a></li>');}
             talkersdata = data['talkers']
 
           })
+    }
+    function removecountry(sid){
+      url = '/emun/speaker/{{munname}}/{{commname}}/'+id+'/'+sid;
+      fetch(url, {
+            headers:{
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            },
+      }).then(response => {
+            return response.json() //Convert response to JSON
+          }).then(data => {
+            if (data['resps'] == 'removed')
+            { $('#speaking'+id).remove();}
+            else
     }
     $( "#sortable1" ).sortable({
       update: function( event, ui ) {}
