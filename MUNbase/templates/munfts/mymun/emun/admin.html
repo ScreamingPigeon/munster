@@ -678,6 +678,7 @@ updatedata = false;
           })
     }
     function fillactivediscinfo(){
+      motionstate = false;
       url = 'http://www.munster.co.in/emun/getactivediscussion/{{munname}}/{{commname}}'
       fetch(url, {
             headers:{
