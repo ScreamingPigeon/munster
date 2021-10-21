@@ -1353,15 +1353,6 @@ def addcountry(request, munname, commname, tid, alloc):
             parz = parz[0]
         except IndexError:
             return 'participant error'
-        speaker = TalkListSpeaker.objects.filter(list = list, speaker = parz)
-        newz = TalkListSpeaker.objects.filter(list = list).values()
-        newtalkers = []
-        for row in newz:
-            newtalkers.append(row)
-        checkallspoken = True;
-        for row in speaker:
-            if row.status=='qd':
-                checkallspoken = False
         speaker = TalkListSpeaker(list = list, speaker = parz)
         speaker.save()
         return  JsonResponse({'resps':'added', 'talkers':newtalkers})
