@@ -527,7 +527,7 @@
           }
             })
           var x = setInterval(function(){
-            if (motionstate == false){clearInterval(x)}
+            if (motionstate == false){clearInterval(x); console.log('ended')}
             url='/emun/showallmotions/{{munname}}/{{commname}}'
             fetch(url, {
                   headers:{
