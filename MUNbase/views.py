@@ -1270,11 +1270,6 @@ def getdiscussions(request, munname, commname):
             comm = comm[0]
         except IndexError:
             return "Committee Error"
-        part = CommitteeAdmin.objects.filter(committee = comm)
-        try:
-            part = part[0]
-        except IndexError:
-            return "Admin Error"
 
         discs = Talklist.objects.filter(committee=comm).order_by('name')
         talkers =[]
@@ -1321,7 +1316,7 @@ def getactivediscussion(request, munname, commname):
         except IndexError:
             return JsonResponse({'resps':"None"})
 
-def addcountry(request, munname, commname, agenda, tps, ns, alloc):
+def addcountry(request, munname, commname, tid, alloc):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
             return None
@@ -1348,7 +1343,7 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             part = part[0]
         except IndexError:
             return 'Admin Error'
-        list = Talklist.objects.filter(name = agenda, secsps = tps, numberofspeakers = ns, active = 'Y',committee = comm)
+        list = Talklist.objects.filter(id = aid, active = 'Y',committee = comm)
         try:
             list = list[0]
         except IndexError:
@@ -1368,14 +1363,11 @@ def addcountry(request, munname, commname, agenda, tps, ns, alloc):
             if row.status=='qd':
                 checkallspoken = False
 
-        if (len(speaker) == 0)or(checkallspoken == True):
-            speaker = TalkListSpeaker(list = list, speaker = parz)
-            speaker.save()
-            return  JsonResponse({'resps':'added', 'talkers':newtalkers})
-        else:
-            speaker = speaker[0]
-            speaker.delete()
-            return  JsonResponse({'resps':'removed','talkers':newtalkers})
+
+        speaker = TalkListSpeaker(list = list, speaker = parz)
+        speaker.save()
+        return  JsonResponse({'resps':'added', 'talkers':newtalkers})
+
 def nextspeaker(request, munname, commname, agenda, alloc, seconds):
     if request.is_ajax and request.method == "GET":
         if request.session.get('emunalloc') is None or request.session.get('emuncomm') is None or request.session.get('emun') is None:
