@@ -1397,7 +1397,7 @@ def removespeaker(request, munname, commname, tid, sid):
                 list = list[0]
             except IndexError:
                 return 'talklist error'
-            speaker = TalkListSpeaker.objects.filter(committee = comm, id = sid)
+            speaker = TalkListSpeaker.objects.filter(list = list, id = sid)
             try:
                 speaker=speaker[0]
             except IndexError:
