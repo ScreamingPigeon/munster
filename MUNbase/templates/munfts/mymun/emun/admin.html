@@ -399,6 +399,7 @@
     var motionstate = false;
     attendance();
     function discussions(){
+      updatedata = false;
       $('#discs').css("display", "block");
       $('#newdisc').css("display", "block");
       $('#tttt').css("display", "none");
@@ -427,7 +428,7 @@
       $('#paperwork').css("display", "none");
       $('#viewpap').css("display", "none");
 
-
+      updatedata = false;
       fillactivediscinfo();
       timerstate = false;
       pworkstate = false;
@@ -445,7 +446,7 @@
       $('#motions').css("display", "none");
       $('#paperwork').css("display", "none");
       $('#viewpap').css("display", "none");
-
+updatedata = false;
       pworkstate = false;
       ammstate = false;
       motionstate = false;
@@ -485,7 +486,7 @@
           }
         })
       timerstate = false;
-
+      updatedata = false;
     }
     function motions(){
       $('#attendancediv').css("display", "none");
@@ -504,7 +505,7 @@
       pworkstate = false;
       ammstate = false;
       motionstate = true;
-
+      updatedata = false;
       timerstate = false;
       url='/emun/showallmotions/{{munname}}/{{commname}}'
       fetch(url, {
@@ -633,6 +634,7 @@
       }
     function newdisc(){
       motionstate = false;
+      updatedata = false;
       var discname = document.getElementById('discname').value;
       var pst = document.getElementById('spektime').value;
       var nums = document.getElementById('speknum').value;
