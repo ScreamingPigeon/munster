@@ -388,6 +388,7 @@
     var agenda = '';
     var tps;
     var vart;
+    var id;
     var updatedata = false;
     var ns;
     var talkersdata;
@@ -695,6 +696,7 @@
             agenda = values['name'];
             tps = values['secsps'];
             ns = values['numberofspeakers'];
+            id = values['id']
             $('#followup').append(ns.toString() +' speakers and '+tps.toString()+' seconds per speaker');
 
             for (let i = 0;i< countries.length; i++){
@@ -718,7 +720,7 @@
       else{
         val = country;
       }
-      url = '/emun/speaker/{{munname}}/{{commname}}/'+agenda+'/'+tps+'/'+ns+'/'+val;
+      url = '/emun/speaker/{{munname}}/{{commname}}/'+id+'/'+val;
       fetch(url, {
             headers:{
                 'Accept': 'application/json',
