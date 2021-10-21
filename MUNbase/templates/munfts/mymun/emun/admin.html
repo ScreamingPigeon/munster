@@ -524,11 +524,10 @@ updatedata = false;
             var id = motions[i]['id']
             var markup = '<tr> <td>'+'<a style="color:blue;font-weight:bold;" data-toggle="modal" data-target="#voterdatamodal"onclick = "voterdata(`'+ motions[i]['id']+'`); updatedata = true;">'+motions[i]['name']+'</a>'+'</td>  <td>'+motions[i]['proposer']+'</td>    <td>'+yes+'</td>   <td>'+ no +'</td>   <td>'+abstain+'</td>   <td>'+parseInt(data['total']).toString()+'</td>   <td>'+((parseInt(yes)/(parseInt(yes)+parseInt(no)))*100).toFixed(2).toString()+'</td>    </tr>'
             $('#motiondata').append(markup);
-            console.log(yes,no);
           }
             })
           var x = setInterval(function(){
-            if (motionstate == false){clearInterval(x); console.log('ended')}
+            if (motionstate == false){clearInterval(x); }
             url='/emun/showallmotions/{{munname}}/{{commname}}'
             fetch(url, {
                   headers:{
@@ -700,7 +699,6 @@ updatedata = false;
             ns = values['numberofspeakers'];
             id = values['id']
             $('#followup').append(ns.toString() +' speakers and '+tps.toString()+' seconds per speaker');
-            console.log(data);
             for (let i = 0;i< countries.length; i++){
               $('#countryadder').append('  <option value="'+countries[i]+'">'+countries[i]+'</option>');
             }
@@ -721,7 +719,6 @@ updatedata = false;
       else{
         val = country;
       }
-      console.log(val)
       url = '/emun/speaker/{{munname}}/{{commname}}/'+id+'/'+val;
       fetch(url, {
             headers:{
@@ -784,7 +781,6 @@ updatedata = false;
       for(let i =8; i<element.length;i++){
         contry+=element[i];
       }
-      console.log(contry)
       url = '/emun/nextspeaker/{{munname}}/{{commname}}/'+id.toString()+'/'+contry.toString()+'/'+seconds.toString()
       fetch(url, {
             headers:{
@@ -820,8 +816,7 @@ updatedata = false;
     function voterdata(id){
       url = '/emun/getvoterdata/{{munname}}/{{commname}}/'+id
       motionstate = false;
-          var int = setInterval(function(){
-            if( updatedata = false){clearInterval(int)}
+
             fetch(url, {
                   headers:{
                       'Accept': 'application/json',
@@ -874,7 +869,7 @@ updatedata = false;
                   markabs.concat('</td>')
                   $('#voterdata').append(markyes + markno + markabs + marknot);
                 })
-          }, 2000);
+
     }
     function paperwork(){
       $('#discs').css("display", "none");
