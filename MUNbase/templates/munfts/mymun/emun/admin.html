@@ -937,6 +937,9 @@ updatedata = false;
   ammstate = true;
   timerstate = false;
   pworkstate = false;
+  $('#contamq').empty();
+  $('#passedam').empty();
+  $('#rejectam').empty();
   var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);}
     var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
     fetch(url, {
