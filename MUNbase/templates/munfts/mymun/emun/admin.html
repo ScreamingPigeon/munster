@@ -928,66 +928,66 @@ updatedata = false;
 
     }
     function openpwork(id){
-      $('#discs').css("display", "none");
-      $('#newdisc').css("display", "none");
-      $('#tttt').css("display", "none");
-      $('#attendancediv').css("display", "none");
-      $('#activ').css("display", "none");
-      $('#activtimer').css("display", "none");
-      $('#paperwork').css("display", "none");
-      $('#viewpap').css("display", "block");
-      motionstate = false;
-      ammstate = true;
-      timerstate = false;
-      pworkstate = false;
-
-        var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
-        fetch(url, {
-              headers:{
-                  'Accept': 'application/json',
-                  'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-              },
-            }).then(response => {
-              return response.json() //Convert response to JSON
-            }).then(data => {
-              resps = data['resps']
-              $('#contamq').empty();
-              $('#passedam').empty();
-              $('#rejectam').empty();
-              for(let i =0; i<resps.length; i++){
-                if(resps[i]['status']=='QUE'){
-                  $('#contamq').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
-                }
-                if(resps[i]['status']=='PAS'){
-                  $('#passedam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
-                }
-                if(resps[i]['status']=='REJ'){
-                  $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
-                }
-              }
-            });
-      url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
-      fetch(url, {
-            headers:{
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-            },
-          }).then(response => {
-            return response.json() //Convert response to JSON
-          }).then(data => {
-            pwork = data['pwork'];
-            $('#resonance').empty()
-            $('#mst').empty()
-            document.getElementById('idpw').value = pwork['id'];
-            $('#mst').text(pwork['country'])
-            $('#currentstat').empty()
-            if (pwork['status'] == 'QUE'){$('#currentstat').text("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
-            if (pwork['status'] == 'OTA'){$('#currentstat').text("Currently this paperwork is Open to Amendments");}
-            if (pwork['status'] == 'VTC'){$('#currentstat').text("Currently this paperwork is Visible to the Committee but not Open to Amendments")}
-            if (pwork['status'] == 'COM'){$('#currentstat').text("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
-            tinymce.get('papeditor').setContent(pwork['body']);
-          });
-      }
+  $('#discs').css("display", "none");
+  $('#newdisc').css("display", "none");
+  $('#tttt').css("display", "none");
+  $('#attendancediv').css("display", "none");
+  $('#activ').css("display", "none");
+  $('#activtimer').css("display", "none");
+  $('#paperwork').css("display", "none");
+  $('#viewpap').css("display", "block");
+  motionstate = false;
+  ammstate = true;
+  timerstate = false;
+  pworkstate = false;
+  var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);}
+    var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
+    fetch(url, {
+          headers:{
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+          },
+        }).then(response => {
+          return response.json() //Convert response to JSON
+        }).then(data => {
+          resps = data['resps']
+          $('#contamq').empty();
+          $('#passedam').empty();
+          $('#rejectam').empty();
+          for(let i =0; i<resps.length; i++){
+            if(resps[i]['status']=='QUE'){
+              $('#contamq').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+            }
+            if(resps[i]['status']=='PAS'){
+              $('#passedam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+            }
+            if(resps[i]['status']=='REJ'){
+              $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
+            }
+          }
+        }); }, 2500)
+  url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
+  fetch(url, {
+        headers:{
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+        },
+      }).then(response => {
+        return response.json() //Convert response to JSON
+      }).then(data => {
+        pwork = data['pwork'];
+        $('#resonance').empty()
+        $('#mst').empty()
+        document.getElementById('idpw').value = pwork['id'];
+        $('#mst').text(pwork['country'])
+        $('#currentstat').empty()
+        if (pwork['status'] == 'QUE'){$('#currentstat').text("Currently this paperwork is Queued for approval. If not approved, you can move it to completed");}
+        if (pwork['status'] == 'OTA'){$('#currentstat').text("Currently this paperwork is Open to Amendments");}
+        if (pwork['status'] == 'VTC'){$('#currentstat').text("Currently this paperwork is Visible to the Committee but not Open to Amendments")}
+        if (pwork['status'] == 'COM'){$('#currentstat').text("Currently this paperwork is Completed and Closed (either due to passing in committee or rejection)")}
+        tinymce.get('papeditor').setContent(pwork['body']);
+      });
+  }
     function updatepwork(){
       var url ='/emun/updatepwork/{{munname}}/{{commname}}';
       var csrftoken = getCookie('csrftoken');
