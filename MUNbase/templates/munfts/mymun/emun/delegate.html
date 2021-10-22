@@ -38,10 +38,10 @@
               <a class="nav-link" onclick="voting();" style="color:white!important;">Voting</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="display:none" onclick="//paperwork();"style="color:white!important;">Submit Paperwork</a>
+              <a class="nav-link" onclick="//paperwork();"style="color:white!important;">Submit Paperwork</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="display:none" onclick="//ammendments();"style="color:white!important;">View Paperwork</a>
+              <a class="nav-link" onclick="//ammendments();"style="color:white!important;">View Paperwork</a>
             </li>
 
             <li class="nav-item active">
@@ -89,6 +89,9 @@
   <div class="row justify-content-center" ><!--ammendments-->
     <div class="col-12" id ='ammendment' style="background-color: white!important;    border: solid #F39848 10px!important;    min-height: 600px!important;">
       <h2>Select a Resolution to View</h2>
+      <br>
+      <button class="btn btn-success" oncllick="ammendments(); windo.alert('Refresh Initiated')">Refresh</button>
+      <br>
       <table class="table table-responsive table-striped">
       <thead>
         <tr>
@@ -217,31 +220,7 @@
             }
             $('#pworkrows').append('<tr><td><a style="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+resps[i]['id']+'`)">'+resps[i]['title']+'</a></td><td>'+status+'</td></tr>')
             }
-              })
-        var x = setInterval(function (){if (ammstate == false){clearInterval(x)}
-        url ='/emun/summonpaperwork/{{munname}}/{{commname}}'
-        fetch(url, {
-              headers:{
-                  'Accept': 'application/json',
-                  'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-              },
-              }).then(response => {
-              return response.json() //Convert response to JSON
-              }).then(data => {
-              resps = data['resps']
-              $('#pworkrows').empty()
-              for(let i =0;i<resps.length;i++){
-              var status ='';
-              if (resps[i]['status']=='OTA'){
-                status = 'Open for Amendments'
-              }
-              if (resps[i]['status']=='VTC'){
-                status = 'Visible'
-              }
-              $('#pworkrows').append('<tr><td><a style="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+resps[i]['id']+'`)">'+resps[i]['title']+'</a></td><td>'+status+'</td></tr>')
-              }
-                })
-      },2000)
+          });
     }
     function readCookie(name) {
       var nameEQ = name + "=";

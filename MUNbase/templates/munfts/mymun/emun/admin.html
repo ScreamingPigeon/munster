@@ -49,7 +49,7 @@
             <a class="nav-link" style="color:white" onclick="motions();">Motions</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" style="color:white;display:none" onclick="//paperwork();">Paperwork</a>
+            <a class="nav-link" style="color:white;" onclick="paperwork();">Paperwork</a>
           </li>
 
           <li class="nav-item active">
@@ -182,6 +182,7 @@
 
   <div class="row justify-content-center" ><!--paperwork-->
     <div class="col-md sectionz" id = 'paperwork'>
+        <button class="btn btn-success" onclick="ammendments();window.alert('Refresh Iniatiated')">Refresh</button>
         <h2>Open to Amendments</h2>
         <table class="table table-responsive table-striped" >
         <thead>
@@ -265,6 +266,9 @@
             <input  name="id" id='idpw' value="" style="visibility:hidden; position: absolute">
         </div>
         <div class="col-3" style="    border-radius: 3px;border: solid #C9CACB 1px;background-color: #F8F8F9; padding: 10px;margin-bottom: 45px;">
+          <br>
+          <button class="btn btn-success" onclick="openpwork('z');window.alert('Refresh Immediately');">Refresh Amendments</button> 
+          <br>
           <div >
             <h5>Queued Amendments</h5>
             <ul id='contamq'>
@@ -921,41 +925,6 @@ updatedata = false;
               $('#tcomp').append(markup)
             }
           });
-      var int = setInterval(function(){if (pworkstate == false){clearInterval( int );}
-        $('#tcomp').empty()
-        $('#tvisible').empty()
-        $('#tqueue').empty()
-        $('#tammend').empty()
-        url = '/emun/getpaperwork/{{munname}}/{{commname}}'
-        fetch(url, {
-              headers:{
-                  'Accept': 'application/json',
-                  'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-              },
-        }).then(response => {
-              return response.json() //Convert response to JSON
-            }).then(data => {
-              var OTA = data['OTA']
-              var VTC = data['VTC']
-              var QUE = data['QUE']
-              var COM = data['COM']
-              for (let i =0; i< OTA.length; i++){
-                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+OTA[i]['id']+'`)" >'+OTA[i]['title']+'</a></td>  <td>'+OTA[i]['mainsubmitter']+'</td>  </tr>';
-                $('#tammend').append(markup)
-              }
-              for (let i =0; i< VTC.length; i++){
-                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+VTC[i]['id']+'`)" >'+VTC[i]['title']+'</a></td>  <td>'+VTC[i]['mainsubmitter']+'</td>   </tr>';
-                $('#tvisible').append(markup)
-              }
-              for (let i =0; i< QUE.length; i++){
-                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+QUE[i]['id']+'`)" >'+QUE[i]['title']+'</a></td>  <td>'+QUE[i]['mainsubmitter']+'</td>  </tr>';
-                $('#tqueue').append(markup)
-              }
-              for (let i =0; i< COM.length; i++){
-                markup ='<tr>  <td ><a style ="color:blue;font-weight:bold"href="#" onclick="openpwork(`'+COM[i]['id']+'`)" >'+COM[i]['title']+'</a></td>  <td>'+COM[i]['mainsubmitter']+'</td> </tr>';
-                $('#tcomp').append(markup)
-              }
-          })},5000)
 
     }
     function openpwork(id){
@@ -971,7 +940,7 @@ updatedata = false;
       ammstate = true;
       timerstate = false;
       pworkstate = false;
-      var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);}
+
         var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
         fetch(url, {
               headers:{
@@ -996,7 +965,7 @@ updatedata = false;
                   $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
                 }
               }
-            }); }, 2500)
+            });
       url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
       fetch(url, {
             headers:{
