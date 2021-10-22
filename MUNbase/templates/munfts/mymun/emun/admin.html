@@ -940,7 +940,7 @@ updatedata = false;
   $('#contamq').empty();
   $('#passedam').empty();
   $('#rejectam').empty();
-  var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);}
+  var ammint = setInterval(function(){   if (ammstate == false){clearInterval(ammint);console.log('ended')}
     var url ='/emun/getammendments/{{munname}}/{{commname}}/'+document.getElementById('idpw').value.toString();
     fetch(url, {
           headers:{
