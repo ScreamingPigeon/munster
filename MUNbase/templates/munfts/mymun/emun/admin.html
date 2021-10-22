@@ -962,7 +962,7 @@ updatedata = false;
               $('#rejectam').append('<li><a style="color:blue"data-toggle="modal" data-target="#ammmodal" onclick="openam(`'+resps[i]['id']+'`);" href="#">'+resps[i]['type']+' for clause '+resps[i]['clause']+' by ' +resps[i]['proposer']+'</a></li>')
             }
           }
-        }); }, 2500)
+        }); }, 3000)
   url ='/emun/paperworkdata/{{munname}}/{{commname}}/'+id.toString();
   fetch(url, {
         headers:{
