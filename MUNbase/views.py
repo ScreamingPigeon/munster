@@ -1994,7 +1994,7 @@ def getusertype(request):
     if type != "Delegate" and type != "MUN":
         return None
     return type
-def getuser(request):
+def getuser (request):
     user=request.session.get('id')
     if user is None:
         return None
